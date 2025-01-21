@@ -7,5 +7,11 @@
         format="revealjs"
         output-filename="slides.html"
         />
+    <target
+        name="slides-a"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />        
   </targets>
 </project>
