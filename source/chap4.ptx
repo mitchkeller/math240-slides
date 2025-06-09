@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+  <section xml:id="sec-functions-defn">
+    <title>Functions</title>
+    <slide>
+      <title>Definition of Function</title>
+      <p>
+        A <term>function</term> <m>f</m> from a set <m>X</m> to a set <m>Y</m>, denoted <m component="a">f\colon X\to Y</m><m component="b">\phantom{f\colon X\to Y}</m>, is a rule that assigns to each element of <m>X</m> <em>exactly one</em> element of <m>Y</m>.
+      </p>
+      <p>
+        If <m>y\in Y</m> is assigned by <m>f</m> to <m>x\in X</m>, then we write <m component="a">f(x)=y</m><m component="b">\phantom{f(x)=y}</m>.
+        <ul>
+          <li>
+            <p component="a">
+              <m>X</m> is called the <term>domain</term> of <m>f</m>
+            </p>
+            <p component="b">
+              <m>X</m> is called the 
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              <m>Y</m> is called the <term>co-domain</term> of <m>f</m>
+            </p>
+            <p component="b">
+              <m>Y</m> is called the 
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>X=\set{0,1,2}</m> and <m>Y=\set{0,1,2,3,4,5}</m>. We define <m>f\colon X\to Y</m> by
+        <ul>
+          <li>
+            <p component="a">
+              <m>f(0)=0</m>, <m>f(1)=1</m>, <m>f(2)=4</m>
+            </p>
+            <p component="b">
+              <m>f(0)=\phantom{0}</m>, <m>f(1)=\phantom{1}</m>, <m>f(2)=\phantom{4}</m>
+            </p>            
+          </li>
+          <li>
+            <p component="a">
+              <m>f = \set{(0,0),(1,1),(2,4)}</m>
+            </p>
+            <p component="b">
+              <m>f = \set{\phantom{(0,0),(1,1),(2,4)}}</m>
+            </p>            
+          </li>  
+          <li>
+            <p component="a">
+              <m>f(x) = x^2</m>
+            </p>
+            <p component="b">
+              <m>f(x) = \phantom{x^2}</m>
+            </p>            
+          </li>     
+          <li>
+            <p component="a">
+              <m>x\mapsto x^2</m>
+            </p>
+            <p component="b">
+              <m>\phantom{x\mapsto x^2}</m>
+            </p>            
+          </li>                            
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <p>
+        The <term>range</term> of a function <m>f\colon X\to Y</m> is
+        <md>
+          <mrow component="a">f(X) \amp = \set{y\in Y\mid \exists x\in X(y=f(x))}</mrow>
+          <mrow component="a"> \amp = \set{f(x)\mid x\in X} </mrow>
+          <mrow component="b">f(X) \amp = \phantom{\set{y\in Y\mid \exists x\in X(y=f(x))}}</mrow>
+          <mrow component="b"> \amp = \phantom{\set{f(x)\mid x\in X}} </mrow>
+
+        </md>
+        
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Two functions <m>f</m> and <m>g</m> are equal (<m component="a">f=g</m><m component="b">\phantom{f=g}</m>) provided that
+        <ol marker="i">
+          <li>
+            <p>
+              they have the same domain,
+            </p>
+          </li>
+          <li>
+            <p>
+              they have the same co-domain, and 
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>f(x)=g(x)</m> for every <m>x</m> in the domain.
+            </p>
+          </li>
+        </ol>
+      </p>
+      <p>
+        <m>f\colon \N\to\N</m> given by <m>f(n)=n+1</m> and <m>g\colon\R\to\R</m> given by <m>g(x) = x+1</m> are not equal as functions, since the domains are different.
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-abs-flr-ceil">
+    <title>Absolute Value, Floor, and Ceiling</title>
+    <slide>
+      <title>Absolute value function</title>
+      <p>
+        <m>\vert\cdot\vert\colon \R\to \R</m> is defined by 
+        <me component="a">\vert x\vert = \begin{cases} x\amp \text{ if }x\geq 0\\
+        -x\amp \text{ if }x\lt 0
+        \end{cases}</me>
+        <me component="b">\vert x\vert = \phantom{\begin{cases} x\amp \text{ if }x\geq 0\\
+        -x\amp \text{ if }x\lt 0
+        \end{cases}}</me>
+      </p>
+    </slide>
+    <slide>
+      <title>Floor and ceiling functions</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              The <term>floor function</term> <m>\lfloor\cdot\rfloor\colon \R\to\Z</m> is defined by
+              <me component="a">
+                \lfloor x\rfloor = \text{the greatest integer }y\leq x
+              </me>
+              <me component="b">
+                \lfloor x\rfloor = \phantom{\text{the greatest integer }y\leq x}
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              The <term>celing function</term> <m>\lceil\cdot\rceil\colon \R\to\Z</m> is defined by
+              <me component="a">
+                \lceil x\rceil = \text{the least integer }z\geq x
+              </me>
+              <me component="b">
+                \lceil x\lceil = \phantom{\text{the least integer }z\geq x}
+              </me>
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        <md>
+          <mrow component="a">\lfloor 4.32\rfloor \amp= 4</mrow>
+          <mrow component="a">\lfloor 4\rfloor \amp= 4</mrow>
+          <mrow component="a">\lceil 4.32\rceil \amp= 5</mrow>
+          <mrow component="a">\lceil 4\rceil \amp= 4</mrow>
+          <mrow component="b">\lfloor 4.32\rfloor \amp= \phantom{4}</mrow>
+          <mrow component="b">\lfloor 4\rfloor \amp= </mrow>
+          <mrow component="b">\lceil 4.32\rceil \amp= </mrow>
+          <mrow component="b">\lceil 4\rceil \amp= </mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <md>
+          <mrow component="a">\lfloor -4.32\rfloor \amp= -5</mrow>
+          <mrow component="a">\lceil -4.32\rceil \amp= 4</mrow>
+          <mrow component="b">\lfloor 4.32\rfloor \amp= \phantom{-5}</mrow>
+          <mrow component="b">\lceil 4.32\rceil \amp= </mrow>
+        </md>
+      </p>      
+    </slide>
+    
+  </section>
+  <section xml:id="sec-props-fns">
+    <title>Properties of Functions</title>
+    <slide>
+      <title>One-to-One</title>
+      <p>
+        A function <m>f\colon X\to Y</m> is <term>one-to-one</term> or <term>injective</term> or an <term>injection</term> provided that for all <m>x_1,x_2\in X</m>
+        <me component="a">
+          (x_1\neq x_2)\rightarrow (f(x_1)\neq f(x_2))
+        </me>
+        <me component="b">
+          \phantom{(x_1\neq x_2)\rightarrow (f(x_1)\neq f(x_2))}
+        </me>
+        or equivalently
+        <me component="a">
+          (f(x_1)= f(x_2))\rightarrow (x_1= x_2)
+        </me>
+        <me component="b">
+          \phantom{(f(x_1)= f(x_2))\rightarrow (x_1= x_2)}
+        </me>        
+      </p>
+    </slide>
+    <slide>
+      <title>Onto</title>
+      <p>
+        A function <m>f\colon X\to Y</m> is <term>onto</term> or <term>surjective</term> or a <term>surjection</term> provided that for all <m component="a">y\in Y</m><m component="b">\phantom{y\in Y}</m> there exists <m component="b">\phantom{x\in X}</m> such that <m component="a">f(x)=y</m><m component="b">\phantom{f(x)=y}</m>. Equivalently, <m component="a">f(X)=Y</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Bijection</title>
+      <p>
+        A function <m>f\colon X\to Y</m> is <term>bijective</term> or a <term>bijection</term> or a <term>one-to-one correspondence</term> provided that <m>f</m> is both one-to-one and onto.
+      </p>
+    </slide>
+    <!-- Slide  above -->
+    <slide>
+      <title>Examples</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              Is <m>\lfloor \cdot\rfloor\colon\R\to\Z</m> injective?
+            </p>
+            <p component="a">
+              No, since <m>\lfloor 2.5\rfloor = \lfloor 2.2\rfloor =2</m> but <m>2.5\neq 2.2</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              Is <m>\lfloor \cdot\rfloor\colon\R\to\Z</m> surjective?
+            </p>
+            <p component="a">
+              Yes, since for any <m>n\in\Z</m>, <m>\lfloor n\rfloor = n</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Is the function <m>f\colon \R\to\R</m> defined by <m>f(x) = x+1</m> a bijection?
+      </p>
+      <p component="a">
+        One-to-one: Suppose <m>f(x_1)=f(x_2)</m>. Then <m>x_1+1=x_2+1</m>, which gives <m>x_1=x_2</m>. Thus, <m>f</m> is one-to-one.
+      </p>
+      <p component="a">
+        Onto: Let <m>c\in\R</m>. Notice that <m>f(c-1)=c-1+1=c</m>. Since <m>c-1\in\R</m> for all <m>c\in\R</m>, we have found an element of the domain that <m>f</m> maps to the arbitrary element <m>c</m> of the co-domain, showing that <m>f</m> is onto.
+      </p>
+      <p>
+        Since <m>f</m> is both one-to-one and onto, <m>f</m> is a bijection.
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Is the function <m>g\colon \Z\to\Z</m> given by <m>g(n)=2n+2</m> a bijection?
+      </p>
+      <p component="a">
+        Surjection: Consider <m>3</m> as an element of the co-domain. We would need to find an <m>n\in\Z</m> so that <m>g(n)=3</m>. However, this would require <m>2n+2=3</m> or <m>n=1/2</m>. Since <m>1/2\not\in\Z</m>, <m>g</m> is not surjective.
+      </p>
+      <p component="a">
+        Since <m>g</m> is not onto, <m>g</m> is not a bijection. <alert>Question to think about: Is <m>g</m> one-to-one?</alert>
+      </p>
+      <p component="a">
+        To show that a function is a bijection, need to show both one-to-one and onto. To show <em>not</em> a bijection, only need to show one of them is false.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>h\colon\Z\to\Z</m> be given by <m>h(n) = 4n-3</m>. Show that <m>h</m> is one-to-one but not onto.
+      </p>
+      <p component="a">
+        <dl>
+          <li>
+            <title>One-to-one</title>
+            <p>
+              Suppose <m>h(n_1)=h(n_2)</m>. Then <m>4n_1-3=4n_2-3</m>, which implies that <m>4n_1=4n_2</m> and that <m>n_1=n_2</m>. Therefore, <m>h</m> is injective.
+            </p>
+          </li>
+          <li>
+            <title>Onto</title>
+            <p>
+              Consider <m>4</m>, which is in the co-domain of <m>h</m>. We would need to find <m>n\in\Z</m> so that <m>h(n)=4</m> for <m>h</m> to be onto. This would require <m>4n-3=4</m>, which only happens for <m>n=7/4</m>. Since <m>7/4\not\in\Z</m>, we see that <m>h</m> is not surjective.
+            </p>
+          </li>
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Cardinality</title>
+      <sbsgroup widths="25% 70%">
+        <sidebyside>
+          <image label="card-inject">
+            <shortdescription component="a">An arrow diagram for an injective function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{a,b,c}</m> and a set <m>Y=\set{5,6,7,8}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(a)=5</m>, <m>f(b)=7</m>, and <m>f(c)=8</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+                  \foreach[count=\i] \lseti/\lsetmi in {X/{$a$,$b$,$c$},Y/{5,6,7,8}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-X) -- (n-1-Y);
+                  \draw[->] (n-2-X) -- (n-3-Y);
+                  \draw[->] (n-3-X) -- (n-4-Y);
+                  \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Y.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>
+          <p>
+            If <m>f\colon X\to Y</m> is injective, then
+            <me component="a">
+              |X|\leq |Y|
+            </me>
+            <me component="b">
+              |X|\phantom{\leq} |Y|
+            </me>
+          </p>
+        </sidebyside>
+        <sidebyside>
+          <image label="card-surject">
+            <shortdescription component="a">An arrow diagram for a surjective function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{a,b,c,d}</m> and a set <m>Y=\set{5,6,7}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(a)=5</m>, <m>f(b)=5</m>, <m>f(c)=7</m>, <m>f(d)=6</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture} 
+                  \foreach[count=\i] \lseti/\lsetmi in {X/{$a$,$b$,$c$,$d$},Y/{5,6,7}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-X) -- (n-1-Y);
+                  \draw[->] (n-2-X) -- (n-1-Y);
+                  \draw[->] (n-3-X) -- (n-3-Y);
+                  \draw[->] (n-4-X) -- (n-2-Y);
+                  \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Y.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>
+          <p>
+            If <m>f\colon X\to Y</m> is surjective, then
+            <me component="a">
+              |X|\geq |Y|
+            </me>
+            <me component="b">
+              |X|\phantom{\geq} |Y|
+            </me>
+          </p>
+        </sidebyside>
+      </sbsgroup>
+    </slide>
+    <slide>
+      <title>Cardinality (continued)</title>
+      <sbsgroup widths="25% 70%">
+        <sidebyside>
+          <p>
+          <image label="card-biject">
+            <shortdescription component="a">An arrow diagram for a bijective function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{a,b,c}</m> and a set <m>Y=\set{5,6,7}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(a)=5</m>, <m>f(b)=7</m>, and <m>f(c)=6</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture} 
+                  \foreach[count=\i] \lseti/\lsetmi in {X/{$a$,$b$,$c$},Y/{5,6,7}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-X) -- (n-1-Y);
+                  \draw[->] (n-2-X) -- (n-3-Y);
+                  \draw[->] (n-3-X) -- (n-2-Y);
+                  \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Y.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>
+
+          </p>
+          <p>
+            If <m>f\colon X\to Y</m> is bijective, then
+            <me component="a">
+              |X|= |Y|
+            </me>
+            <me component="b">
+              |X|\phantom{=} |Y|
+            </me>
+          </p>
+        </sidebyside>        
+      </sbsgroup>
+    </slide>
+  </section>
+  <section xml:id="sec-inverse">
+    <title>Inverse of a Function</title>
+    <slide>
+      <p>
+        If we have a bijection <m>f\colon \set{1,2,3}\to\set{4,5,6}</m> as shown below, then we can obtain a function <m>f^{-1}\colon \set{4,5,6}\to\set{1,2,3}</m> by reversing the arrows.
+        <sidebyside widths="48% 48%">
+          <image label="biject-for-inverse">
+            <shortdescription component="a">An arrow diagram for a bijective function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{1,2,3}</m> and a set <m>Y=\set{4,5,6}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(1)=4</m>, <m>f(2)=6</m>, and <m>f(3)=5</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture} 
+                  \foreach[count=\i] \lseti/\lsetmi in {X/{1,2,3},Y/{4,5,6}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-X) -- (n-1-Y);
+                  \draw[->] (n-2-X) -- (n-3-Y);
+                  \draw[->] (n-3-X) -- (n-2-Y);
+                  \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Y.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>
+          <image label="inverse" component="a">
+            <shortdescription component="a">An arrow diagram for a bijective function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{1,2,3}</m> and a set <m>Y=\set{4,5,6}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(1)=4</m>, <m>f(2)=6</m>, and <m>f(3)=5</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture} 
+                  \foreach[count=\i] \lseti/\lsetmi in {Y/{4,5,6},X/{1,2,3}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-Y) -- (n-1-X);
+                  \draw[->] (n-3-Y) -- (n-2-X);
+                  \draw[->] (n-2-Y) -- (n-3-X);
+                  \draw[->] (l-Y) -- node[above]{$f^{-1}$}(l-Y.center-|l-X.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>
+        </sidebyside>
+      </p>
+      <p>
+        We call <m>f^{-1}</m> the <term>inverse</term> of <m>f</m>. For a bijection <m>f\subseteq X\times Y</m>, we have
+        <me component="a">
+          f^{-1}=\set{(y,x)\mid (x,y)\in f}\subseteq Y\times X
+        </me>
+        <me component="b">
+          f^{-1}=\phantom{\set{(y,x)\mid (x,y)\in f}\subseteq Y\times X}
+        </me>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For each function below, determine if it has an inverse and if so, describe the inverse:
+      </p>
+      <sidebyside widths="48% 48%">
+        <image label="find-inverse-1">
+            <shortdescription component="a">An arrow diagram for a function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{1,2,3}</m> and a set <m>Y=\set{4,5,6}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(1)=4</m>, <m>f(2)=4</m>, and <m>f(3)=5</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture} 
+                  \foreach[count=\i] \lseti/\lsetmi in {X/{1,2,3},Y/{4,5,6}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-X) -- (n-1-Y);
+                  \draw[->] (n-2-X) -- (n-1-Y);
+                  \draw[->] (n-3-X) -- (n-2-Y);
+                  \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Y.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>
+          <image label="find-inverse-2">
+            <shortdescription component="a">An arrow diagram for a function</shortdescription>
+            <description component="a">
+              <p>A set <m>X=\set{1,2,3}</m> and a set <m>Y=\set{4,5,6}</m> with a function <m>g\colon X\to Y</m> defined by <m>g(1)=5</m>, <m>g(2)=6</m>, and <m>f(3)=4</m>.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+                  \foreach[count=\i] \lseti/\lsetmi in {X/{1,2,3},Y/{4,5,6}} {
+                      \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                      \foreach[count=\j] \lj in \lsetmi {
+                          \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                      }
+                      \end{scope}
+                      \node[ellipse, draw, fit=(\lseti), 
+                      label={[name=l-\lseti]above:$\lseti$}] {};
+                  }
+                  \draw[->] (n-1-X) -- (n-2-Y);
+                  \draw[->] (n-2-X) -- (n-3-Y);
+                  \draw[->] (n-3-X) -- (n-1-Y);
+                  \draw[->] (l-X) -- node[above]{$g$}(l-X.center-|l-Y.west);
+                \end{tikzpicture}     
+            </latex-image>
+          </image>          
+      </sidebyside>
+      <p component="a">
+        The function <m>f</m> is not a bijection, so does not have an inverse, but <m>g</m> does have an inverse: <m>g^{-1}(4)=3, g^{-1}(5)=1,g^{-1}(6)=2</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Bijections and Inverses</title>
+      <theorem>
+        <statement>
+          <p>
+            A function <m>f\colon X\to Y</m> has an inverse if and only if <m>f</m> is a bijection.
+            <me>
+              f(x)=y\leftrightarrow f^{-1}(y)=x
+            </me>
+            
+          </p>
+        </statement>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Suppose that <m>f\colon \R\to\R</m> is given by <m>f(x)=x^3-2</m>. What is <m>f^{-1}\colon \R\to\R</m>?
+      </p>
+      <p component="a">
+        If <m>y=x^3-2</m>, then <m>x=\sqrt[3]{y+2}</m>. Hence, <m>f^{-1}\colon\R\to\R</m> given by <m>f^{-1}(y) = \sqrt[3]{y+2}</m> is the inverse of <m>f</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Define <m>f\colon\R\to\R</m> by <m>x\mapsto -x-5</m>. Find <m>f^{-1}</m>.
+      </p>
+      <p>
+        <m>f^{-1}(y)=-y-5</m>, so here <m>f^{-1}=f</m>.
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-composition">
+    <title>Composition of Functions</title>
+    <slide>
+      <title>Composition Defined</title>
+      <p>
+        Given two functions <m>f\colon X\to Y</m> and <m>g\colon Y\to Z</m>, the <term>composition of <m>g</m> with <m>f</m></term>, denoted <m component="a">g\circ f</m><m component="b">\phantom{g\circ f}</m>, is the function <m component="a">g\circ f\colon X\to Z</m><m component="b">\phantom{g\circ f\colon X\to Z}</m> defined by
+        <me component="a">
+          (g\circ f)(x) = g(f(x))
+        </me>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <sidebyside widths="30% 30% 30%">
+        <image label="composition1">
+          <shortdescription component="a">An arrow diagram for a function</shortdescription>
+          <description component="a">
+            <p>A set <m>X=\set{1,2,3}</m> and a set <m>Y=\set{4,5,6}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(1)=4</m>, <m>f(2)=4</m>, and <m>f(3)=5</m>.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture} 
+                \foreach[count=\i] \lseti/\lsetmi in {X/{1,2,3},Y/{4,5,6}} {
+                    \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                    \foreach[count=\j] \lj in \lsetmi {
+                        \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                    }
+                    \end{scope}
+                    \node[ellipse, draw, fit=(\lseti), 
+                    label={[name=l-\lseti]above:$\lseti$}] {};
+                }
+                \draw[->] (n-1-X) -- (n-1-Y);
+                \draw[->] (n-2-X) -- (n-1-Y);
+                \draw[->] (n-3-X) -- (n-2-Y);
+                \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Y.west);
+              \end{tikzpicture}     
+          </latex-image>
+        </image>
+        <image label="composition2">
+          <shortdescription component="a">An arrow diagram for a function</shortdescription>
+          <description component="a">
+            <p>A set <m>Y=\set{4,5,6}</m> and a set <m>Z=\set{\sqrt{2},\pi}</m> with a function <m>g\colon Y\to Z</m> defined by <m>g(4)=\sqrt{2}</m>, <m>g(5)=\sqrt{2}</m>, and <m>g(6)=\pi</m>.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture} 
+                \foreach[count=\i] \lseti/\lsetmi in {Y/{4,5,6},Z/{$\sqrt{2}$,$\pi$}} {
+                    \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                    \foreach[count=\j] \lj in \lsetmi {
+                        \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                    }
+                    \end{scope}
+                    \node[ellipse, draw, fit=(\lseti), 
+                    label={[name=l-\lseti]above:$\lseti$}] {};
+                }
+                \draw[->] (n-1-Y) -- (n-1-Z);
+                \draw[->] (n-2-Y) -- (n-1-Z);
+                \draw[->] (n-3-Y) -- (n-2-Z);
+                \draw[->] (l-Y) -- node[above]{$g$}(l-Y.center-|l-Z.west);
+              \end{tikzpicture}     
+          </latex-image>
+        </image>
+        <image label="composition3" component="a">
+          <shortdescription component="a">An arrow diagram for a function</shortdescription>
+          <description component="a">
+            <p>A set <m>X=\set{1,2,3}</m> and a set <m>Z=\set{\sqrt{2},\pi}</m> with a function <m>f\colon X\to Y</m> defined by <m>f(1)=\sqrt{2}</m>, <m>f(2)=\sqrt{2}</m>, and <m>f(3)=\sqrt{2}</m>.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture} 
+                \foreach[count=\i] \lseti/\lsetmi in {X/{1,2,3},Z/{$\sqrt{2}$,$\pi$}} {
+                    \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                    \foreach[count=\j] \lj in \lsetmi {
+                        \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                    }
+                    \end{scope}
+                    \node[ellipse, draw, fit=(\lseti), 
+                    label={[name=l-\lseti]above:$\lseti$}] {};
+                }
+                \draw[->] (n-1-X) -- (n-1-Z);
+                \draw[->] (n-2-X) -- (n-1-Z);
+                \draw[->] (n-3-X) -- (n-1-Z);
+                \draw[->] (l-X) -- node[above]{$f$}(l-X.center-|l-Z.west);
+              \end{tikzpicture}     
+          </latex-image>
+        </image>        
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>f\colon \R\to\R</m> and <m>g\colon \R\to\R</m> be defined by <m>f(x)=x-1</m> and <m>g(x)=x^2</m>. 
+        <md>
+          <mrow>f\circ g\colon \R\amp \to\R \amp g\circ f\colon \R\amp \to\R </mrow>
+          <mrow component="a">x\amp\mapsto x^2-1 \amp x\amp\mapsto (x-1)^2 </mrow>
+          <mrow component="b">x\amp\mapsto \phantom{x^2-1} \amp x\amp\mapsto \phantom{(x-1)^2} </mrow>
+        </md>
+        <m component="a">f\circ g\neq g\circ f</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For <m>f\colon\Z\to\Z</m>, <m>g\colon \Z\to\Z</m>, and <m>h\colon\Z\to\Z</m> defined by
+        <me>
+          f(x)=2x+1,\qquad g(x)=x^3,\qquad h(x)=\left\lfloor\frac{x}{3}\right\rfloor
+        </me>,
+        find
+      </p>
+      <p>
+        <ol marker="a">
+          <li>
+            <p>
+              <m component="b">f\circ g(x)</m><m component="a">f\circ g(x)=2x^3+1</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="b">g\circ f(x)</m><m component="a">g\circ f(x)=(2x+1)^3</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="b">h\circ g\circ f(x)</m><m component="a">h\circ g\circ f(x)=\displaystyle\left\lfloor\frac{(2x+1)^3}{3}\right\rfloor</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Identity Map</title>
+      <p>
+        For any set <m>A</m>, the <term>identity map</term> on <m>A</m> is the function <m>I_A\colon A\to A</m> defined by <m>I_A(x)=x</m>.
+      </p>
+      <p>
+        Alternate notation: <m component="a">\text{id}_A</m> <m component="a">\text{Id}_A</m>.
+      </p>
+      <p>
+        For any bijection <m>f\colon A\to B</m>, we have
+        <me component="a">
+          f^{-1}\circ f = I_A\qquad \text{and}\qquad f\circ f^{-1}=I_B
+        </me>
+        <me component="b">
+          f^{-1}\circ f = \phantom{I_A}\qquad \text{and}\qquad f\circ f^{-1}=\phantom{I_B}
+        </me>        
+      </p>
+      <p component="a">
+        If <m>f(a)=b</m>, then <m>f^{-1}(b)=a</m>. Hence <m>f^{-1}(f(a))=f^{-1}(b)=a</m> and <m>f(f^{-1}(b)) = f(a)=b</m>.
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-logs-exp">
+    <title>Logarithms and Exponential Functions</title>
+    <slide>
+      <title>Definitions</title>
+      <p>
+        We define the <term>exponential function</term> 
+        <md>
+          <mrow>\exp_b\amp\colon \R\to\R^+</mrow>
+          <mrow component="a">x\amp\mapsto b^x</mrow>
+          <mrow component="b">x\amp\mapsto\phantom{b^x}</mrow>
+        </md>
+        and its inverse, the <term>logarithm function</term>,
+        <md>
+          <mrow>\log_b\amp\colon \R\to\R^+</mrow>
+          <mrow component="a">\log_b(y)=x\amp\leftrightarrow b^x=y</mrow>
+          <mrow component="b">\log_b(y)=x\amp\leftrightarrow \phantom{b^x=y}</mrow>
+        </md>        
+      </p>
+    </slide>
+    <slide>
+      <title>Properties of Exponents</title>
+      <p>
+        For any positive real numbers <m>b,c</m> and any real numbers <m>x,y</m>, the following equalities are always true:
+        <md component="a">
+          <mrow>b^x b^y \amp= b^{x+y} </mrow>
+          <mrow>\left(b^x\right)^y \amp = b^{xy} </mrow>
+          <mrow>\frac{b^x}{b^y} \amp= b^{x-y} </mrow>
+          <mrow>(bc)^x \amp= b^xc^x</mrow>
+        </md>
+        <md component="b">
+          <mrow>b^x b^y \amp= \phantom{b^{x+y}} </mrow>
+          <mrow>\left(b^x\right)^y \amp = \phantom{b^{xy}} </mrow>
+          <mrow>\frac{b^x}{b^y} \amp= \phantom{b^{x-y}} </mrow>
+          <mrow>(bc)^x \amp= \phantom{b^xc^x}</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Properties of Logarithms</title>
+      <p>
+        For any positive real numbers <m>b,c,x,y</m> with <m>b\neq 1</m>, the following equalities are always true:
+        <md component="a">
+          <mrow>\log_b(xy) \amp = \log_b(x)+\log_b(y)</mrow>
+          <mrow>\log_b\left(\frac{x}{y}\right) \amp \log_b(x)-\log_b(y)</mrow>
+          <mrow>\log_b\left(x^y\right) \amp = y\log_b(x)</mrow>
+          <mrow>\log_c(x) \amp = \frac{\log_b(x)}{\log_b(c)}, \qquad\text{where }c\neq 1</mrow>
+        </md>
+        <md component="b">
+          <mrow>\log_b(xy) \amp = \phantom{\log_b(x)+\log_b(y)}</mrow>
+          <mrow>\log_b\left(\frac{x}{y}\right) \amp = \phantom{\log_b(x)-\log_b(y)}</mrow>
+          <mrow>\log_b\left(x^y\right) \amp = \phantom{y\log_b(x)}</mrow>
+          <mrow>\log_c(x) \amp = \phantom{\frac{\log_b(x)}{\log_b(c)}, \quad\text{where }c\neq 1}</mrow>
+        </md>        
+      </p>
+    </slide>
+    
+  </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

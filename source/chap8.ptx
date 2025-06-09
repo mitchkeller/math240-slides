@@ -1,0 +1,2303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\Rg}{\R^{\geq}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>Mitchel T. Keller </personname>
+      <institution>University of Wisconsin<ndash/>Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+    <titlepage-items/>
+  </frontmatter>
+  <section>
+    <title>Sequences</title>
+    <slide>
+      <title>Sequences Defined</title>
+      <p>
+        A <term>sequence</term> <m component="a">\set{a_n}</m><m component="b">\phantom{\set{a_n}}</m> is a function from a subset of <m>\N</m> to some set <m>S</m>.
+      </p>
+      <p>
+        We use <m>a_n</m> to denote the image under <m>a</m> of <m>n\in \N</m>, which we otherwise would write <m>a(n)</m>
+      </p>
+      <p>
+        We call <m>a_n</m> a <term>term</term> of the sequence and <m>n</m> the <term>index</term> of <m>a_n</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Warning!</title>
+      <p>
+        Despite the notation, <alert><m>\set{a_n}</m> is not to be treated as a set</alert>. (Order matters and an element of <m>S</m> can appear multiple times.)
+      </p>
+      <p>
+        As a way to avoid confusion, you might see
+        <me>
+          \set{a_n}_{n=1}^\infty = \set{a_n}_{n\in\Z^+} = \set{a_1,a_2,\dots}
+        </me>
+        or
+        <me>
+          \set{a_n}_{n=1}^5 = \set{a_1,a_2,a_3,a_4,a_5}
+        </me>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>\set{a_n}</m> be the sequence defined by <m>a_n = 1/n</m>. List the first five terms.
+      </p>
+      <p component="a">
+        <m>a_1 = 1</m>, <m>a_2 = 1/2</m>, <m>a_3 = 1/3</m>, <m>a_4 = 1/4</m>, <m>a_5 = 1/5</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        What are the initial and final terms of the sequence <m>\{a_n\}_{n=2}^4</m> defined by <m>a_n = 2^n</m>?
+      </p>
+      <p component="a">
+        <m>a_2 = 4</m>, <m>a_2 = 16</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Common Types of Sequences</title>
+      <p>
+        <dl>
+          <li>
+            <title>Increasing</title>
+            <p>
+              for all <m>k</m>, <m component="a">a_k\lt a_{k+1}</m> 
+            </p>
+          </li>
+          <li>
+            <title>Non-decreasing</title>
+            <p>
+              for all <m>k</m>,<m component="a">a_k\leq a_{k+1}</m> 
+            </p>
+          </li>
+          <li>
+            <title>Decreasing</title>
+            <p>
+              for all <m>k</m>, <m component="a">a_k\gt a_{k+1}</m> 
+            </p>
+          </li>
+          <li>
+            <title>Non-increasing</title>
+            <p>
+              for all <m>k</m>,<m component="a">a_k\geq a_{k+1}</m> 
+            </p>
+          </li>
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Geometric Sequences</title>
+      <p>
+        A <term>geometric sequence</term> is a sequence of the form <m>\set{a_n}_{n=0}^\infty</m> with
+        <me component="a">
+          a_0 = a, a_1 = a\cdot r, a_2 = a\cdot r^2, a_3 = a\cdot r^3, \dots
+        </me>
+        <me component="b">
+          a_0 = \phantom{a}, a_1 = \phantom{a\cdot r}, a_2 = \phantom{a\cdot r^2}, a_3 = \phantom{a\cdot r^3}, \dots
+        </me>
+        so <m component="a">a_n = a\cdot r^n</m><m component="b">a_n = \phantom{a\cdot r^n}</m>.
+      </p>
+      <p>
+        We call <m>a</m> the <term>initial term</term> and <m>r</m> is called the <term>common ratio</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        What are the initial terms and common ratios for the following geometric sequences? Find a formula for <m>a_n</m> in each case.
+        <ol marker="i">
+          <li>
+            <p>
+              <m>1,-1,1,-1,\dots</m>: <m component="a">a = 1</m> <m component="a">r=-1</m> <m component="a">a_n = 1\cdot (-1)^n</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>2,10,50,250,\dots</m>: <m component="a">a = 2</m>, <m component="a">r=5</m> <m component="a">a_n = 2\cdot 5^n</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>6,2,\frac{2}{3},\frac{2}{9},\dots</m>: <m component="a">a = 6</m> <m component="a">r=\frac{1}{3}</m> <m component="a">6\cdot \displaystyle\left(\frac{1}{3}\right)^n</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Arithmetic Sequences</title>
+      <p>
+        An <term>arithmetic sequence</term> is a sequence of the form <m>\set{a_n}_{n=0}^\infty</m>
+        <me component="a">
+          a_0 = a, a_1 = a +d, a_2 = a+2d, a_3 = a +3d, \dots
+        </me>
+        <me component="b">
+          a_0 = a, a_1 = \phantom{a +d}, a_2 = \phantom{a+2d}, a_3 = \phantom{a +3d}, \dots
+        </me>
+        so <m component="a">a_n = a +n\cdot d</m><m component="b">a_n = \phantom{n\cdot d}</m>.
+      </p>
+      <p>
+        We call <m>a</m> the <term>initial term</term> and <m>r</m> is called the <term>common difference</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+            <p>
+        What are the initial terms and common differences for the following arithmetic sequences? Find a formula for <m>a_n</m> in each case.
+        <ol marker="i">
+          <li>
+            <p>
+              <m>-1,3,7,11,\dots</m>: <m component="a">a = -1</m> <m component="a">d=4</m> <m component="a">a_n = -1+4\cdot n</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>7,4,1,-2,\dots</m>: <m component="a">a = 7</m> <m component="a">d=-3</m> <m component="a">a_n = 7-3\cdot n</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>0,11,22,33,\dots</m>: <m component="a">a = 0</m> <m component="a">d=11</m> <m component="a">a_n = 0+11\cdot n</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+  </section>
+  <section>
+    <title>Recurrence Relations</title>
+    <slide>
+      <title>Recursive sequences</title>
+      <p>
+        Notice that for a geometric sequence we can write the term <m>a_n</m> using the term <m>a_{n-1}</m>:
+        <me component="a">
+          a_n = r\cdot a_{n-1}
+        </me>
+        <me component="b">
+          a_n = \phantom{r\cdot a_{n-1}}
+        </me>
+        Similarly, for an arithmetic sequence
+        <me component="a">a_n = a_{n-1}+d</me>
+        <me component="b">a_n = \phantom{a_{n-1}+d}</me>
+        We call these <term>recurrence relations</term>.
+      </p>            
+    </slide>
+    <slide>
+      <title>Recurrence relations</title>
+      <p>
+        Formally, a <term>recurrence relation</term> for a sequence <m>\set{a_n}_{n=0}^\infty</m> is an equation that expresses <m>a_n</m> in terms of one or more of the previous terms of the sequence.
+      </p>
+      <p>
+        A sequence <m>\set{a_n}_{n=0}^\infty</m> is said to be a <term>solution</term> of a recurrence relation if its terms satisfy the recurrence relation.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>\set{a_n}_{n=0}^\infty</m> be the sequence defined by <m>a_n=2a_{n-1}+5</m>, <m>n\geq 1</m>, and <m>a_0=2</m>. What are <m>a_1,a_2,a_3</m>?
+      </p>
+      <p component="a">
+        <md>
+          <mrow>a_0 \amp = 2</mrow>
+          <mrow>a_1 \amp = 2a_0+5 = 2\cdot 2 + 5 = 9</mrow>
+          <mrow>a_2 \amp = 2a_1+5 = 2\cdot 9+5 = 18+5=23</mrow>
+          <mrow>a_3 \amp = 2a_2+5 = 2\cdot 23+5 = 51</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Fibonacci Sequence</title>
+      <p>
+        The Fibonacci sequence is given by the recurrence
+        <me>
+          f_n=f_{n-1}+f_{n-2}, \qquad f_1 = 1, \qquad f_0 = 0
+        </me>.
+      </p>
+    </slide>
+    <slide>
+      <title>A Counting Recurrence</title>
+      <p>
+        Let <m>r_n</m> be the number of regions into which the plane is divided by <m>n</m> lines satisfying all of the following:
+        <ul>
+          <li>
+            <p>
+              every pair of lines intersects and
+            </p>
+          </li>
+          <li>
+            <p>
+              no three lines intersect at a single point.
+            </p>
+          </li>
+        </ul>
+        <p component="a">
+          <m>r_0 = 1</m>, <m>r_1 = 2</m>, <m>r_2 = 4</m>
+        </p>
+      </p>
+    </slide>
+    <slide>
+      <title>Recurrence!</title>
+      <sidebyside widths="60% 38%">
+        <image source="lines_regions.jpg">
+        <shortdescription>A wall painted so that five lines are in general position</shortdescription>
+      </image>  
+      <p component="a">
+        When we add the <m>n</m>th line, we have <m>r_{n-1}</m> existing regions. The <m>(n-1)</m> existing lines cut the new line into <m>n</m> pieces, and each piece creates a new region. Thus, we have
+        <m>r_n = r_{n-1} + n</m>. What is <m>r_7</m>? (Use <m>r_5 = 16</m>.) We have <m>r_6 = 16+6=22</m> and <m>r_7 = 22+7=29</m>.
+      </p>
+      <p component="b">
+        <nbsp />
+      </p>
+      </sidebyside>
+      
+    </slide>
+  </section>
+  <section>
+    <title>Summations</title>
+    <slide>
+      <title>Sigma Notation</title>
+      <p>
+        For any sequence <m>\set{a_n}</m> the sum of consecutive terms
+        <me>
+          a_s+a_{s+1}+\cdots + a_{t-1}+a_t
+        </me>
+        is denoted by
+        <me component="a">
+          \sum_{i=s}^t a_i
+        </me>
+      </p>
+      <p>
+        Example: <m component="a">\sum_{i=1}^5i^2 = 1^2+2^2+3^2+4^2+5^2=55</m><m component="b">\sum_{i=1}^5i^2 </m>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Calculate
+        <me component="a">
+          \left(\sum_{i=1}^5 i\right)^2 = \left(1+2+3+4+5\right)^2 = 15^2 = 225.
+        </me>
+        <me component="b">
+          \left(\sum_{i=1}^5 i\right)^2 
+        </me>
+      </p>
+    </slide>
+    <slide>
+      <title>Manipulating Sums</title>
+      <p>
+        <md>
+          <mrow component="a">\sum_{i=1}^n a_i \amp = \sum_{i=1}^{n-1}a_i + a_n</mrow>
+          <mrow component="b">\sum_{i=1}^n a_i \amp = \phantom{\sum_{i=1}^{n-1}a_i + a_n}</mrow>
+          <mrow component="a">\sum_{i=1}^n a_i \amp = \sum_{i=j}^{n}a_j</mrow>
+          <mrow component="b">\sum_{i=1}^n a_i \amp = \phantom{\sum_{i=j}^{n}a_j}</mrow>
+          <mrow component="a">\sum_{k=1}^na_{k+2} \amp =\sum_{i=3}^{n+2} a_i</mrow>
+          <mrow component="b">\sum_{k=1}^na_{k+2} \amp =\phantom{\sum_{i=3}^{n+2} a_i}</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Write <m>\sum_{i=1}^5 (i+1)+7</m> as a single sum:
+        <me component="b">\sum_{i=1}^5 (i+1)+7</me>
+        <me component="a">\sum_{i=1}^5 (i+1)+7 = \sum_{i=1}^5(i+1)+(6+1)=\sum_{i=1}^6(i+1)</me>
+        Write it from <m>j=2</m>:
+        <me component="a">
+          \sum_{i=1}^6(i+1) = \sum_{j=2}^7 i
+        </me>
+      </p>
+    </slide>
+    <slide>
+      <title>Arithmetic and Geometric Sums</title>
+      <p>
+        For an arithmetic sequence <m>\set{a_n}</m> with <m>a_n = a+nd</m>, we have
+        <me component="a">
+          \sum_{k=0}^{n-1} a_k = an+d\cdot \frac{n(n-1)}{2}
+        </me>
+        <me component="b">
+          \sum_{k=0}^{n-1} a_k = \phantom{an+d\cdot \frac{n(n-1)}{2}}
+        </me>
+        
+        For a geometric sequence <m>\set{a_n}</m> with <m>a_n = a\cdot r^n</m>, <m>r\neq 1</m>, we have
+        <me component="a">
+          \sum_{k=0}^{n-1} a_k = \frac{a(r^n-1)}{r-1}
+        </me>
+        <me component="b">
+          \sum_{k=0}^{n-1} a_k = \phantom{\frac{a(r^n-1)}{r-1}}
+        </me>
+      </p>
+    </slide>
+  </section>
+  <section>
+    <title>Mathematical Induction</title>
+    <slide>
+      <title>What is Mathematical Induction?</title>
+      <p>
+        <term>Mathematical induction</term> is a proof method that allows us to show that a predicate <m>P(n)</m> is true for all integer <m>n</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Steps for an induction proof </title>
+      <p>
+        <ol marker="1">
+          <li>
+            <p>
+              State you are using a proof by induction.
+            </p>
+          </li>
+          <li>
+            <p>
+              <term>Base case</term> (also called <term>basis step</term>): Prove that <m>P(1)</m> is true
+            </p>
+          </li>
+          <li>
+            <p>
+              <term>Inductive Step</term>
+              <ol marker="a">
+                <li>
+                  <p>
+                    <term>Inductive hypothesis</term>: Assume <em>for some integer <m>k\geq 1</m></em> that <m>P(k)</m> is true.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Prove that if <m>P(k)</m> is true, then <m>P(k+1)</m> is true.
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+          <li>
+            <p>
+              Conclude that we have proved that <m>P(n)</m> is true for all <m>n\geq 1</m>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            For all <m>n\in\Z^+</m>,
+            <m>
+             \displaystyle 1+2+3+\cdots + n = \sum_{i=1}^n i = \frac{n(n+1)}{2}
+            </m>.
+            
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>P(n)</m> be the predicate
+            <me>
+              P(n): \qquad \sum_{i=1}^n i = \frac{n(n+1)}{2}
+            </me>. We will use proof by induction on <m>n</m>.
+          </p>
+        </proof>
+      </theorem>
+    </slide>
+    <slide>
+          <p component="a">
+            For the base case, we want to show that <m>P(n) = 1</m> is true. The left-hand side is <m>\sum_{i=1}^1 i = 1</m>. The right-hand side is <m>\frac{1(1+1)}{2} = 1</m>. Since these are equal, <m>P(1)</m> is true.
+          </p>
+          <p component="a">
+            For the inductive step, assume that for some integer <m>k\geq 1</m>, <m>P(k)</m> is true. Then
+            <m>
+              \sum_{i=1}^k i=\frac{k(k+1)}{2}
+            </m>. We will show that <m>P(k+1)</m> is also true. Now
+            <md>
+              <mrow>\sum_{i=1}^{k+1} \amp = \sum_{i=1}^k i + (k+1) = \frac{k(k+1)}{2} + (k+1)</mrow>
+              <mrow>\amp = \frac{k(k+1)+2(k+1)}{2} = \frac{(k+1)(k+2)}{2}</mrow>
+            </md>
+            Thus, <m>P(k+1)</m> is true. Hence, by induction, <m>P(n)</m> is true for all <m>n\geq 1</m>.
+          </p>
+    </slide>
+    <slide>
+      <!-- <title>Activity</title> -->
+      <theorem>
+        <statement>
+          <p>
+            For all integers <m>n\geq 1</m>, <m>\displaystyle\sum_{i=1}^n i^3 = \frac{n^2(n+1)^2}{4}</m>.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        Work with your neighbors on a proof by induction:
+        <ol>
+          <li>
+            <p>
+              Inform the reader you're using induction and define <m>P(n)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Prove the base case.
+            </p>
+          </li>
+          <li>
+            <p>
+              State the inductive hypothesis and prove that <m>P(k)\rightarrow P(k+1)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              State your conclusion.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Proof</title>
+      <p component="a">
+        We will prove this by induction on <m>n</m>. Let <m>P(n)</m> be the predicate <m>\displaystyle\sum_{i=1}^n i^3 = \frac{n^2(n+1)^2}{4}</m>.
+      </p>
+      <p component="a">
+        For the base case, consider the left-hand side of <m>P(1)</m>. This is <m>\sum_{i=1}^1 i^3 = 1</m>. The right-hand side is <m>1^2(1+1)^2/4 = 4/4=1</m>. Since the left-hand side and right-hand side are equal, <m>P(1)</m> is true.
+      </p>
+      <p component="a">
+        Now assume that for some <m>k\geq 1</m> that <m>P(k)</m> is true. That is, we assume that for some <m>k\geq 1</m> that <m>\displaystyle\sum_{i=1}^k i^3 = \frac{k^2(k+1)^2}{4}</m>.
+      </p>
+    </slide>
+    <slide>
+      <p component="a">We will now prove that <m>P(k+1)</m> is true. Working with the left-hand side of <m>P(k+1)</m>, we have
+        <md>
+          <mrow> \sum_{i=1}^{k+1} i^3\amp = \sum_{i=1}^k i^3 + (k+1)^3 = \frac{k^2(k+1)^2}{4} + (k+1)^3</mrow>
+          <mrow> \amp = \frac{(k+1)^2(k^2+4(k+1))}{4} = \frac{(k+1)^2(k+2)^2}{4}</mrow>
+        </md>
+        Thus, <m>P(k+1)</m> is true.
+      </p>
+      <p component="a">
+        Therefore, by induction, the theorem is true for all <m>n\geq 1</m>.
+      </p>
+    </slide>    
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            For the sequence <m>\set{r_n}_{n=0}^\infty</m> that gives the number of regions into which <m>n</m> lines in general position divides the plane, we have <m>r_n = \frac{n^2+n+2}{2}</m>
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>P(n)</m> be the predicate <m>P(n): r_n = \frac{n^2+n+2}{2}</m>. We will use proof by induction on <m>n</m>.
+          </p>
+          <p>
+            For the basis step, we have <m>n=0</m>. We know from our investigation of this problem that <m>r_0=1</m>. We can also see that substituting <m>n=0</m> into the formula in <m>P(n)</m> and simplifying gives <m>1</m>.
+          </p>
+        </proof>
+      </theorem>
+    </slide>
+    <slide>
+          <p component="a">
+            Now suppose that for some integer <m>k\geq 0</m> that <m>P(k)</m> is true. That is, <m>r_k=\frac{k^2+k+2}{2}</m>. We must show that <m>P(k+1)</m> is true.
+          </p>
+          <p component="a">
+            From the recurrence relation, we know that if <m>k+1\geq 0</m>, then <m>r_{k+1} = r_k + (k+1)</m>. By the induction hypothesis, <m>r_k=\frac{k^2+k+2}{2}</m>. Substituting, we have 
+            <md>
+              <mrow>r_{k+1} \amp = r_k + (k+1) = \frac{k^2+k+2}{2} + (k+1)</mrow>
+              <mrow>\amp = \frac{k^2+k+2+2k+2}{2} = \frac{k^2+3k+4}{2}</mrow>
+            </md>.
+          </p>
+    </slide>
+    <slide>
+          <p component="a">
+            Now consider that in <m>P(k+1)</m>, we have <m>\frac{(k+1)^2+(k+1)+2}{2} = \frac{k^2+2k+1+k+3}{2}=\frac{k^2+3k+4}{2}</m>. Since this is what we have arrived at using the recurrence relation, we know that <m>P(k+1)</m> is true. Hence, by induction, <m>P(n)</m> is true for all <m>n\geq 0</m>.
+          </p>
+      
+      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <theorem>
+        <statement>
+          <p>
+            Let <m>\set{h_n}</m> be the sequence defined by <m>h_0=7</m> and <m>h_n=(h_{n-1})^3</m> for <m>n\geq 1</m>. For all integers <m>n\geq 0</m>, we have <m>h_n=7^{(3^n)}</m>.
+          </p>
+        </statement>
+      </theorem>
+      <proof component="a">
+        <p>
+          We will prove this by induction on <m>n</m>. The base case is <m>n=0</m>, where we find <m>7^{(3^0)} = 7^1=7</m>, which equals <m>h_0</m>. Thus, the base case holds.
+        </p>
+        <p>
+          Now we assume that for some integer <m>k\geq 0</m> that <m>h_k = 7^{(3^k)} </m>. We will prove that <m>h_{k+1}=7^{(3^{k+1})} </m>. 
+        </p>
+      </proof>
+    </slide>
+    <slide>
+      <p component="a">
+      Since <m>k\geq 0</m>, <m>k+1\geq 1</m> and we can use the recurrence:
+        <md>
+          <mrow>h_{k+1} \amp = (h_k)^3 = \left(7^{(3^k)}\right)^3 = 7^{(3^k\cdot 3)} = 7^{(3^{k+1})} </mrow>
+        </md>
+      Thus, the formula holds for <m>k+1</m> as well.
+      </p>
+      <p component="a">
+        Hence, by induction, <m>h_n = 7^{(3^n)}</m> for all integers <m>n\geq 0</m>.
+      </p>
+    </slide>
+
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            For all integers <m>n\geq 4</m>, <m>n^2\leq 2^n</m>.
+          </p>
+        </statement>
+      </theorem>
+      <proof component="a">
+        <p>
+          We will prove this by induction on <m>n</m>. For the base case, we consider <m>n=4</m>. We have that <m>4^2=16</m> for the left-hand side. The right-hand side is <m>2^4=16</m>. Since <m>16\leq 16</m>, the inequality is true for <m>n=4</m>.
+        </p>
+        <p>
+          Now suppose that for some integer <m>k\geq 4</m> that <m>k^2\leq 2^k</m>. We must show that <m>(k+1)^2\leq 2^{k+1}</m>. 
+        </p>
+      </proof>
+    </slide>
+    <slide>
+      <p component="a">
+        We have
+        <md>
+          <mrow>(k+1)^2 \amp = k^2+2k+1\leq k^2+2k+2k </mrow>
+          <mrow> \amp = k^2+4k\leq k^2+k^2\amp \text{Since }k\geq 4 </mrow>
+          <mrow> \amp = 2k^2 \leq 2\cdot 2^k\amp\text{By the ind. hyp.} </mrow>
+          <mrow> \amp = 2^{k+1}</mrow>
+        </md>
+        Thus, the inequality is true for <m>k+1</m> as well.
+      </p>
+      <p component="a">
+        Therefore, by induction the theorem is true for all <m>n\geq 4.</m>
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            For an arithmetic sequence <m>\set{a_n}</m> with <m>a_n = a+nd</m>, we have for <m>n\geq 1</m>
+            <me>
+              \sum_{i=0}^{n-1} a_i = an+d\frac{n(n-1)}{2}
+            </me>
+          </p>
+        </statement>
+      </theorem>
+      <p component="a">
+        Proof: We have already proved that <m>\sum_{i=1}^k i = \frac{k(k+1)}{2}</m>, so let's apply this:
+        <me>
+          \sum_{i=0}^{n-1} a_i  = \sum_{i=0}^{n-1} (a+id) = \sum_{i=0}^{n-1} a + d\sum_{i=0}^{n-1}i
+          = an + d\frac{(n-1)n}{2}
+        </me>.
+      </p>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Strong Induction</title>
+    <slide>
+      <title>A motivating problem</title>
+      <p>
+        Suppose that we want to prove that each term of the Fibonacci sequence (<m>f_0=0</m>, <m>f_1=1</m>, and for <m>n\geq 2</m>, <m>f_n = f_{n-1}+f_{n-2}</m>) satisfies <m>f_n\leq 2^n</m>. What happens in the induction step?
+      </p>
+      <p component="a">
+        We assume for some <m>k</m> that <m>f_k\leq 2^k</m>. When we look at the recurrence, however, we have <m>f_{k+1}=f_k+f_{k-1}</m>, so we need to also know something about <m>f_{k-1}</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Strong Induction Described</title>
+      <p>
+        A proof of <m>P(n)</m> for all <m>n\geq 1</m> using strong induction has the form:
+        <ol marker="1">
+          <li>
+            <p>
+              State that you are using strong induction.
+            </p>
+          </li>
+          <li>
+            <p>
+              Base case: Prove that <m>P(1)</m> (and maybe more!) holds
+            </p>
+          </li>
+          <li>
+            <p>
+              Inductive step
+              <ol marker="a">
+                <li>
+                  <p>
+                    Inductive hypothesis: Fix <m>k\geq 1</m>. Assume that <m>P(j)</m> holds for all <m>1\leq j\leq k</m>.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Prove that this implies that <m>P(k+1)</m> is true.
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+          <li>
+            <p>
+              Conclude, by strong induction, that <m>P(n)</m> is true for all <m>n\geq 1</m>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            Each term of the Fibonacci sequence (<m>f_0=0</m>, <m>f_1=1</m>, and for <m>n\geq 2</m>, <m>f_n = f_{n-1}+f_{n-2}</m>) satisfies <m>f_n\leq 2^n</m>.
+          </p>
+        </statement>
+      </theorem>
+
+        <p component="a">
+          <em>Proof</em>: We use strong induction on <m>n</m>. For the base case, we consider <m>n=0</m>, where we have <m>f_0=0\leq 1=2^0</m>, as well as <m>n=1</m>, where we have <m>f_1=1\leq 2 = 2^1</m>. Thus, the inequality holds for <m>n=0</m> and <m>n=1</m>.
+        </p>
+        <p component="a">
+          We now assume for some integer <m>k\geq 1</m> that for all <m>j</m> with <m>1\leq j\leq k</m> we have <m>f_j\leq 2^j</m>. We must prove that <m>f_{k+1}\leq 2^{k+1}</m>. We have
+          <me>
+            f_{k+1} = f_k+f_{k-1} \leq 2^k + 2^{k-1} = 2^{k-1}(2+1)\leq 4\cdot 2^{k-1} = 2^{k+1}
+          </me>.</p>
+    </slide>
+    <slide>
+      <p component="a">
+          Hence, the inequality holds for <m>k+1</m>.
+        </p>
+        <p component="a">
+          Therefore, by strong induction, <m>f_n\leq 2^n</m> for all <m>n\geq 0</m>.
+        </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            Define a sequence <m>\set{g_n}</m> by <m>g_1 = 5</m>, <m>g_2 = 13</m>, and for all integers <m>n\geq 3</m>, <m>g_n = 5g_{n-1}-6g_{n-2}</m>. An explicit formula for <m>g_n</m> is <m>g_n = 2^n+3^n</m>.
+          </p>
+        </statement>
+      </theorem>
+      <p component="a">
+        <em>Proof</em>: We will prove this by strong induction. For the base case, we consider <m>n=1</m>, when <m>2^1+3^1 = 5=g_1</m>, and <m>n=2</m>, when <m>2^2+3^2 = 4+9 = 13=g_2.</m>
+      </p>
+      <p component="a">
+        Now assume for some integer <m>k\geq 2</m> that for all <m>j</m> with <m>1\leq j\leq k</m>, we have <m>g_k = 2^k+3^k</m>. We will prove that <m>g_{k+1} = 2^{k+1}+3^{k+1}</m>. Since <m>k\geq 2</m>, <m>k+1\geq 3</m> and the recurrence applies.
+      </p>
+    </slide>
+    <slide>
+      <p component="a">Hence,
+        <md>
+          <mrow>g_{k+1} \amp =5g_k-6g_{k-1} = 5(2^k+3^k)-6(2^{k-1}+3^{k-1})</mrow>
+          <mrow>\amp = 5\cdot 2^k-3\cdot 2^{k} + 5\cdot 3^k-2\cdot 3^k </mrow>
+          <mrow>\amp= 2^{k+1}+3^{k+1}</mrow>
+        </md>.
+        Thus, the explicit formula holds for <m>k+1</m>.
+      </p>
+      <p component="a">
+        Therefore, by strong induction, <m>g_n = 2^n+3^n</m> for all integers <m>n\geq 1</m>.
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Suppose that a grocery store sells yogurt in packs of 3 and packs of 4. For all integers <m>n\geq 6</m>, it is possible to buy <m>n</m> containers of yogurt with a combination of <m>3</m>-packs and <m>4</m>-packs.
+      </p>
+      <p>
+        <ol>
+          <li>
+            <p>
+              Confirm that <m>5</m> containers of yogurt cannot be purchased using <m>3</m>-packs and <m>4</m>-packs.
+            </p>
+          </li>
+          <li>
+            <p>
+              Verify how to make 6, 7, and 8 containers of yogurt using <m>3</m>-packs and <m>4</m>-packs.
+            </p>
+          </li>
+          <li>
+            <p>
+              If for some <m>k</m> and for all <m>j</m> with <m>6\leq j\leq k</m>, you know how to make <m>j</m> containers of yogurt, how can you use this information to make <m>k+1</m> containers of yogurt?
+            </p>
+          </li>
+        </ol>
+      </p>
+      
+    </slide>
+    <slide>
+      <p>
+        <em>Proof</em>: Let <m>P(n)</m> be the predicate <q>It is possible to buy <m>n</m> containers of yogurt with a combination of <m>3</m>-packs and <m>4</m>-packs.</q> We will prove that <m>P(n)</m> is true for all integers <m>n\geq 6</m> by strong induction on <m>n</m>.
+      </p>
+      <p component="a">
+        <em>Base cases</em>: Notice that
+        <md>
+          <mrow>6 \amp = 2\cdot 3 + 0\cdot 4</mrow>
+          <mrow>7 \amp = 1\cdot 3 + 1\cdot 4</mrow>
+          <mrow>8 \amp = 0\cdot 3 + 2\cdot 4</mrow>
+        </md>. Thus, <m>P(6)</m>, <m>P(7)</m>, and <m>P(8)</m> are true.
+      </p>
+    </slide>
+    <slide>
+      <p component="a">
+        Let <m>k\geq 8</m>. Assume <m>P(j)</m> is true for all <m>j</m> with <m>6\leq j\leq k</m>. We will show <m>P(k+1)</m> is true. Notice that <m>k+1-3 = k-2</m>, and since <m>k\geq 8</m>, we also have <m>6\leq k-2\leq 8</m>. By the inductive hypothesis, <m>P(k-2)</m> is true. Hence, we can buy <m>k-2</m> containers with <m>3</m>-packs and <m>4</m>-packs. That is, there are nonnegative integers <m>a,b</m> so that <m>k-2 = a\cdot 3 + b\cdot 4</m>. Therefore, <m>k+1 = (k-2)+3 = a\cdot 3 + b\cdot 4 + 3 = (a+1)\cdot 3 +b\cdot 4</m>. Since <m>a</m> is a nonnegative integer, so is <m>a+1</m>. Thus, <m>P(k+1)</m> is true.
+      </p>
+      <p component="a">
+        Therefore, by strong induction, <m>P(n)</m> is true for all <m>n\geq 6</m>.
+      </p>
+    </slide>
+  </section>
+  <section>
+    <title>Recursive Definitions</title>
+    <slide>
+      <title>Recursion</title>
+      <p>
+        Main idea: We define something or solve a problem in terms of the definition or solution of a simpler version of the same object.
+      </p>
+      <p>
+        We often write
+        <me component="a">
+          n! = n(n-1)\cdots 2\cdot 1
+        </me>
+        <me component="b">
+          n! = \phantom{n(n-1)\cdots 2\cdot 1}
+        </me>
+        for the factorial function, but the <m>\cdots</m> is imprecise. We can make this precise with a recursive definition:
+        <md>
+          <mrow component="a">f(0) \amp  = 1</mrow>
+          <mrow component="b">f(0) \amp  = \phantom{1}</mrow>
+          <mrow component="a">f(n) \amp = n\cdot f(n-1), n\geq 1</mrow>
+          <mrow component="b">f(n) \amp = \phantom{n\cdot f(n-1), n\geq 1}</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Recursively define <m>g\colon \N\to \Z</m> by 
+        <md>
+          <mrow>g(0) \amp  = 0</mrow>
+          <mrow>g(n) \amp  = g(n-1)+n^3,n\geq 1</mrow>
+        </md>
+        Find <m>g(3)</m>.
+      </p>
+      <p component="a">
+        <m>g(3) = g(2)+3^3 = g(1) + 2^3 + 27 = g(0)+1^3 + 35 = 36</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Recursively Defined Sets</title>
+      <p>
+        We can define a set recursively by describing how to build new elements from already existing elements. A <term>recursive definition of a set</term> consists of:
+        <ol marker="1">
+          <li>
+            <p>
+              A <term>basis</term>: Specify one or more elements in the set.
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>recursive rule</term>: A rule for constructing new elements from those we already know are in the set.
+            </p>
+          </li>
+          <li>
+            <p>
+              An <term>exclusion statement</term>: A statement that an element is not in the set if it is not in the basis or cannot be constructed using the recursive rule.
+            </p>
+          </li>
+        </ol>
+      </p>
+      <p component="a">
+        The exclusion statement is not always written explicitly, but it is always assumed.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Consider the subset <m>S\subseteq \Z</m> recursively defined by:
+        <ul>
+          <li>
+            <p>
+              Basis: <m>2\in S</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Recursive rule: If <m>x,y\in S</m>, then <m>x+y\in S</m>.
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p component="a">
+        Then <m>S = \set{2,4,6,8,\dots} = \set{x\in\Z\mid x\geq 2\text{ and }x\text{ is even}}</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>B = \set{0,1,2}</m>. Recall that <m>B^*</m> is the set of all strings of finite length using symbols <m>0,1,2</m>. Give a recursive definition of <m>B^*</m>.
+      </p>
+      <p component="a">
+        <ol>
+          <li>
+            <p>
+              Basis: <m>\lambda \in B^*</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>w\in B^*</m>, then <m>w0\in B^*</m>, <m>w1\in B^*</m>, and <m>w2\in B^*</m>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Defining Functions on Recursively-Defined Sets</title>
+      <p>
+        We can define a function on a recursively defined set by defining the function on every basis element and for every part of the recursive rule.
+      </p>
+      <p>
+        Example: We can define the length function <m>\vert\cdot \vert\colon B^*\to \N</m> for <m>B = \set{0,1,2}</m> by
+        <ul>
+          <li>
+            <p>
+              Base case: <m component="a">|\lambda| = 0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Recursive rule: If <m>w\in B^*</m>, then <m component="a">|w0| = |w|+1</m><m component="b">|w0| = \phantom{|w|+1}</m>, <m component="a">|w1| = |w|+1</m><m component="b">|w1| = \phantom{|w|+1}</m>, <m component="a">|w2| = |w|+1</m><m component="b">|w2| = \phantom{|w|+1}</m>.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="a">
+          <li>
+            <p>
+              What is <m>|021|</m>? <m component="a">|021| = |02|+1 = |0|+1+1 = |\lambda| + 1 + 1 + 1 = 3</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>|w|=4</m>, what is <m>|w201|</m>? <m component="a">|w201| = |w20|+1 = |w2|+1+1 = |w|+1+1+1 = 4+3 = 7</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+  </section>
+  <section>
+    <title>Structural Induction</title>
+    <slide>
+      <title>Proofs about Recursively-Defined Sets</title>
+      <p>
+        We can use a proof by induction to prove statements about recursively-defined sets. If the proof uses the structure of the recursive definition, then it is called a proof by <term>structural induction</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Form of Proofs by Structural Induction</title>
+      <p>
+        <ol>
+          <li>
+            <p>
+              State we are using structural induction
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Base case</em>: Prove that the result holds for all basis elements.
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Inductive step</em>: Assume that the result holds for the elements used in the recursive rule. Show that the result holds for the new elements.
+            </p>
+          </li>
+          <li>
+            <p>
+              Conclude, by structural induction, that the result holds for all elements.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      
+      <p>
+        Recall the set <m>S\subseteq \Z</m> recursively defined by:
+        <ul>
+          <li>
+            <p>
+              Basis: <m>2\in S</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Recursive rule: If <m>x,y\in S</m>, then <m>x+y\in S</m>.
+            </p>
+          </li>
+        </ul>
+        We shall prove that every element <m>x\in S</m> is even.
+      </p>
+      <p component="a">
+        <em>Proof</em>: Our proof is by structural induction. For the base case, since <m>2=2\cdot 1</m>, we have that <m>2</m> is even. Now let <m>x,y\in S</m> and assume they are both even. Then <m>x=2k</m> and <m>y=2j</m> for some <m>k,j\in\Z</m>. Hence, <m>x+y = 2k+2j = 2(k+j)</m>. Since <m>k,j\in \Z</m>, <m>k+j\in\Z</m> and thus <m>x+y</m> is even. Therefore, by structural induction, all elements of <m>S</m> are even.
+      </p>
+    </slide>
+    <slide>
+      <p>
+        The set <m>P</m> of properly nested parentheses is recursively defined by:
+        <ul>
+          <li>
+            <p>
+              Basis: <m component="a">()\in P</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Recursive rule: If <m>u,v\in P</m>, then
+              <ol marker="1">
+                <li>
+                  <p>
+                    <m component="a">(u)\in P</m>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m component="a">uv\in P</m>
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        A string of parentheses is <term>balanced</term> if it has the same number of left and right parentheses:
+        <ul>
+          <li>
+            <p component="a">
+              <m>()(())</m> is balanced
+            </p>
+            <p component="b">
+              <m>()(())</m> 
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              <m>(())(</m> is not balanced
+            </p>
+            <p component="b">
+              <m>(())(</m> 
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            Properly nested parentheses are balanced.
+          </p>
+        </statement>
+      </theorem>
+      <p component="a">
+        <em>Proof</em>: We will prove this by structural induction. For the base case, the element <m>()</m> has one left and one right parentheses, so is balanced. For the inductive step, let <m>u,v\in P</m> be balanced. Let <m>l_u,l_v,r_u,r_v</m> be the number of left and right parentheses in <m>u</m> and <m>v</m>. Then we have <m>l_u = r_u</m> and <m>l_v = r_v</m>. Notice that <m>(u)</m> has <m>l_u+1</m> left parentheses and <m>r_u+1</m> right parentheses. Since <m>l_u=r_u</m>, <m>l_u+1=r_u+1</m> and <m>(u)</m> is balanced. Notice that <m>uv</m> has <m>l_u+l_v</m> left parentheses and <m>r_u+r_v</m> right parentheses. Since <m>l_u=r_u</m> and <m>l_v=r_v</m>, we have <m>l_u+l_v = r_u+r_v</m>. Thus, <m>uv</m> is balanced. Hence, by structural induction, all properly nested parentheses are balanced.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Define the set of strings <m>S\subseteq \set{a,b}^*</m> by
+        <ul>
+          <li>
+            <p>
+              Basis: <m>\lambda\in S</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Recursive rule: If <m>x,y\in S</m>, then
+              <ol marker="1">
+                <li>
+                  <p>
+                    <m>xa\in S</m>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m>xbb\in S</m>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m>xy\in S</m>
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+        </ul>
+        Prove that ever <m>w\in S</m> has an even number of <m>b</m>s.
+      </p>
+    </slide>
+    <slide>
+      <!-- <title>Proof</title> -->
+      <p component="a">
+        We will use structural induction. For the base case, notice that <m>\lambda</m> has <m>0</m> <m>b</m>s, and <m>0</m> is even. Now let <m>x,y\in S</m> and assume that they have an even number of <m>b</m>s, <m>2n</m> and <m>2m</m>, respectively, with <m>n,m\in\Z</m>. 
+        <ol marker="1">
+          <li>
+            <p>
+              <m>xa</m> has the same number of <m>b</m>s as <m>s</m>,, which is even.
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>xbb</m> has <m>2n+2 = 2(n+1)</m> <m>b</m>s, which is an even number since <m>n+1\in \Z</m> if <m>n\in\Z</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>xy</m> has <m>2n+2m= 2(n+m)</m> <m>b</m>s, which is an even number since <m>n,m\in\Z</m> implies <m>n+m\in\Z</m>
+            </p>
+          </li>
+        </ol>
+        Hence, by structural induction, all strings in <m>S</m> have an even number of <m>b</m>s.
+      </p>
+      <p component="a">
+        <alert>Note that we have not yet proved that all strings with an even number of <m>b</m>s are in <m>S</m>!</alert>
+      </p>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Recursive Algorithms</title>
+    <slide>
+      <title>Algorithms Calling Themselves</title>
+      <p>
+        A <term>recursive algorithm</term> is an algorithm that calls itself. Calls to itself are called <term>recursive calls</term>.
+      </p>
+      <p>
+        A recursive algorithm for calculating <m>n!</m>:
+        <ul>
+          <li>
+            <p>
+              Factorial(<m>n</m>)
+            </p>
+          </li>
+          <li>
+            <p>
+              Input: A nonnegative integer <m>n</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Output: <m>n!</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <program language="$">
+        <code>
+        If (n=0), Return(1)
+        r := Factorial(n-1)
+        Return(r*n)
+        </code>
+      </program>
+    </slide>
+    <slide>
+      <title>Power Set</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              PowerSet(<m>A</m>)
+            </p>
+          </li>
+          <li>
+            <p>
+              Input: A set <m>A</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Output: The power set of <m>A</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <program language="$">
+        <code>
+        If (A is empty), Return({{}})
+        Select an element a in A
+        A1 := A - {a}
+        P := PowerSet(A1)
+        P1 := P
+        For each S in P'
+          Add S union {a} to P
+        End-for
+        Return(P)
+        </code>
+      </program>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Define a set <m>S\subseteq \set{a,b}^*</m> recursively by:
+        <ul>
+          <li>
+            <p>
+              Basis: <m>a\in S</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Recursive rule: If <m>x\in S</m>, then
+              <ol marker="1.">
+                <li>
+                  <p>
+                    <m>bx\in S</m>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m>xb\in S</m>
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+        </ul>
+        Prove that every string in <m>S</m> has exactly one <m>a</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Proof</title>
+      <p component="a">
+        We use structural induction. For the base case, we have only the string <m>a</m> in the basis, and this string has exactly one <m>a</m>. Now let <m>x\in S</m> and assume that <m>x</m> has exactly one <m>a</m>. The recursive rule produces new elements:
+        <ol marker="1">
+          <li>
+            <p>
+              <m>xb</m> has the same number of <m>a</m>s as <m>x</m>, which by assumption is exactly one.
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>bx</m> has the same number of <m>a</m>s as <m>x</m>, which by assumption is exactly one.
+            </p>
+          </li>
+        </ol>
+        Hence, by structural induction, every element of <m>S</m> has exactly one <m>a</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Looping</title>
+      <p>
+        An algorithm that uses loops (e.g., for loops or while loops) instead of recursion is called <term>iterative</term>. 
+      </p>
+      <p>
+        Often a problem can be solved with algorithms of both kinds. They may have different performance!
+      </p>
+    </slide>
+    <slide>
+      <sbsgroup widths="48% 48%">
+        <sidebyside>
+          <p>Iterative version:
+            <ul>
+              <li>
+                <p>
+                  ItPower(<m>r,n</m>)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Input: <m>r\in\R</m> and <m>n\in \N</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Output: <m>r^n</m>
+                </p>
+              </li>
+            </ul>
+          </p>
+          <p>
+            Complete a recursive version:
+            <ul>
+              <li>
+                <p>
+                  RecPower(<m>r,n</m>)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Input: <m>r\in\R</m> and <m>n\in \N</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Output: <m>r^n</m>
+                </p>
+              </li>              
+            </ul>
+          </p>
+        </sidebyside>
+        <sidebyside>
+          <program language="$">
+            <code>
+            power := 1
+            exp := 0
+            while(exp &lt; n)
+              power := power * r
+              exp := exp + 1
+            End-while
+            Return(Power)
+            </code>
+          </program>
+          <program language="$">
+            <code component="a">
+            If (n = 0) Return(1)
+            p := RecPower(r,n-1)
+            Return(r*p)
+            </code>
+          </program>
+        </sidebyside>
+      </sbsgroup>
+      
+    </slide>
+    
+  </section>
+  <section>
+    <title>Program Correctness</title>
+    <slide>
+      <title>Goal</title>
+      <p>
+        <term>Program correctness (or validation)</term> aims to prove that a program/algorithm does what it claims to do. A proof of program correctness requires us to prove two things:
+        <ol marker="1.">
+          <li>
+            <p>
+              <term>Partial correctness</term>: Show that for all valid inputs, if the algorithm terminates, then it returns the correct result for that input.
+            </p>
+          </li>
+          <li>
+            <p>
+              <term>Termination</term>: Show that the algorithm terminates on all valid inputs.
+            </p>
+          </li>
+        </ol>
+        The method for doing these things varies depending on if the algorithm is recursive or iterative.
+      </p>
+    </slide>
+    <slide>
+      <title>Program correctnes for recursive programs</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              <em>Partial correctness</em>: Assume input is valid and algorithm terminates.
+              <ol marker="a.">
+                <li>
+                  <p>
+                    <em>Base case</em>: Show that the program returns the correct output on the base case (i.e., when there are no recursive calls).
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <em>Recursive case</em>: Show that the input to the recursive call is valid. Assume the recursive call gives the correct output. Show that the whole algorithm returns the correct output.
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Termination</em>: Use induction to show the chain of recursive calls eventually ends.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <sbsgroup widths="35% 60%">
+        <sidebyside>
+          <p>
+            <ul>
+              <li>
+                <p>
+                  RecPower(<m>r,n</m>)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Input: <m>r\in\R</m> and <m>n\in \N</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Output: <m>r^n</m>
+                </p>
+              </li>              
+            </ul>
+          </p>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="a">
+            <em>Partial correctness</em>: When <m>n=0</m>, the algorithm returns <m>1=r^0=r^n</m>. Thus, the output is correct. When <m>n\geq 1</m>, the algorithm returns <m>r\cdot \text{RecPower}(r,n-1)</m>. Since <m>r\in\R</m> and <m>n-1\in \N</m> because <m>n\geq 1</m>, the input is valid.
+          </p>
+        </sidebyside>
+        <sidebyside>
+          <program language="$">
+            <code>
+            If (n = 0) Return(1)             
+            p := RecPower(r,n-1)
+            Return(r*p)
+            </code>
+          </program>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="a">
+            Assume that <m>\text{RecPower}(r,n-1)</m> returns the correct output <m>r^{n-1}</m>. The whole algorithm then returns <m>r\cdot \text{RecPower}(r,n-1) = r\cdot r^{n-1} = r^n</m>, which is the correct output. This proves partial correctness.
+          </p>
+        </sidebyside>
+      </sbsgroup>
+    </slide>
+    <slide>
+      <title>Termination on of RecPower</title>
+      <p component="a">
+        We use induction on <m>n</m>. For the base case, with <m>n=0</m>, the algorithm returns immediately for any <m>r\in\R</m>. Now assume that for some <m>k\in\N</m> that th eprogram terminates for every valid input <m>(r,k)</m> with <m>r\in\R</m>. On input <m>(r,k+1)</m>, the program calls itself on input <m>(r,k)</m> then multiplies this result by <m>r</m> and returns this product. Since by the inductive hypothesis, the call with input <m>(r,k)</m> terminates and the remaining steps of multiplying by <m>r</m> and treturning takes a finite number of steps, our algorithm terminates on input <m>(r,k+1)</m>. Hence, by induction, the program terminates on all valid inputs.
+      </p>
+      <p>
+        Since we have partial correctness and termination, the algorithm is correct.
+      </p>
+    </slide>
+    <slide>
+      <title>Program correctnes for iterative programs</title>
+      <p>Equations or inequalities that are true before and after each iteration of a loop are called <term>loop invariants</term>.
+        <ol marker="1.">
+          <li>
+            <p>
+              <em>Loop invariants</em>: Prove (or be given) loop invariants.
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Partial correctness</em>: Assume the input is valid and the algorithm terminates. Use loop invariants to show the algorithm returns the correct result.
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Termination</em>: Use loop invariants to show that the while loop condition will eventually be false and so the program will terminate.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <sbsgroup widths="35% 60%">
+        <sidebyside>
+          <p>
+            <ul>
+              <li>
+                <p>
+                  ItPower(<m>r,n</m>)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Input: <m>r\in\R</m> and <m>n\in \N</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Output: <m>r^n</m>
+                </p>
+              </li>              
+            </ul>
+          </p>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="a">
+            <em>Loop invariants</em>: We will use induction on the number of iterations to prove that <m>\text{power}=r^\text{exp}</m> and <m>\text{exp}\leq n</m> are loop invariants. For the base case, after <m>n=0</m> iterations, <m>\text{power}=1=r^0=r^\text{exp}</m> and <m>\text{exp}=0\leq n</m>.
+          </p>
+        </sidebyside>
+        <sidebyside>
+          <program language="$">
+            <code>
+            power := 1
+            exp := 0
+            while(exp &lt; n)
+              power := power * r
+              exp := exp + 1
+            End-while
+            Return(Power)
+            </code>
+          </program>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="a">
+            Assume the loop invariants hold after some number <m>k\geq 0</m> of iterations. Let <m>\text{power}_k</m>, <m>\text{exp}_k</m>, <m>\text{power}_{k+1}</m>, and <m>\text{exp}_{k+1}</m> be the values after <m>k</m> and <m>k+1</m> iterations. After the <m>(k+1)^\text{st}</m> iteration,
+            <m>\text{power}_{k+1} = \text{power}_k\cdot r </m> and
+              <m>\text{exp}_{k+1} = \text{exp}_k + 1</m>
+            Thus, 
+            <me>
+              \text{power}_{k+1} = \text{power}_k\cdot r = r^{\text{exp}_k}\cdot r = r^{\text{exp}_k+1} = r^{\text{exp}_{k+1}}
+            </me>.
+          </p>
+        </sidebyside>
+      </sbsgroup>
+    </slide>
+    <slide>
+      <p component="a">
+        If the <m>(k+1)^\text{st}</m> iteration ran, then we must have had <m>\text{exp}_k\lt n</m> (the while loop condition). Thus, we will have <m>\text{exp}_{k+1}=\text{exp}_k+1\leq n</m>. Thus, the loop invariants hold after <m>k+1</m> iterations. Hence, by induction, <m>\text{power} = r^{\text{exp}}</m> and <m>\text{exp}\leq n</m> are loop invariants.
+      </p>
+      <p component="a">
+        <em>Partial correctness</em>: Assume we have a valid input and that the algorithm terminates. If the algorithm terminates, then we must have <m>\text{exp} \lt n</m> is false. Thus, when the algorithm terminates we must have <m>\text{exp}\geq n</m>. However, <m>\text{exp}\leq n</m> is a loop invariant, so <m>\text{exp}=n</m>. Since <m>\text{power}=r^\text{exp}</m> is a loop invariant, when the algorithm terminates, we have <m>\text{power}=r^\text{exp} = r^n</m>, which is the correct output. Thus, we have partial correctness.
+      </p>
+    </slide>
+    <slide>
+      <p component="a">
+        <em>Termination</em>: We can see that after <m>n</m> iterations, we will have <m>\text{exp}=n</m>. This makes the loop condition <m>\text{exp}\lt n</m> false. This will be true for any valid input, which means we have proven termination.
+      </p>
+      <p component="a">
+        <em>Algorithm correctness</em>: We have proved partial correctness and termination, so we have proved algorithm correctness.
+      </p>
+    </slide>
+    <slide>
+      <title>Finding GCDs</title>
+      <p>
+        The <term>greatest common divisor</term> of <m>a</m> and <m>b</m> is the largest integer <m>d</m> so that <m>d\mid a</m> and <m>d\mid b</m>.
+      </p>
+      <lemma>
+        <statement>
+          <p>
+            For <m>a,b\in\Z^+</m>:
+            <ul>
+              <li>
+                <p>
+                  If <m>a=b</m>, then <m>\gcd(a,b)=a=b</m>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  If <m>a\gt b</m>, then <m>\gcd(a,b)=\gcd(a-b,b)</m>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  If <m>b\gt a</m>, then <m>\gcd(a,b)=\gcd(a,b-a)</m>.
+                </p>
+              </li>
+            </ul>
+          </p>
+        </statement>
+      </lemma>
+    </slide>
+    <slide>
+      <title>Iterative GCD Finding</title>
+      <sbsgroup widths="30% 65%">
+        <sidebyside>
+          <p>
+            <ul>
+              <li>
+                <p>
+                  it_gcd(<m>a,b</m>):
+                </p>
+              </li>
+              <li>
+                <p>
+                  Input: <m>a,b\in\Z^+</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Output: <m>\gcd(a,b)</m>
+                </p>
+              </li>
+            </ul>
+          </p>
+          <p component="a">
+            <em>Loop invariants</em>: <m>\gcd(x,y)=\gcd(a,b)</m>, <m>x\gt 0</m>, <m>y\gt 0</m>. We will prove these by induction on number of loop iterations, letting <m>x_i</m> and <m>y_i</m> be the values of <m>x</m> and <m>y</m> after iteration <m>i</m>.
+          </p>
+          <p component="b">
+            <nbsp />
+          </p>
+        </sidebyside>
+        <sidebyside>
+          <program language="$">
+            <code>
+            (x,y) := (a,b)
+            While (x ≠ y)
+              If (x &lt; y) y := y - x
+              Else x := x - y
+            End-while
+            Return(x)
+            </code>
+          </program>    
+          <p component="a">
+            The base case is before the loop runs, when we have <m>x_0 = a \gt 0</m> and <m>y_0 = b\gt 0</m> and <m>\gcd(x_0,y_0)=\gcd(a,b)</m>. These are true.
+          </p>
+          <p component="b">
+            <nbsp/>
+          </p>
+        </sidebyside>
+      </sbsgroup>
+      
+    </slide>
+    <slide>
+      <p component="a">
+        Now assume the invariants hold after some number <m>k\geq 0</m> of iterations. This means <m>x_k\gt 0</m>, <m>y_k\gt 0</m>, and <m>\gcd(x_k,y_k)=\gcd(a,b)</m>. For iteration <m>k+1</m> to run, we must have <m>x_k\neq y_k</m>.
+        <ul>
+          <li>
+            <p>
+              If <m>x_k\lt y_k</m>, then <m>y_{k+1} = y_k-x_k\gt 0</m>, <m>x_{k+1} = x_k</m>, and <m>\gcd(x_{k+1},y_{k+1})=\gcd(x_k,y_k-x_k) = \gcd(x_k,y_k)=\gcd(a,b)</m>. Invariants hold!
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>x_k\gt y_k</m>, the argument is symmetric.
+            </p>
+          </li>
+        </ul>
+        Hence, by induction, we have three loop invariants.
+      </p>
+      
+    </slide>
+    <slide>
+      <p component="a">
+        <em>Partial correctness</em>: Assume the input is valid and the program terminates. This requires <m>x=y</m>, which means <m>x=\gcd(x,y)=\gcd(a,b)</m> by the loop invariant and the output is correct.
+      </p>
+      <p component="a">
+        <em>Termination</em>: Consider the value of <m>x+y</m>. If the loop does not exit after iteration <m>k</m>, then <m>x_k\neq y_k</m>. 
+        <ul>
+          <li>
+            <p>
+              If <m>x_k\lt y_k</m>, then <m>x_{k+1} = x_k</m>, <m>y_{k+1}=y_k-x_k\lt y_k</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>y_k\lt x_k</m>, then <m>x_{k+1}=x_k-y_k\lt x_k</m>, <m>y_{k+1}=y_k</m>.
+            </p>
+          </li>
+        </ul>
+        Either way, <m>x_{k+1}+y_{k+1} \leq x_k+y_k-1</m>. After <m>m=a+b-2</m> iterations, we have <m>2\leq x_m+y_m \leq a+b(a+b-2)=2</m>. Thus, <m>x_m+y_m = 2</m>, which implies <m>x_m=1=y_m</m> and the loop exits.
+      </p>
+      <p component="a">
+        Therefore, the algorithm is correct.
+      </p>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Time Complexity of Recursive Algorithms</title>
+    <slide>
+      <p>
+        The time complexity <m>T(n)</m> of a recursive algorithm satisfies a recurrence relation.
+      </p>
+      <sbsgroup widths="30% 65%">
+        <sidebyside>
+          <p>
+          <ul>
+            <li>
+              <p>
+                Factorial(<m>n</m>)
+              </p>
+            </li>
+            <li>
+              <p>
+                Input: A nonnegative integer <m>n</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Output: <m>n!</m>
+              </p>
+            </li>
+          </ul>
+        </p>
+        <p component="a">
+          <ul>
+            <li>
+              <p>
+                When <m>n=0</m>, we have one comparison and one return, so <m>T(0)=2</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                When <m>n\gt 0</m>, we have one comparison, one subtraction, one assignment, one recursive call, one multiplication, and one return, which gives <m>T(n) = T(n-1)+5</m>.
+              </p>
+            </li>
+          </ul>
+        </p>
+        <p component="b">
+          <nbsp/>
+        </p>
+      </sidebyside>
+      <sidebyside>
+        <program language="$">
+          <code>
+          If (n=0), Return(1)
+          r := Factorial(n-1)
+          Return(r*n)
+          </code>
+        </program>
+        <p component="a">
+          Asymptotically, this is <m>T(n) = T(n-1)+\Theta (1)</m>.
+        </p>
+        <p component="b">
+          <nbsp/>
+        </p>
+        </sidebyside>
+      </sbsgroup>
+    </slide>
+    <slide>
+      <title>Simplifying Recurrence Relations</title>
+      <p>
+        We may simplify <me>T(n) = 2\cdot T\left(\left\lfloor\frac{n}{2}\right\rfloor\right) + n^2-1</me> as
+        <me>T(n) = \phantom{2\cdot T\left(\frac{n}{2}\right)+\Theta(n^2)}</me>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <sidebyside widths="50% 50%">
+        <p>
+          Simplify the following recurrence relations:
+          <ol marker="a">
+            <li>
+              <p>
+                <m>T(n) = T(n-1)+5n^3+4n</m>: <m component="a">T(n) = T(n-1)+\Theta(n^3)</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>T(n) = T\left(\left\lceil\frac{n}{2}\right\rceil\right) + T\left(\left\lfloor\frac{n}{2}\right\rfloor\right) + 7n</m>: <m component="a">T(n) = 2\cdot T\left(\frac{n}{2}\right) +\Theta(n)</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+        <p>
+          Find the actual and simplified recurrence relation for the time complexity of
+          <cd>
+            <cline>PowerRec(r,n)</cline>
+
+            <cline>If (n=0), Return (1)</cline>
+            <cline>y := PowerRec(r,n-1)</cline>
+            <cline>Return(r*y)</cline>
+          </cd>
+        </p>
+      </sidebyside>
+      <p component="a">
+        Actual: <m>T(0)=2</m>, <m>T(n)= T(n-1)+5</m>. Simplified: <m>T(n)=T(n-1)+\Theta(1)</m>.
+      </p>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Divide and Conquer Algorithms</title>
+    <slide>
+      <p>
+        A <term>divide and conquer algorithm </term> is a recursive algorithm with three basic steps:
+        <ol>
+          <li>
+            <p>
+              Break the input into smaller subproblems of the same type.
+            </p>
+          </li>
+          <li>
+            <p>
+              Solve each subproblem recursively.
+            </p>
+          </li>
+          <li>
+            <p>
+              Combine the solutions of the subproblems into a solution of the larger problem.
+            </p>
+          </li>
+        </ol>
+      </p>
+      
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Finding the minimum element of a list:
+      </p>
+      <sidebyside widths="35% 60%">
+        <program language="$">
+          <code>
+          FindMin(n),(a1,a2,…,an)
+          If (n=1), Return(a1)
+          m := ceiling(n/2)
+          List1 := (a1,a2,…,am)
+          List2 := (a(m+1),a(m+2),…,an)
+          min1 := FindMin(m,List1)
+          min2 := FindMin(n-m,List2)
+          If (min1 &lt; min2), Return(min1)
+          Return(min2)
+          </code>
+        </program>
+        <p component="a">
+          We have a constant number of operations outside of the recursive call. Each recursive call is on an input of size <m>\lceil n/2\rceil</m> or <m>\lfloor n/2\rfloor</m>, so simplifies to <m>n/2</m>. Hence, <m>T(n) = 2\cdot T(n/2)+\Theta(1)</m>.
+        </p>
+        <p component="b">
+          <nbsp/>
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Sorting!</title>
+      <p>
+        A <term>sorting algorithm</term> takes a list of numbers and returns the list in ascending order. We saw Bubble Sort a couple weeks back and it had <m>T(n) = \Theta(n^2)</m>. Today we look at a recursive algorithm.
+      </p>
+    </slide>
+    <slide>
+      <!-- <title>Merge Sort</title> -->
+      <sidebyside widths="30% 30% 40%">
+        <program language="$">
+          <code>
+          MergeSort(X)
+
+          If (size(X) = 1), Return(X)
+
+          L := createEmptyQueue()
+          R := createEmptyQueue()
+
+          n := size(X)
+          m := ceiling(n/2)
+
+          For i := 1 to m
+            x := remove(X)
+            add(L,x)
+          End-for
+          </code>
+        </program>
+        <program>
+          <code>
+          For i := 1 to (n-m)
+            x := remove(X)
+            add(R,x)
+          End-for
+
+          A := mergeSort(L)
+          B := mergeSort(R)
+
+          C := merge(A,B)
+
+          Return(C)
+          </code>
+        </program>
+        <p component="a">
+          <md>
+            <mrow>X \amp = (17,2,9,11,21,4,7,1)</mrow>
+            <mrow>L \amp = (17,2,9,11)</mrow>
+            <mrow>R \amp = (21,4,7,1)</mrow>
+            <mrow>A \amp = (2,9,11,17)</mrow>
+            <mrow>B \amp = (1,4,7,21)</mrow>
+            <mrow>C \amp = (1,2,4,7,9,11,17,21)</mrow>
+          </md>
+          <m>T(n) = 2\cdot T(n/2) + \Theta(n)</m> because forming <m>L,R</m> and merging are all <m>\Theta(n)</m>
+        </p>
+        <p component="b">
+          <m>X=(17,2,9,11,21,4,7,1)</m>
+        </p>
+      </sidebyside>
+
+    </slide>
+    <slide>
+      <title>Binary Search</title>
+      <p>
+        A <term>search algorithm</term> tries to find a target element in a list. We saw Linear Search earlier. It had time complexity <m>T(n) = \Theta(n)</m>.
+      </p>
+      <p>
+        Today we consider a recursive search algorithm called Binary Search. Its input must be a <em>sorted list</em>.
+      </p>
+    </slide>
+    <slide>
+      <!-- <title>BinarySearch</title> -->
+      <sidebyside widths="50% 50%">
+        <program language="$">
+          <code>
+          RecBinarySearch(low,high,A,x)
+
+          If (low = high AND a_low = x), Return(low)
+          If (low = high AND a_low ≠ x), Return(-1)
+
+          mid := floor( (low + high) / 2)
+
+          If (x ≤ a_mid), then high := mid
+          If (x &gt; a_mid), then low := mid + 1
+
+          Return(RecBinarySearch(low,high,A,x))
+          </code>
+        </program>
+        <p component="a">
+          RecBinarySearch(1,4,(6,7,8,9),5) returns <m>-1</m>. Walk through the steps. Time complexity is <m>T(n) = T(n/2) + \Theta(1)</m>.
+        </p>
+        <p component="b">
+          <nbsp />
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <sidebyside widths="50% 50%">
+      <p>
+        <ul>
+          <li>
+            <p>
+              PowerSet(<m>A</m>)
+            </p>
+          </li>
+          <li>
+            <p>
+              Input: A set <m>A</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Output: The power set of <m>A</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        Let <m>|A| = n</m>. Find the actual and simplified recurrence relation for the time complexity <m>T(n)</m>.
+      </p>
+      </sidebyside>
+      <sidebyside widths="50% 50%">
+      <program language="$">
+        <code>
+        If (A is empty), Return({{}})
+        Select an element a in A
+        A1 := A - {a}
+        P := PowerSet(A1)
+        P1 := P
+        For each S in P'
+          Add S union {a} to P
+        End-for
+        Return(P)
+        </code>
+      </program>
+      <p component="a">
+        Actual: <m>T(0)=2</m>, <m>T(n)=T(n-1) + 2^n + 6</m>, <m>n\geq 1</m>. Simplified: <m>T(n) = T(n-1)+\Theta(2^n)</m>.
+      </p>
+      <p component="b">
+        <nbsp/>
+      </p>
+      </sidebyside>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Solving Recurrence Relations</title>
+    <slide>
+      <title>Linear Homogeneous Recurrence Relations</title>
+      <p>
+        A <term>linear homogeneous recurrence relation of degree <m>k</m></term> is a recurrence relation of the form
+        <me component="a">
+          f_n = c_1 f_{n-1} + c_2 f_{n-2} + \cdots + c_k f_{n-k}
+        </me>
+        <me component="b">
+          f_n = \phantom{c_1 f_{n-1} + c_2 f_{n-2} + \cdots + c_k f_{n-k}}
+        </me>        
+        where the <m>c_j</m> are constants and <m>c_{k}\neq 0</m>.
+      </p>
+      <p component="a">
+        <term>Linear</term> refers to the recursive terms only appearing to the first power and not being multiplied by anything other than a constant. <term>Homogeneous</term> refers to the fact that every term includes the sequence. 
+        <me>
+          f_n - c_1 f_{n-1} - c_2 f_{n-2} - \cdots - c_k f_{n-k} = 0
+        </me>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For each recurrence relation below, classify it as linear or non-linear. For the linear recurrence relations, classify as homogeneous or non-homogeneous and identify the degree.
+        <ol marker="1.">
+          <li>
+            <p component="b">
+              <m>a_n = 5a_{n-1} + 3a_{n-5}</m>
+            </p>
+            <p component="a">
+              <m>a_n = 5a_{n-1} + 3a_{n-5}</m>: Linear, homoogeneous, degree <m>5</m>
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>b_n = 3b_{n-1} + b_{n-4}\cdot n</m>
+            </p>
+            <p component="a">
+              <m>b_n = 3b_{n-1} + b_{n-4}\cdot n</m>: Non-linear
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>d_n = 3d_{n-1} +  d_{n-4} + n</m>
+            </p>
+            <p component="a">
+              <m>d_n = 3d_{n-1} +  d_{n-4} + n</m>: Linear, non-homogeneous, degree <m>4</m>
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>f_n = (-7)f_{n-3}</m>
+            </p>
+            <p component="a">
+              <m>f_n = (-7)f_{n-3}</m>: Linear, homogeneous, degree <m>3</m>
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>g_n = n^3\cdot g_{n-1} + 8 g_{n-5} + \lfloor \sqrt{n^5+3}\rfloor</m>
+            </p>
+            <p component="a">
+              <m>g_n = n^3\cdot g_{n-1} + 8 g_{n-5} + \lfloor \sqrt{n^5+3}\rfloor</m>: Non-linear
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Solving Degree 1</title>
+      <p>
+        Consider the recurrence <m>h_0 = 3</m> and <m>h_n = 7\cdot h_{n-1}</m> for <m>n\geq 1</m>. This equation is linear homogeneous of degree 1.
+      </p>
+      <p>
+        Set <m component="a">h_n = c\cdot 7^n</m><m component="b">h_n = \phantom{c\cdot 7^n}</m>  for some constant <m>c</m>. Then
+        <me component="a">
+          h_{n+1} = 7\cdot h_n = 7\cdot c\cdot 7^n = c\cdot 7^{n+1}
+        </me>
+        <me component="b">
+          h_{n+1} = \phantom{7\cdot h_n = 7\cdot c\cdot 7^n = c\cdot 7^{n+1}}
+        </me>
+        so the recurrence relation is satisfied. We call <m>h_n</m> the <term>general solution</term>. To satisfy the initial condition, we need <m component="a">3=h_0 = c\cdot 7^0 = c</m><m component="b">\phantom{3=h_0 = c\cdot 7^0 = c}</m>. The <term>solution</term> to the recurrence relation is <m component="a">h_n = 3\cdot 7^n</m><m component="b">h_n = \phantom{3\cdot 7^n}</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Solve the recurrence relation <m>a_0 = 4</m> and for <m>n\geq 1</m>, <m>a_n = 3\cdot a_{n-1}</m>.
+      </p>
+      <p component="a">
+        The general solution is <m>a_n = c\cdot 3^n</m> for some constant <m>c</m>. We need <m>4 = a_0 = c\cdot 3^0 = c</m>, so the solution is <m>a_n = 4\cdot 3^n</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Solving Degree Two</title>
+      <p>
+        Consider the recurrence relation <m>g_n = g_{n-1}-6g_{n-2}</m>.
+      </p>
+      <p component="a">
+        For <q>reasons</q>, we can expect a solution to this might have the form <m>c\cdot x^n</m> with <m>c\neq 0</m>. Substituting gives
+        <md>
+          <mrow>cx^n \amp = cx^{n-1} -6 cx^{n-2} \amp x^2 \amp  = x -6</mrow>
+          <mrow>x^n \amp =  x^{n-1} - 6x^{n-2} \amp x^2+x-6 \amp = 0</mrow>
+          <mrow>x^{n+2} \amp = x^{n+1} - 6 x^n\amp (x-3)(x+2) \amp = 0</mrow>
+        </md>
+        Hence <m>a_1 \cdot 3^n</m> and <m>a_2 \cdot (-2)^n</m> are solutions to the recurrence relation.
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            If <m>h_n</m> and <m>g_n</m> are solutions to the recurrence relation
+            <me>
+              f_n = c_1 f_{n-1} + \cdot c_kf_{n-k}
+            </me>,
+            then so is <m component="a">s\cdot h_n+t\cdot g_n</m><m component="b">\phantom{s\cdot h_n+t\cdot g_n}</m> for any <m>s,t\in\R</m>.
+          </p>
+        </statement>
+      </theorem>
+      <p>
+        The general solution of <m>g_n = g_{n-1}-6g_{n-2}</m> is thus
+        <m component="a">
+          g_n = a_1\cdot 3^n + a_2 \cdot (-2)^n\text{.}
+        </m>
+        <m component="b">
+          g_n = \phantom{a_1\cdot 3^n + a_2 \cdot (-2)^n}
+        </m>
+        If we have <m>g_0 = 3</m> and <m>g_1=4</m>, then
+        <md component="a">
+          <mrow>3 \amp = a_1+a_2 \amp 3-a_2 \amp = a_1 \amp 5a_2 \amp =  5</mrow>
+          <mrow>4 \amp = 3a_1-2a_2 \amp 4\amp= 3(3-a_2)-2a_2 = 9-5a_2</mrow>
+        
+        </md>
+      </p>
+      <p component="a">
+        Hence, <m>g_n = 2\cdot 3^n +(-2)^n</m> is the solution.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Solve the recurrence relation <m>f_0 = 0</m>, <m>f_1 = 1</m>, and for <m>n\geq 2</m>, <m>f_n = f_{n-2}</m>.
+      </p>
+      <p component="a">
+        Characteristic equation is <m>x^2-1=0</m>, so we have <m>f_n = a_1 1^n + a_2 (-1)^n</m> as the general solution. Using the initial conditions, <m>0=f_0 = a_1 + a_2</m> and <m>1=f_1 = a_1-a+2</m> gives <m>a_2=-a_1</m> and <m>a_1 = 1/2</m>. Thus, the solution is 
+        <me>
+          f_n = \frac{1}{2} - \frac{1}{2}(-1)^n = \frac{1-(-1)^n}{2}
+        </me>.
+      </p>
+    </slide>
+    <slide>
+      <title>Higher Degree</title>
+      <p>
+        Same process, provided all the roots of your characteristic equation are distinct.
+      </p>
+      <p component="a">
+        Why does it work? The honest answer is linear algebra! 
+      </p>
+    </slide>
+    
+    <slide>
+      <title>Repeated Roots</title>
+      <p>
+        Consider the recurrence relation <m>g_0=6</m>, <m>g_1 = 19</m>, and for <m>n\geq 2</m>, <m>g_n = 6g_{n-1}-9g_{n-2}</m>.
+      </p>
+      <p component="a">
+        Characteristic equation is <m>x^n  = 6 x^{n-1} - 9x^{n-2}</m>
+        <md>
+          <mrow>x^{n+2} \amp = 6x^{n+1} - 9 x^n\amp x^2-6x+9 \amp = 0</mrow>
+          <mrow>x^2 \amp  = 6x -9\amp (x-3)^2 \amp = 0</mrow>
+        </md>
+        We expect <m>a_1\cdot 3^n</m> as a solution, but <m>b\cdot 3^n</m> isn't distinct because would just be <m>(a_1+b)3^n</m>. Turns out that <m>a_2 n3^n</m> is also a solution, so <m>g_n = a_1 3^n + a_2n3^n</m> is the general solution. By the initial conditions, we find that <m>a_1 = g_0 = 6</m>. Hence <m>a_2=\frac{1}{3}</m> so the solution is <m>g_n = 6\cdot 3^n +n\cdot 3^{n-1}</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>General Solutions from Characteristic Equations</title>
+      <tabular>
+        <row>
+          <cell>Characteristic Equation</cell>
+          <cell>General Solution</cell>
+        </row>
+        <row>
+          <cell><m>(x-3)^4=0</m></cell>
+          <cell><m component="a">a_1 3^n + a_2 n3^n+a_3 n^2 3^n + a_4 n^3 3^n</m><m component="b">\phantom{a_1 3^n + a_2 n3^n+a_3 n^2 3^n + a_4 n^3 3^n}</m></cell>
+        </row>
+        <row>
+          <cell><m>(x-2)^2(x+5)(x-6)=0</m></cell>
+          <cell><m component="a">a_1 2^n + a_2 n 2^n +a_3 (-5)^n + a_4 6^n</m></cell>
+        </row>
+        <row>
+          <cell><m>(x+1)(x-3)(x-4)(x+2)=0</m></cell>
+          <cell><m component="a">a_1(-1)^n + a_2 3^n + a_3 4^n +a_4 (-2)^n</m></cell>
+        </row>
+        <row>
+          <cell><m>(x+3)(x-5)^3(x+1)^2=0</m></cell>
+          <cell><m component="a">a_1 (-3)^n + a_2 5^n +a_3 n5^n + a_4 n^2 5^n +a_5 (-1)^n + a_6 n(-1)^n</m></cell>
+        </row>
+        <row>
+          <cell><m>(x^2-4)(x-2)(x+5)=0</m></cell>
+          <cell><m component="a">a_1 2^n + a_2 n 2^n + a_3 (-2)^n + a_4 (-5)^n</m></cell>
+        </row>
+      </tabular>
+    </slide>
+    <slide>
+      <title>Linear Nonhomogeneous Recurrences</title>
+      <p>
+        Find <m>f_n</m> satisfying <m>f_0 = 2</m> and <m>f_n =3f_{n-1} + 6</m> for <m>n\geq 1</m>.
+      </p>
+      <p component="a">
+        We first find a <term>particular solution</term>, denoted <m>f_n^{(p)}</m>. The nonhomogeneous part is constant, so try <m>f_n^{(p)}=c</m>. This gives <m>c=f_n^{(p)} = 3f_{n-1}^{(p)}+6 = 3c+6</m> and <m>c=-3</m>. Hence <m>f_n^{(p)}=-3</m>. But, we could also add any solution <m>f_n^{(h)}=a_3\cdot 3^n</m> to the homogeneous equation <m>f_n = 3f_{n-1}</m> to this solution and it would still be a solution! The general solution is <m>f_n = a_1\cdot 3^n - 3</m>. Using the initial condition <m>2=f_0 = a_1-3</m> implies <m>a_1 = 5</m> and <m>f_n = 5\cdot 3^n -3</m> is the solution.
+      </p>
+    </slide>
+    <slide>
+      <!-- <title>Another Linear Nonhomogeneous Recurrence</title> -->
+      <p>
+        Consider the recurrence <m>f_n = 4f_{n-1}-4f_{n-2} + 3^{n-2} + 2n-4</m>.
+      </p>
+      <p component="a">
+        A particular solution should look like <m>f_n^{(p)} = d_1 3^n+d_2 n + d_3</m>. Inserting into the recurrence gives 
+        <md>
+          <mrow>d_1 3^n + d_2 n + d_3 = \amp 4d_1 3^{n-1}+4d_2(n-1)+4d_3 </mrow>
+          <mrow> \amp -4d_13^{n-2}-4d_2 (n-2)-4d_3</mrow>
+          <mrow> \amp +3^{n-2}+2n-4</mrow>
+        </md>
+        Hence <m>9d_1 = 12d_1-4d_1+1</m>, so <m>d_1=1</m>. Also <m>d_2 n=4d_2n-4d_2n+2n</m>, so <m>d_2 = 2</m>. Finally, <m>d_3 = 4d_3-4d_3-4d_2+8d_2-4</m> and <m>d_3=4</m>. Thus, <m>f_n^{(p)} = 3^n+2n+4</m>. Characteristic equation is <m>(x-2)^2=0</m>, so <m>f^{(h)}_n = a_1 2^n + a_2 n 2^n</m>. General solution is 
+        <m>
+          f_n = a_1 2^n + a_2 n2^n + 3^n+2n+4
+        </m>.
+      </p>
+    </slide>
+    <slide>
+      <!-- <title>Method for solving Linear Honhomogeneous</title> -->
+      <p>
+        <ol marker="1">
+          <li>
+            <p>
+              Find the general solution <m>f_n^{(h)}</m> of the associated homogeneous recurrence relation.
+            </p>
+          </li>
+          <li>
+            <p>
+              Find a particular solution <m>f_n^{(p)}</m> of the nonhomogeneous recurrence relation. Terms should:
+              <ol marker="a">
+                <li>
+                  <p>
+                    Look like the right-hand side, including all lower powers of <m>n</m>.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Not include any terms from <m>f_n^{(h)}</m> (so need to increase powers of <m>n</m>)
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+        </ol>
+      </p>
+      <p>
+        The recurrence <m>f_n = 8f_{n-1}-21 f_{n-2}+14f_{n-3}+20f_{n-4}-24f_{n-4}+3n2^n+n5^n</m> has characteristic equation <m>(x-2)^3(x+1)(x-3)=0</m>.
+      </p>
+
+    </slide>
+    <slide component="a">
+      <p>
+        <m>f_n^{(h)} = a_1 2^n + a_2 n 2^n + a_3 n^2 2^n + a_4 (-1)^n + a_5 3^n</m>, so we need to try <m>f_n^{(p)} = d_1 n^3 2^n + d_2 n^4 2^n + d_3 n5^n + d_4 5^n</m>.
+      </p>
+      
+    </slide>
+    
+  </section>
+  <section>
+    <title>Divide and Conquer Recurrence Relations</title>
+    <slide>
+      <!-- <title>The Master Theorem</title> -->
+      <p>
+        Many recurrence relations for the time complexity of a divide and conquer algorithm have the form 
+        <m>
+           T(n) = aT\left(\frac{n}{b}\right) + \Theta (n^d)
+        </m>
+        for constants <m>a\gt 0</m>, <m>b\gt 0</m>, and <m>d\geq 0</m>.
+      </p>
+      <theorem xml:id="thm-master">
+        <title>Master Theorem</title>
+        
+        
+        <statement>
+          <p>
+            Let <m>T(n) = aT\left(\frac{n}{b}\right) + \Theta (n^d)</m> for constants <m>a\gt 0</m>, <m>b\gt 0</m>, and <m>d\geq 0</m>. We have the following:
+            <ol marker="1.">
+              <li>
+                <p>
+                  If <m>\frac{a}{b^d}\lt 1</m>, then <m>T(n)</m> is <m component="a">\Theta(n^d)</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  If <m>\frac{a}{b^d}= 1</m>, then <m>T(n)</m> is <m component="a"> \Theta(n^d\log(n))</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  If <m>\frac{a}{b^d}\gt 1</m>, then <m>T(n)</m> is <m component="a"> \Theta\left(n^{\log_b(a)}\right)</m>
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        <dl>
+          <li>
+            <title>Merge Sort</title>
+            <p>
+              <m>T(n) = 2T\left(\frac{n}{2}\right)+\Theta(n)</m>
+            </p>
+            <p component="a">
+              Here <m>a=2</m>, <m>b=2</m>, and <m>d=1</m>. Thus, <m>a/b^d = 2/2^1 = 1</m>. Case 2 applies and <m>T(n)</m> is <m>\Theta(n^d\log(n))=\Theta(n\log n)</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <title>Binary Search</title>
+            <p>
+              <m>T(n) = T\left(\frac{n}{2}\right) + \Theta(1)</m>
+            </p>
+            <p component="a">
+              Here <m>a=1</m>, <m>b=2</m>, and <m>d=0</m>. Thus, <m>a/b^d = 1/2^0 = 1</m>. Case 2 applies and <m>T(n)</m> is <m>\Theta(n^d\log(n))=\Theta(\log n)</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Simplify each of the following recurrence relations and apply the Master Theorem:
+        <ol marker="a.">
+          <li>
+            <p>
+              <m>T(n) = 2T\left(\left\lfloor\frac{n}{3}\right\rfloor\right) + 2 T\left(\left\lceil \frac{n}{3}\right\rceil\right) + 5n+7</m>
+            </p>
+            <p component="a">
+              <m>T(n)</m> is <m>\Theta(n^{\log_3(4)})</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>T(n) = 4T\left(\frac{n}{4}\right) + \sqrt{n} - 5</m>
+            </p>
+            <p component="a">
+              <m>T(n)</m> is <m>\Theta(n^{\log_4(4)})=\Theta(n)</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>T(n) = T\left(\left\lfloor \frac{n}{2}\right\rfloor\right)+3T\left(\left\lceil \frac{n}{2}\right\rceil\right) + 2n^3-5n+1</m>
+            </p>
+            <p component="a">
+              <m>T(n)</m> is <m>\Theta(n^3)</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    
+  </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

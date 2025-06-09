@@ -1,0 +1,1008 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude" >
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \DeclareMathOperator{\ind}{in-degree}
+      \DeclareMathOperator{\outd}{out-degree}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usepackage{tkz-graph}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+    <subtitle>Introduction to Discrete Mathematics</subtitle>
+    <frontmatter>
+      <bibinfo>
+      <author>
+        <personname>
+        Mitchel T.
+        Keller </personname>
+        <institution>University of Wisconsin<ndash/>
+        Madison</institution>
+      </author>
+      <date>Spring 2025</date>
+      </bibinfo>
+
+      <titlepage-items/>
+    </frontmatter>
+    <section xml:id="sec-coloring-cont">
+      <title>Subgraphs and Graph Coloring</title>
+      <slide>
+        <title>Subgraphs</title>
+        <p>
+          Let <m>G = (V,E)</m> and <m>G'=(V',E')</m> be graphs. We say that <m>G'</m> is a <term>subgraph</term> of <m>G</m> provided that <m>V'\subseteq V</m> and <m>E'\subseteq E</m>.
+        </p>
+        <p component="a">
+          <em>Observation 1</em>: We have written our definition to require that <m>G'</m> be a graph. Taking arbitrary subsets <m>V'\subseteq V</m> and <m>E'\subseteq E</m> might not lead to a graph, as some edge of <m>E'</m> might not have its endpoint(s) in <m>V'</m>.
+        </p>
+        <p component="a">
+          <em>Observation 2</em>: Our definition does not require that we take all the edges in <m>E</m> that have both ends in <m>V'</m>.
+        </p>
+      </slide>
+      
+      <slide>
+        <title>Example</title>
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="color-it">
+            <diagram dimensions="(800,400)" margins="12">
+              <coordinates bbox="(0,0,4,2)">
+                <network  scale="0.8" labels="no"
+                  node-fill="#fcf" node-stroke="black" 
+                  seed="1" 
+                  tactile-node-size="40">
+                  <node at="1" p="(0,1)" edges="[2,3]" />
+                  <node at="2" p="(1,0)" edges="[3,4,5]" />
+                  <node at="3" p="(1,2)" edges="[4,6]" />
+                  <node at="4" p="(2,1)" edges="[5,6]" />
+                  <node at="5" p="(3,0)" edges="[6,7]" />
+                  <node at="6" p="(3,2)" edges="[7]" />
+                  <node at="7" p="(4,1)" edges="[]" />
+                </network>
+                
+              </coordinates>
+            </diagram>  
+          </prefigure>
+        </image>   
+        <p component="a">
+          Contains <m>K_3</m>, so needs at least 3 colors. Demonstrate 3-coloring.
+        </p>      
+      </slide>
+      
+    </section>
+    <section xml:id="sec-trees">
+      <title>Trees</title>
+      <slide>
+        <title>Definition</title>
+        <p>
+          A <term>tree</term> is a connected graph that has no cycles. A <term>forest</term> is a graph with no cycles.
+        </p>
+        <p component="a">
+          <em>Discuss</em>: True or false? A tree must be a simple graph.
+        </p>
+        <p component="b">
+          <nbsp/>
+        </p>
+        <p>
+          A <term>rooted tree</term> is a tree with a special vertex designated as the <term>root</term>. Computer scientists are not botanists, so they draw rooted trees with the root at the top. The <term>level</term> of a vertex is its distance from the root. The <term>height</term> of a tree is the largest vertex level.
+        </p>
+        <p component="a">
+          The terminology <q>free tree</q> is nonsense. 
+        </p>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <sidebyside widths="50% 50%">
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="tree-example">
+            <diagram dimensions="(600,450)" margins="5">
+              <definition>
+                graph={0:[1,2],1:[3,4],2:[5],3:[6,7],4:[8],5:[11,12],8:[9,10]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="spring" graph="graph" node-fill="#E66100"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <!-- <node at="0" fill="#5D3A9B"/> -->
+                  <!-- <edge vertices="[0,1]" stroke="blue" thickness="4"/> -->
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>  
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="rooted-tree-example">
+            <diagram dimensions="(600,450)" margins="5">
+              <definition>
+                graph={0:[1,2],1:[3,4],2:[5],3:[6,7],4:[8],5:[11,12],8:[9,10]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="bfs" start="0" graph="graph" node-fill="#E1B36A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <node at="0" fill="#44AA99"/>
+                  <!-- <edge vertices="[0,1]" stroke="blue" thickness="4"/> -->
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        </sidebyside>
+        <p component="a">
+          Talk about 1, 2 at level 1; 3,4,5 at level 2; etc. Talk about height being 4.
+        </p>
+      </slide>
+
+      <slide>
+        <title>Rooted Tree Terminology</title>
+        <sidebyside widths="40% 60%">
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="rooted-tree-example2">
+            <diagram dimensions="(400,300)" margins="5">
+              <definition>
+                graph={0:[1,2],1:[3,4],2:[5],3:[6,7],4:[8],5:[11,12],8:[9,10]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="bfs" start="0" graph="graph" node-fill="#E1BE6A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <node at="0" fill="#44AA99"/>
+                  <node at="1" fill="#CC6677"/>
+                  <node at="4" fill="#CC6677"/>
+                  <node at="5" fill="#88CCEE"/>
+                  <node at="11" fill="#88CCEE"/>
+                  <node at="12" fill="#88CCEE"/>
+                  <edge vertices="[1,4]" stroke="#332288" thickness="4"/>
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        <p>
+          <ul>
+            <li>
+              <p>
+                <term>Parent</term>: First vertex on path to root.
+              </p>
+            </li>
+            <li>
+              <p>
+                <term>Ancestor</term>: Any vertex on path to root.
+              </p>
+            </li>
+            <li>
+              <p>
+                <term>Child</term>: If <m>u</m> is the parent of <m>v</m>, then <m>v</m> is a child of <m>u</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                <term>Descendant</term>: If <m>u</m> is an ancestor of <m>v</m>, then <m>v</m> is a descendant of <m>u</m>.
+              </p>
+            </li>
+          </ul>
+        </p>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Rooted Tree Terminology</title>
+        <sidebyside widths="40% 60%">
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="rooted-tree-example3">
+            <diagram dimensions="(400,300)" margins="5">
+              <definition>
+                graph={0:[1,2],1:[3,4],2:[5],3:[6,7],4:[8],5:[11,12],8:[9,10]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="bfs" start="0" graph="graph" node-fill="#E1BE6A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <node at="0" fill="#44AA99"/>
+                  <node at="6" fill="#DDCC77"/>
+                  <node at="4" fill="#CC6677"/>
+                  <node at="8" fill="#CC6677"/>
+                  <node at="9" fill="#CC6677"/>
+                  <node at="10" fill="#CC6677"/>
+                  <node at="11" fill="#88CCEE"/>
+                  <node at="12" fill="#88CCEE"/>
+                  
+                  <edge vertices="[4,8]" stroke="#332288" thickness="4"/>
+                  <edge vertices="[9,8]" stroke="#332288" thickness="4"/>
+                  <edge vertices="[10,8]" stroke="#332288" thickness="4"/>
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        <p>
+          <ul>
+            <li>
+              <p>
+                <term>Leaf</term>: Vertex of degree 1
+              </p>
+            </li>
+            <li>
+              <p>
+                <term>Siblings</term>: Same parent
+              </p>
+            </li>
+            <li>
+              <p>
+                <term>Subtree</term>: A vertex <m>v</m> and all its descendants (with <m>v</m> as root)
+              </p>
+            </li>
+          </ul>
+        </p>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <sidebyside widths="45% 55%">
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="rooted-tree-activity">
+            <diagram dimensions="(400,500)" margins="5">
+              <definition>
+                graph={"a":["b","c","e"],"b":["d","f"],"e":["i","j","z"],"f":["g"],"d":["k","m"],"j":["w"],"w":["y"]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="bfs" start="a" graph="graph" node-fill="#E1BE6A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        <p>
+          <ul>
+            <li>
+              <p component="b">
+                Leaves:
+              </p>
+              <p component="a">
+                Leaves: <m>c,k,m,g,y,z</m>
+              </p>
+            </li>
+            <li>
+              <p component="b">
+                Parent of <m>f</m>: 
+              </p>
+              <p component="a">
+                Parent of <m>f</m>: <m>b</m>
+              </p>
+            </li>   
+            <li>
+              <p component="b">
+                Children of <m>a</m>:
+              </p>
+              <p component="a">
+                Children of <m>a</m>: <m>b,c,e</m>
+              </p>
+            </li>         
+            <li>
+              <p component="b">
+                Sibling(s) of <m>i</m>: 
+              </p>
+              <p component="a">
+                Sibling(s) of <m>i</m>: <m>j,z</m>
+              </p>
+            </li>
+            <li>
+              <p component="b">
+                Ancestors(s) of <m>m</m>: 
+              </p>
+              <p component="a">
+                Ancestors(s) of <m>m</m>: <m>d,b,a</m>
+              </p>
+            </li>
+          </ul>
+        </p>
+        </sidebyside>
+      </slide>
+
+    </section>
+    <section xml:id="sec-tree-props">
+      <title>Properties of Trees</title>
+      <slide>
+        <theorem xml:id="thm-tree-unique-path">
+          <statement>
+            <p>
+              Let <m>T=(V,E)</m> be a tree. For all <m>u,v\in V</m>, there exists a unique path from <m>u</m> to <m>v</m> in <m>T</m>
+            </p>
+          </statement>
+        </theorem>
+        <proof component="a">
+          <p>
+            Since <m>T</m> is connected, there exists a path from <m>u</m> to <m>v</m>. Suppose for a contradiction there exist at least two paths, say <m>P</m> and <m>P'</m>. Follow the paths from <m>u</m> until they diverge at <m>x</m>. They must come back together again at some vertex <m>y</m> (possibly <m>y=v</m>). Following <m>P</m> from <m>x</m> to <m>y</m> and <m>P'</m> from <m>y</m> to <m>x</m> is a cycle in <m>T</m>, which is a contradiction.
+          </p>
+        </proof>
+        
+      </slide>
+      <slide>
+        <title>Trees Have Leaves!</title>
+        <theorem xml:id="thm-tree-leaves">
+          <statement>
+            <p>
+              Every tree on at least <m>2</m> vertices has at least <m>2</m> leaves.
+            </p>
+          </statement>
+        </theorem>
+        <proof component="a">
+          <p>
+            Since <m>T</m> is finite, there is a path of greatest length. Let <m>u,v</m> be the ends of a path of greatest length in <m>T</m>. We must have that <m>u,v</m> are leaves, as an edge from <m>u</m> or <m>v</m> back to the path would create multiple paths from <m>u</m> to <m>v</m> and an edge to a vertex not on the path would create a longer path.
+          </p>
+        </proof>
+      </slide>
+      <slide>
+        <theorem xml:id="thm-tree-edge-count">
+          <statement>
+            <p>
+              If <m>T</m> is a tree with <m>n</m> vertices, then <m>T</m> has <m>n-1</m> edges.
+            </p>
+          </statement>
+        </theorem>
+        <proof component="a">
+          <p>
+            We prove this by induction on <m>n</m>. Trivial if <m>n=1</m>. Now suppose that for some integer <m>k\geq 1</m>, every tree with <m>k</m> vertices has <m>k-1</m> edges. Let <m>T</m> be a tree with <m>k+1</m> vertices. We know that <m>T</m> has a leaf, <m>v</m>. Form <m>T'</m> from <m>T</m> by deleting <m>v</m> and its single edge. We must have that <m>T'</m> is a tree (can't disconnect or create cycle) with <m>k</m> vertices, so by IH, it has <m>k-1</m> edges. But <m>T</m> has one more edge, so <m>T</m> has <m>k</m> edges.
+          </p>
+        </proof>
+        
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Draw a <em>forest</em> on <m>n=11</m> vertices made up of <m>3</m> <em>trees</em>. How many edges does your forest have? Compare with your neighbors.
+        </p>
+        <p component="a">
+          Fact: A forest on <m>n</m> vertices with <m>k</m> components has <m>n-k</m> edges.
+        </p>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-tree-traversals">
+      <title>Tree Traversals</title>
+      <slide>
+        <title>Pseudocode</title>
+        <p>
+          Trees are often used as a data structure. A <term>tree traversal</term> is a way of <q>visiting</q> every vertex of a tree exactly once to <q>process</q> whatever data is stored at the vertex.
+        </p>
+        <sidebyside widths="40% 20% 40%">
+          <program>
+            <code>
+            Pre-order(<m>v</m>):
+
+            process(<m>v</m>)
+            For every child <m>w</m> of <m>v</m>:
+              Pre-order(<m>w</m>)
+            End-for
+            </code>
+          </program>
+          <p>
+            <nbsp/>
+          </p>
+          <program>
+            <code>
+            Post-order(<m>v</m>):
+
+            For every child <m>w</m> of <m>v</m>:
+              Post-order(<m>w</m>)
+            End-for
+            process(<m>v</m>)
+            </code>
+          </program>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <sidebyside widths="45% 55%">
+          <image>
+          <prefigure xmlns="https://prefigure.org" label="traversals">
+            <diagram dimensions="(600,450)" margins="5">
+              <definition>
+                graph={"a":["b","c"],"b":["d","e"],"c":["f"],"d":["g","h"],"e":["i"],"f":["j","k"],"i":["l","m"]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="bfs" start="a" graph="graph" node-fill="#E1B36A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <node at="a" fill="#44AA99"/>
+                  <!-- <edge vertices="[0,1]" stroke="blue" thickness="4"/> -->
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        <p component="a">
+          <ul>
+            <li>
+              <p>
+                Pre-order: <m>a,b,d,g,h,e,i,l,m,c,f,j,k</m>.
+              </p>
+              <p>
+                Draw curve around tree, starting from root and going left. When passing the left-hand side of a vertex, process it.
+              </p>
+            </li>
+            <li>
+              <p>
+                Post-order: <m>g,h,d,l,m,i,e,b,j,k,f,c,a</m>
+              </p>
+              <p>
+                Draw curve around tree, starting from root and going left. When passing the right-hand side of a vertex, process it.
+              </p>
+            </li>
+          </ul>  
+        </p>
+        <p component="b">
+          <nbsp/>
+        </p>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Draw the tree shown below as a <em>rooted</em> tree with root vertex <m>d</m>. What is the height of this rooted tree? Find the pre-order and post-order traversal orderings.
+        </p>
+        <sidebyside widths="50% 50%">
+          <image>
+          <prefigure xmlns="https://prefigure.org" label="traversal-act">
+            <diagram dimensions="(600,450)" margins="5">
+              <definition>
+                graph={"a":["d"],"b":["d"],"c":["f"],"d":["f"],"e":["f"],"f":["g","h"]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="spring" graph="graph" node-fill="#E1B36A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <!-- <node at="d" fill="#44AA99"/> -->
+                  <!-- <edge vertices="[0,1]" stroke="blue" thickness="4"/> -->
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        <image component="a">
+          <prefigure xmlns="https://prefigure.org" label="traversal-act-soln">
+            <diagram dimensions="(600,450)" margins="5">
+              <definition>
+                graph={"a":["d"],"b":["d"],"c":["f"],"d":["f"],"e":["f"],"f":["g","h"]}
+              </definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network layout="bfs" start="d" graph="graph" node-fill="#E1B36A"
+                  rotate="-90" scale="0.8" labels="yes"> 
+                  <node at="d" fill="#44AA99"/>
+                  <!-- <edge vertices="[0,1]" stroke="blue" thickness="4"/> -->
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+        <p component="b">
+          <nbsp/>
+        </p>
+        </sidebyside>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-spanning-trees">
+      <title>Speanning Trees and Graph Traversals</title>
+      <slide>
+        <!-- <title>Spanning Subgraphs</title> -->
+        <p>
+          Let <m>G = (V,E)</m> and <m>G'=(V',E')</m> be graphs with <m>G'</m> a subgraph of <m>G</m>. We say that <m>G'</m> is a <term>spanning subgraph</term> of <m>G</m> provided that <m>V'= V</m>.
+        </p>
+        <sidebyside widths="35% 65%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="spanning">
+              <diagram dimensions="(300,400)" margins="5">
+                <coordinates bbox="(0,0,10,15)">
+                  <network  node-fill="#E1B36A"
+                    scale="0.8" labels="yes"> 
+                    <node at="1" p="(0,12)" edges="[5,7]" />
+                    <node at="2" p="(8,9)" edges="[3,5,6,7]" />
+                    <node at="3" p="(7,6)" edges="[5,8,10]" />
+                    <node at="4" p="(1,5)" edges="[7,10]" />
+                    <node at="5" p="(5,14)" edges="[6]" />
+                    <node at="6" p="(9,13)" edges="[]" />
+                    <node at="7" p="(2,8)" edges="[10]" />
+                    <node at="8" p="(9,5)" edges="[9]" />
+                    <node at="9" p="(7,2)" edges="[10]" />
+                    <node at="10" p="(3,1)" edges="[]" />
+                    <!-- <edge vertices="[0,1]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>   
+          <p component="b">
+            <nbsp/>
+          </p>     
+          <p component="a">
+            <ul>
+              <li>
+                <p>
+                  Graph with no edges and all vertices is a spanning subgraph.
+                </p>
+              </li>
+              <li>
+                <p>
+                  The original graph is a spanning subgraph of itself.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Can think of making a spanning subgraph by deleting edges from the original graph.
+                </p>
+              </li>
+              <li>
+                <p>
+                  When <m>G'</m> is a tree, things are particularly nice!
+                </p>
+              </li>
+            </ul>
+          </p>  
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Spanning Trees</title>
+        <sidebyside widths="35% 65%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="spanning-tree">
+              <diagram dimensions="(300,400)" margins="5">
+                <coordinates bbox="(0,0,10,15)">
+                  <network  node-fill="#E1B36A"
+                    scale="0.8" labels="yes"> 
+                    <node at="1" p="(0,12)" edges="[5,7]" />
+                    <node at="2" p="(8,9)" edges="[3,5,6,7]" />
+                    <node at="3" p="(7,6)" edges="[5,8,10]" />
+                    <node at="4" p="(1,5)" edges="[7,10]" />
+                    <node at="5" p="(5,14)" edges="[6]" />
+                    <node at="6" p="(9,13)" edges="[]" />
+                    <node at="7" p="(2,8)" edges="[10]" />
+                    <node at="8" p="(9,5)" edges="[9]" />
+                    <node at="9" p="(7,2)" edges="[10]" />
+                    <node at="10" p="(3,1)" edges="[]" />
+                    <edge vertices="[5,6]" stroke="blue" thickness="4"/>
+                    <edge vertices="[2,6]" stroke="blue" thickness="4"/>
+                    <edge vertices="[2,7]" stroke="blue" thickness="4"/>
+                    <edge vertices="[5,1]" stroke="blue" thickness="4"/>
+                    <edge vertices="[7,4]" stroke="blue" thickness="4"/>
+                    <edge vertices="[7,10]" stroke="blue" thickness="4"/>
+                    <edge vertices="[2,3]" stroke="blue" thickness="4"/>
+                    <edge vertices="[3,8]" stroke="blue" thickness="4"/>
+                    <edge vertices="[8,9]" stroke="blue" thickness="4"/>
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>   
+          
+          <p>
+            A <term>spanning tree</term> of a graph <m>G</m> is a spanning subgraph of <m>G</m> that is also a tree.
+          </p>
+
+        </sidebyside>
+        <p component="a">
+            The blue edges form a spanning tree of the graph.
+          </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Find three spanning trees of the graph shown below.
+        </p>
+        <sidebyside widths="25% 25% 25% 25%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="graph-find-spantree">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","c","d"],"b":["c","e"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>   
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <image component="a">
+            <prefigure xmlns="https://prefigure.org" label="graph-spantree1">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","d"],"b":["c"],"c":["e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes" edge-stroke="#332288" edge-thickness="4"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <image component="a">
+            <prefigure xmlns="https://prefigure.org" label="graph-spantree2">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["c"],"b":["e"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes" edge-stroke="#44AA99" edge-thickness="4"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <image component="a">
+            <prefigure xmlns="https://prefigure.org" label="graph-spantree3">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["c"],"b":["c"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes" edge-stroke="#CC6677" edge-thickness="4"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>  
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Finding Spanning Trees</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A <term>graph traversal</term> is a way of systematically exploring every <em>vertex</em> of a (connected) graph. Doing so efficiently inherently builds a spanning tree.
+              </p>
+            </li>
+            <li>
+              <p>
+                Breadth-first search systematically adds all of the (unvisited) neighbors of a vertex as it explores the graph.
+              </p>
+            </li>
+            <li>
+              <p>
+                Depth-first search systematically explores a single (unvisited) neighbor
+              </p>
+            </li>
+          </ul>
+        </p>
+        <p component="a">
+          BFS is iterative and uses a queue to track vertices to explore from. DFS is recursive (can view as backtracking).
+        </p>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <p>
+          Let's do BFS starting at <m>d</m> and DFS starting at <m>c</m>. Break ties alphabetically.
+        </p>
+        <sidebyside widths="33% 33% 33%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="graph-do-search">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","c","d"],"b":["c","e"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <image component="b">
+            <prefigure xmlns="https://prefigure.org" label="graph-BFS-find">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","c","d"],"b":["c","e"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>  
+          <image component="a">
+            <prefigure xmlns="https://prefigure.org" label="graph-BFS-soln">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","d"],"c":["d","e"]}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes" edge-stroke="#332288" edge-thickness="4"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <image component="b">
+            <prefigure xmlns="https://prefigure.org" label="graph-DFS-find">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","c","d"],"b":["c","e"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image> 
+          <image component="a">
+            <prefigure xmlns="https://prefigure.org" label="graph-DFS-soln">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","c","d"],"b":["e"]}
+                </definition>
+                <coordinates bbox="(0,0,2,1)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes" edge-stroke="#44AA99" edge-thickness="4"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+        </sidebyside>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-min-span-tree">
+      <title>Minimum (Weight) Spanning Trees</title>
+      <slide>
+        <title>Weighted Graphs</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A <term>weighted graph</term> is a graph <m>G=(V,E)</m> together with a function <m>w\colon E\to \R</m>. 
+              </p>
+            </li>
+            <li>
+              <p>
+                For <m>e\in E</m>, we call <m>w(e)</m> the <term>weight</term> of <m>e</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <m>H=(V_H,E_H)</m> is a subgraph of <m>G</m>, we the <term>weight of <m>H</m></term>, denoted by <m>w(H)</m>, is <m>\sum_{e\in E_H}w(e)</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                A <term>minimum spanning tree</term> (MST) of a weighted graph <m>G</m> is a spanning tree <m>T</m> so that <m>w(T)\leq w(T')</m> for all spanning trees <m>T'</m> of <m>G</m>. That is, there is no spanning tree of <m>G</m> with smaller weight.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </slide>
+      <slide>
+        <title>Greedy Algorithms Sometimes Work!</title>
+        <sidebyside widths="25% 75%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="graph-weighted">
+              <diagram dimensions="(400,200)" margins="5">
+                <definition>
+                  graph={"a":["b","c","d"],"b":["c","e"],"c":["d","e"],}
+                </definition>
+                <coordinates bbox="(-0.25,-0.25,2,1.25)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes"> 
+                    <node at="a" p="(0,1)" />
+                    <node at="b" p="(1,1)" />
+                    <node at="c" p="(1,0)" />
+                    <node at="d" p="(0,0)" />
+                    <node at="e" p="(2,0)" />
+                    <!-- <edge vertices="[8,9]" stroke="blue" thickness="4"/> -->
+                  </network>
+                  <label anchor="(-0.15,0.5)" alignment="east"><m>7</m></label>
+                  <label anchor="(0.4,1.25)" alignment="south"><m>11</m></label>
+                  <label anchor="(0.4,0.6)" alignment="east"><m>8</m></label>
+                  <label anchor="(0.45,-0.25)" alignment="north"><m>5</m></label>
+                  <label anchor="(0.9,0.5)" alignment="east"><m>10</m></label>
+                  <label anchor="(1.325,0.55)" alignment="east"><m>25</m></label>
+                  <label anchor="(1.325,-0.25)" alignment="north"><m>20</m></label>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <p component="b">
+            <nbsp/>
+          </p>
+          <p component="a">
+            <dl>
+              <li>
+                <title>Prim's Algorithm (Build Tree)</title>
+                <p>
+                  Start at vertex <m>a</m> and iteratively add a new vertex (and its edge to the existing vertices) of minimum weight.
+                  <m>\set{a,d},\set{d,c},\set{c,b},\set{c,e}</m> for <m>7+5+10+20=42</m>
+                </p>
+              </li>
+              <li>
+                <title>Kruskal's Algorithm (Avoid Cycles)</title>
+                <p>
+                  Consider the edges in order of nondecreasing weight. Add an edge unless it would create a cycle.
+                  <m>\set{d,c},\set{a,d},\set{c,b},\set{c,e}</m> for <m>5+7+10+20=42</m>
+                </p>
+              </li>
+            </dl>
+          </p>
+        </sidebyside>
+      </slide>
+      <slide>
+        <!-- <title>Activity</title> -->
+        <p>
+          Use Prim's Algorithm (Build Tree) and then Kruskal's Algorithm (Avoid Cycles) to find minimum spanning trees in the graph below.
+        </p>
+        <sidebyside widths="25% 50% 25%">
+          <p component="b">
+            <nbsp />
+          </p>
+          <p component="a">
+            Build Tree
+            <md>
+              <mrow>ae \amp: 3</mrow>
+              <mrow>eg \amp: 4</mrow>
+              <mrow>eb \amp: 5</mrow>
+              <mrow>ad \amp: 5</mrow>
+              <mrow>eh \amp: 6</mrow>
+              <mrow>bc \amp: 7</mrow>
+              <mrow>cf \amp: 2</mrow>
+              <mrow>bi \amp: 8 </mrow>
+            </md>
+          </p>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="graph-weighted-activity">
+              <diagram dimensions="(750,300)" margins="5">
+                <definition>
+                  graph={"a":["b","d","e"],"b":["c","e","i"],"c":["f","h"],"d":["g"],"e":["g","h"],"f":["i"]}
+                </definition>
+                <coordinates bbox="(0,0,5,2.25)">
+                  <network node-fill="#E1B36A" graph="graph"
+                    scale="0.8" labels="yes"> 
+                    <node at="a" p="(1,2)" />
+                    <node at="b" p="(3,2)" />
+                    <node at="c" p="(4,2)" />
+                    <node at="d" p="(0,1)" />
+                    <node at="e" p="(2,1)" />
+                    <node at="f" p="(5,1)" />
+                    <node at="g" p="(1,0)" />
+                    <node at="h" p="(3,0)" />
+                    <node at="i" p="(4,0)" />
+                  </network>
+                  <label anchor="(0.5,1.5)" alignment="east"><m>5</m></label>
+                  <label anchor="(2,2)" alignment="north"><m>12</m></label>
+                  <label anchor="(3.25,2)" alignment="north"><m>7</m></label>
+                  <label anchor="(1.5,1.5)" alignment="east"><m>3</m></label>
+                  <label anchor="(2.5,1.75)" alignment="west"><m>5</m></label>
+                  <label anchor="(4.05,1.75)" alignment="east"><m>2</m></label>
+                  <label anchor="(0.5,0.5)" alignment="east"><m>10</m></label>
+                  <label anchor="(1.5,0.75)" alignment="east"><m>4</m></label>
+                  <label anchor="(2.5,0.5)" alignment="west"><m>6</m></label>
+                  <label anchor="(2.8,0.65)" alignment="east"><m>13</m></label>
+                  <label anchor="(3.55,0.65)" alignment="east"><m>8</m></label>
+                  <label anchor="(4.25,0.5)" alignment="west"><m>8</m></label>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <p component="b">
+            <nbsp />
+          </p>
+          <p component="a">
+            Avoid Cycles
+            <md>
+              <mrow>cf \amp: 2</mrow>
+              <mrow>ae \amp: 3</mrow>
+              <mrow>eg \amp: 4</mrow>
+              <mrow>eb \amp: 5</mrow>
+              <mrow>ad \amp: 5</mrow>
+              <mrow>eh \amp: 6</mrow>
+              <mrow>bc \amp: 7</mrow>
+              <mrow>fi \amp: 8 </mrow>
+            </md>
+          </p>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>PreFigure</title>
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="pretext-flow">
+            <diagram dimensions="(600,300)" margins="5">
+              <definition>
+                graph={"p":["h","l","b","e"]}
+              </definition>
+              <coordinates bbox="(0,0,5,2.25)">
+                <network node-fill="#E1B36A" graph="graph" rotate="-90" layout="bfs" start="p"
+                  scale="0.8" labels="yes"> 
+                  <node at="p" label="PreTeXt" />
+                  
+                </network>
+                <label anchor="(0.5,1.5)" alignment="east"><m>5</m></label>
+                
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>
+      </slide>
+      
+    </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

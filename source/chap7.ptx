@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\Rg}{\R^{\geq}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+  <section xml:id="sec-review">
+    <title>Review of Inverses</title>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>f\colon \R\to\R</m> be given by <m>f(x)=-2x+5</m> and let <m>g\colon \R\to\R</m> be given by <m>g(x) = -\frac{x-5}{2}</m>. Show that <m>g=f^{-1}</m>.
+      </p>
+      <p component="a">
+        It will suffice to verify that <m>f\circ g = I_\R</m>:
+        <md>
+          <mrow>f\circ g(x) \amp = f\left( -\frac{x-5}{2}\right) </mrow>
+          <mrow> \amp = -2\left(-\frac{x-5}{2}\right)+5 </mrow>
+          <mrow> \amp= (x-5)+5</mrow>
+          <mrow> \amp= x</mrow>
+          <mrow> \amp= I_\R(x) </mrow>
+        </md>
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-asymp-growth">
+    <title>Asymptotic Growth of Functions</title>
+    <slide>
+      <title>Introduction</title>
+      <p>
+        When we analyze the number of steps an algorithm takes to run on an input of size <m>n</m>, we may find that it takes <m>5n^2+2n+3</m> steps. In practice, we say that <em>for large <m>n</m></em>, this behaves like <m>n^2</m>. This is called <term>asymptotic growth</term>.
+      </p>
+      <p>
+        How can we say this formally?
+      </p>
+    </slide>
+    <slide>
+      <title>Useful sets</title>
+      <p>
+        <md>
+          <mrow component="a">\Z^+ \amp = \set{x\in\Z\mid x\gt 0}</mrow>
+          <mrow component="b">\Z^+ \amp = \phantom{\set{x\in\Z\mid x\gt 0}}</mrow>
+          <mrow component="a">\R^+ \amp = \set{x\in\R\mid x\gt 0}</mrow>
+          <mrow component="b">\R^+ \amp = \phantom{\set{x\in\R\mid x\gt 0}}</mrow>
+          <mrow component="a">\Rg \amp = \set{x\in\R\mid x\geq 0}</mrow>
+          <mrow component="b">\Rg \amp = \phantom{\set{x\in\R\mid x\geq 0}}</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Big Oh Notation</title>
+      <sidebyside widths="65% 35%">
+        <p>
+          Given two functions <m>f,g\colon \Z^+\to\Rg</m>, we say <term><m>f</m> is big Oh of <m>g</m></term>, denoted <m component="a">f\text{ is }O(g)</m><m component="b">\phantom{f\text{ is }O(g)}</m>, if there exist <m component="a">c,n_0\in\R^+</m><m component="b">\phantom{c,n_0}\in\R^+</m> so that for any <m>n\in\Z^+</m> with <m component="a">n\geq n_0</m><m component="b">\phantom{n\geq n_0}</m> we have
+          <me component="a">
+            f(n)\leq c\cdot g(n)
+          </me>
+          <me component="b">
+            \phantom{f(n)\leq c\cdot g(n)}
+          </me>
+        </p>
+        <image source="big-Oh.png">
+          <shortdescription>Two functions demonstrating that one is big Oh of the other</shortdescription>
+          <description component="a">
+            <p>A function <m>f(n)</m> is graphed along with <m>c\cdot g(n)</m>. Beyond the position <m>n_0</m> on the horizontal axis, <m>f(n)</m> is less than <m>c\cdot g(n)</m>.
+            </p>
+          </description>
+        </image>
+      </sidebyside>
+
+      <p component="a">
+        That is, for large <m>n</m> (meaning <m>n\geq n_0</m>), <m>f(n)</m> grows no worse (no faster) than <m>g(n)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        How do we show that <m>f(n) = 5n^2+2n+3</m> is <m>O(g)</m> for <m>g(n)=n^2</m>?
+      </p>
+      <p component="a">
+        Let <m>c=10</m> and <m>n_0=1</m>. Let <m>n\geq n_0</m>. Since <m>n\geq 1</m>, <m>n^2\geq n\geq 1</m>, so 
+        <me>
+          f(n) = 5n^2+2n+3\leq 5n^2+2n^2+3n^2=10n^2
+        </me>.
+        Hence for <m>n\geq n_0=1</m>, we have <m>f(n)\leq 10n^2 = c\cdot g(n)</m>. Thus, <m>f=O(n^2)</m>.
+      </p>
+      <p component="a">
+        The constants <m>c</m> and <m>n_0</m> are called <term>witnesses</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>f(n) = 2n^3+n^2-4</m> and <m>g(n) = n^3</m>. Show that <m>f</m> is <m>O(g)</m>.
+      </p>
+      <p component="a">
+        Let <m>c=3</m> and <m>n_0=1</m>. Let <m>n\geq n_0</m>. Since <m>n\geq 1</m>, <m>n^2\leq n^3</m> and so 
+        <me>
+          f(n) = 2n^3+n^2-4\leq 2n^3+n^3=3n^3=c\cdot g(n)
+        </me>.
+        Hence, <m>f</m> is <m>O(g)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example of not being Big Oh</title>
+      <p>
+        Let <m>f(n) = 2n^3+n+6</m> and <m>g(n) = n^2</m>. Is <m>f</m> <m>O(g)</m>?
+      </p>
+      <p component="a">
+        No. Suppose that <m>f=O(g)</m>. Then there are <m>c,n_0\in \R^+</m> so that for <m>n\geq n_0</m>, <m>f(n)\leq c\cdot g(n)</m>. Hence
+        <md>
+          <mrow>2n^3+n+6 \amp cn^2 \amp 2n \amp \leq c </mrow>
+          <mrow>2n^3\leq 2n^3+n+6 \amp\leq cn^2 \amp n \amp \leq \frac{1}{2}c </mrow>
+          <mrow>\frac{1}{n^2}\left(2n^3\right) \amp \leq c\amp </mrow>
+        </md>
+        However, taking <m>n\geq \max\set{n_0,\frac{1}{2}c+1}</m> gives <m>n\geq n_0</m> and <m>n\gt \frac{1}{2}c</m> which is a contradiction. Thus, <m>f</m> cannot be <m>O(g)</m>.
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-big-Omega">
+    <title>Big Omega Notation</title>
+    <slide>
+      <title>Big Omega Notation</title>
+      <sidebyside widths="65% 35%">
+        <p>
+          Let <m>f,g\colon \Z^+\to\Rg</m>. We say <term><m>f</m> is big Omega of <m>g</m></term>, denoted <m component="a">f\text{ is }\Omega(g)</m><m component="b">\phantom{f\text{ is }\Omega(g)}</m>, provided that there exist <m>c,n_0\in \Rg</m> so that for any <m>n\in\Z^+</m> with <m>n\geq n_0</m> we have
+          <me component="a">
+            f(n)\geq c\cdot g(n)
+          </me>
+          <me component="b">
+            \phantom{f(n)\geq c\cdot g(n)}
+          </me>
+        </p>
+        <image source="big-Omega.png">
+          <shortdescription>Two functions demonstrating that one is big Omega of the other</shortdescription>
+          <description component="a">
+            <p>A function <m>f(n)</m> is graphed along with <m>c\cdot g(n)</m>. Beyond the position <m>n_0</m> on the horizontal axis, <m>f(n)</m> is greater than <m>c\cdot g(n)</m>.
+            </p>
+          </description>
+        </image>
+      </sidebyside>
+      <p component="a">
+        Once <m>n</m> is large (<m>n\geq n_0</m>), <m>f(n)</m> grows as fast as <m>g(n)</m> because <m>f(n)\geq c\cdot g(n)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Switching Big Oh and Big Omega</title>
+      <me>
+        f \text{ is } \Omega(g) \leftrightarrow g \text{ is }O(f)
+      </me>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>f(n)=n^2-7n-3</m> and <m>g(n) = n^2</m>. Show that <m>f</m> is <m>\Omega(g)</m>.
+      </p>
+      <p component="a">
+        Let <m>c=1/2</m> and <m>n_0=20</m>. Let <m>n\geq n_0</m>. Since <m>n\geq 20\geq 1</m> and <m>-3\geq -3n</m>, we have
+        <md>
+          <mrow>f(n)=n^2-7n-3 \amp \geq n^2-7n-3n</mrow>
+          <mrow> \amp \geq n^2-10n \amp \text{Don't want }-9n^2\text{ here!}</mrow>
+          <mrow> \amp =n(n-10)</mrow>
+          <mrow> \amp \geq \frac{1}{2}n^2 = c\cdot g(n)</mrow>
+        </md>
+        since <m>n-10\geq \frac{1}{2}n</m> because <m>n\geq 20</m>. Hence, <m>f</m> is <m>\Omega(g)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>f(n)=n^3+n</m> and <m>g(n)=n^3</m>. Show that <m>f</m> is <m>\Omega(g)</m>.
+      </p>
+      <p component="a">
+        Let <m>c=1</m> and <m>n_0=1</m>. Let <m>n\geq n_0</m>. Since <m>n\geq 1</m>, <m>n\geq 0</m> and so <m>f(n) = n^3+n\geq n^3=c\cdot g(n)</m>. Hence, <m>f</m> is <m>\Omega(g)</m>.
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-theta">
+    <title>Theta Notation</title>
+    <slide>
+      <title>Theta Notation Defined</title>
+      <p>
+        Let <m>f,g\colon \Z^+\to\Rg</m>. We say that <term><m>f</m> is Theta of <m>g</m></term>, denoted <m component="a">f\text{ is }\Theta(g)</m><m component="b">\phantom{f\text{ is }\Theta(g)}</m>, provided that
+        <me component="a">
+          f\text{ is }O(g)\qquad \text{and}\qquad f\text{ is }\Omega(g)
+        </me>        
+      </p>
+    </slide>
+    <slide>
+      <title>Polynomials</title>
+      <theorem>
+        <statement>
+          <p>
+            Let <m>p(n)</m> be a degree <m>k</m> polynomial of the form
+            <me>
+              p(n) = a_kn^k+a_{k-1}n^{k-1}+\cdots + a_1n + a_0
+            </me>
+            with <m>a_k\gt 0</m>. Then <m>p(n)</m> is <m>\Theta(n^k)</m>.
+          </p>
+        </statement>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Logarithms</title>
+      <p>
+        Since for <m>a,b\gt 0</m> and <m>a\neq 1\neq b</m>,
+        <me component="a">
+          \log_a(n) = \log_a(b)\cdot \log_b(n)
+        </me>
+        <me component="b">
+          \log_a(n) = \phantom{\log_a(b)}\cdot \log_b(n)
+        </me>
+        we have <m>\log_a(n)</m> is <m>\Theta(\log_b(n))</m>, we normally drop the base and write <m>f</m> is <m>\Theta(\log(n))</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Hierarchy of Complexity</title>
+      <tabular>
+        <row>
+          <cell>Constant</cell>
+          <cell><m>\log \log</m></cell>
+          <cell>Logarithmic</cell>
+          <cell>Linear</cell>
+          <cell><m>n\log(n)</m></cell>
+        </row>
+        <row>
+          <cell><m>\Theta(1)</m></cell>
+          <cell><m>\Theta(\log(\log(n)))</m></cell>
+          <cell><m>\Theta(\log(n))</m></cell>
+          <cell><m>\Theta(n)</m></cell>
+          <cell><m>\Theta(n\log(n))</m></cell>
+        </row>
+        <row>
+          <cell>Quadratic</cell>
+          <cell>Cubic</cell>
+          <cell>Exponential</cell>
+          <cell>Factorial</cell>
+        </row>
+        <row>
+          <cell><m>\Theta(n^2)</m></cell>
+          <cell><m>\Theta(n^3)</m></cell>
+          <cell><m>\Theta(c^n)</m>, <m>c\gt 1</m></cell>
+          <cell><m>\Theta(n!)</m></cell>
+        </row>
+      </tabular>
+      <p component="a">
+        Organized left-to-right in order of increasing growth rate (with second row higher than first row)
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Use the fact that <m>n\lt 2^n</m> for <m>n\gt 1</m> to show that <m>n</m> is <m>O(2^n)</m> and <m>\log(n)</m> is <m>O(n)</m>.
+      </p>
+      <p component="a">
+        Let <m>c=1</m> and <m>n_0=2</m>. Let <m>n\geq n_0 \gt 1</m>. Then <m>n\lt 2^n=1\cdot 2^n</m>. Hence <m>n=O(2^n)</m>. We also have <m>\log_2(n)\lt \log_2(2^n) = n</m>. Thus, since <m>\log_2(n) </m> is <m>\Theta(\log(n))</m>, we have <m>\log(n)</m> is <m>O(n)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Rules About Asymptotic Growth</title>
+      <p>
+        Let <m>f</m>, <m>g</m>, and <m>h</m> be functions from <m>\Z^+</m> to <m>\Rg</m>:
+        <ul>
+          <li>
+            <p>
+              If <m>f</m> is <m>O(h)</m> and <m>g</m> is <m>O(h)</m>, then <m>f+g</m> is <m>O(h)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>f</m> is <m>\Omega(h)</m> or <m>g</m> is <m>\Omega(h)</m>, then <m>f+g</m> is <m>\Omega(h)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>f</m> is <m>O(g)</m> and <m>c\in\R^+</m>, then <m>c\cdot f</m> is <m>O(g)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>f</m> is <m>\Omega(g)</m> and <m>c\in\R^+</m>, then <m>c\cdot f</m> is <m>\Omega(g)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>f</m> is <m>O(g)</m> and <m>g</m> is <m>O(h)</m>, then <m>f</m> is <m>O(h)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>f</m> is <m>\Omega(g)</m> and <m>g</m> is <m>\Omega(h)</m>, then <m>f</m> is <m>\Omega(h)</m>.
+            </p>
+          </li>        
+        </ul>
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-intro-algs">
+    <title>An Introduction to Algorithms</title>
+    <slide>
+      <title>Definition</title>
+      <p>
+        An <term>algorithm</term> is a step-by-step method for solving a problem. We often write an algorithm using <term>pseudocode</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <algorithm>
+        <title>Sum of Three</title>
+        <statement>
+          <p>
+            This algorithm finds the sum of three numbers.
+          </p>
+
+          <poem>
+            <stanza>
+              <line indent="0">Input: real numbers <m>a,b,c</m></line>
+              <line indent="0">Output: <c>sum</c>, the sum of <m>a,b,c</m></line>
+            </stanza>
+            <stanza>
+              <line indent="1"><c>sum := a+b+c</c></line>
+              <line indent="1"><c>Return(sum)</c></line>
+            </stanza>
+          </poem>
+        </statement>
+      </algorithm>
+
+    </slide>
+    <slide>
+      <title>If Statements</title>
+      <p>
+        An <term>if statement</term> checks if a condition is true and performs one or more steps if it is:
+      </p>
+      <program language="$">
+        <code>
+        If (x &lt; 0)
+          abs := -x
+        End-if
+        </code>
+      </program>
+      <p component="a">
+        <alert>Do not treat if statements like implications in logic!</alert>
+      </p>
+    </slide>
+    <slide>
+      <title>If-Else Statements</title>
+      <p>
+        An <term>if-else statement</term> also includes additional steps to perform if the condition is false:
+      </p>
+      <program language="$">
+        <code>
+        If (x ≥ 0)
+          abs := x
+        Else
+          abs := -x
+        End-if
+        </code>
+      </program>      
+    </slide>
+    <slide>
+      <title>For Loops</title>
+      <p>
+        A <term>for loop</term> repeats a sequence of steps a fixed number of times. Each repetition is called an <term>iteration</term>.
+      </p>
+      <program language="$">
+        <code>
+        sum := 0
+        For i = 1 to 10
+          sum := sum + 1
+        End-for
+        </code>
+      </program>      
+    </slide> 
+    <slide>
+      <title>While Loops</title>
+      <p>
+        A <term>while loop</term> repeats a sequence of steps for as long as some condition is true:
+      </p>
+      <program language="$">
+        <code>
+        i := 0
+        While (i &lt; 10)
+          i := i + 1
+        End-while
+        </code>
+      </program>      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>Find the final value of <c>product</c> after the pseudocode on the left. Find the final value of <c>count</c> after the pseudocode on the right.
+      </p>
+      <sidebyside widths="45% 45%">
+        <program language="$">
+          <code>
+          product := 1
+          count := 3
+          While (count &gt; 0)
+            product := product * count
+            count := count - 1
+          End-while
+          </code>
+        </program>
+        <program language="$">
+          <code>
+          count := 0
+          For i = 1 to 2
+            For j = 1 to 2
+              count := count + i + j
+            End-for
+          End-for
+          </code>
+        </program>        
+      </sidebyside>
+      <p component="a">
+        For the left, <c>product = 6</c>. For the right, <c>count=12</c>.
+      </p>
+    </slide>
+             
+  </section>
+  <section xml:id="sec-analysis-algs">
+    <title>Analysis of Algorithms</title>
+    <slide>
+      <title>Computational Complexity</title>
+      <ul>
+        <li>
+          <p>
+            The <term>computational complexity</term> of an algorithm is a measure of how much <em>time</em> and <em>space</em> the algorithm needs to run.
+          </p>
+        </li>
+        <li>
+          <p>
+            An <term>atomic operation</term> is an assignment, arithmetic operation, comparison, return statement, etc. used in an algorithm.
+          </p>
+        </li>
+        <li>
+          <p>
+            The <term>time complexity</term> of an algorithm is defined by a function <m>f\colon\Z^+\to\Z^+</m> such that <m>f(n)</m> is the <em>maximum number</em> of atomic operations performed on <em>any input of size <m>n</m></em>.
+          </p>
+        </li>
+      </ul>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <ul>
+        <li>
+          <p>
+            <c>ComputeSum</c>
+          </p>
+        </li>
+        <li>
+          <p>
+            Input: <m>a_1,a_2,\dots,a_n\in\R</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            Output: <m>a_1+a_2+\cdots + a_n</m>
+          </p>
+        </li>
+      </ul>
+      <sidebyside widths="25% 73%">
+      <program language="$">
+        <code>
+        sum := 0
+        For i = 1 to n
+          sum := sum + a_i
+        End-for
+        Return(sum)
+        </code>
+      </program>
+      <p component="a">
+        Time complexity is <m>f(n)=1+4n+1 = 4n+2</m>. (Each iteration of the loop uses four atomic operations: comparison of <c>i</c>, increase of <c>i</c>, addition, and assignment. The initialization of <c>sum</c> and returning <c>sum</c> are two more.)
+      </p>
+      <p component="b">
+        <nbsp/>
+      </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Asymptotics</title>
+      <p>
+        The <term>asymptotic time complexity</term> of an algorithm is the asymptotic growth rate of <m>f(n)</m>. That is, what is <m>\Theta(f(n))</m>?
+      </p>
+      <p>
+        For example, the asymptotic time complexity of <c>ComputeSum</c> is <m component="a">\Theta(n)</m><m component="b">\phantom{\Theta(n)}</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <ul>
+        <li>
+          <p>
+            <c>FindSmallest</c>
+          </p>
+        </li>
+        <li>
+          <p>
+            Input: <m>a_1,a_2,\dots,a_n\in\R</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            Output: The smallest <m>a_i</m>
+          </p>
+        </li>
+      </ul>
+      <sidebyside widths="25% 73%">
+      <program language="$">
+        <code>
+        min := a_1
+        For i = 2 to n
+          If (a_i &lt; min)
+            min := a_i
+          End-if
+        End-for
+        Return(min)
+        </code>
+      </program>
+      <p component="a">
+        <m>d=2</m> operations before/after the loop. Each loop iteration requires at least 3 ops (compare <c>i</c>, increment <c>i</c>, compare <c>a_i</c>) and requires a fourth if <c>a_i &lt; min</c>. Time complexity is <m>f(n) = c(n-1)+d = cn-c+d=\Theta(n)</m>.
+      </p>
+      <p component="b">
+        <nbsp/>
+      </p>
+      </sidebyside>
+    </slide>
+    <!-- Slide 35 above -->
+    <slide>
+      <title>Worst Case Analysis</title>
+      <p>
+        Some algorithms may have different performances even on inputs of the same size. We always analyze the <em>worst case</em>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <sidebyside widths="55% 45%">
+      <p>
+        <ul>
+          <li>
+            
+            <p>
+              <em>FindDuplicate</em>:  This algorithm determines if there is a pair of duplicate entries in a sequence.
+            </p>
+          </li>
+          <li>
+            
+            <p>
+              <em>Input</em>: <m>a_1,\dots,a_n</m>
+            </p>
+          </li>
+          <li>
+            
+            <p>
+              <em>Output</em>: <q>Yes</q> if there is such a pair. <q>No</q> otherwise.
+            </p>
+          </li>
+        </ul>
+      </p>
+      <program language="$">
+        <code>
+        For i = 1 to n
+          For j = i+1 to n
+            if (a_i = a_j) Return ("Yes")
+          End-for
+        End-for
+        Return("No")
+        </code>
+      </program>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Analysis of FindDuplicate</title>
+      <p component="a">
+        <em>Worst case</em>: The worst case is a sequence with no duplicates. This requires completing the full nested loop.
+      </p>
+      <p component="a">
+        <em>Lower bound</em>: If the index of the outer loop is <m>i</m>, then the inner loop repeats <m>(n-i)</m> times. Each repeat has at least <m>1</m> operation. The nested loop thus requires at least
+        <me>
+          (n-1)+(n-2) + \cdots +1 = \frac{n(n-1)}{2} \geq a n^2
+        </me>
+        for some constant <m>a</m> operations. That is, <m>f(n)</m> is <m>\Omega(n^2)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Analysis of FindDuplicate</title>
+      <p component="a">
+        <em>Upper bound</em>: The inner loop repeats <m>n-i\leq n</m> times. The outer loop repeats <m>n</m> times so the steps in the inner loop are repeated at most <m>n^2</m> times. The steps in  the inner loop have at most some constant <m>c</m> of operations and the steps outside of the nested loop have at most some constant <m>d</m> of operations. Thus
+        <me>
+          f(n)\leq cn^2+d
+        </me>. That is, <m>f(n)</m> is <m>O(n^2)</m>.
+      </p>
+      <p component="a">
+        <em>Complexity</em>: <m>f(n)</m> is <m>\Theta(n^2)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Linear Search</title>
+      <sidebyside widths="55% 45%">
+      <p>
+        <ul>
+          <li>
+            <p>
+              <em>Input</em>: <m>x\in\Z</m> and <m>(a_1,a_2,\dots,a_n)\in\Z^n</m>
+            </p>
+          </li>
+          <li>
+            
+            <p>
+              <em>Output</em>: <m>i</m> if <m>a_i=x</m> or <m>0</m> otherwise
+            </p>
+          </li>
+        </ul>
+      </p>
+      <program language="$">
+        <code>
+        i := 1
+        While (i ≤ n and a_i ≠ x)
+          i := i+1
+        End-while
+        If (i ≤ n) location := i
+        else location := 0
+        End-if
+        Return(location)
+        </code>
+      </program>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Analysis of Linear Search</title>
+      <p component="a">
+        <em>Worst case</em>: <m>x\neq a_i</m> for any <m>i</m>
+      </p>
+      <p component="a">
+        In the worst case, the loop repeats <m>n</m> times. The while check has <m>2</m> operations and <c>i := i+1</c> is <m>2</m> operations. The loop contributs <m>4n</m> operations and there are <m>4</m> operations outside the loop. Thus, <m>f(n) = 4n+4</m> and <m>f(n)</m> is <m>\Theta(n)</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Bubble Sort</title>
+      <sidebyside widths="55% 45%">
+      <p>
+        <ul>
+          <li>
+            <p>
+              <em>Input</em>: A list of real numbers <m>(a_1,a_2,\dots,a_n)</m>
+            </p>
+          </li>
+          <li>
+            
+            <p>
+              <em>Output</em>: The list sorted in increasing order.
+            </p>
+          </li>
+        </ul>
+      </p>
+      <program language="$">
+        <code>
+        For i = 1 to n-1
+          For j = 1 to n-i
+            If (a_j &gt; a_(j+1)) swap a_j and a_(j+1)
+            End-if
+          End-for
+        End-for
+        Return(list)
+        </code>
+      </program>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        What does Bubble Sort do with <m>3,2,4,1,5</m>?
+      </p>
+        <sidebyside widths="15% 10% 15% 10% 15% 10% 15%">
+          <p>
+            <m>i=1</m>:
+            <md>
+              <mrow> \amp 3,2,4,1,5 </mrow>
+              <mrow component="a"> \amp 2,3,4,1,5 </mrow>
+              <mrow component="a"> \amp 2,3,4,1,5 </mrow>
+              <mrow component="a"> \amp 2,3,1,4,5 </mrow>
+              <mrow component="a"> \amp 2,3,1,4,5 </mrow>
+            </md>
+          </p>
+          <p>
+            <nbsp />
+          </p>
+          <p>
+            <m>i=2</m>:
+            <md>
+              <mrow component="b"> \amp \phantom{2,3,1,4,5} </mrow>
+              <mrow component="a"> \amp 2,3,1,4,5 </mrow>
+              <mrow component="a"> \amp 2,3,1,4,5 </mrow>
+              <mrow component="a"> \amp 2,1,3,4,5 </mrow>
+              <mrow component="a"> \amp 2,1,3,4,5 </mrow>
+            </md>
+          </p>
+          <p>
+            <nbsp/>
+          </p>
+          <p>
+            <m>i=3</m>:
+            <md>
+              <mrow component="b"> \amp \phantom{2,3,1,4,5} </mrow>
+              <mrow component="a"> \amp 2,1,3,4,5 </mrow>
+              <mrow component="a"> \amp 1,2,3,4,5 </mrow> 
+              <mrow component="a"> \amp 1,2,3,4,5 </mrow>              
+            </md>
+          </p>          
+          <p>
+            <nbsp/>
+          </p>
+          <p>
+            <m>i=4</m>:
+            <md>
+              <mrow component="b"> \amp \phantom{2,3,1,4,5} </mrow>
+              <mrow component="a"> \amp 1,2,3,4,5 </mrow>   
+              <mrow component="a"> \amp 1,2,3,4,5 </mrow>              
+            </md>
+          </p>          
+
+        </sidebyside>
+    </slide>
+    <slide>
+      <title>Analysis of Bubble Sort</title>
+      <p>
+        Let <m>f(n)</m> be the number of comparisons required to sort a list of size <m>n</m> using Bubble Sort.
+      </p>
+      <p component="a">
+        The number of comparisons is
+        <me>
+          f(n) = (n-1)+(n-2)+\cdots + 1 = \frac{n(n-1)}{2} = \frac{1}{2}n^2 - \frac{1}{2}
+        </me>.
+        Thus, <m>f(n)</m> is <m>\Theta(n^2)</m>.
+      </p>
+      <p component="a">
+        <alert>Note</alert>: There is an algorithm called Merge Sort that is <m>\Theta(n\log(n))</m>.
+      </p>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Finite State Machines</title>
+    <slide>
+      <p>
+        A <term>finite state machine</term> is an abstract model of computation. It consists of finitely many states and rules for how to move between them.
+      </p>
+      <sidebyside widths="55% 45%">
+        <image label="fsm-turnstile">
+          <shortdescription>A finite state machine for a turnstile</shortdescription>
+          <latex-image>
+            \begin{tikzpicture}[scale=0.4]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (12.1,-22.8) circle (3);
+            \draw (12.1,-22.8) node {closed};
+            \draw [black] (33.1,-22.8) circle (3);
+            \draw (33.1,-22.8) node {open};
+            \draw [black] (9.42,-24.123) arc (324:36:2.25);
+            \draw (4.85,-22.8) node [left] {push};
+            \fill [black] (9.42,-21.48) -- (9.07,-20.6) -- (8.48,-21.41);
+            \draw [black] (35.78,-21.477) arc (144:-144:2.25);
+            \draw (40.35,-22.8) node [right] {coin};
+            \fill [black] (35.78,-24.12) -- (36.13,-25) -- (36.72,-24.19);
+            \draw [black] (30.774,-24.686) arc (-56.72891:-123.27109:14.899);
+            \fill [black] (30.77,-24.69) -- (29.83,-24.71) -- (30.38,-25.54);
+            \draw (22.6,-27.63) node [below] {coin};
+            \draw [black] (14.666,-21.252) arc (116.30843:63.69157:17.903);
+            \fill [black] (14.67,-21.25) -- (15.6,-21.35) -- (15.16,-20.45);
+            \draw (22.6,-18.9) node [above] {push};
+            \draw [black] (9.5,-30.4) -- (11.13,-25.64);
+            \fill [black] (11.13,-25.64) -- (10.4,-26.23) -- (11.34,-26.56);
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        <p>
+          <ul>
+            <li>
+              <p>
+                States <m component="a">Q = \set{\text{closed},\text{open}}</m><m component="b">Q = \phantom{\set{\text{closed},\text{open}}}</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                Inputs <m component="a">I = \set{\text{coin}, \text{push}}</m><m component="b">I = \phantom{\set{\text{coin}, \text{push}}}</m>
+              </p>
+            </li>
+            <li>
+              <p>Transitions
+                <me component="a">
+                  \begin{array}{c|c|c}
+                  \amp \text{coin} \amp \text{push}\\\hline
+                  \text{closed} \amp \text{open} \amp \text{closed}\\
+                  \text{open} \amp \text{open} \amp \text{closed}
+                  \end{array}
+                </me>
+                <me component="b">
+                  \begin{array}{c|c|c}
+                  \amp \text{coin} \amp \text{push}\\\hline
+                  \text{closed} \amp \phantom{\text{open}} \amp \phantom{\text{closed}}\\
+                  \text{open} \amp \phantom{\text{open}} \amp \phantom{\text{closed}}
+                  \end{array}
+                </me>
+              </p>
+            </li>
+          </ul>
+          
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Formal Definition of Finite State Machine</title>
+      <p>
+        A <term>finite state machine</term> (FSM) or <term>finite state automaton</term> (FSA) consists of
+        <ul>
+          <li>
+            <p>
+              a finite set of states <m>Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a start state <m>q_0\in Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a finite set of input actions <m>I</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a transition function <m>\delta\colon Q\times I\to Q</m>
+            </p>
+            <p>
+              <m component="a">(\text{current state},\text{input})\mapsto \text{next state} </m><nbsp component="b"/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+    <sidebyside widths="33% 33% 33%">
+      <p>
+        Draw the state diagram for the FSM <m>M=(Q,q_0,I,\delta)</m> defined by
+        <ul>
+          <li>
+            <p>
+              <m>Q = \set{q_0,q_1,q_2,q_3}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Start state <m>q_0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>I=\set{0,1}</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        <m>\displaystyle
+                \begin{array}{c|c|c}
+                \delta \amp 0 \amp 1\\\hline
+                q_0 \amp q_0 \amp q_1\\
+                q_1 \amp q_3 \amp q_2\\
+                q_2 \amp q_0 \amp q_0\\
+                q_3 \amp q_2 \amp q_1
+                \end{array}
+              </m>
+      </p>
+      <image label="binary-fsm" component="a">
+        <shortdescription>A finite state machine</shortdescription>
+        <latex-image>
+          \begin{tikzpicture}[scale=0.4]
+          \tikzstyle{every node}+=[inner sep=0pt]
+          \draw [black] (12.2,-17.2) circle (3);
+          \draw (12.2,-17.2) node {$q_0$};
+          \draw [black] (22.9,-9.8) circle (3);
+          \draw (22.9,-9.8) node {$q_1$};
+          \draw [black] (22.9,-25.3) circle (3);
+          \draw (22.9,-25.3) node {$q_2$};
+          \draw [black] (35,-17.2) circle (3);
+          \draw (35,-17.2) node {$q_3$};
+          \draw [black] (4.1,-17.2) -- (9.2,-17.2);
+          \fill [black] (9.2,-17.2) -- (8.4,-16.7) -- (8.4,-17.7);
+          \draw [black] (9.572,-15.777) arc (269.30071:-18.69929:2.25);
+          \draw (7.3,-11.19) node [above] {$0$};
+          \fill [black] (11.73,-14.25) -- (12.24,-13.45) -- (11.24,-13.44);
+          \draw [black] (14.67,-15.49) -- (20.43,-11.51);
+          \fill [black] (20.43,-11.51) -- (19.49,-11.55) -- (20.06,-12.37);
+          \draw (18.55,-14) node [below] {$1$};
+          \draw [black] (25.887,-9.66) arc (84.52228:32.58029:10.542);
+          \fill [black] (33.76,-14.48) -- (33.75,-13.53) -- (32.91,-14.07);
+          \draw (31.38,-10.66) node [above] {$0$};
+          \draw [black] (32.07,-16.575) arc (-107.05104:-135.8464:17.156);
+          \fill [black] (24.79,-12.12) -- (24.99,-13.05) -- (25.71,-12.35);
+          \draw (27.15,-15.31) node [below] {$1$};
+          \draw [black] (32.51,-18.87) -- (25.39,-23.63);
+          \fill [black] (25.39,-23.63) -- (26.34,-23.6) -- (25.78,-22.77);
+          \draw (27.95,-20.75) node [above] {$0$};
+          \draw [black] (20.51,-23.49) -- (14.59,-19.01);
+          \fill [black] (14.59,-19.01) -- (14.93,-19.89) -- (15.53,-19.09);
+          \draw (19.3,-20.75) node [above] {$0,1$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      <p component="b">
+        <nbsp/>
+      </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        In what state are we after the input <m>01001</m>?
+      </p>
+      <sidebyside>
+      
+            <image label="binary-fsm-repeat">
+        <shortdescription>A finite state machine</shortdescription>
+        <latex-image>
+          \begin{tikzpicture}[scale=0.4]
+          \tikzstyle{every node}+=[inner sep=0pt]
+          \draw [black] (12.2,-17.2) circle (3);
+          \draw (12.2,-17.2) node {$q_0$};
+          \draw [black] (22.9,-9.8) circle (3);
+          \draw (22.9,-9.8) node {$q_1$};
+          \draw [black] (22.9,-25.3) circle (3);
+          \draw (22.9,-25.3) node {$q_2$};
+          \draw [black] (35,-17.2) circle (3);
+          \draw (35,-17.2) node {$q_3$};
+          \draw [black] (4.1,-17.2) -- (9.2,-17.2);
+          \fill [black] (9.2,-17.2) -- (8.4,-16.7) -- (8.4,-17.7);
+          \draw [black] (9.572,-15.777) arc (269.30071:-18.69929:2.25);
+          \draw (7.3,-11.19) node [above] {$0$};
+          \fill [black] (11.73,-14.25) -- (12.24,-13.45) -- (11.24,-13.44);
+          \draw [black] (14.67,-15.49) -- (20.43,-11.51);
+          \fill [black] (20.43,-11.51) -- (19.49,-11.55) -- (20.06,-12.37);
+          \draw (18.55,-14) node [below] {$1$};
+          \draw [black] (25.887,-9.66) arc (84.52228:32.58029:10.542);
+          \fill [black] (33.76,-14.48) -- (33.75,-13.53) -- (32.91,-14.07);
+          \draw (31.38,-10.66) node [above] {$0$};
+          \draw [black] (32.07,-16.575) arc (-107.05104:-135.8464:17.156);
+          \fill [black] (24.79,-12.12) -- (24.99,-13.05) -- (25.71,-12.35);
+          \draw (27.15,-15.31) node [below] {$1$};
+          \draw [black] (32.51,-18.87) -- (25.39,-23.63);
+          \fill [black] (25.39,-23.63) -- (26.34,-23.6) -- (25.78,-22.77);
+          \draw (27.95,-20.75) node [above] {$0$};
+          \draw [black] (20.51,-23.49) -- (14.59,-19.01);
+          \fill [black] (14.59,-19.01) -- (14.93,-19.89) -- (15.53,-19.09);
+          \draw (19.3,-20.75) node [above] {$0,1$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+
+      <p >
+        <me component="a">
+          q_0 \overset{0}{\longrightarrow} q_0 \overset{1}{\longrightarrow} q_1 \overset{0}{\longrightarrow} q_3 \overset{0}{\longrightarrow} q_2 \overset{1}{\longrightarrow} q_0
+        </me>
+        <nbsp component="b" />
+      </p>
+</sidebyside>
+    </slide>
+    <slide>
+      <!-- <title>Finite State Machine with Output</title> -->
+      <p>
+        A <term>finite state machine with output</term> prints output for each input action. It consists of
+        <ul>
+          <li>
+            <p>
+              a finite set of states <m>Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a start state <m>q_0\in Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a finite set of input actions <m>I</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a finite set of output actions <m>O</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a transition function <m>\delta\colon Q\times I\to Q\times O</m>
+            </p>
+            <p>
+              <m component="a">(\text{current state},\text{input})\mapsto (\text{next state},\text{output}) </m><nbsp component="b"/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example/Activity</title>
+      <sidebyside>
+        <image label="fsm-output">
+          <shortdescription>A finite state machine</shortdescription>
+          <latex-image>
+            \LARGE
+            \begin{tikzpicture}[scale=0.35] 
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (14.8,-22.1) circle (3);
+            \draw (14.8,-22.1) node {$q_0$};
+            \draw [black] (28.7,-10.1) circle (3);
+            \draw (28.7,-10.1) node {$q_1$};
+            \draw [black] (50.8,-10.1) circle (3);
+            \draw (50.8,-10.1) node {$q_2$};
+            \draw [black] (28.7,-32) circle (3);
+            \draw (28.7,-32) node {$q_3$};
+            \draw [black] (50.8,-32) circle (3);
+            \draw (50.8,-32) node {$q_4$};
+            \draw [black] (8.1,-22.1) -- (11.8,-22.1);
+            \fill [black] (11.8,-22.1) -- (11,-21.6) -- (11,-22.6);
+            \draw [black] (17.07,-20.14) -- (26.43,-12.06);
+            \fill [black] (26.43,-12.06) -- (25.5,-12.2) -- (26.15,-12.96);
+            \draw (24.04,-16.59) node [below] {$0\mbox{ }/\mbox{ }1$};
+            \draw [black] (27.377,-7.42) arc (234:-54:2.25);
+            \draw (28.7,-2.85) node [above] {$0\mbox{ }/\mbox{ }1$};
+            \fill [black] (30.02,-7.42) -- (30.9,-7.07) -- (30.09,-6.48);
+            \draw [black] (31.7,-10.1) -- (47.8,-10.1);
+            \fill [black] (47.8,-10.1) -- (47,-9.6) -- (47,-10.6);
+            \draw (39.75,-10.6) node [below] {$1\mbox{ }/\mbox{ }1$};
+            \draw [black] (50.8,-13.1) -- (50.8,-29);
+            \fill [black] (50.8,-29) -- (51.3,-28.2) -- (50.3,-28.2);
+            \draw (50.3,-21.05) node [left] {$1\mbox{ }/\mbox{ }0$};
+            \draw [black] (50.607,-34.982) arc (24.02425:-263.97575:2.25);
+            \draw (45.15,-38.35) node [below] {$1\mbox{ }/\mbox{ }0$};
+            \fill [black] (48.32,-33.66) -- (47.38,-33.53) -- (47.79,-34.44);
+            \draw [black] (47.8,-32) -- (31.7,-32);
+            \fill [black] (31.7,-32) -- (32.5,-32.5) -- (32.5,-31.5);
+            \draw (39.75,-31.5) node [above] {$0\mbox{ }/\mbox{ }0$};
+            \draw [black] (48.67,-12.21) -- (30.83,-29.89);
+            \fill [black] (30.83,-29.89) -- (31.75,-29.68) -- (31.05,-28.97);
+            \draw (37.45,-20.57) node [above] {$0\mbox{ }/\mbox{ }0$};
+            \draw [black] (28.7,-29) -- (28.7,-13.1);
+            \fill [black] (28.7,-13.1) -- (28.2,-13.9) -- (29.2,-13.9);
+            \draw (29.2,-21.05) node [right] {$0\mbox{ }/\mbox{ }0$};
+            \draw [black] (17.689,-22.897) arc (70.45522:38.62554:20.848);
+            \fill [black] (17.69,-22.9) -- (18.28,-23.64) -- (18.61,-22.69);
+            \draw (25.09,-25.06) node [above] {$1\mbox{ }/\mbox{ }0$};
+            \draw [black] (25.726,-31.649) arc (-102.42368:-148.49556:15.094);
+            \fill [black] (25.73,-31.65) -- (25.05,-30.99) -- (24.84,-31.97);
+            \draw (17.94,-29.7) node [below] {$1\mbox{ }/\mbox{ }0$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        <p>
+          Find the output produced by
+          <ol marker="a.">
+            <li>
+              <p>
+                <m>101011</m>: <m component="a">001000</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>110101</m>: <m component="a">001100</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Languages</title>
+      <p>
+        An <term>alphabet</term> <m>\Sigma</m> is a finite set of symbols/letters.
+      </p>
+      <p>
+        The set of all finite strings/words over <m>\Sigma</m> is denoted by <m>\Sigma^*</m>.
+      </p>
+      <p>
+        The <term>empty string/word</term> is denoted by <m>\lambda</m>.
+      </p>
+      <p>
+        A <term>language</term> <m>L</m> is a subset of <m>\Sigma^*</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        Consider the alphabet <m>\Sigma=\set{0,1}</m>. This means that <m>\Sigma^*</m> is the set of all finite binary strings (including the empty string <m>\lambda</m>). Some languages over <m>\Sigma</m> include:
+        <md>
+          <mrow>L_1 \amp = \set{\lambda, 0, 1, 00, 11, 000, 111, \dots}</mrow>
+          <mrow>L_2 \amp = \set{w\in\Sigma^*\mid w\text{ contains exactly one }0}</mrow>
+          <mrow>L_3 \amp = \set{w\in\Sigma^*\mid w\text{ contains at least two }1\text{s}}</mrow>
+        </md>
+      </p>
+      <p>
+        Activity: Is <m>\lambda\in L_2</m>? Is <m>01011\in L_3</m>?
+      </p>
+      <p component="a">
+        No. Yes.
+      </p>
+    </slide>
+    <slide>
+      <!-- <title>Decision Problems</title> -->
+      <p>
+        A <term>decision problem</term> is a problem for which the answer is <q>yes</q> or <q>no</q>.
+      </p>
+      <p>
+        Most algorithmic questions can (or need to be) formulated as decision problems, although sometimes we need to think carefully about how to state the question.
+      </p>
+      <p>
+        Are these decision problems?
+        <ul>
+          <li>
+            <p>
+              Given an alphabet <m>\Sigma</m>, a language <m>L</m> over <m>\Sigma</m>, and <m>w\in\Sigma^*</m>, is <m>w\in L</m>?
+            </p>
+            <p component="a">
+              Yes, this is a decision problem.
+            </p>
+          </li>
+          <li>
+            <p>
+              Given a function <m>f\colon \R\to \R</m>, does there exists <m>x\in\R</m> so that <m>f(x)\geq 3</m>?
+            </p>
+            <p component="a">
+              Yes, this is a decision problem.
+            </p>
+          </li>
+          <li>
+            <p>
+              Given a function <m>f\colon \R\to \R</m>, what is the maximum value of <m>f</m>?
+            </p>
+            <p component="a">
+              No, this is not a decision problem.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>FSMs for Languages</title>
+      <p>
+        It is sometimes possible to tell if a given word is in a language by using a special type of FSM. 
+      </p>
+      <p>
+        A <term>finite state machine with recognition</term> (FSMR) consists of:
+        <ul>
+          <li>
+            <p>
+              <m>Q</m>, <m>q_0</m>, <m>I</m>, and <m>\delta</m> as with FSM as originally defined
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>A\subseteq Q</m> the set of <term>accepting states</term>, which we denote by double circles.
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        A string is <term>recognized</term> or <term>accepted</term> by a FSMR <m>M=(Q,q_0,I,\delta,A)</m> if the string takes state <m>q_0</m> to some state <m>q\in A</m>. The <term>language accepted by</term> <m>M</m> is the set of all accepted strings. We also say the language is <term>recognized by</term> <m>M</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        What is the language recognized by this FSMR?
+      </p>
+    <image label="fsm-two-bs">
+      <shortdescription>A FSM</shortdescription>
+        <latex-image>
+          \Huge
+          \begin{tikzpicture}[scale=0.3]
+          \tikzstyle{every node}+=[inner sep=0pt]
+          \draw [black] (9.9,-24.6) circle (3);
+          \draw (9.9,-24.6) node {$q_0$};
+          \draw [black] (9.9,-24.6) circle (2.4);
+          \draw [black] (23.1,-24.6) circle (3);
+          \draw (23.1,-24.6) node {$q_1$};
+          \draw [black] (23.1,-24.6) circle (2.4);
+          \draw [black] (35.6,-24.6) circle (3);
+          \draw (35.6,-24.6) node {$q_2$};
+          \draw [black] (35.6,-24.6) circle (2.4);
+          \draw [black] (48.6,-24.6) circle (3);
+          \draw (48.6,-24.6) node {$q_3$};
+          \draw [black] (12.9,-24.6) -- (20.1,-24.6);
+          \fill [black] (20.1,-24.6) -- (19.3,-24.1) -- (19.3,-25.1);
+          \draw (16.5,-25.1) node [below] {$b$};
+          \draw [black] (26.1,-24.6) -- (32.6,-24.6);
+          \fill [black] (32.6,-24.6) -- (31.8,-24.1) -- (31.8,-25.1);
+          \draw (29.35,-25.1) node [below] {$b$};
+          \draw [black] (38.6,-24.6) -- (45.6,-24.6);
+          \fill [black] (45.6,-24.6) -- (44.8,-24.1) -- (44.8,-25.1);
+          \draw (42.1,-25.1) node [below] {$b$};
+          \draw [black] (11.223,-27.28) arc (54:-234:2.25);
+          \draw (9.9,-31.85) node [below] {$a$};
+          \fill [black] (8.58,-27.28) -- (7.7,-27.63) -- (8.51,-28.22);
+          \draw [black] (24.423,-27.28) arc (54:-234:2.25);
+          \draw (23.1,-31.85) node [below] {$a$};
+          \fill [black] (21.78,-27.28) -- (20.9,-27.63) -- (21.71,-28.22);
+          \draw [black] (3.6,-24.6) -- (6.9,-24.6);
+          \fill [black] (6.9,-24.6) -- (6.1,-24.1) -- (6.1,-25.1);
+          \draw [black] (36.923,-27.28) arc (54:-234:2.25);
+          \draw (35.6,-31.85) node [below] {$a$};
+          \fill [black] (34.28,-27.28) -- (33.4,-27.63) -- (34.21,-28.22);
+          \draw [black] (49.923,-27.28) arc (54:-234:2.25);
+          \draw (48.6,-31.85) node [below] {$a,b$};
+          \fill [black] (47.28,-27.28) -- (46.4,-27.63) -- (47.21,-28.22);
+          \end{tikzpicture} 
+        </latex-image>
+      </image>
+      <p component="a">
+        <m>L=\set{w\in\set{a,b}^*\mid w\text{ contains at most 2 }b\text{s}}</m>. Notice that <m>\lambda\in L</m>!
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        What is the language <m>L</m> recognized by this FSMR? Is <m>\lambda\in L</m>?
+      </p>
+      <image label="fsmr-ends-10">
+        <shortdescription>A FSMR that recognizes bit strings ending in <m>10</m></shortdescription>
+        <latex-image>
+        \Huge
+        \begin{tikzpicture}[scale=0.3]
+        \tikzstyle{every node}+=[inner sep=0pt]
+        \draw [black] (10.4,-21) circle (3);
+        \draw (10.4,-21) node {$q_0$};
+        \draw [black] (23.1,-21.1) circle (3);
+        \draw (23.1,-21.1) node {$q_1$};
+        \draw [black] (37.4,-21.1) circle (3);
+        \draw (37.4,-21.1) node {$q_2$};
+        \draw [black] (37.4,-21.1) circle (2.4);
+        \draw [black] (4.1,-21) -- (7.4,-21);
+        \fill [black] (7.4,-21) -- (6.6,-20.5) -- (6.6,-21.5);
+        \draw [black] (13.4,-21.02) -- (20.1,-21.08);
+        \fill [black] (20.1,-21.08) -- (19.3,-20.57) -- (19.3,-21.57);
+        \draw (16.75,-21.56) node [below] {$1$};
+        \draw [black] (25.453,-19.258) arc (119.29626:60.70374:9.804);
+        \fill [black] (35.05,-19.26) -- (34.59,-18.43) -- (34.1,-19.3);
+        \draw (30.25,-17.5) node [above] {$0$};
+        \draw [black] (11.698,-18.301) arc (148.31965:31.25594:14.318);
+        \fill [black] (11.7,-18.3) -- (12.54,-17.88) -- (11.69,-17.36);
+        \draw (23.94,-11) node [above] {$0$};
+        \draw [black] (11.723,-23.68) arc (54:-234:2.25);
+        \draw (10.4,-28.25) node [below] {$0$};
+        \fill [black] (9.08,-23.68) -- (8.2,-24.03) -- (9.01,-24.62);
+        \draw [black] (24.423,-23.78) arc (54:-234:2.25);
+        \draw (23.1,-28.35) node [below] {$1$};
+        \fill [black] (21.78,-23.78) -- (20.9,-24.13) -- (21.71,-24.72);
+        \draw [black] (34.875,-22.703) arc (-65.34456:-114.65544:11.087);
+        \fill [black] (25.63,-22.7) -- (26.14,-23.49) -- (26.56,-22.58);
+        \draw (30.25,-24.21) node [below] {$1$};
+        \end{tikzpicture}
+        </latex-image>
+      </image>
+      <p component="a">
+        <m>L=\set{w\in\set{0,1}^*\mid w\text{ ends with }10}</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Can we design an FSMR that recognizes <me>L=\set{w\in\set{0,1}^*\mid w\text{ contains an odd number of }0\text{s}}</me>?
+      </p>
+      <image label="fsmr-odd-0" component="a">
+        <shortdescription>A FSMR that recognizes the language <m>L</m></shortdescription>
+        <latex-image>
+          \Huge 
+          \begin{tikzpicture}[scale=0.35]
+          \tikzstyle{every node}+=[inner sep=0pt]
+          \draw [black] (12.3,-21.3) circle (3);
+          \draw (12.3,-21.3) node {$q_0$};
+          \draw [black] (25.4,-21.3) circle (3);
+          \draw (25.4,-21.3) node {$q_1$};
+          \draw [black] (25.4,-21.3) circle (2.4);
+          \draw [black] (6.2,-21.3) -- (9.3,-21.3);
+          \fill [black] (9.3,-21.3) -- (8.5,-20.8) -- (8.5,-21.8);
+          \draw [black] (10.977,-18.62) arc (234:-54:2.25);
+          \draw (12.3,-14.05) node [above] {$0$};
+          \fill [black] (13.62,-18.62) -- (14.5,-18.27) -- (13.69,-17.68);
+          \draw [black] (24.077,-18.62) arc (234:-54:2.25);
+          \draw (25.4,-14.05) node [above] {$0$};
+          \fill [black] (26.72,-18.62) -- (27.6,-18.27) -- (26.79,-17.68);
+          \draw [black] (14.448,-19.23) arc (123.23741:56.76259:8.032);
+          \fill [black] (23.25,-19.23) -- (22.86,-18.37) -- (22.31,-19.21);
+          \draw (18.85,-17.42) node [above] {$1$};
+          \draw [black] (23.323,-23.439) arc (-55.13259:-124.86741:7.825);
+          \fill [black] (14.38,-23.44) -- (14.75,-24.31) -- (15.32,-23.49);
+          \draw (18.85,-25.34) node [below] {$1$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </slide>
+    
+    <slide>
+      <title>Regular Languages</title>
+      <p>
+        The languages recognized by FSMR are called <term>regular languages</term>. The original idea for <em>regular expressions</em> relates to regular languages. However, regular expressions now have so many bells and whistles that they no longer align.
+      </p>
+      <p>
+        We cannot design a FSMR that recognizes the language <m>L_0</m> the bit strings with more <m>0</m>s than <m>1</m>s. Why not?
+      </p>
+      <p component="a">
+        The most natural ways to create such an FSMR would be to allow an infinite number of states (violating the F in FSMR) or some form of memory to keep track of how many more <m>0</m>s than <m>1</m>s we have (not part of the definition).
+      </p>
+    </slide>
+    <slide component="a">
+      <title>Bit strings with more 0s than 1s</title>
+      <p>
+        It turns out that <m>L_0</m> is what is called a <term>context-free</term> language, and there's a generaliztion of the FSMR called a <term>push-down automaton</term> (PDA) that (oversimplifying things) adds a stack to the FSMR. If you have a stack, whenever the stack is empty, you push whatever letter you see next onto the stack and keep pushing copies of that letter. Each time you see the other letter with a nonempty stack, you pop off the stack. When you reach the end of the string, if you have an empty stack, you have the same number of <m>0</m>s as <m>1</m>s. Otherwise, whichever symbol is on the stack is what you have more of.
+      </p>
+    </slide>
+        
+  </section>
+  <section>
+    <title>Turing Machines</title>
+    <slide>
+      <!-- <title>Turing Machines</title> -->
+      <p>
+        A <term>Turing machine</term> consists of
+        <ul>
+          <li>
+            <p>
+              a finite set of states <m>Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a finite set of tape symbols <m>\Gamma</m> and a subset <m>\Sigma\subsetneq \Gamma</m> of input symbols
+            </p>
+          </li>
+          <li>
+            <p>
+              three special states: a start state <m>q_0\in Q</m>, an accept state <m>q_\text{acc}\in Q</m>, and a reject state <m>q_{\text{rej}}\in Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              a transition function
+              <m>
+                \delta\colon (Q-\set{q_{\text{acc}},q_{\text{rej}}})\times \Gamma\to Q\times \Gamma\times \set{L,R}
+              </m>
+              that maps (current state, symbol read by head) to (next state, symbol to write on tape, move left/right).
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <image source="TM-tape.png" component="a">
+        <shortdescription>A Turing Machine tape</shortdescription>
+      </image>
+      <p component="a">
+        We call <m>*</m> the <term>blank tape symbol</term>. We always have <m>*\in\Gamma</m> and <m>*\not\in \Sigma</m>. Inputs are always finite.
+      </p>
+      <p component="b">
+        <nbsp/>
+      </p>
+    </slide>
+    <slide>
+      <title>What do TMs do?</title>
+      <p>
+        A Turing machine
+        <ul>
+          <li>
+            <p>
+              finishes in <m>q_{\text{acc}}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              finishes in <m>q_{\text{rej}}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              or never finishes running.
+            </p>
+          </li>
+        </ul>
+        In the first two cases, we say that the TM <term>halts</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Computing a Language</title>
+      <p>
+        A Turing machine <m>M</m> <term>computes a language <m>L</m></term> (or <term>decides <m>L</m></term>) if for any word <m>w\in \Sigma^*</m>, 
+        <ul>
+          <li>
+            <p>
+              if <m>w\in L</m>, then <m>M</m> halts and accepts <m>w</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              if <m>w\not\in L</m>, then <m>M</m> halts and rejects <m>w</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Palindromes</title>
+      <image label="TM-palindrome">
+        <shortdescription>A TM that accepts palindromes in <m>\set{a,b}^*</m></shortdescription>
+        <latex-image>
+        \Large
+\begin{tikzpicture}[scale=0.22]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (10.6,-22.6) circle (3);
+\draw (10.6,-22.6) node {$q_0$};
+\draw [black] (19.2,-12.5) circle (3);
+\draw (19.2,-12.5) node {$q_1$};
+\draw [black] (40.6,-12.5) circle (3);
+\draw (40.6,-12.5) node {$q_2$};
+\draw [black] (50.5,-22.6) circle (3);
+\draw (50.5,-22.6) node {$q_3$};
+\draw [black] (21.1,-34.1) circle (3);
+\draw (21.1,-34.1) node {$q_4$};
+\draw [black] (40.6,-34.1) circle (3);
+\draw (40.6,-34.1) node {$q_5$};
+\draw [black] (65.7,-21.3) circle (3);
+\draw (65.7,-21.3) node {$q_a$};
+\draw [black] (65.7,-21.3) circle (2.4);
+\draw [black] (53.5,-39.6) circle (3);
+\draw (53.5,-39.6) node {$q_r$};
+\draw [black] (53.5,-39.6) circle (2.4);
+\draw [black] (12.54,-20.32) -- (17.26,-14.78);
+\fill [black] (17.26,-14.78) -- (16.36,-15.07) -- (17.12,-15.72);
+\draw (15.45,-18.99) node [right] {$a/*,R$};
+\draw [black] (17.877,-9.82) arc (234:-54:2.25);
+\draw (19.2,-5.25) node [above] {$a/a,R;b/b,R$};
+\fill [black] (20.52,-9.82) -- (21.4,-9.47) -- (20.59,-8.88);
+\draw [black] (22.2,-12.5) -- (37.6,-12.5);
+\fill [black] (37.6,-12.5) -- (36.8,-12) -- (36.8,-13);
+\draw (29.9,-13) node [below] {$*/*,L$};
+\draw [black] (42.7,-14.64) -- (48.4,-20.46);
+\fill [black] (48.4,-20.46) -- (48.2,-19.54) -- (47.48,-20.24);
+\draw (45.02,-19.02) node [left] {$a/*,L$};
+\draw [black] (49.514,-19.779) arc (227.00741:-60.99259:2.25);
+\draw (53.12,-14.8) node [above] {$a/a,L;b/b,L$};
+\fill [black] (52.14,-20.1) -- (53.05,-19.86) -- (52.32,-19.18);
+\draw [black] (43.1,-10.851) arc (117.91717:23.44174:15.644);
+\fill [black] (64.78,-18.45) -- (64.92,-17.52) -- (64,-17.92);
+\draw (58.74,-9.31) node [above] {$*/*,R$};
+\draw [black] (47.5,-22.6) -- (13.6,-22.6);
+\fill [black] (13.6,-22.6) -- (14.4,-23.1) -- (14.4,-22.1);
+\draw (30.55,-22.1) node [above] {$*/*,R$};
+\draw [black] (12.62,-24.82) -- (19.08,-31.88);
+\fill [black] (19.08,-31.88) -- (18.91,-30.96) -- (18.17,-31.63);
+\draw (16.39,-26.89) node [right] {$b/*,R$};
+\draw [black] (23.145,-36.279) arc (70.9286:-217.0714:2.25);
+\draw (28.81,-41.38) node [below] {$a/a,R;b/b,R$};
+\fill [black] (20.62,-37.05) -- (19.88,-37.64) -- (20.83,-37.97);
+\draw [black] (24.1,-34.1) -- (37.6,-34.1);
+\fill [black] (37.6,-34.1) -- (36.8,-33.6) -- (36.8,-34.6);
+\draw (30.85,-34.6) node [below] {$*/*,L$};
+\draw [black] (42.56,-31.83) -- (48.54,-24.87);
+\fill [black] (48.54,-24.87) -- (47.64,-25.15) -- (48.4,-25.81);
+\draw (45,-26.9) node [left] {$b/*,L$};
+\draw [black] (66.052,-24.278) arc (3.65235:-180.94924:27.862);
+\fill [black] (66.05,-24.28) -- (65.6,-25.11) -- (66.6,-25.04);
+\draw (38.94,-54.49) node [below] {$*/*,R$};
+\draw [black] (63.721,-23.554) arc (-43.78074:-82.17972:34.365);
+\fill [black] (63.72,-23.55) -- (62.81,-23.79) -- (63.53,-24.48);
+\draw (57.94,-30.9) node [below] {$*/*,R$};
+\draw [black] (43.36,-35.28) -- (50.74,-38.42);
+\fill [black] (50.74,-38.42) -- (50.2,-37.65) -- (49.81,-38.57);
+\draw (43.76,-37.39) node [below] {$a/*,R$};
+\draw [black] (42.399,-10.104) arc (138.27073:-87.36045:17.789);
+\fill [black] (56.49,-39.71) -- (57.32,-40.18) -- (57.27,-39.18);
+\draw (72.45,-13.24) node [right] {$b/*,R$};
+\draw [black] (5.3,-22.6) -- (7.6,-22.6);
+\fill [black] (7.6,-22.6) -- (6.8,-22.1) -- (6.8,-23.1);
+\end{tikzpicture}
+
+        </latex-image>
+      </image>
+    </slide>
+    
+  </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \DeclareMathOperator{\ind}{in-degree}
+      \DeclareMathOperator{\outd}{out-degree}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usepackage{tkz-graph}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+  <section >
+    <title>Introduction to Counting: Sum and Product Rules</title>
+    <slide>
+      <title>Product Rule</title>
+      <p>
+        Suppose that we are making a sandwich. If we have 4 choices for the type of bread and 3 choices for the filling, how many different sandwiches can be made?
+        <me component="a">
+          (4\text{ choices of bread})(3\text{ choices of filling}) = 12
+        </me>
+      </p>
+      <p component="a">
+        Formally, we are choosing a point <m>(b,f)</m> in the set <m>B\times F</m> where <m>B</m> is the set of bread choices and <m>F</m> is the set of filling choices. <m>|B\times F| = |B|\cdot |F|</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              Let <m>S=\set{0,1}^4</m> be the set of binary strings of length 4. How many strings start with a 0 and end with a 1 simultaneously?
+            </p>
+            <p component="a">
+              One choice for the first bit, two for the second, two for the third, and one for the fourth gives <m>4</m>. List them all out?
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              Assume that <m>X</m> and <m>Y</m> are finite sets. How many functions are there from <m>X</m> to <m>Y</m>?
+            </p>
+            <p component="a">
+              <m>|Y|^{|X|}</m> because we have <m>|Y|</m> choices for where each of the <m>|X|</m> elements of <m>X</m> maps.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ol>
+        
+      </p>
+    </slide>
+    <slide>
+      <title>The Sum Rule</title>
+      <p>
+        <em>Fact</em>: If <m>A\cap B = \empset</m>, then <m component="a">|A\cup B| = |A| + |B|</m><m component="a">|A\cup B| = \phantom{|A| + |B|}</m>
+      </p>
+      <p>
+        <em>Example</em>: Suppose that on a flight, we are allowed to choose a hot drink (coffee, tea, or cocoa) or a cold drink (water or orange juice). How many choices do we have?
+      </p>
+      <p component="a">
+        <m>3+2=5</m> choices
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              How many binary strings of length at least 3 and at most 4 are there?
+            </p>
+            <p component="a">
+              <m>2^3 + 2^4 = 8+16=24</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many binary strings of length at least 3 and at most 4 are there in which the first bit is a 0?
+            </p>
+            <p component="a">
+              <m>2^2+2^3 = 4+8 = 12</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Generalized Product Rule</title>
+      <p>
+        Suppose that we want to choose <m>k</m> items and we have
+        <ul>
+          <li>
+            <p>
+              <m>n_1</m> ways to choose item 1
+            </p>
+          </li>
+          <li>
+            <p>
+              for every choice of item 1, we have <m>n_2</m> ways to choose item 2
+            </p>
+          </li>
+          <li>
+            <p>
+              for every choice of items 1 and 2, we have <m>n_3</m> ways to choose item 3
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\vdots</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              for every choice of items <m>1</m> through <m>k-1</m>, we have <m>n_k</m> ways to choose item <m>k</m>.
+            </p>
+          </li>
+        </ul>
+        The total number of ways to choose our <m>k</m> items is <m>n_1\cdot n_2\cdots n_k</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Suppose we have a family of four consisting of a mom, a dad, a son, and a daughter. How many ways can we line up the family so that a parent comes first and last?
+      </p>
+      <p component="a">
+        <m>2\cdot 2\cdot 1\cdot 1= 4</m> ways because we have 2 choices for the first parent and then the preson in the last spot is forced. We also have two choices for the first child (in second position) and then the child in third position is forced.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              Suppose a state issues license plates that are numbered with strings of length <m>7</m> so that the first three characters must be upper-case letters in the English alphabet and the last four characters must be base <m>10</m> digits. How many license plates are possible?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Suppose the state starts suffering confusion between <m>O</m> and <m>0</m>.
+              <ol marker="a.">
+                <li>
+                  <p>
+                    How many license plates are possible if they prohibit the use of the letter <m>O</m> in the alphabetic part?
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    What if they allow <m>O</m> but prohibit <m>0</m>?
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    What about prohibiting both <m>O</m> and <m>0</m>?
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+        </ol>
+
+      </p>
+    </slide>
+    <slide component="a">
+      <title>Activity Answers</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              <m>26^3\cdot 10^4</m>
+            </p>
+          </li>
+
+          <li>
+            <p><nbsp/>
+              <ol marker="a.">
+                <li>
+                  <p>
+                    <m>25^3\cdot 10^4</m>
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    <m>26^3\cdot 9^4</m>
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    <m>26^3\cdot 10^4 -(25^3\cdot 10^4 + 26^3\cdot 9^4) + 25^3\cdot 9^4 </m>
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </li>
+        </ol>
+
+      </p>      
+    </slide>
+    
+    <slide>
+      <title>Activity</title>
+      <p>
+        How many <em>injective</em> functions are there from a finite set <m>X</m> of size <m>m</m> to a finite set <m>Y</m> of size <m>n</m>?
+      </p>
+      <p component="a">
+        <m>n(n-1)(n-2)\cdots (n-(m-1))=n(n-1)(n-2)\cdots (n-m+1)</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Permutations</title>
+      <p>
+        A <term>permutation</term> of a set <m>X</m> of <m>n</m> elements is an ordering <m>(x_1,x_2,\dots,x_n)</m> of the elements of <m>X</m>.
+      </p>
+      <p>
+        A <term><m>r</m>-permutation</term> of elements of <m>X</m>, for <m>0\leq r\leq n</m>, is an ordering <m>(x_1,x_2,\dots,x_r)</m> of <m>r</m> elements of <m>X</m> with no repetitions. (That is, if <m>i\neq j</m>, then <m>x_i\neq x_j</m>.)
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>X = \set{a,b,c,d}</m>. Then
+        <ul component="a">
+          <li>
+            <p>
+              <m>(b,d,a,c)</m> is a permutation of <m>X</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>(d,c)</m> is a <m>2</m>-permutation of elements of <m>X</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>(d,c)</m> and <m>(c,d)</m> are <em>distinct</em> <m>2</m>-permutations of <m>X</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>(c,d,b,c)</m> is <em>not</em> an <m>r</m>-permutation of elements of <m>X</m> because <m>c</m> is repeated.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Counting Permutations</title>
+      <p>
+        The generalized product rule tells us that the number of <m>r</m>-permutations of a set of size <m>n</m> is
+        <me component="a">
+          P(n,r) = n\cdot (n-1)\cdot (n-2)\cdots (n-r+1) = \frac{n!}{(n-r)!}
+        </me>
+        
+      </p>
+      <p>
+        The number of permutations of a set of size <m>n</m> is
+        <me component="a">
+          P(n,n) = \frac{n!}{(n-n)!}=\frac{n!}{0!} = \frac{n!}{1} = n!
+        </me>
+        
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Madison phone numbers start 608 and are completed with 7 digits.
+        <ul>
+          <li>
+            <p>
+              How many phone numbers are there? <m component="a">10^7</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many are there for which the last 7 digits are all different? <m component="a">P(10,7) = \frac{10!}{3!}</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              Suppose that 8 people compete in a race. How many possible final standings are there?
+            </p>
+            <p component="a">
+              <m>P(8,8)=8! = 40\, 320</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many possible ways are there for the first three places to be determined in an 8-person race?
+            </p>
+            <p component="a">
+              <m>P(8,3)=8\cdot 7\cdot 6 = 336</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many permutations of the letters A, B, C, D, E, F, G, H are there that have ABC appearing as a block (in this order)?
+            </p>
+            <p component="a">
+              <m>P(6,6)=6!</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="1.">
+          <li>
+            <p>
+              How many <m>4</m>-digit positive integers are there? (Assume that we count by writing an integer using as few digits as possible so that <m>10</m> is a <m>2</m>-digit integer but not a <m>4</m>-digit integer.) <m component="a">9\cdot 10^4</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many <m>4</m>-digit positive integers are there with all distinct digits? <m component="a">9\cdot 9\cdot 8\cdot 7</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many <m>4</m>-digit positive integers with distinct digits are divisible by <m>10</m>? <m component="a">9\cdot 8\cdot 7\cdot 1</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              How many <m>4</m>-digit positive integers with distinct digits are divisible by <m>5</m>? <m component="a">9\cdot 8\cdot 7\cdot 1 + 8\cdot 8\cdot 7\cdot 1</m>
+            </p>
+          </li>
+        </ol>
+        
+      </p>
+    </slide>
+    
+  </section>
+<section>
+  <title>The Bijection Rule</title>
+  <slide>
+    <title>Using Bijections to Count</title>
+    <p>
+      Recall from Chapter 4 that a function <m>f\colon S\to T</m> is a <term>bijection</term> provided that <m>f</m> is both one-to-one and onto. Equivalently, <m>f</m> has an <term>inverse</term> <m>f^{-1}\colon T\to S</m> so that for all <m>s\in S</m> and <m>t\in T</m>, <m>f(s)=t</m> if and only if <m>f^{-1}(t) = s</m>.
+    </p>
+    <p>
+      If <m>S</m> and <m>T</m> are finite sets and <m>f\colon S\to T</m> is a bijection, then <m>|S| = |T|</m>.
+    </p>
+  </slide>
+  <slide>
+    <title>Power Set Cardinality</title>
+    <theorem>
+      <statement>
+        <p>
+          Let <m>X</m> be a finite set with <m>|X| = n</m>. The power set <m>P(X)</m> has cardinality <m>|P(X)| = 2^n</m>.
+        </p>
+      </statement>
+    </theorem>
+    <p component="a">
+      <em>Proof</em>: We will construct a bijection from <m>P(X)</m> to <m>Y = \{0,1\}^n</m>. Let <m>X = \set{x_1,x_2,\dots,x_n}</m> and <m>A\subseteq X</m>. Define <m>f\colon P(X) \to Y</m> by
+      <me>
+        f(A) = y_1y_2\cdots y_n\qquad\text{where}\qquad y_i = 1\text{ if }x_i\in A\text{ and }y_i=0\text{ if }x_i\not\in A
+      </me>.
+      Notice that we have an inverse <m>f^{-1}(y_1y_2\cdots y_n) = \set{x_i\in X\mid y_i = 1}</m>. Thus, <m>|P(X)| = |Y|=2^n</m> by the bijection rule and product rule.
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      Let <m>X = \set{a,b,c}</m> (labeled as <m>x_1 = a, x_2 = b, x_3 = c</m>).
+      <me component="a">
+        P(X) = \set{\empset,\set{a},\set{b},\set{c},\set{a,b},\set{a,c},\set{b,c},\set{a,b,c}}
+      </me>
+      <me component="b">
+        P(X) = \phantom{\set{\empset,\set{a},\set{b},\set{c},\set{a,b},\set{a,c},\set{b,c},\set{a,b,c}}}
+      </me>
+    </p>
+  </slide>
+  <slide>
+    <title><m>k</m>-to-1 Rule</title>
+    <p>
+      We call a function <m>f\colon S\to T</m> a <term><m>k</m>-to-1 correspondence</term> provided that
+    </p>
+    <p component="a">
+      for every <m>t\in T</m>, there exist exactly <m>k</m> distinct <m>s\in S</m> so that <m>f(s) = t</m>.
+    </p>
+    <p component="a">
+      If there is a <m>k</m>-to-1 correspondence between <m>S</m> and <m>T</m>, then 
+      <me component="a">
+        |S| = k|T| \leftrightarrow |T| = \frac{|S|}{k}
+      </me>
+      <me component="b">
+        |S| = \phantom{k|T|} \leftrightarrow |T| = \phantom{\frac{|S|}{k}}
+      </me>
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      Suppose that we have four people (A, B, C, D) and we wish to seat them around a circular table. We consider two seatings to be equivalent provided that each person has the same right and left neighbor. How many non-equivalent seatings are there?
+    </p>
+    <p component="a">
+      If we consider the seats around the table marked north, east, south, and west (clockwise), then there are <m>4!</m> ways to seat the people before accounting for equivalence. Two seatings are equivalent if and only if they are rotations of one another. There are four rotations positions of a seating, so this is a <m>4</m>-to-1 correspondence and we have <m>4!/4 = 6</m> non-equivalent seatings.
+    </p>
+  </slide>
+  
+</section>
+<section xml:id="sec-subsets">
+  <title>Counting Subsets</title>
+  <slide>
+    <title>Subsets (Combinations)</title>
+    <p>
+      If <m>S</m> is a set of size <m>n</m>, then we call a set <m>T\subseteq S</m> with <m>|T| = r</m> an <term><m>r</m>-subset</term> or <term><m>r</m>-combination</term> provided that <m>|T| = r</m>.
+    </p>
+    <p>
+      Let <m>S = \set{x,y,z,r}</m>. Then
+      <ul component="a">
+        <li>
+          <p>
+            <m>\set{y,z}</m> is a <m>2</m>-subset
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>\set{x,y}</m> and <m>\set{y,x}</m> are <em>the same</em> <m>2</m>-subset
+          </p>
+        </li>
+      </ul>
+    </p>
+  </slide>
+  <slide>
+    <title>Counting <m>r</m>-subsets</title>
+    <p>
+      We can use the <m>k</m>-to-1 rule to count <m>r</m>-subsets:
+    </p>
+    <p component="a">
+      There are <m>P(n,r)</m> <m>r</m>-permutations of an <m>n</m>-element set. An <m>r</m>-permutation <m>(x_1,x_2,\dots,x_r)</m> can be sent to the <m>r</m>-subset <m>\set{x_1,x_2,\dots,x_r}</m>. Since any reordering of an <m>r</m>-permutation maps to the same <m>r</m>-subset and there are <m>r!</m> reorderings of <m>r</m> objects, this is an <m>r!</m>-to-1 correspondence. Therefore, the number of <m>r</m>-subsets is
+      <me>
+        \frac{P(n,r)}{r!} = \frac{\frac{n!}{(n-r)!}}{r!} = \frac{n!}{r!(n-r)!}
+      </me>.
+      We write <m>\binom{n}{r}</m> (read <q><m>n</m> choose <m>r</m></q>) or <m>C(n,r)</m> for the number of <m>r</m>-subsets of an <m>n</m>-element set.
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      How many 5-card poker hands are there that can be dealt from a standard 52-card deck?
+      <me component="a">
+        \binom{52}{5} = \frac{52!}{5!47!} = 2\,598\,960
+      </me>
+      
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      <ol marker="1.">
+        <li>
+          <p>
+            A scholarship selection committee has been tasked with choosing five winners from <m>250</m> applicants. The winners will receive scholarships of $10,000, $8,000, $6,000, $4,000, and $2,000. How many possible outcomes are there? <m component="a">P(250,5)</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            Suppose the committee is instead tasked with choosing five winners (from <m>250</m> applicants), each of whom will receive a $6,000 scholarship. Find the number of ways to choose the winners. Is the number of possible outcomes here less than, the same as, or greater than the number of ways to award scholarships of five different amounts? <m component="a">C(250,5)</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+  </slide>
+  <slide>
+    <title>Symmetry</title>
+    <theorem xml:id="thm-bincoeff-symm">
+      <statement>
+        <p>
+          For all <m>n\in\N</m> and <m>r\in\N</m> with <m>r\leq n</m>, we have
+          <me>
+            \binom{n}{r} = \binom{n}{n-r}
+          </me>
+          
+        </p>
+      </statement>
+    </theorem>
+    <p component="a">
+      <em>Proof 1</em>: The <m>r</m>-subsets are in one-to-one correspondence with the <m>(n-r)</m>-subsets.
+    </p>
+    <p component="a">
+      <em>Proof 2</em>: <m>\displaystyle \binom{n}{n-r} = \frac{n!}{(n-r)! (n-(n-r))!} = \frac{n!}{(n-r)! r!} = \binom{n}{r}</m>
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      Suppose a basketball team has <m>15</m> players.
+      <ol marker="a.">
+        <li>
+          <p>
+            How many ways are there to choose the <m>5</m> players who are on the court at any given time? <m component="a">C(15,5)</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To be a bit more realistic, suppose there are <m>6</m> players who play guard, <m>5</m> players who play forward, and <m>4</m> players who play center.
+            The team's offense calls for two guards, two forwards, and one center to be on the court at all times.
+            How many ways are there for the coach to pick the players to put in the game in this scenario? <m component="a">C(6,2)C(5,2)C(4,1)</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      Alice's Diner is a meat and three restaurant at which customers order a plate consisting of one of five meats and three sides chosen from a list of <m>15</m> options.
+      How many different plates can be ordered? What if Alice's Diner offers a <q>deluxe plate</q> offering the customer's choice of two meats (but still three sides)?
+    </p>
+    <p component="a">
+      <m>C(5,1)C(15,3)</m> in the first case and <m>C(5,2)C(15,3)</m> in the second.
+    </p>
+  </slide>
+  
+  <slide>
+    <title>Activity</title>
+    <p>
+      Let's go back to license plates allowing any three letters followed by any four numbers.
+      <ol marker="1.">
+        <li>
+          <p>
+            How many license plates start with a vowel followed by a consonant? <m component="a">5\cdot 4\cdot 26\cdot 10^4</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            How many license plates end with a <m>4</m>-digit number divisible by <m>5</m>? (Here we allow leading zeros in <m>4</m>-digit numbers.) <m component="a">26^3\cdot 10^3\cdot 2</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            How many license plates start with a vowel followed by a consonant <em>and</em> end with a <m>4</m>-digit number divisible by <m>5</m>? <m component="a">5\cdot 4\cdot 26\cdot 10^3\cdot 2</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            How many license plates start with a vowel followed by a consonant <em>or</em> end with a <m>4</m>-digit number divisible by <m>5</m>? <m component="a">5\cdot 4\cdot 26\cdot 10^4 + 26^3\cdot 10^3\cdot 2 - 5\cdot 4\cdot 26\cdot 10^3\cdot 2</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+  </slide>
+  <slide>
+    <!-- <title>Activity</title> -->
+    <p>
+      Suppose we're making <m>7</m>-character license plates using uppercase letters and digits (but no longer LLLDDDD).
+      <ol>
+        <li>
+          <p>
+            Suppose we require the license plate to contain exactly two W's, which are allowed to appear in any of the <m>7</m> positions and can fill the other <m>5</m> positions with any digit or letter (other than W). <m component="a">C(7,2)35^5</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            What if we modify the scenario above by not allowing any character to be repeated when filling the other five positions? <m component="a">C(7,5)P(35,5)</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Suppose we require of exactly three letters and exactly four digits (repetition allowed for both) but no longer want to mandate which positions are letters and which positions are digits.
+            How many license plates can we make now? <m component="a">C(7,3)26^3 10^4</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+  </slide>
+  
+</section>
+<section xml:id="sec-count-by-complement">
+  <title>Counting by Complement</title>
+  <slide>
+    <title>Background</title>
+    <p>
+      We have already said that if <m>A</m> and <m>B</m> are disjoint sets, then <m>|A\cup B| = |A| + |B|</m>. Now suppose that <m>S\subseteq P</m>. We know that <m>P</m> and <m>\overline{P}</m> are disjoint, so
+      <md component="a">
+        <mrow>|S| \amp = |P| + |\overline{P}|</mrow>
+        <mrow>|P| \amp |S| - |\overline{P}|</mrow>
+      </md>
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      There are 30 people in a room. Six of them are at least 1.8 meters tall. How many of them are less than 1.8 meters tall?
+      <m component="a">30 - 6 = 24</m>
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      A computer system relies on usernames consisting of between 6 and 8 characters, where uppercase letters and digits are allowed. Each username must contain at least one digit. How many usernames are there?
+    </p>
+    <p component="a">
+      Let <m>U</m> be the set of usernames with <m>U_k</m> denoting the set of usernames of length <m>k</m>. Then <m>U = U_6\cup U_7\cup U_8</m> with the sets disjoint, so <m>|U| = |U_6| + |U_7| + |U_8|</m>:
+      <md>
+        <mrow>U_6 \amp = 36^6 - 26^6 = 1\,867\,866\,560</mrow>
+        <mrow>U_7 \amp = 36^7 - 26^7 = 70\,332\,353\,920</mrow>
+        <mrow>U_8 \amp = 36^8 - 26^8 = 2\,684\,483\,063\,360</mrow>
+      </md>
+      Hence, <m>|U| = 2\,684\,483\,063\,360</m>.
+    </p>
+  </slide>
+  
+</section>
+<section xml:id="sec-inclusion-exclusion">
+  <title>Principle of Inclusion-Exclusion</title>
+  <slide>
+    <title>Motivation</title>
+    <p>
+      Suppose <m>A= \set{0,1,2}</m> and <m>B = \set{2,3,4}</m>. Is <m>|A\cup B| = |A|+|B|?</m>
+    </p>
+    <p component="a">
+      No, because <m>A\cup B = \set{0,1,2,3,4}</m>, so <m>|A\cup B| = 5</m>. However, <m>|A| + |B| = 3+3=6</m>. We counted 2 twice!
+    </p>    
+  </slide>
+  <slide>
+    <title>P.I.E. for 2 sets</title>
+    <p>
+      For two finite sets <m>A</m> and <m>B</m>, 
+      <me component="a">
+        |A\cup B| = |A|+|B| - |A\cap B|
+      </me>
+      
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      How many bit strings of length 8 start with 1 or end with 00? (This is the mathematical inclusive or!)
+    </p>
+    <p component="a">
+      There are <m>2^7</m> that start with 1 and <m>2^6</m> that end with 00. However, we have double counted those that start with 1 and end with 00. There are <m>2^5</m> of these, so we have <m>2^7+2^6-2^5</m> such bit strings.
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      In a group of UW students, there are 30 computer sciences majors, 25 Wisconsin residents, and 16 Wisconsin-resident computer sciences majors. How many students are in this group?
+    </p>
+    <p component="a">
+      <m>30+25-16 = 39</m>
+    </p>
+  </slide>
+  <slide>
+    <title>P.I.E. for 3 sets</title>
+    <p>
+      For two finite sets <m>A</m>, <m>B</m>, and <m>C</m>, 
+      <me component="a">
+        |A\cup B\cup C| = |A|+|B| +|C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap B\cap C|
+      </me>
+    </p>
+    <p component="a">
+      Draw venn diagram counting how many times each region gets counted.
+    </p>
+  </slide>  
+  <slide>
+    <title>Example</title>
+    <p>
+      How many of the numbers between <m>1</m> and <m>30</m> (inclusive) are divisible by <m>2</m>, <m>3</m>, or <m>5</m>?
+    </p>
+    <p component="a">
+      Let <m>A_k</m> denote the elements of <m>\set{1,2,\dots,30}</m> that are divisible by <m>k</m>. Then <m>|A_2| = 15</m>, <m>|A_3| = 10</m>, and <m>|A_5| = 6</m>. Further, <m>|A_2\cap A_3| = |A_6| = 5</m>, <m>|A_2\cap A_5| = |A_{10}| = 3</m>, and <m>|A_3\cap A_5| = |A_{15}| = 2</m>. Finally, <m>|A_2\cap A_3\cap A_5| = |A_{30}| = 1</m>. Thus, the answer is
+      <me>
+        15 + 10+6-5-3-2+1 = 22
+      </me>
+    </p>
+  </slide>
+  
+  <slide>
+    <title>Activity</title>
+      <p>
+        A class of <m>50</m> students was polled to determine the programming languages in which they were proficient.
+        <tabular>
+          <col halign="right"> </col> <col right="minor"> </col> <col halign="right"> </col> <col right="minor"> </col> <col halign="right"> </col> <col> </col>
+          <row>
+            <cell> <m>\#</m> </cell>
+            <cell>Language(s)</cell>
+            <cell> <m>\#</m> </cell>
+            <cell>Language(s)</cell>
+            <cell> <m>\#</m> </cell>
+            <cell>Language(s)</cell>
+          </row>
+
+          <row>
+          </row>
+
+          <row>
+            <cell>32</cell>
+            <cell>ALGOL60</cell>
+            <cell>12</cell>
+            <cell>ALGOL60 + PL/I</cell>
+            <cell>2</cell>
+            <cell>All 3</cell>
+          </row>
+
+          <row>
+            <cell>17</cell>
+            <cell>PL/I</cell>
+            <cell>17</cell>
+            <cell>ALGOL60 + COBOL</cell>
+            <cell> </cell>
+            <cell> </cell>
+          </row>
+
+          <row>
+            <cell>26</cell>
+            <cell>COBOL</cell>
+            <cell>3</cell>
+            <cell>PL/I + COBOL</cell>
+            <cell> </cell>
+            <cell> </cell>
+          </row>
+        </tabular>
+        How many of the students are proficient in NONE of the languages?
+      </p>
+  </slide>
+  
+</section>
+<section xml:id="sec-bin-coeffs-comb-ident">
+  <title>Binomial Coefficients and Combinatorial Identities</title>
+  <slide>
+    <!-- <title>Motivation</title> -->
+    <p>
+      <md>
+        <mrow>\binom{0}{0} \amp  = 1</mrow>
+        <mrow>\binom{1}{0} + \binom{1}{1} \amp = 1+1 = 2 </mrow>
+        <mrow>\binom{2}{0} + \binom{2}{1} + \binom{2}{2} \amp = 1+2+1 = 4</mrow>
+        <mrow> \amp\vdots </mrow>
+        <mrow>\binom{n}{0} + \binom{n}{1} + \cdots + \binom{n}{n} \amp =</mrow>
+      </md>
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      For all <m>n\geq 0</m>, 
+      <me>
+        \binom{n}{0} + \binom{n}{1} + \cdots + + \binom{n}{n-1} + \binom{n}{n} = 2^n
+      </me>.
+    </p>
+    <p component="a">
+      Each side counts bit strings of length <m>n</m>. On the right-hand side, we count directly using the product rule. On the left-hand side, we group them based on the number of bits that are 1 with <m>C(n,k)</m> representing those that have exactly <m>k</m> of the bits equal to 1.
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      Suppose we have <m>n</m> individuals on campus eligible to serve on a committee to plan a conference. The committee must have <m>r</m> members, and a subcommittee of <m>k</m> must be selected to work on the banquet. How many ways can we do this?
+    </p>
+    <p component="a">
+      First choose the committee and then choose the subcommittee: 
+      <m>
+        \binom{n}{r}\binom{r}{k}
+      </m>
+      Alternatively, first choose the subcommittee and then choose the remaining people to fill the committee:
+      <m>
+        \binom{n}{k}\binom{n-k}{r-k}
+      </m>
+      <me>
+        \binom{n}{r}\binom{r}{k} = \binom{n}{k}\binom{n-k}{r-k}
+      </me>
+      
+    </p>
+  </slide>
+  <slide>
+    <!-- <title>Activity</title> -->
+<p>
+  We proved earlier that <m>\displaystyle 1 + 2 + \cdots + n = \frac{(n+1)n}{2}=\binom{n+1}{2}</m>.
+  Can we find a proof that counts <m>2</m>-element subsets?
+</p>
+
+<p>
+  How many <m>2</m>-element subsets <m>S</m> of <m>\{1,2,\dots ,n+1\}</m> have each number below as the smallest element of <m>S</m>?
+</p>
+<sidebyside widths="50% 50%">
+  
+<p>
+<ul>
+  <li>
+    <p>
+      <m>1</m>
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <m>2</m>
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <m>3</m>
+    </p>
+  </li>
+</ul>
+</p>
+<p>
+<ul>
+  <li>
+    <p>
+      <m>n</m>
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <m>n+1</m>
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <m>i</m> (<m>1\leq i \leq n+1</m>)
+    </p>
+  </li>
+</ul>
+</p>
+</sidebyside>
+<p>
+  How can we use this to explain the identity?
+</p>
+  </slide>
+  <slide>
+    <title>Another Identity</title>
+    <p>
+      <me component="b">
+        \binom{n-1}{k-1} + \binom{n-1}{k} = \phantom{\binom{n}{k}}
+      </me>
+      <me component="a">
+        \binom{n-1}{k-1} + \binom{n-1}{k} = \binom{n}{k}
+      </me>
+    </p>
+    <p component="a">
+      The right-hand side counts the number of <m>k</m>-element subsets of an <m>n</m>-element set <m>S=\set{x_1,x_2,\dots,x_n}</m>. Notice that we can partition the <m>k</m>-element subsets of <m>S</m> as <m>A\cup B</m> where <m>A</m> is the <m>k</m>-element subsets of <m>S</m> that <em>do</em> contain <m>x_1</m> and <m>B</m> is the <m>k</m>-element subsets of <m>S</m> that <em>do not</em> contain <m>x_1</m>. We have <m>|A| = \binom{n-1}{k-1}</m> and <m>|B| = \binom{n-1}{k}</m>.
+    </p>
+  </slide>
+  <slide>
+    <title>Expanding Binomials</title>
+    <p>
+      A <term>binomial</term> is a polynomial with two terms: <m>x+y</m>, <m>2xy^2 + 5y</m>, <m>3x+1</m>, etc.
+    </p>
+    <p>
+      <me component="a">
+        (x+y)^5 = \binom{5}{0}x^5y^0 + \binom{5}{1}x^4y^1 + \binom{5}{2}x^3y^2 + \binom{5}{3}x^2y^3 + \binom{5}{4}x^1y^4 + \binom{5}{5}x^0y^5
+      </me>
+      <me component="b">
+        (x+y)^5 = \phantom{\binom{5}{0}x^5y^0 + \binom{5}{1}x^4y^1 + \binom{5}{2}x^3y^2 + \binom{5}{3}x^2y^3 + \binom{5}{4}x^1y^4 + \binom{5}{5}x^0y^5}
+      </me>
+    </p>
+    <p component="a">
+      We need to count the number of ways to form the <m>x^{5-k}y^k</m> term. To do so, we pick <m>y</m> from <m>k</m> of the factors and <m>x</m> from the remaining <m>5-k</m> factors. There are <m>C(5,k)</m> ways to choose the <m>k</m> factors where <m>y</m> is used.
+    </p>
+  </slide>
+  <slide>
+    <theorem xml:id="thm-binomial">
+      <title>Binomial Theorem</title>  
+      <statement>
+        <p>
+          Let <m>x</m> and <m>y</m> be variables. For all <m>n\in \N</m>, 
+          <me component="a">
+            (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k}y^k
+          </me>
+          <me component="b">
+            (x+y)^n = \phantom{\sum_{k=0}^n \binom{n}{k} x^{n-k}y^k}
+          </me>
+        </p>
+      </statement>
+    </theorem>
+    <proof component="a">
+      <p>
+      We need to count the number of ways to form the <m>x^{n-k}y^k</m> term. To do so, we pick <m>y</m> from <m>k</m> of the factors and <m>x</m> from the remaining <m>n-k</m> factors. There are <m>C(n,k)</m> ways to choose the <m>k</m> factors where <m>y</m> is used.
+    </p>
+    </proof>
+    
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      <ol marker="1.">
+        <li>
+          <p>
+            Expand <m>(x+y)^4</m>
+          </p>
+          <p component="a">
+            <m>\displaystyle x^4 + 4x^3y + 6 x^2y^2 + 4xy^3 + y^4</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            What is the coefficient of <m>x^{17}y^4</m> in the expansion of <m>(x+y)^{21}</m>?
+          </p>
+          <p component="a">
+            <m>C(21,17)=C(21,4)</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+    
+  </slide>
+  <slide>
+    <title>A Fancier Example</title>
+    <p>
+      What is the coefficient of <m>a^{10}b^{13}</m> in the expansion of <m>(2a^2-5b)^{18}</m>?
+    </p>
+    <p component="a">
+      First observe that <m>a^{10}b^{13} = \left(a^2\right)^5 b^{13}</m>, so the exponents do sum to <m>18</m>. Binomial Theorem says
+      <me>
+        (2a^2-5b)^{18} = \sum_{k=0}^{18} \binom{18}{k}\left(2a^2\right)^{18-k}(-5b)^k
+      </me>,
+      so we get the desired term with <m>k=13</m> and <m>n-k = 18-13 = 5</m>. Thus, we have <m>C(18,13)2^5(-5)^{13}</m>.
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      Find the coefficient on each of the following in the expansion of <m>\left(3x+2y^3\right)^{20}</m>:
+      <ol marker="a.">
+        <li>
+          <p>
+            <m>x^{16}y^{12}</m>
+          </p>
+          <p component="a">
+            This is <m>k=4</m>, so have <m>C(20,4)3^{16}2^{4}</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>x^{14}y^{18}</m>
+          </p>
+          <p component="a">
+            This is <m>k=6</m>, so have <m>C(20,6)3^{14}2^{6}</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>x^{13}y^{7}</m>
+          </p>
+          <p component="a">
+            Notice that only multiples of <m>3</m> are valid powers of <m>y</m> in this expansion, so we can say the coefficient is <m>0</m>.
+          </p>
+        </li>
+      </ol>
+    </p>
+  </slide>
+  <slide>
+    <title>Binomial Identities from the Binomial Theorem</title>
+    <p>
+      <md>
+        <mrow component="b">\sum_{k=0}^n \binom{n}{k} \amp = \phantom{2^n}</mrow>
+        <mrow component="a">\sum_{k=0}^n \binom{n}{k} \amp = 2^n</mrow>
+        <mrow component="b">\binom{n}{0} -\binom{n}{1} + \binom{n}{2} -\cdots + (-1)^n\binom{n}{n}  \amp = \phantom{0 }</mrow>
+        <mrow component="a">\binom{n}{0} -\binom{n}{1} + \binom{n}{2} -\cdots + (-1)^n\binom{n}{n}  \amp = 0 </mrow>
+      </md>
+    </p>
+    <p component="a">
+      The first one is <m>(1+1)^n</m>. The second is <m>(1+(-1))^n</m>.
+    </p>
+  </slide>
+  <slide>
+    <title>Pascal's Triangle</title>
+    <p component="a">
+      Draw it. Refer back to earlier slide.
+    </p>
+  </slide>
+  
+  
+</section>
+<section xml:id="sec-pigeonhole">
+  <title>The Pigeonhole Principle</title>
+  <slide>
+    <title>Motivation</title>
+    <p>
+      Suppose that we have <m>10</m> pigeons but only <m>9</m> pigeonholes. Then at least two pigeons must share a pigeonhole.
+    </p>
+  </slide>
+  <slide>
+    <title>The Pigeonhole Principle</title>
+    <p>
+      Let <m>k\in\Z^+</m>. If <m>k+1</m> or more objects are placed into <m>k</m> boxes, then there is at least one box containing <m>2</m> or more objects.
+    </p>
+    <p>
+      A function <m>f\colon X\to Y</m> with <m>|Y| = k</m> and <m>|X|\geq k+1</m> is not injective.
+    </p>
+  </slide>
+  <slide>
+    <title>Examples</title>
+    <p>
+      <ul>
+        <li>
+          <p>
+            Among <m>367</m> people, two will have the same birthday (day, month).
+          </p>
+        </li>
+        <li>
+          <p>
+            Given any <m>m+1</m> integers, at least two of them will have the same value mod <m>m</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            Given any three cards from a standard deck of playing cards, at least two will be the same color.
+          </p>
+        </li>
+      </ul>
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      A standard deck of playing cards consists of the suits hearts, clubs, diamonds, and spades. How many cards must be picked to guarantee having two cards of the same suit?
+    </p>
+    <p component="a">
+      There are four suits, so we need at least five cards.
+    </p>
+  </slide>
+  <slide>
+    <title>Generalized Pigeonhole Principle</title>
+    <p>
+      Let <m>k,N\in\Z^+</m>. If <m>N</m> objects are placed into <m>k</m> boxes, then there is at least one box containing <m>\displaystyle \left\lceil \frac{N}{k}\right\rceil</m> or more objects.
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      In a group of 100 people, at least how many are born in the same month?
+    </p>
+    <p component="a">
+      There are twelve months, so we have <m>\lceil 100/12\rceil = 9</m> (or more) people born in the same month.
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      How many cards from a standard deck must be picked to guarantee that at least 4 have the same suit?
+    </p>
+    <p component="a">
+      We want <m>\lceil N/4\rceil\geq 4</m>, so we need <m>N/4 \gt 3</m>. This means <m>N\gt 12</m> or <m>N\geq 13</m>.
+    </p>
+    <p component="a">
+      In general, if we want <m>\lceil N/k\rceil \geq b</m>, then we want <m>N/k \gt b-1</m>, or <m>N\geq k(b-1) + 1</m>.
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      Suppose we have a group of <m>N</m> people, each of whom shakes hands with some number (possibly 0) of other people in the group. Then there are at least two people with the same number of handshakes.
+    </p>
+    <p component="a">
+      The number of handshakes a person can do is in <m>\set{0,1,\dots, N-1}</m>. However, we cannot have both a person with zero handshakes and a person with <m>N-1</m> handshakes. Thus, there are <m>N-1</m> possible values for the number of handshakes a person has done and <m>N</m> people, so there must be (at least) two with the same number.
+    </p>
+  </slide>
+  <slide>
+    <title>Activity</title>
+    <p>
+      Suppose that a set of <m>8</m> numbers are chosen from the set <m>\set{1,2,\dots,14}</m>. Show that two of the selected numbers must sum to <m>15</m>.
+    </p>
+    <p>
+      <em>Hint</em>: One of your boxes might be <m>\set{1,14}</m>.
+    </p>
+    <p component="a">
+      Consider the boxes <m>\set{1,14}</m>, <m>\set{2,13}</m>, <m>\set{3,12}</m>, <m>\set{4,11}</m>, <m>\set{5,10}</m>, <m>\set{6,9}</m>, <m>\set{7,8}</m>. This is <m>7</m> boxes, so if we have chosen <m>8</m> numbers, then at least two of them are in the same box. Those numbers sum to <m>15</m>.
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+    <p>
+      Let <m>X</m> be a set of numbers between <m>0</m> and <m>99</m>. What can we say about the size of <m>X</m> if we know that <m>X</m> has two distinct subsets with the same sum?
+    </p>
+    <p component="a">
+      A set of size <m>n</m> will have <m>2^n</m> subsets. The sum of each subset ranges from <m>0</m> to <m>99n</m> (crude bound that could be improved!). Hence, we need <m>2^n \gt 99n+1</m>. Since <m>2^9 = 512</m> while <m>99\cdot 9 +1 = 892</m>, we can see that <m>n=9</m> is not enough to apply the Pigeonhole Principle. However, <m>2^{10} = 1024</m> and <m>99\cdot 10 + 1 = 991</m>. Thus, <m>|X|\geq 10</m>.
+    </p>
+  </slide>
+  
+</section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

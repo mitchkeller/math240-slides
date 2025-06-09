@@ -1,0 +1,2150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \newcommand{\land}{\wedge}
+      \newcommand{\lor}{\vee}
+    </macros>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+
+  <section>
+    <title>Course Overview</title>
+
+    <slide>
+    <title>Textbook</title>
+
+    <p>
+      We will use the zyBook
+      <pubtitle>
+      <em>Introduction to Discrete Mathematics</em></pubtitle>
+      by Sandy Irani et al.
+      You will access this through Canvas by clicking links to assignments.
+      The cost is $64.
+    </p>
+
+    <p component="a">
+      Lots of exercises you can do for practice!
+    </p>
+    </slide> <slide>
+    <title>Rough Weekly Schedule (Week <m>n</m>)</title>
+
+    <p>
+      <ul pause="yes">
+        <li>
+          <p>
+            M: Discussion on topic A (Week <m>n-1</m>)
+          </p>
+        </li>
+
+        <li>
+          <p>
+            T (8am): zyBook Participation Activities on topic B due
+          </p>
+        </li>
+
+        <li>
+          <p>
+            T (9:30am or 11am): Lecture on topic B
+          </p>
+        </li>
+
+        <li>
+          <p>
+            W: Discussion on topic A
+          </p>
+        </li>
+
+        <li>
+          <p>
+            R (9:30am or 11am): Lecture on topic B
+          </p>
+        </li>
+
+        <li>
+          <p>
+            R (11:59pm): Written Homework and zyBook Challenge Activities on topic A due
+          </p>
+        </li>
+      </ul>
+    </p>
+    </slide> 
+    
+    <slide>
+    <title>Tests and Final</title>
+
+    <p>
+      <dl>
+      <li>
+        <title>Test I</title>
+
+        <p>
+          Wednesday, February 26, 2025.
+          7:30<ndash/>9pm.
+        </p>
+      </li>
+
+      <li>
+        <title>Test II</title>
+
+        <p>
+          Wednesday, April 9, 2025.
+          7:30<ndash/>9pm.
+        </p>
+      </li>
+
+      <li>
+        <title>Final Exam</title>
+
+        <p>
+          Tuesday, May 6, 2025.
+          5:05<ndash/>7:05pm.
+        </p>
+      </li>
+      </dl>
+    </p>
+    </slide>
+    <slide>
+      <title>Policy on Generative AI</title>
+      
+    </slide>
+    
+  </section>
+
+  <section>
+    <title>The Division Algorithm</title>
+
+    <slide>
+    <title>Divides</title>
+
+    <definition xml:id="def-integers">
+      <statement component="b">
+        <p>
+          The integers are the numbers in
+          <me>
+            \{\ldots,-4,-3,-2,-1,0,1,2,3,4, \ldots\}=\phantom{\Z}
+          </me>
+        </p>
+      </statement>
+
+      <statement component="a">
+        <p>
+          The integers are the numbers in
+          <me>
+            \{\ldots,-4,-3,-2,-1,0,1,2,3,4, \ldots\}=\Z
+          </me>
+        </p>
+      </statement>
+    </definition>
+
+    <definition xml:id="def-divides" pause="yes">
+      <statement>
+        <p>
+          We say that <m>x</m> <term>divides</term> <m>y</m> if and only if <m component="b"><fillin characters="5" /></m><m component="a">x\neq 0</m> and there is an integer <m>k</m> such that <m component="b">y=<fillin characters="5" /></m><m component="a">y=k\cdot x</m>
+        </p>
+      </statement>
+    </definition>
+    </slide> 
+    
+    <slide>
+    <title>Multiples and Factors</title>
+
+    <p>
+      <dl>
+      <li>
+        <title>Multiple</title>
+
+        <p component="b">
+          <nbsp/>
+        </p>
+
+        <p component="a">
+          <m>y</m> is said to be a multiple of <m>x</m>
+        </p>
+      </li>
+
+      <li>
+        <title>Divisor</title>
+
+        <p component="b">
+          <nbsp/>
+        </p>
+
+        <p component="a">
+          <m>x</m> is said to be a divisor or factor of <m>y</m>
+        </p>
+      </li>
+      </dl>
+    </p>
+
+    <example>
+      <p>
+        <ul>
+          <li>
+            <p>
+              <m>3\mid 6</m> since <m component="a">6=2\cdot 3</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>5\mid 15</m> since <m component="a">15=3\cdot 5</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>2\nmid 7</m> since <m component="a">7\neq 2\cdot k, k\in\Z</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </example>
+    </slide> 
+    
+    <slide>
+    <title>Activity</title>
+
+    <p>
+      Are the following true or false?
+      <ol marker="(a)">
+        <li>
+          <p>
+            <m>2\mid 0</m>
+          </p>
+
+          <p component="a">
+            True since <m>0=0\cdot 2</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>3\mid 11</m>
+          </p>
+
+          <p component="a">
+            False since <m>11\neq 3\cdot k</m> for any integer <m>k</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>5\mid (20 + 15)</m>
+          </p>
+
+          <p component="a">
+            True since <m>20+15=35</m> and <m>35=5\cdot 7</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>20\mid 4</m>
+          </p>
+
+          <p component="a">
+            False since <m>4\neq 20\cdot k</m> for any integer <m>k</m>
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>-3\mid 9</m>
+          </p>
+
+          <p component="a">
+            True since <m>9=(-3)(-3)</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+    </slide>
+    <slide>
+      <title>Linear Combinations</title>
+      <theorem >
+        <statement>
+          <p>
+            Let <m>x</m>, <m>y</m>, and <m>z</m> be integers. If <m>x\mid y</m> and <m>x\mid z</m>, then <m component="b"><fillin characters="8" /></m><m component="a">x\mid (sy+tz)</m> for any integers <m>s</m> and <m>t</m>.
+          </p>
+        </statement>
+      </theorem>
+      <example>
+        <p>
+          <m>3\mid 6</m> and <m>3\mid 9</m>. What about <m>6+9</m> and <m>2\cdot 6+3\cdot 9</m>?
+        </p>
+        <p component="a">
+          We have <m>3\mid (6+9)</m> since <m>3\mid 15</m>. Also, <m>2\cdot 6+3\cdot 9 = 12+27=39</m>, and we also have <m>3\mid 39</m>. 
+        </p>
+      </example>
+    </slide>
+    <slide>
+      <title>GCD and LCM</title>
+      <definition>
+        <statement>
+          <p>
+            The <term>greatest common divisor</term> of two nonzero integers <m>x</m> and <m>y</m> is the largest positive integer <m>z</m> so that <m component="b"><fillin characters="5" /></m><m component="a">z\mid x</m> and <m component="b"><fillin characters="5" /></m><m component="a">z\mid y</m>. It is denoted by <m component="b"><fillin characters="5" /></m><m component="a">\gcd(x,y)</m>
+          </p>
+          <p>
+            The <term>least common multiple</term> of two nonzero integers <m>x</m> and <m>y</m> is the smallest positive integer <m>z</m> so that <m component="b"><fillin characters="5" /></m><m component="a">x\mid z</m> and <m component="b"><fillin characters="5" /></m><m component="a">y\mid z</m>. It is denoted by <m component="b"><fillin characters="5" /></m><m component="a">\lcm(x,y)</m>
+          </p>          
+        </statement>
+      </definition>
+      <example>
+        <p>
+          <ul cols="2">
+            <li>
+              <p>
+                <m component="b">\gcd(6,9)=<fillin characters="2" /></m><m component="a">\gcd(6,9)=3</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m component="b">\lcm(6,9)=<fillin characters="2" /></m><m component="a">\lcm(6,9)=18</m>
+              </p>
+            </li>            
+          </ul>
+        </p>
+      </example>
+    </slide>
+    <slide>
+      <title>The Division Algorithm</title>
+      <theorem xml:id="thm-division-alg">
+        <statement>
+          <p>
+            Let <m>y</m> be an integer and let <m>x</m> be a positive integer. There exist unique integers <m>q</m> and <m>r</m> so that
+            <m component="b">
+              y=<fillin characters="8" />
+            </m>
+            <m component="a">
+              y=q\cdot x+r
+            </m>
+            with <m component="b"><fillin characters="8" /></m><m component="a">0\leq r\leq x-1</m>. We call <m>q</m> the <term>quotient</term> and <m>r</m> the <term>remainder</term> and write <m component="a">r=y\bmod{x}</m><m component="b"><fillin characters="3" /></m>
+          </p>
+        </statement>
+      </theorem>
+      <p component="a">
+        For <m>y=7</m> and <m>x=2</m>, <m>q=3</m> and <m>r=1</m> because <m>7=3\cdot 2+1</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Find the quotient and remainder for each pair of integers below:
+        <ol marker="a">
+          <li>
+            <p>
+              <m>y=9</m>, <m>x=3</m>: <m component="a">q=3, r=0, 9=3\cdot 3+0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>y=15</m>, <m>x=4</m>: <m component="a">q=3, r=3, 15=3\cdot 4+3</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>y=-2</m>, <m>x=4</m>: <m component="a">q=-1, r=2, -2=(-1)4+2</m>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Modular Arithmetic</title>
+        <p>
+          <md component="b">
+            <mrow>(5+4)\bmod{3} \amp= </mrow>
+            <mrow>(9-2)\bmod{3} \amp= </mrow>
+            <mrow>(5\cdot 2)\bmod{7} \amp= </mrow>
+          </md>
+          <md component="a">
+            <mrow>(5+4)\bmod{3} \amp= 9\bmod{3} = 0</mrow>
+            <mrow>(9-2)\bmod{3} \amp= 7\bmod{3} = 1</mrow>
+            <mrow>(5\cdot 2)\bmod{7} \amp= 10\bmod{7} = 3</mrow>
+          </md>
+        </p>
+      <activity>
+        <p>
+          Evaluate
+          <ol marker="a">
+            <li>
+              <p>
+                <m component="b">(4-6)\bmod{4}</m>
+                <m component="a">(4-6)\bmod{4} = (-2)\bmod{4} = 2</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                <m component="b">(6\cdot 5)\bmod{8}</m>
+                <m component="a">(6\cdot 5)\bmod{8} = (30)\bmod{8} = 6</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </activity>
+    </slide>
+    <slide>
+      <title>Congruence</title>
+      <definition xml:id="def-congruence">
+        <statement>
+          <p>
+            Let <m>x</m> and <m>y</m> be integers and let <m>m</m> be a positive integer. We say that <m>x</m> is <term>congruent to <m>y</m> modulo <m>m</m></term> provided that 
+            <me component="a">
+              x\bmod{m} = y\bmod{m}
+            </me>
+            <me component="b">
+              <fillin characters="10" />
+            </me>
+            We denote this by <m component="b"><fillin characters="5" /></m><m component="a">x\equiv y\bmod{m}</m>
+          </p>
+        </statement>
+      </definition>
+      <theorem xml:id="thm-congruence-divides">
+        <statement>
+          <p>
+            <m>x\equiv y\bmod{m}</m> if and only if <m component="b"><fillin characters="5" /></m><m component="a">m\mid(x-y)</m>
+          </p>
+        </statement>
+      </theorem>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              <m>27\equiv 2\bmod{5}</m>: <m component="a">27-2=25,\quad 5\mid 25</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>6\equiv 4\bmod{2}</m>: <m component="a">6-4=2,\quad 2\mid 2</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>8\not\equiv 1\bmod{3}</m>: <m component="a">8-1=7,\quad 3\nmid 7</m>
+            </p>
+          </li>                    
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Are the following statements true or false?
+        <ol marker="a">
+          <li>
+            <p>
+              <m>13\equiv 1\bmod{4}</m>
+            </p>
+            <p component="a">
+              True: <m>13-1 = 12, \quad 4\mid 12</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>12\equiv 10\bmod{3}</m>
+            </p>
+            <p component="a">
+              False: <m>12-10 = 2, \quad 3\nmid 2</m>
+            </p>
+          </li>     
+          <li>
+            <p>
+              <m>-2\equiv 6\bmod{8}</m>
+            </p>
+            <p component="a">
+              True: <m>-2-6 = -8, \quad 8\mid -8</m>
+            </p>
+          </li>
+               
+        </ol>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-props-log-ops">
+    <title>Propositions and Logical Operations</title>
+    <slide>
+      <title>Propositions</title>  
+      <definition>
+        <statement>
+          <p>A <term>proposition</term> is a declarative statement that is either true or false.</p>  
+        </statement>
+      </definition>
+      <p pause="yes">
+        The <term>truth value</term> of a statement may be unknown.
+      </p>
+    </slide>
+    <slide>
+      <title>Proposition or not?</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              These slides are made for MATH/COMP SCI 240.
+            </p>
+            <p component="a">
+              Yes. True.
+            </p>
+          </li>
+          <li>
+            <p>
+              The Wisconsin state animal is the badger.
+            </p>
+            <p component="a">
+              Yes. True.
+            </p>            
+          </li>
+          <li>
+            <p>
+              Wisconsin borders Ohio.
+            </p>
+            <p component="a">
+              Yes. False.
+            </p>            
+          </li>
+          <li>
+            <p>
+              Where are the slides for CS/MATH 240?
+            </p>
+            <p component="a">
+              No
+            </p>            
+          </li>
+          <li>
+            <p>
+              Send me an email reminder.
+            </p>
+            <p component="a">
+              No
+            </p>            
+          </li>
+          <li>
+            <p>
+              Every even integer bigger than 2 can be written as the sum of two prime numbers.
+            </p>
+            <p component="a">
+              Yes. Unknown.
+            </p>            
+          </li>
+          <li>
+            <p>
+              This sentence is false.
+            </p>
+            <p component="a">
+              No
+            </p>            
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Logical Operations</title>
+      <p>
+        A <term>logical operation</term> takes one or more propositions and combines them to form a new proposition called a <term>compound proposition</term>.
+      </p>
+      <p pause="yes">
+        A <term>truth table</term> gives the possible truth values of a compound proposition given <em>all</em> possible truth values of the input propositions.
+      </p>
+      <p pause="yes">
+        We <em>define</em> our logical operations using truth tables and then can construct truth tables for more complex compound propositions.
+      </p>
+    </slide>
+    <slide>
+      <title>Negation Operation</title>
+      <p>
+        Takes a proposition <m>p</m> and returns <q>not <m>p</m></q>, which we denote by <m component="b"><fillin characters="3" /></m><m component="a">\neg p</m>
+      </p>
+      <tabular>
+        <row header="yes" bottom="minor">
+          <cell right="minor"><m>p</m></cell>
+          <cell><m>\neg p</m></cell>
+        </row>
+        <row bottom="none">
+          <cell right="minor">T</cell>
+          <cell component="a">F</cell>
+          <cell component="b"></cell>
+        </row>
+        <row>
+          <cell right="minor">F</cell>
+          <cell component="a">T</cell>
+          <cell component="b"></cell>
+        </row>        
+      </tabular>
+    </slide>
+    <slide>
+      <title>Conjunction Operation</title>
+      <p>
+        Takes two propositions <m>p</m> and <m>q</m> and returns the proposition <q><m>p</m> and <m>q</m></q>, which we denote by <m component="b"><fillin characters="3" /></m><m component="a">p\land q</m>
+      </p>
+      <p>
+        <me component="b">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\land q\\\hline
+            T \amp T \amp\\\hline
+            T \amp F \amp\\\hline
+            F \amp T \amp\\\hline
+            F \amp F \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\land q\\\hline
+            T \amp T \amp T \\\hline
+            T \amp F \amp F \\\hline
+            F \amp T \amp F \\\hline
+            F \amp F \amp F
+          \end{array}
+        </me>
+      </p>
+    </slide>    
+    <slide>
+      <title>Disjunction Operation</title>
+      <p>
+        Takes two propositions <m>p</m> and <m>q</m> and returns the proposition <q><m>p</m> or <m>q</m></q>, which we denote by <m component="b"><fillin characters="3" /></m><m component="a">p\lor q</m>
+      </p>
+      <p>
+        <me component="b">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\lor q\\\hline
+            T \amp T \amp\\\hline
+            T \amp F \amp\\\hline
+            F \amp T \amp\\\hline
+            F \amp F \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\lor q\\\hline
+            T \amp T \amp T \\\hline
+            T \amp F \amp T \\\hline
+            F \amp T \amp T \\\hline
+            F \amp F \amp F
+          \end{array}
+        </me>
+      </p>
+      <p pause="yes">
+        In mathematics, <q>or</q> is always interpreted in the inclusive sense.
+      </p>
+    </slide>  
+    <slide>
+      <title>Recap of Logical Operations</title>
+      <sidebyside widths="28% 34% 34%" margins="auto">
+        <p>
+          <me>
+          \begin{array}{c|c}
+            p \amp \neg p\\\hline
+            T \amp F\\\hline
+            F \amp T
+          \end{array}
+          </me>
+        </p>
+        <p>
+          <me>
+          \begin{array}{c|c|c}
+            p \amp q \amp p\land q\\\hline
+            T \amp T \amp T \\\hline
+            T \amp F \amp F \\\hline
+            F \amp T \amp F \\\hline
+            F \amp F \amp F
+          \end{array}
+          </me>
+        </p>
+        <p>
+          <me>
+          \begin{array}{c|c|c}
+            p \amp q \amp p\lor q\\\hline
+            T \amp T \amp T \\\hline
+            T \amp F \amp T \\\hline
+            F \amp T \amp T \\\hline
+            F \amp F \amp F
+          \end{array}
+          </me>
+        </p>
+      </sidebyside>
+    </slide>
+    
+    <slide>
+      <title>Activity</title>
+      <p>
+        Complete the truth tables for <m>(\neg p)\land q</m> and <m>\neg(p\lor(\neg q))</m>.
+      </p>
+      <sidebyside widths="40% 60%">
+      <p>
+        <me component="b">
+          \begin{array}{c|c|c|c}
+            p \amp q \amp \neg p\amp (\neg p)\land q\\\hline
+            T \amp T \amp  \amp  \\\hline
+            T \amp F \amp  \amp  \\\hline
+            F \amp T \amp  \amp  \\\hline
+            F \amp F \amp  \amp 
+          \end{array}
+        </me>      
+        <me component="a">
+          \begin{array}{c|c|c|c}
+            p \amp q \amp \neg p\amp (\neg p)\land q\\\hline
+            T \amp T \amp F \amp F \\\hline
+            T \amp F \amp F \amp F \\\hline
+            F \amp T \amp T \amp T\\\hline
+            F \amp F \amp T \amp F
+          \end{array}
+        </me>
+        </p>
+        <p>
+        <me component="b">
+          \begin{array}{c|c|c|c|c}
+            p \amp q \amp \neg q\amp p\lor(\neg q) \amp \neg(p\lor(\neg q))\\\hline
+            T \amp T \amp  \amp \amp  \\\hline
+            T \amp F \amp  \amp \amp  \\\hline
+            F \amp T \amp  \amp \amp  \\\hline
+            F \amp F \amp  \amp \amp
+          \end{array}
+        </me>      
+        <me component="a">
+          \begin{array}{c|c|c|c}
+            p \amp q \amp \neg q\amp p\lor(\neg q) \amp \neg(p\lor(\neg q))\\\hline
+            T \amp T \amp F \amp T \amp F\\\hline
+            T \amp F \amp T \amp T \amp F\\\hline
+            F \amp T \amp F \amp F \amp T\\\hline
+            F \amp F \amp T \amp T \amp F
+          \end{array}
+        </me>
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Exclusive Or</title>
+      <p>
+        Takes two propositions <m>p</m> and <m>q</m> and returns the proposition <q><m>p</m> or <m>q</m> but not both</q>, which we denote by <m component="b"><fillin characters="3" /></m><m component="a">p\oplus q</m>
+      </p>
+      <p>
+        <me component="b">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\oplus q\\\hline
+            T \amp T \amp\\\hline
+            T \amp F \amp\\\hline
+            F \amp T \amp\\\hline
+            F \amp F \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\oplus q\\\hline
+            T \amp T \amp F \\\hline
+            T \amp F \amp T \\\hline
+            F \amp T \amp T \\\hline
+            F \amp F \amp F
+          \end{array}
+        </me>
+      </p>
+    </slide>  
+
+    <slide>
+      <title>Conditional Operation</title>
+      <p>
+        Takes two propositions <m>p</m> and <m>q</m> and returns the proposition <q>if <m>p</m>, then <m>q</m></q>, which we denote by <m component="b"><fillin characters="3" /></m><m component="a">p\rightarrow q</m> or <m component="b"><fillin characters="3" /></m><m component="a">p\Rightarrow q</m>
+      </p>
+      <p>
+        <me component="b">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\rightarrow q\\\hline
+            T \amp T \amp\\\hline
+            T \amp F \amp\\\hline
+            F \amp T \amp\\\hline
+            F \amp F \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\rightarrow q\\\hline
+            T \amp T \amp T \\\hline
+            T \amp F \amp F \\\hline
+            F \amp T \amp T \\\hline
+            F \amp F \amp T
+          \end{array}
+        </me>
+      </p>    
+      <p pause="yes">
+        We call <m>p</m> the <term>hypothesis</term> and <m>q</m> the <term>conclution</term>. Compound propositions using <m>\rightarrow</m> are called <term>conditional propositions/statements</term>.
+      </p>  
+    </slide>
+    <slide>
+      <title>Conditional Statements</title>
+      <p>
+        Think of conditional statements like contracts. <q>If you get 100% in this course, then you will get an A.</q> is false exactly when
+      </p>
+      <p component="a">
+        you get 100% <em>and</em> you don't get an A.
+      </p>
+    </slide>
+    <slide>
+      <title>Order of Precedence</title>
+      <p>
+        The order of precedence (highest to lowest) for our four logical operations is
+        <ol marker="1">
+          <li>
+            <p component="a">
+              <m>\neg</m> (not)
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              <m>\land</m> (and)
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              <m>\vee</m> (or)
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              <m>\rightarrow</m> (if-then)
+            </p>
+          </li>                              
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>Suppose that <m>p</m> is true, <m>q</m> is false, and <m>r</m> is true. Find the truth values of 
+      <ol marker="a">
+        <li>
+          <p>
+            <m>p\land \neg q</m>: <m component="a">T\land\neg F = T\land T = T</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>p\lor q\land r</m>: <m component="a">T\lor(F\land T) = T\lor F = T</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>\neg p\lor\neg(q\land r)</m>: <m component="a">\neg T\lor\neg(F\land T) = F\lor\neg F = F\lor T = T</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>\neg(r\lor q\rightarrow \neg p)</m>: <m component="a">\neg((T\lor F)\rightarrow\neg T) = \neg(T\rightarrow F) = \neg F = T</m>
+          </p>
+        </li>
+      </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Related Conditional Statements</title>
+      <p>
+        Given the proposition <m>p\rightarrow q</m>:
+        <ul>
+          <li>
+            <p>
+              The <term>converse</term> is <m component="a">q\rightarrow p</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              The <term>contrapositive</term> is <m component="a">\neg q\rightarrow \neg p</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              The <term>inverse</term> is <m component="a">\neg p\rightarrow \neg q</m>.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <dl>
+        <li>
+          <title>Implication</title>
+          <p>
+            If <m>4\mid n</m>, then <m>2\mid n</m>.
+          </p>
+        </li>
+        <li>
+          <title>Converse</title>
+          <p component="b">
+            <nbsp/>            
+          </p>
+          <p component="a">
+            If <m>2\mid n</m>, then <m>4\mid n</m>.
+          </p>
+        </li>        
+        <li>
+          <title>Contrapositive</title>
+          <p component="b">
+            <nbsp/>            
+          </p>          
+          <p component="a">
+            If <m>4\nmid n</m>, then <m>2\nmid n</m>.
+          </p>
+        </li>        
+        <li>
+          <title>Inverse</title>
+          <p component="b">
+            <nbsp/>
+          </p>          
+          <p component="a">
+            If <m>4\nmid n</m>, then <m>2\nmid n</m>.
+          </p>
+        </li>                        
+      </dl>
+    </slide>
+    <slide>
+      <title>Biconditional Operation</title>
+      <p>
+        For propositions <m>p</m> and <m>q</m>, the proposition <q><m>p</m> if and only if <m>q</m></q> (<q><m>p</m> iff <m>q</m></q>) is denoted <m>p\leftrightarrow</m> and has truth table
+                <me component="b">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\leftrightarrow q\\\hline
+            T \amp T \amp\\\hline
+            T \amp F \amp\\\hline
+            F \amp T \amp\\\hline
+            F \amp F \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{c|c|c}
+            p \amp q \amp p\leftrightarrow q\\\hline
+            T \amp T \amp T \\\hline
+            T \amp F \amp F \\\hline
+            F \amp T \amp F \\\hline
+            F \amp F \amp T
+          \end{array}
+        </me>
+      </p>
+      <p component="a">
+        A biconditional statement is true exactly when both propositions are true or both propositions are false.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity: When is <m>p\leftrightarrow (q\lor r)</m> true?</title>
+      <p>
+        <me component="b">
+          \begin{array}{ccc|c|c}
+          p\amp q\amp r\amp q\lor r\amp p\leftrightarrow (q\lor r)\\\hline
+          \amp \amp \amp \amp\\
+          \amp \amp \amp \amp\\
+          \amp \amp \amp \amp\\
+          \amp \amp \amp \amp\\
+          \amp \amp \amp \amp\\          
+          \amp \amp \amp \amp\\
+          \amp \amp \amp \amp\\
+          \amp \amp \amp \amp       
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{ccc|c|c}
+          p\amp q\amp r\amp q\lor r\amp p\leftrightarrow (q\lor r)\\\hline
+          T \amp T \amp T \amp T \amp T\\
+          T \amp T \amp F \amp T \amp T\\
+          T \amp F \amp T \amp T \amp T\\
+          T \amp F \amp F \amp F \amp F\\
+          F \amp T \amp T \amp T \amp F\\          
+          F \amp T \amp F \amp T \amp F\\
+          F \amp F \amp T \amp T \amp F\\
+          F \amp F \amp F \amp F \amp T       
+          \end{array}
+        </me>        
+      </p>
+    </slide>
+    <slide>
+      <title>Translating Between Logic and English</title>
+      <p>
+        The text has examples of other ways of saying <q><m>p</m> and <m>q</m></q> as well as <q>if <m>p</m>, then <m>q</m></q>. 
+      </p>
+    </slide>
+    <slide>
+      <title>Change between sentence and symbolic form</title>
+      <p>
+        Let <m>p</m> be the proposition <q>It is below freezing.</q> Let <m>q</m> be the proposition <q>It is snowing.</q> 
+        <ol marker="a">
+          <li>
+            <p>
+              <m>p\land q</m>: <q component="a">It is below freezing and it is snowing.</q>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>p\land \neg q</m>: <q component="a">It is below freezing and it is not snowing.</q>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\neg p\land \neg q</m>: <q component="a">It is not below freezing and it is not snowing.</q>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>p\lor q</m>: <q component="a">It is below freezing or it is snowing.</q>
+            </p>
+          </li>
+          <li>
+            <p>
+              <q>If it is below freezing, it is also snowing</q>: <m component="a">p\rightarrow q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <q>Either it is below freezing or it is snowing, but it is not snowing if it is below freezing</q>: <m component="a">(p\lor q)\land(p\rightarrow \neg q)</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Logical Equivalence</title>
+      <p>
+        Two compound propositions <m>s</m> and <m>r</m> are <term>logically equivalent</term> if they have the same truth values in <em>all</em> possible cases. We denote this <m component="b"><fillin characters="3" /></m><m component="a">s\equiv r</m>
+        <me>
+          p\leftrightarrow q \equiv (p\rightarrow q)\land (q\rightarrow p)
+        </me>
+        <me component="b">
+          \begin{array}{cc|c|c|c|c}
+          p \amp q\amp p\leftrightarrow q\amp p\rightarrow q\amp q\rightarrow p\amp (p\rightarrow q)\land (q\rightarrow p)\\\hline
+          T \amp T \amp \amp \amp \amp \\
+          T \amp F \amp \amp \amp \amp \\
+          F \amp T \amp \amp \amp \amp \\
+          F \amp F \amp \amp \amp \amp                              
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{cc|c|c|c|c}
+          p \amp q\amp p\leftrightarrow q\amp p\rightarrow q\amp q\rightarrow p\amp (p\rightarrow q)\land (q\rightarrow p)\\\hline
+          T \amp T \amp T \amp T \amp T \amp T\\
+          T \amp F \amp F \amp F \amp T \amp F \\
+          F \amp T \amp F \amp T \amp F \amp F \\
+          F \amp F \amp T \amp T \amp T \amp T                             
+          \end{array}
+        </me>        
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <sidebyside widths="65% 35%">
+      <p>
+        Is <m>p\rightarrow q\equiv \neg q\rightarrow \neg p</m>?
+        <me component="b">
+          \begin{array}{cc|c|c|c|c}
+          p \amp q\amp p\rightarrow q\amp \neg q\amp \neg p\amp \neg q\rightarrow \neg p\\\hline
+          \amp  \amp \amp \amp \amp \\
+          \amp  \amp \amp \amp \amp \\
+          \amp  \amp \amp \amp \amp \\
+          \amp  \amp \amp \amp \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{cc|c|c|c|c}
+          p \amp q\amp p\rightarrow q\amp \neg q\amp \neg p\amp \neg q\rightarrow \neg p\\\hline
+          T \amp T \amp T \amp F \amp F \amp T \\
+          T \amp F \amp F \amp T \amp F \amp F \\
+          F \amp T \amp T \amp F \amp T \amp T \\
+          F \amp F \amp T \amp T \amp T \amp T 
+          \end{array}
+        </me>        
+      </p>
+      <p>
+        Is <m>p\rightarrow q\equiv q\rightarrow p</m>?
+        <me component="b">
+          \begin{array}{cc|c|c}
+          p \amp q\amp p\rightarrow q\amp q\rightarrow p\\\hline
+          \amp  \amp \amp \\
+          \amp  \amp \amp \\
+          \amp  \amp \amp \\
+          \amp  \amp \amp 
+          \end{array}
+        </me>
+        <me component="a">
+          \begin{array}{cc|c|c}
+          p \amp q\amp p\rightarrow q\amp q\rightarrow p\\\hline
+          T \amp T \amp T \amp T \\
+          T \amp F \amp F \amp T \\
+          F \amp T \amp T \amp F \\
+          F \amp F \amp T \amp T 
+          \end{array}
+        </me>        
+      </p>      
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Special Statements</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              A <term>tautology</term> is a proposition that is always true, e.g. <m component="a">p\lor \neg p</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>contradiction</term> is a proposition that is always false, e.g. <m component="a">p\land \neg p</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>DeMorgan's Laws</title>
+      <p>
+        Think of these as distributive laws for <m>\neg</m> with respect to <m>\land</m> or <m>\lor</m>.
+        <md>
+          <mrow component="a">\neg (p\lor q)  \amp\equiv \neg p\land\neg q </mrow>
+          <mrow component="a">\neg (p\land q) \amp\equiv \neg p\lor \neg q </mrow>
+          <mrow component="b">\neg (p\lor q)  \amp\equiv \phantom{\neg p\land\neg q}</mrow>
+          <mrow component="b">\neg (p\land q) \amp\equiv \phantom{\neg p\lor \neg q}</mrow>          
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Laws of Propositional Logic</title>
+      <p>
+        Long list in Table 1.5.1 of the textbook.
+      </p>
+      <p>
+        Activity: Use the laws of propositional logic to show that 
+        <me>
+          p\land (\neg p\rightarrow q)\equiv p
+        </me>.
+        <md component="a">
+          <mrow>p\land (\neg p\rightarrow q) \amp\equiv p\land (\neg\neg p\lor q)\amp\text{conditional identity}</mrow>
+          <mrow> \amp\equiv p\land(p\lor q)\amp\text{double negation} </mrow>
+          <mrow> \amp\equiv p\amp\text{absorption law} </mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity: Use laws of Prop Logic</title>
+      <p>
+        <me component="b">
+          p\land (\neg p\rightarrow q)\equiv p
+        </me>
+        <md component="a">
+          <mrow>p\land (\neg p\rightarrow q) \amp\equiv p\land (\neg\neg p\lor q)\amp\text{conditional identity}</mrow>
+          <mrow> \amp\equiv p\land(p\lor q)\amp\text{double negation} </mrow>
+          <mrow> \amp\equiv p\amp\text{absorption law} </mrow>
+        </md>
+        <me component="b">
+          \neg(\neg p\land\neg q)\lor\neg q\equiv T
+        </me>
+        <md component="a">
+          <mrow>\neg(\neg p\land\neg q)\lor\neg q \amp\equiv (\neg\neg p\lor\neg\neg q)\lor\neg q\amp\text{DeMorgan's Laws}</mrow>
+          <mrow> \amp\equiv (p\lor q)\lor\neg q\amp\text{double negation} </mrow>
+          <mrow> \amp\equiv p\lor(q\lor\neg q)\amp\text{associative} </mrow>
+          <mrow> \amp\equiv p\lor(T)\amp\text{complement} </mrow>
+          <mrow> \amp\equiv T\amp\text{domination} </mrow>
+        </md>        
+      </p>
+
+    </slide>
+    
+  </section>
+  <section xml:id="sec-pred-quant">
+    <title>Predicates and Quantifiers</title>
+    <slide>
+      <title>Definitions</title>
+      <p>
+        A <term>predicate</term> is a logical statement whose truth value depends on one or more variables.
+      </p>
+      <p pause="yes">
+        The <term>domain</term> is the set of all possible values that can be used for the variable.
+      </p>
+      <p pause="yes">
+        We can think of a predicate as a machine that takes in variables from the domain and outputs propositions.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        <ul>
+          <!-- <li>
+            <p>
+              Let the domain be cities in the US and define the predicate <m>C(x)</m> to be
+              <me>
+                C(x)\colon x\text{ is a state capital}
+              </me>.
+              <ul>
+                <li>
+                  <p component="b">
+                    <m>C(\text{Madison})</m>
+                  </p>
+                  <p component="a">
+                    <m>C(\text{Madison})</m> is true
+                  </p>
+                  
+                </li>
+                <li>
+                  <p component="b">
+                    <m>C(\text{Milwaukee})</m>
+                  </p>
+                  <p component="a">
+                    <m>C(\text{Milwaukee})</m> is false
+                  </p>
+                </li>                
+              </ul>
+            </p>
+          </li> -->
+          <li>
+            <p>
+              Let <m>\Z</m> be the domain and define the predicate <m>O(n)</m> to be
+              <me>
+                O(n)\colon n\text{ is odd}
+              </me>
+              <ul>
+                <li>
+                  <p component="b">
+                    <m>O(3)</m>
+                  </p>
+                  <p component="a">
+                    <m>O(3)</m> is true
+                  </p>
+                  
+                </li>
+                <li>
+                  <p component="b">
+                    <m>O(0)</m> 
+                  </p>
+                  <p component="a">
+                    <m>O(0)</m> is false
+                  </p>
+                </li>                
+              </ul>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let the domain be <m>\R</m> the set of real numbers. Let <m>P(x)</m> be the predicate <q><m>x</m> is positive</q>. Determine the truth values of
+        <ol marker="a" cols="3">
+          <li>
+            <p component="b">
+              <m>P(2)</m>
+            </p>
+            <p component="a">
+              <m>P(2)</m> is true
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>P(-10)</m>
+            </p>
+            <p component="a">
+              <m>P(-10)</m> is false
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>P(\pi)</m>
+            </p>
+            <p component="a">
+              <m>P(\pi)</m> is true
+            </p>            
+          </li>
+        </ol>
+      </p>  
+      <p pause="yes">
+        What if the domain was just the integers?
+      </p>
+      <p pause="yes" component="a">
+        <m>P(2)</m> and <m>P(-10)</m> are the same, but <m>P(\pi)</m> is now undefined.
+      </p>
+    </slide>
+    <slide>
+      <title>Convention</title>
+      <p>
+        If it is not specified, we usually assume that the domain is as large as possible so that the predicate makes sense for all variables in the domain.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For the domain <m>\Z</m> of integers, define the predicates:
+        <md>
+          <mrow>P(x) \amp: x \gt 0</mrow>
+          <mrow>Q(x,y) \amp: x +y=1</mrow>
+          <mrow>R(x,y,z) \amp: x\lt y\lt z</mrow>
+        </md>
+        Determine the truth values of
+      </p>
+      <p>
+        <ol cols="3" marker="a">
+          <li>
+            <p component="b">
+              <m>P(-3)</m>
+            </p>
+            <p component="a">
+              <m>P(-3)</m> is false
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>Q(2,-1)</m>
+            </p>
+            <p component="a">
+              <m>Q(2,-1)</m> is true
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>R(1,2,3)</m>
+            </p>
+            <p component="a">
+              <m>R(1,2,3)</m> is true
+            </p>            
+          </li>                    
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Universal Quantifier</title>
+      <p>
+        Given a predicate <m>P(x)</m>, the proposition <m component="b"><fillin characters="5" /></m><m component="a">\forall xP(x)</m> is the statement <q>for all <m>x</m> (in the domain), <m>P(x)</m> is true.</q> It is
+        <ul>
+          <li>
+            <p>
+              true if <m>P(x)</m> is true for every <m>x</m> in the domain
+            </p>
+          </li>
+          <li>
+            <p>
+              false if <m>P(x)</m> is false for some <m>x</m> in the domain
+            </p>
+          </li>          
+        </ul>
+      </p>
+      <p pause="yes">
+        The symbol <m>\forall</m> is called the <term>universal quantifer</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>R(x)</m> be the predicate <q><m>x^2\gt 0</m></q> over the domain of all real numbers. Is <m>\forall xR(x)</m> true or false?
+      </p>
+      <p component="a">
+        Since <m>R(0)</m> is false, <m>\forall xR(x)</m> is false.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>T(x)</m> be the predicate <q><m>x\lt 2x</m></q>. Is <m>\forall xT(x)</m> true if
+        <ol marker="a">
+          <li>
+            <p component="b">
+              the domain is the positive integers?
+            </p>
+            <p component="a">
+              the domain is the positive integers? Yes! The numbers are positive.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              the domain is all real numbers?
+            </p>
+            <p component="a">
+              the domain is all real numbers? No, since <m>T(-1)</m> is false because <m>-2\lt -1</m>.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              the domain is empty?
+            </p>
+            <p component="a">
+              the domain is empty? Yes! This is our convention.
+            </p>            
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Empty Domain, Counterexamples</title>
+      <p>
+        If the domain is empty, then any statement of the form <q><m>\forall xP(x)</m></q> is true because it would be false only if we could find an <m>x</m> in the domain for which <m>P(x)</m> fails to hold. However, there are no such <m>x</m> since the domain is empty.
+      </p>
+      <p pause="yes">
+        A <term>counterexample</term> to <m>\forall xP(x)</m> is an <m>x</m> so that <m>P(x)</m> is false.
+      </p>
+    </slide>
+    <slide>
+      <title>Existential Quantifier</title>
+      <p>
+        Given a predicate <m>P(x)</m>, the proposition <m component="b"><fillin characters="5" /></m><m component="a">\exists xP(x)</m> is the statement <q>there exists an <m>x</m> (in the domain) so that <m>P(x)</m> is true.</q> The statement is
+        <ul>
+          <li>
+            <p>
+              true if we can find one (or more) <m>x</m> in the domain with <m>P(x)</m> true.
+            </p>
+          </li>
+          <li>
+            <p>
+              false if <m>P(x)</m> false for all <m>x</m> in the domain.
+            </p>
+          </li>          
+        </ul>
+      </p>
+      <p pause="yes">
+        The symbol <m>\exists</m> is called the <term>existential quantifier</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Again let <m>T(x)</m> be the predicate <q><m>x\lt 2x</m></q> over the domain of all real numbers. Is <m>\exists xT(x)</m> true?
+      </p>
+      <p component="a">
+        Yes, since <m>T(7)</m> is true.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>P(x)</m> be the predicate <q><m>x^2=2</m></q>. Is <m>\exists xP(x)</m> true or false when
+        <ol marker="a">
+          <li>
+            <p component="b">
+              the domain is the integers?
+            </p>
+            <p component="a">
+              the domain is the integers? False, as <m>\sqrt{2}</m> and <m>-\sqrt{2}</m> are not integers.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              the domain is the real numbers?
+            </p>
+            <p component="a">
+              the domain is the real numbers? True since <m>P(\sqrt{2}</m> is true.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              the domain is empty?
+            </p>
+            <p component="a">
+              the domain is empty? False, as there are no <m>x</m> for which <m>P(x)</m> could be true.
+            </p>            
+          </li>                    
+        </ol>
+      </p>
+      <p pause="yes">
+        Statements of the form <q><m>\exists xP(x)</m></q> are false when the domain is empty.
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-Quantified-Statements">
+    <title>Quantified Statements</title>
+    <slide>
+      <title>Definition</title>
+      <p>
+        A statement that combines quantifiers, predicates, and logical operators is called a <term>quantified statement</term>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Over the positive integers, define the predicates
+        <md>
+          <mrow>P(x) \amp \colon x\text{ is prime} </mrow>
+          <mrow>O(x) \amp \colon x\text{ is odd} </mrow>          
+        </md>
+        <ul>
+          <li>
+            <p component="b">
+              Is <m>\exists x(P(x)\land\neg O(x))</m> true?
+            </p>
+            <p component="a">
+              Is <m>\exists x(P(x)\land\neg O(x))</m> true? Yes, since <m>P(2)\land\neg O(2)</m> is true because <m>2</m> is prime but not odd.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              Is <m>\forall x(P(x)\rightarrow O(x))</m> true?
+            </p>
+            <p component="a">
+              Is <m>\forall x(P(x)\rightarrow O(x))</m> true? No, since <m>2</m> is a counterexample.
+            </p>            
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Free and Bound Variables</title>
+      <p>
+        A variable in a predicate <m>P(x)</m> is called <term>free</term> since it can take on any value in the domain.
+      </p>
+      <p pause="yes">
+        A variable in a statement of the form <m>\forall xP(x)</m> or <m>\exists xQ(x)</m> is said to be bound.
+      </p>
+      <p pause="yes">
+        A quantified statement is a proposition if and only if all variables are bound.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Over the positive integers, define the predicates
+        <md>
+          <mrow>P(x) \amp \colon x\text{ is prime}\amp O(x) \amp \colon x\text{ is odd} </mrow>
+        </md>
+        Which of the following are propositions?
+        <ol marker="a" cols="4">
+          <li>
+            <p component="b">
+              <m>(\forall x P(x))\land O(x)</m>
+            </p>
+            <p component="a">
+              <m>(\forall x P(x))\land O(x)</m> is <em>not</em> a proposition.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>(\exists x P(x))\lor O(5)</m>
+            </p>
+            <p component="a">
+              <m>(\exists x P(x))\lor O(5)</m> is a proposition.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>\forall x (P(x)\lor O(x))</m>
+            </p>
+            <p component="a">
+              <m>\forall x (P(x)\lor O(x))</m> is  a proposition.
+            </p>            
+          </li>
+          <li>
+            <p component="b">
+              <m>(\forall x P(x))\lor (\exists x O(x))</m>
+            </p>
+            <p component="a">
+              <m>(\forall x P(x))\lor (\exists x O(x))</m> is a proposition.
+            </p>            
+          </li>                              
+        </ol>
+      </p>      
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        For the domain of all real numbers, rewrite <q>For all <m>x</m> and <m>y</m>, if <m>(x+y\geq 300)</m>, then (<m>x\geq 150</m> or <m>y\geq 150</m>)</q> using the predicates
+        <md>
+          <mrow>A(x,y) \amp\colon x+y\geq 300</mrow>
+          <mrow>B(z) \amp\colon z\geq 150</mrow>
+        </md>
+      </p>
+      <p component="a">
+        <m>\forall x\forall y (A(x,y)\rightarrow (B(x)\lor B(y)))</m>
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Let the domain be all students at UW<ndash/>Madison. Using the predicates
+        <md>
+          <mrow>S(x) \amp\colon x\text{ is a MATH/COMP SCI 240 student} </mrow>
+          <mrow>C(x) \amp\colon x\text{ has studied calculus} </mrow>
+          <mrow>M(x) \amp\colon x\text{ is a CS major} </mrow>
+        </md>
+        rewrite
+        </p>
+        <p>
+        <ol marker="a">
+          <li>
+            <p>
+              Every student in this class has studied calculus. 
+              <m component="a">
+                \forall x(S(x)\rightarrow C(x))
+              </m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Some students in this class are not CS majors.
+              <m component="a">
+                \exists x(S(x)\land\neg M(x))
+              </m>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-demorgan-quant">
+    <title>DeMorgan's Laws for Quantified Statements</title>
+    <slide>
+      <title>Negating Quantified Statements</title>
+      <p>
+        For a predicate <m>P(x)</m>, we have
+        <md component="a">
+          <mrow>\neg(\forall x P(x)) \amp\equiv \exists x\neg P(x) </mrow>
+          <mrow>\neg(\exists x P(x)) \amp\equiv \forall x\neg P(x) </mrow>
+        </md>
+        <md component="b">
+          <mrow>\neg(\forall x P(x)) \amp\equiv  </mrow>
+          <mrow>\neg(\exists x P(x)) \amp\equiv  </mrow>
+        </md>        
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        The statements below are logically equivalent
+        <ol>
+          <li>
+            <p>
+              <q>not everyone speaks English</q>
+            </p>
+          </li>
+          <li>
+            <p>
+              <q>there is someone who does not speak English</q>
+            </p>
+          </li>
+        </ol>
+        </p>
+        <p>
+        Using the predicate <m>E(x)</m> as <q><m>x</m> speaks English</q>,
+        </p>
+        <p>
+        <ol>
+          <li>
+            <p>
+              is <m component="a">\neg\forall xE(x)</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              is <m component="a">\exists x \neg E(x)</m>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Using <m>E(x)</m> as <q><m>x</m> speaks English</q>, rewrite
+        <ol marker="a">
+          <li>
+            <p>
+              <q>Nobody speaks English</q>: <m component="a">\neg(\exists xE(x))</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <q>Everyone does not speak English</q>: <m component="a">\forall x\neg E(x)</m>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-nested-quant">
+    <title>Nested Quantifiers</title>
+    <slide>
+      <title>Definition</title>
+      <p>
+        A logical expression with multiple quantifiers binding different variables of a predicate is said to have <term>nested quantifiers</term>. The quantifiers can be the same or different. <alert>Order matters!</alert>
+      </p>      
+    </slide>
+    
+    <slide>
+      <title>Types of Nested Quantifiers</title>
+      <tabular row-headers="yes">
+      <!-- <col width="20%"/><col width="40%" /><col width="40%" /> -->
+        <row header="yes" bottom="major">
+          <cell>Statement</cell>
+          <cell>True when</cell>
+          <cell>False when</cell>
+        </row>
+        <row>
+          <cell><m>\forall x\forall y P(x,y)</m></cell>
+          <cell component="b"><line><m>\phantom{asdf asdf asdf asdf }</m></line><line><nbsp/></line></cell>
+          <cell component="a"><m>P(x,y)</m> is true for every pair <m>x</m> and <m>y</m></cell>
+          <cell component="b"><line><m>\phantom{asdf asdf asdf asdf }</m></line><line><nbsp/></line></cell>
+          <cell component="a">There is a pair <m>x</m> and <m>y</m> so that <m>P(x,y)</m> is false</cell>
+        </row>
+        <row>
+          <cell><m>\forall x\exists y P(x,y)</m></cell>
+          <cell component="b"><line><nbsp/></line><line><nbsp/></line></cell>
+          <cell component="a">For every <m>x</m> there is a <m>y</m> so that <m>P(x,y)</m> is true</cell>
+          <cell component="b"></cell>
+          <cell component="a">There is an <m>x</m> so that for every <m>y</m>, <m>P(x,y)</m> is false</cell>
+        </row>  
+        <row>
+          <cell><m>\exists x\forall y P(x,y)</m></cell>
+          <cell component="b"><line><nbsp/></line><line><nbsp/></line></cell>
+          <cell component="a">There is an <m>x</m> so that <m>P(x,y)</m> is true for every <m>y</m></cell>
+          <cell component="b"></cell>
+          <cell component="a">For each <m>x</m> there is a <m>y</m> so that <m>P(x,y)</m> is false</cell>
+        </row>      
+        <row>
+          <cell><m>\exists x\exists y P(x,y)</m></cell>
+          <cell component="b"><line><nbsp/></line><line><nbsp/></line></cell>
+          <cell component="a">There is a pair pair <m>x</m> and <m>y</m> so that <m>P(x,y)</m> is true</cell>
+          <cell component="b"></cell>
+          <cell component="a">For every pair <m>x</m> and <m>y</m>, <m>P(x,y)</m> is false</cell>
+        </row>                
+      </tabular>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For the domain of the real numbers, define the predicates
+        <md>
+          <mrow>P(x,y) \amp\colon x\gt y\text{ or }x\lt y \amp Q(x,y) \amp\colon x\geq y</mrow>
+        </md>
+        Determine the truth values of the following:
+      </p>
+      <p>
+        <ol marker="a">
+          <li component="b">
+            <m>\forall x\forall y P(x,y)</m>
+          </li>
+          <li component="a">
+            <m>\forall x\forall y P(x,y)</m>: False, <m>P(0,0)</m> is false.
+          </li>      
+          <li component="b">
+            <m>\exists x\exists y P(x,y)</m>
+          </li>
+          <li component="a">
+            <m>\exists x\exists y P(x,y)</m>: True, <m>P(1,0)</m> is true.
+          </li>  
+          <li component="b">
+            <m>\forall x\exists y Q(x,y)</m>
+          </li>
+          <li component="a">
+            <m>\forall x\exists y Q(x,y)</m>: True, since <m>Q(x,y)</m> is true if <m>y=x</m>
+          </li>  
+          <li component="b">
+            <m>\exists x\forall y Q(x,y)</m>
+          </li>
+          <li component="a">
+            <m>\exists x\forall y Q(x,y)</m>: False, <m>Q(x,x+1)</m> is false for every <m>x</m>
+          </li>
+          <li component="b">
+            <m>\exists x\forall y Q(x,y)</m> <em>with domain all negative integers</em>
+          </li>
+          <li component="a">
+            <m>\exists x\forall y Q(x,y)</m> <em>with domain all negative integers</em>: True, since <m>Q(-1,y)</m> is true for all negative integers <m>y</m>
+          </li>                                        
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Negating Nested Quantifiers</title>
+      <p>
+        When negating nested quantifiers, proceed iteratively:
+        <md>
+          <mrow component="a">\neg(\forall x\forall y P(x,y)) \amp\equiv \exists x\neg(\forall y P(x,y)) \equiv \exists x\exists y \neg P(x,y) </mrow>
+          <mrow component="b">\neg(\forall x\forall y P(x,y)) \amp\equiv \phantom{\exists x\neg(\forall y P(x,y)) \equiv \exists x\exists y \neg P(x,y)} </mrow>
+          <mrow component="a">\neg(\forall x\exists y P(x,y)) \amp\equiv \exists x\neg(\exists y P(x,y)) \equiv \exists x\forall y \neg P(x,y) </mrow>
+          <mrow component="b">\neg(\forall x\exists y P(x,y)) \amp\equiv \phantom{\exists x\neg(\exists y P(x,y)) \equiv \exists x\forall y \neg P(x,y)} </mrow>
+          <mrow component="a">\neg(\exists x\forall y P(x,y)) \amp\equiv \forall x\neg(\forall y P(x,y)) \equiv \forall x\exists y \neg P(x,y) </mrow>
+          <mrow component="b">\neg(\exists x\forall y P(x,y)) \amp\equiv \phantom{\forall x\neg(\forall y P(x,y)) \equiv \forall x\exists y \neg P(x,y)} </mrow>
+          <mrow component="a">\neg(\exists x\exists y P(x,y)) \amp\equiv \forall x\neg(\exists y P(x,y)) \equiv \forall x\forall y \neg P(x,y) </mrow>
+          <mrow component="b">\neg(\exists x\exists y P(x,y)) \amp\equiv \phantom{\forall x\neg(\exists y P(x,y)) \equiv \forall x\forall y \neg P(x,y)} </mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For the domain students in this class, define the predicate <m>F(x,y):</m> <q><m>x</m> knows <m>y</m></q>. Translate between English and symbols:
+      </p>
+      <p>
+        <ol marker="a">
+          <li>
+            <p>
+              Not everybody knows everybody (including themselves) <m component="a">\neg(\forall x\forall y F(x,y))</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              There are students where one does not know the other <m component="a">\exists x\exists y \neg F(x,y))</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              There is a student who knows everyone <m component="a">\exists x\forall y F(x,y)</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              Every student has someone they do not know <m component="a">\forall x\exists y \neg F(x,y)</m>
+            </p>
+          </li>  
+          <li>
+            <p>
+              <m>\forall x\exists y F(x,y)</m> <q component="a">Every student knows someone</q>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\exists x\forall y\neg F(x,y)</m> <q component="a">There is a student who doesn't know anyone</q>
+            </p>
+          </li>                  
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Logical Operators FTW</title>
+      <p>
+        <m>P(x,y):</m> <q><m>x\gt y</m> or <m>x\lt y</m></q> leads to <m>\forall x\forall yP(x,y)</m> having counterexamples when <m>x=y</m>. What if we wanted to say <q>Every number is strictly larger or strictly smaller than every other number?</q>
+        <me component="a">
+          \forall x\forall y ((x\neq y)\rightarrow P(x,y))
+        </me>
+        <me component="b">
+          \phantom{\forall x\forall y ((x\neq y)\rightarrow P(x,y))}
+        </me>
+      </p>
+      <p component="a">
+        We can use a conditional statement (or sometimes other logical operators) to restrict to a special part of the domain.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>F(x)</m> be the predicate <q><m>x</m> failed MATH 240</q>. How would we write <q>Exactly one student failed MATH 240</q>?
+        <me component="a">
+          \exists x (F(x)\land \forall y ((x\neq y)\rightarrow \neg F(y)))
+        </me>
+        <me component="b">
+          \phantom{\exists x (F(x)\land \forall y ((x\neq y)\rightarrow \neg F(y)))}
+        </me>        
+      </p>
+      <p pause="yes">
+        We can rewrite this with both quantifiers out front:
+        <me component="a">
+          \exists x \forall y(F(x)\land ((x\neq y)\rightarrow \neg F(y)))          
+        </me>
+        <me component="b">
+          \phantom{\exists x \forall y(F(x)\land ((x\neq y)\rightarrow \neg F(y)))}
+        </me>
+      </p>
+      <p pause="yes">
+        Quantified statements in generally take the form
+        <me component="a">
+          \forall x\exists y\exists z\forall w (\text{predicates and logical operators})
+        </me>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-logical-reasoning">
+    <title>Logical Reasoning</title>
+    <slide>
+      <p>
+        An <term>argument</term> is a sequence of propositions called <term>hypotheses</term> followed by a final proposition called the <term>conculsion</term>. When all of the hypotheses are true, the argument is <term>valid</term> if the conclusion is true and <term>invalid</term> if the conclusion is false.
+    
+      </p>
+      <sidebyside widths="35% 65%">
+        <p>
+          <me>
+            \begin{array}{l}
+            p_1\\
+            p_2\\
+            p_3\\
+            \hline
+            \therefore c
+            \end{array}
+          </me>  
+        </p>
+        <p component="a">
+          Valid if <m>(p_1\land p_2\land p_3)\rightarrow c</m> is always true (i.e., a tautology).
+        </p>
+        <p component="b">
+          
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <sidebyside widths="35% 65%">
+        <p>
+          Consider the argument
+          <me>
+            \begin{array}{l}
+            p\\
+            p\rightarrow q\\
+            \hline
+            \therefore q
+            \end{array}
+          </me>
+          Is this valid?
+        </p>
+        <p component="a">
+          We can use a truth table:
+          <me>
+            \begin{array}{cc|c}
+             p \amp q \amp p\rightarrow q\\
+             \hline
+             T \amp T \amp T\\
+             T \amp F \amp F\\
+             F \amp T \amp T\\
+             F \amp F \amp T
+            \end{array}
+          </me>
+          Since <m>q</m> is true whenever we have <m>p\land (p\rightarrow q)</m> true, the argument is valid.
+        </p>
+        <p component="b">
+          
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <sidebyside widths="35% 65%">
+        <p>
+          Show that
+          <me>
+            \begin{array}{l}
+            \neg p\\
+            p\rightarrow q\\
+            \hline
+            \therefore \neg q
+            \end{array}
+          </me>
+          is invalid.
+        </p>
+        <p component="a">
+          <me>
+            \begin{array}{cc|c|c|c}
+            p \amp q\amp \neg p\amp \neg q\amp p\rightarrow q\\
+            \hline
+            T \amp T \amp F \amp F\amp T\\
+            T \amp F \amp F \amp T\amp F\\
+            F \amp T \amp T \amp F\amp T\\
+            F \amp F \amp T \amp T\amp T\\
+            \end{array}
+          </me>
+          Invalid because there is a case where <m>p\rightarrow q</m> is true, <m>\neg p</m> is true, but <m>\neg q</m> is false.
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <sidebyside widths="65% 35%">
+        <p>
+          For the propositions
+          <md>
+            <mrow>s \amp: \text{ he studied for the test} </mrow>
+            <mrow>f \amp: \text{ he failed the test} </mrow>          
+          </md>,
+          write the following argument in symbols:
+          <me>
+            \begin{array}{l}
+            \text{he studied for the test or failed or both}\\
+            \text{he passed the test}\\
+            \hline
+            \text{Therefore he studied for the test}
+            \end{array}
+          </me>
+        </p>   
+        <p component="a">
+          <me>
+            \begin{array}{l}
+            s\lor f\\
+            \neg f\\
+            \hline
+            \therefore s
+            \end{array}
+          </me>
+          Observation: This is valid since if <m>s\lor f</m> is true but <m>f</m> is false (i.e., <m>\neg f</m> is true), then <m>s</m> must be true.
+        </p>             
+      </sidebyside>
+
+    </slide>
+    
+  </section>
+  <section xml:id="sec-rules-inf-prop">
+    <title>Rules of Inference with Propositions</title>
+    <slide>
+      <title>Useful Rules</title>
+      <sidebyside widths="33% 33% 33%">
+        <p>
+          We don't want to make a truth table every time we want to check that an argument is true, so there are some laws of inference we can use in Table 1.12.1. <alert>You do not need to know the names of these.</alert>
+        </p>
+        <p>
+          Modus ponens
+          <me>
+            \begin{array}{l}
+            p\\
+            p\rightarrow q\\
+            \hline
+            \therefore q
+            \end{array}
+          </me>
+        </p>
+        <p>
+          Modus tollens
+          <me>
+            \begin{array}{l}
+            \neg q\\
+            p\rightarrow q\\
+            \hline
+            \therefore \neg p
+            \end{array}
+          </me>
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <sidebyside widths="35% 65%">
+        <p>
+          Show that the argument
+          <me>
+            \begin{array}{l}
+            (p\lor r)\rightarrow q\\
+            q\rightarrow t\\
+            r\\
+            \hline
+            \therefore t
+            \end{array}
+          </me>
+          is valid.
+        </p>
+        <p component="b">
+          
+        </p>
+        <p component="a">
+          
+          <ol>
+            <li>
+              <p>
+                <m>r</m> is true
+              </p>
+            </li>
+            <li>
+              <p>
+                So <m>p\lor r</m> is true
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>(p\lor r)\rightarrow q</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                So <m>q</m> is true
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>q\rightarrow t</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                So <m>t</m> is true
+              </p>
+            </li>
+          </ol>
+        </p>
+      </sidebyside>
+    </slide>
+    
+  </section>
+<section xml:id="sec-rules-inf-quants">
+  <title>Rules of Inference with Quantifiers</title>
+  <slide>
+    <title>List of Rules</title>
+    <p>
+      See Table 1.13.1 in the text. <alert>Again, you do not need to know the names.</alert>
+    </p>
+    <p>
+      The key idea is the difference between a variable being <term>arbitrary</term> (any element of the domain) or <term>particular</term> (potentially having special additional properties).
+    </p>
+  </slide>
+  <slide>
+    <title>Example</title>
+      <sidebyside widths="35% 65%">
+        <p>
+          Show that the argument
+          <me>
+            \begin{array}{l}
+            \exists x(P(x)\lor Q(x))\\
+            \forall x\neg P(x)\\
+            \hline
+            \therefore \exists xQ(x)
+            \end{array}
+          </me>
+          is valid.
+        </p>
+        <p component="b">
+          
+        </p>        
+        <p component="a">
+          <ol>
+            <li>
+              <p>
+                <m>\exists x(P(x)\lor Q(x)) </m>
+              </p>
+            </li>
+            <li>
+              <p>
+                So there is a <em>particular</em> element <m>c</m> in the domain so that <m>P(c)\lor Q(c)</m> is true.
+              </p>
+            </li>
+            <li>
+              <p>
+                <m>\forall x\neg P(x)</m>
+              </p>
+            </li>
+            <li>
+              <p>
+                Since <m>c</m> is in the domain, <m>\neg P(c)</m> is true.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <m>P(c)\lor Q(c)</m> and <m>\neg P(c)</m> are true, then <m>Q(c)</m> must be true.
+              </p>
+            </li>
+            <li>
+              <p>
+                Since <m>c</m> is an element with <m>Q(c)</m> true, we can state that <m>\exists xQ(x)</m> is true by choosing <m>x=c</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </sidebyside>    
+  </slide>
+  
+</section>
+  </slideshow>
+</pretext>

@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \DeclareMathOperator{\ind}{in-degree}
+      \DeclareMathOperator{\outd}{out-degree}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usepackage{tkz-graph}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+  <section xml:id="sec-binary-relations">
+    <title>Introduction to Binary Relations</title>
+    <slide>
+      <!-- <title>Binary Relations</title> -->
+      <p>
+        We have already considered relationships between objects:
+        <ul>
+          <li>
+            <p>
+              Is <m>A\subseteq B</m>?
+            </p>
+          </li>
+          <li>
+            <p>
+              Is <m>x\leq y</m>?
+            </p>
+          </li>
+          <li>
+            <p>
+              Is <m>x</m> a student enrolled in course <m>y</m>?
+            </p>
+          </li>
+        </ul>
+        Binary relations formalize this idea.
+      </p>
+      <definition>
+        <statement>
+          <p>
+            Let <m>A</m> and <m>B</m> be sets. A <term>binary relation</term> between <m>A</m> and <m>B</m> is a subset <m component="a">R</m><m component="b">\phantom{R}</m> of <m component="a">A\times B</m><m component="b">\phantom{A\times B}</m>
+          </p>
+          <p>
+            We write <m component="a">aRb</m><m component="b">\phantom{aRb}</m> if <m component="a">(a,b)\in R</m><m component="b">\phantom{(a,b)\in R}</m>. If <m>(a,b)\not\in R</m>, we write <m component="a">a\not R b</m><m component="b">\phantom{a\not R b}</m>
+          </p>
+        </statement>
+      </definition>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>S</m> be the set of UW<ndash/>Madison students. Let <m>C</m> be the set of courses. Define <m>R=\set{(s,c)\mid \text{student }s \text{ is taking course }c}</m>.
+      </p>
+      <p component="a">
+        Let <m>x</m> be any student in the classroom. Then we have <m>(x,\text{MATH } 240)\in R</m>. We might also have <m>x\, R\, \text{ COMP SCI }400</m>. We also should have <m>x\not R\text{ MATH }96</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>A=B=\R</m>. Define <m>R = \set{(a,b)\mid a\leq b}</m>.
+        <ul>
+          <li>
+            <p>
+              <m component="a">(3,5)\in R</m><m component="b">(3,5)</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">(4,4)\in R</m><m component="b">(4,4)</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">(0,-1)\not\in R</m><m component="b">(0,-1)</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>A=B=\Z^+</m> and define <m>R\subseteq A\times B</m> by <m>(a,b)\in R</m> if and only if <m>a\equiv b\pmod{4}</m>.
+        <ul>
+          <li>
+            <p>
+              <m component="a">3R7</m><m component="b">3\phantom{R}7</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">3\not R8</m><m component="b">3\phantom{\not R}7</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">aRa</m><m component="b">a\phantom{R}a</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">a\not R(a+2)</m><m component="b">a\phantom{\not R}(a+2)</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>A = \R</m>, <m>B = \Z</m>, and define <m>R\subseteq A\times B</m> by <m>aRb</m> if and only if <m>|a-b|\leq 1</m>. Determine which of the following hold:
+        <ol marker="a">
+          <li>
+            <p component="b">
+              <m>\pi R 3</m>
+            </p>
+            <p component="a">
+              <m>\pi R 3</m> is true because <m>|\pi - 3| = 0.14159\dots \leq 1</m>
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>0 R 2</m>
+            </p>
+            <p component="a">
+              <m>0 R 2</m> is false because <m>|0 - 2| = 2 \gt 1</m>
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>e R 2</m>
+            </p>
+            <p component="a">
+              <m>e R 2</m> is true because <m>|e - 2| = 0.71\dots \leq 1</m>
+            </p>
+          </li>                    
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Arrow Diagrams</title>
+      <p>
+        As we did for functions, if <m>A</m> and <m>B</m> are both finite, we can represent a binary relation <m>R\subseteq A\times B</m> using an <term>arrow diagram</term>.
+      </p>
+      <p>
+        Let <m>A = \set{1,2,3}</m> and <m>B = \set{x,y}</m> and define <m>R = \set{(1,x),(1,y),(2,x),(3,y)}</m>. The relation <m>R</m> can be represented as
+      </p>
+      <image label="arrow-diag-example" width="50%" component="a">
+        <shortdescription component="a">An arrow diagram for a relation</shortdescription>
+        <latex-image>
+          \begin{tikzpicture} 
+              \foreach[count=\i] \lseti/\lsetmi in {A/{1,2,3},B/{$x$,$y$}} {
+                  \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                  \foreach[count=\j] \lj in \lsetmi {
+                      \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                  }
+                  \end{scope}
+                  \node[ellipse, draw, fit=(\lseti), 
+                  label={[name=l-\lseti]above:$\lseti$}] {};
+              }
+              \draw[->] (n-1-A) -- (n-1-B);
+              \draw[->] (n-1-A) -- (n-2-B);
+              \draw[->] (n-2-A) -- (n-1-B);
+              \draw[->] (n-3-A) -- (n-2-B);
+              
+            \end{tikzpicture}     
+        </latex-image>
+      </image>
+    </slide>
+    <slide>
+      <title>Matrix Representation</title>
+      <p>
+        The <term>matrix representation</term> of a binary relation <m>R</m> on finite sets <m>A</m> and <m>B</m> is a matrix with rows labeled by <m>a\in A</m> and columns labeled by <m>b\in B</m>. There is a <m>1</m> in row <m>a</m>, column <m>b</m> if and only if <m>aRb</m> (and a <m>0</m> otherwise).
+      </p>
+      <p>
+        Let <m>A = \set{1,2,3}</m> and <m>B = \set{x,y}</m> and define <m>R = \set{(1,x),(1,y),(2,x),(3,y)}</m>. The relation <m>R</m> can be represented as
+        <me>
+          \begin{bmatrix}
+          1 \amp 1\\
+          1 \amp 0\\
+          0 \amp 1
+          \end{bmatrix}
+        </me>
+        
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>A=\set{1,2,3}</m> and <m>B=\set{x,y}</m> and define <m>R = \set{(1,y),(2,x),(2,y),(3,y)}</m>. Give the arrow diagram and matrix representation of <m>R</m>
+      </p>
+      <sidebyside component="a" widths="50% 50%">
+        <image label="arrow-diag-activity">
+          <shortdescription component="a">An arrow diagram for a relation</shortdescription>
+          <latex-image>
+            \begin{tikzpicture} 
+                \foreach[count=\i] \lseti/\lsetmi in {A/{1,2,3},B/{$x$,$y$}} {
+                    \begin{scope}[local bounding box=\lseti, x=2cm, y=0.5cm]
+                    \foreach[count=\j] \lj in \lsetmi {
+                        \node[minimum width=1em] (n-\j-\lseti) at (\i,-\j) {\lj};
+                    }
+                    \end{scope}
+                    \node[ellipse, draw, fit=(\lseti), 
+                    label={[name=l-\lseti]above:$\lseti$}] {};
+                }
+                \draw[->] (n-1-A) -- (n-2-B);
+                \draw[->] (n-2-A) -- (n-1-B);
+                \draw[->] (n-2-A) -- (n-2-B);
+                \draw[->] (n-3-A) -- (n-2-B);
+                
+              \end{tikzpicture}     
+          </latex-image>
+        </image>
+        <p>
+          <me>
+            \begin{bmatrix}
+            0 \amp 1\\
+            1 \amp 1\\
+            0 \amp 1
+            \end{bmatrix}
+          </me>
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <p>
+        A <term>binary relation</term> on a set <m>A</m> is a subset of <m>A\times A</m>. We call <m>A</m> the domain.
+      </p>
+      <p>
+        Let <m>A=\set{1,2,3,4}</m>. Define <m>R\subseteq A\times A</m> by <m>(a,b)\in R</m> if and only if <m>a\mid b</m>.
+      </p>
+      <sidebyside component="a" widths="50% 50%">
+        <image label="arrow-diag-divides">
+          <shortdescription component="a">An arrow diagram for a relation</shortdescription>
+          <latex-image>
+\begin{tikzpicture}[scale=0.3]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (20.2,-20.4) circle (3);
+\draw (20.2,-20.4) node {$1$};
+\draw [black] (38.4,-20.4) circle (3);
+\draw (38.4,-20.4) node {$2$};
+\draw [black] (20.2,-38.2) circle (3);
+\draw (20.2,-38.2) node {$3$};
+\draw [black] (38.4,-38.2) circle (3);
+\draw (38.4,-38.2) node {$4$};
+\draw [black] (18.877,-17.72) arc (234:-54:2.25);
+\fill [black] (21.52,-17.72) -- (22.4,-17.37) -- (21.59,-16.78);
+\draw [black] (37.077,-17.72) arc (234:-54:2.25);
+\fill [black] (39.72,-17.72) -- (40.6,-17.37) -- (39.79,-16.78);
+\draw [black] (21.523,-40.88) arc (54:-234:2.25);
+\fill [black] (18.88,-40.88) -- (18,-41.23) -- (18.81,-41.82);
+\draw [black] (39.723,-40.88) arc (54:-234:2.25);
+\fill [black] (37.08,-40.88) -- (36.2,-41.23) -- (37.01,-41.82);
+\draw [black] (23.2,-20.4) -- (35.4,-20.4);
+\fill [black] (35.4,-20.4) -- (34.6,-19.9) -- (34.6,-20.9);
+\draw [black] (20.2,-23.4) -- (20.2,-35.2);
+\fill [black] (20.2,-35.2) -- (20.7,-34.4) -- (19.7,-34.4);
+\draw [black] (38.4,-23.4) -- (38.4,-35.2);
+\fill [black] (38.4,-35.2) -- (38.9,-34.4) -- (37.9,-34.4);
+\draw [black] (22.34,-22.5) -- (36.26,-36.1);
+\fill [black] (36.26,-36.1) -- (36.03,-35.19) -- (35.33,-35.9);
+\end{tikzpicture}  
+          </latex-image>
+        </image>
+        <p>          
+          <me>
+            \begin{bmatrix}
+            1 \amp 1 \amp 1 \amp 1\\
+            0 \amp 1 \amp 0 \amp 1\\
+            0 \amp 0 \amp 1 \amp 0\\
+            0 \amp 0 \amp 0 \amp 1
+            \end{bmatrix}
+          </me>
+
+        </p>
+      </sidebyside>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Properties of Binary Relations</title>
+    <slide>
+      <title>Reflexive and Anti-reflexive</title>
+      <p>
+        A binary relation <m>R</m> on a set <m>A</m> is <term>reflexive</term> provided that for all <m component="a">x\in A, xRx</m>
+      </p>
+      <p>
+        A binary relation <m>R</m> on a set <m>A</m> is <term>anti-reflexive</term> or <term>irreflexive</term> provided that for all <m component="a">x\in A, x\not Rx</m>
+      </p>
+      <p component="a">
+        <alert>Note that anti-reflexive is not the same thing as not being reflexive!</alert>
+      </p>
+    </slide>
+    <slide>
+      <title>How do we see these properties?</title>
+      <p component="a">
+        When <m>R</m> is reflexive, every element in the arrow diagram has a loop. When <m>R</m> is anti-reflexive, no element in the arrow diagram has a loop.
+      </p>
+      <p component="a">
+        When <m>R</m> is reflexive, the diagonal of the matrix representation is all <m>1</m>s. When <m>R</m> is anti-reflexive, the diagonal of the matrix representation is all <m>0</m>s.
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        Let <m>A=\set{1,2,3,4}</m>.
+        <ul>
+          <li>
+            <p>
+              <m>R_1 = \set{(1,1),(1,2),(1,3),(1,4),(2,2),(2,4),(3,3),(4,4)}</m>
+            </p>
+            <p component="a">
+              <m>R_1</m> is reflexive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>R_2 = \set{(1,1),(1,2),(2,1)}</m>
+            </p>
+            <p component="a">
+              <m>R_2</m> is neither reflexive nor anti-reflexive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>R_3 = \set{(1,2),(1,3),(2,3),(2,4),(3,1),(3,4)}</m>
+            </p>
+            <p component="a">
+              <m>R_3</m> is anti-reflexive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>A=\Z^+</m>. Determine whether the following relations are reflexive, anti-reflexive, or neither.
+        <ol marker="a">
+          <li>
+            <p>
+              <m>xR_1 y</m> if and only if <m>x\leq y</m>
+            </p>
+            <p component="a">
+              Reflexive since for all <m>x\in \Z^+</m>, <m>x\leq x</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>xR_2 y</m> if and only if <m>x\lt y</m>
+            </p>
+            <p component="a">
+              Anti-reflexive since for all <m>x\in \Z^+</m>, <m>x\not\lt x</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>xR_3 y</m> if and only if <m>\gcd(x,y)=1</m>
+            </p>
+            <p component="a">
+              Neither since <m>\gcd(1,1)=1</m> so <m>1R_3 1</m> while <m>\gcd(2,2)=2</m> so <m>2\not R_3 2</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Symmetric and Anti-Symmetric</title>
+      <p>
+        A binary relation <m>R</m> on a set <m>A</m> is <term>symmetric</term> provided that for all <m>x,y\in A</m>, we have <m component="a">xRy</m><m component="b">\phantom{xRy}</m> if and only if <m component="a">yRx</m><m component="b">\phantom{yRx}</m>.
+      </p>
+      <p component="a">
+        A binary relation <m>R</m> on a set <m>A</m> is <term>anti-symmetric</term> provided that for all <m>x,y\in A</m>, if <m>xRy</m> and <m>yRx</m>, then <m>x=y</m>.
+      </p>
+      <p component="b">
+        A binary relation <m>R</m> on a set <m>A</m> is <term>anti-symmetric</term> provided that for all <m>x,y\in A</m>, 
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        Let <m>A=\set{1,2,3,4}</m>.
+        <ul>
+          <li>
+            <p>
+              <m>R_1 = \set{(1,1),(1,2),(1,3),(1,4),(2,2),(2,4),(3,3),(4,4)}</m>
+            </p>
+            <p component="a">
+              <m>R_1</m> is anti-symmetric
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>R_2 = \set{(1,1),(1,2),(2,1)}</m>
+            </p>
+            <p component="a">
+              <m>R_2</m> is symmetric
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>R_3 = \set{(1,2),(1,3),(2,3),(2,4),(3,1),(3,4)}</m>
+            </p>
+            <p component="a">
+              <m>R_3</m> is neither symmetric nor anti-symmetric
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title component="b">Activity</title>
+      <p>
+        Let <m>A=\Z^+</m>. Determine whether the following relations are symmetric, anti-symmetric, both, or neither.
+        <ol marker="a">
+          <li>
+            <p component="b">
+              <m>xR_1 y</m> if and only if <m>x= y</m>
+            </p>
+            <p component="a">
+              <m>xR_1 y</m> if and only if <m>x= y</m>: Symmetric and anti-symmetric.
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>xR_2 y</m> if and only if <m>x\lt y</m>
+            </p>
+            <p component="a">
+              <m>xR_2 y</m> if and only if <m>x\lt y</m>: Anti-symmetric only
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <m>xR_3 y</m> if and only if <m>\gcd(x,y)=1</m>
+            </p>
+            <p component="a">
+              <m>xR_3 y</m> if and only if <m>\gcd(x,y)=1</m>: Since <m>\gcd(x,y)=\gcd(y,x)</m>, <m>R_3</m> is symmetric but not antisymmetric since <m>\gcd(2,1)=1=\gcd(1,2)</m> while <m>1\neq 2</m>.
+            </p>
+
+          </li>
+        </ol>
+      </p>
+      <p component="b">
+        Let <m>A=\R</m> and define <m>xR_4 y</m> if and only if <m>xy^2\gt 0</m>.
+      </p>
+      <p component="a">
+        Let <m>A=\R</m> and define <m>xR_4 y</m> if and only if <m>xy^2\gt 0</m> is neither: <m>(2,-1)\in R_4</m> while <m>(2,-1)\not\in R_4</m> but <m>(1,2)\in R_4</m> and <m>(2,1)\in R_4</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Transitive</title>
+      <p component="a">
+        A binary relation <m>R</m> on a set <m>A</m> is <term>transitive</term> provided that for all <m>x,y,z\in A</m>, if <m>xRy</m> and <m>yRz</m>, then <m>xRz</m>.
+      </p>
+      <p component="b">
+        A binary relation <m>R</m> on a set <m>A</m> is <term>transitive</term> provided that 
+      </p>
+      <p component="a">
+        The relation <m>R=\set{(a,b)\mid a+b=4}</m> on <m>\Z^+</m> is not transitive.
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        Let <m>A=\set{1,2,3,4}</m>.
+        <ul>
+          <li>
+            <p>
+              <m>R_1 = \set{(1,1),(1,2),(1,3),(1,4),(2,2),(2,4),(3,3),(4,4)}</m>
+            </p>
+            <p component="a">
+              <m>R_1</m> is transitive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>R_2 = \set{(1,1),(1,2),(2,1)}</m>
+            </p>
+            <p component="a">
+              <m>R_2</m> is not transitive because <m>(2,1)\in R_2</m> and <m>(1,2)\in R_2</m> but <m>(2,2)\not\in R_2</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>R_3 = \set{(1,2),(1,3),(2,3),(2,4),(3,1),(3,4)}</m>
+            </p>
+            <p component="a">
+              <m>R_3</m> is not transitive because we have <m>(1,2)\in R_3</m> and <m>(2,4)\in R_3</m> but <m>(1,4)\not\in R_3</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>A=\Z^+</m>. Determine whether the following relations are reflexive, anti-reflexive, or neither.
+        <ol marker="a">
+          <li>
+            <p>
+              <m>xR_1 y</m> if and only if <m>x= y</m>
+            </p>
+            <p component="a">
+              Transitive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>xR_2 y</m> if and only if <m>x\lt y</m>
+            </p>
+            <p component="a">
+              Transitive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>xR_3 y</m> if and only if <m>ab=6</m>
+            </p>
+            <p component="a">
+              Not transitive since we have <m>2R_3 3</m> and <m>3R_3 2</m> but not <m>2R_32</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>    
+  </section>
+  <section xml:id="sec-digraphs">
+    <title>Directed Graphs, Paths, and Cycles</title>
+    <slide>
+      <title>Digraphs</title>
+      <p>
+        A <term>directed graph</term> or <term>digraph</term> is a pair <m>(V,E)</m> where <m>V</m> is a set called the set of <term>vertices</term> and <m component="a">E\subseteq V\times V</m><m component="b">\phantom{E\subseteq V\times V}</m> is called the set of <term>edges</term>. We call <m>v\in V</m> a <term>vertex</term> and <m>(u,v)\in E</m> an <term>edge</term>. We say that <m>u</m> is the <term>tail</term> of <m>(u,v)</m> while <m>v</m> is the head.
+      </p>
+      <p>
+        For <m>u\in V</m>, we define
+        <md>
+          <mrow component="a">\ind(u) \amp= |\set{v\mid (v,u)\in E}|</mrow>
+          <mrow component="b">\ind(u) \amp =\phantom{|\set{v\mid (v,u)\in E}|}</mrow>
+          <mrow component="a">\outd(u) \amp= |\set{v\mid (u,v)\in E}|</mrow>
+          <mrow component="b">\outd(u) \amp =\phantom{|\set{v\mid (u,v)\in E}|}</mrow>          
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Consider <m>G=(V,E)</m> with <m>V=\set{1,2,3,4}</m> and <m>E = \set{(1,1),(1,2),(1,3),(1,4),(2,2),(2,4),(3,3),(4,4)}</m>.
+      </p>
+      <sidebyside widths="40% 60%" component="a">
+        <image component="a" label="digraph1">
+          <latex-image>
+            \begin{tikzpicture}[scale=3]
+                \SetGraphUnit{2}
+                \renewcommand*{\VertexLineColor}{white}
+                \renewcommand*{\VertexLightFillColor}{blue}
+                \renewcommand*{\VertexLineWidth}{1pt}
+                \GraphInit[vstyle=Welsh]
+                \Vertices{circle}{1,2,3,4}
+                %\AddVertexColor{blue}{5,1}
+                \SetUpEdge[style={->,very thick},color=black]
+                \Loop[dist=1cm,dir=EA](1)
+                \Edge(1)(2)
+                \Edge(1)(3)
+                \Edge(1)(4)
+                \Loop[dist=1cm,dir=NO](2)
+                \Edge(2)(4)
+                \Loop[dist=1cm,dir=WE](3)
+                \Loop[dist=1cm,dir=SO](4) 
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        <p>
+          <md>
+            <mrow> \ind(1) \amp = 1 </mrow>
+            <mrow> \ind(2) \amp = 2</mrow>
+            <mrow> \ind(3) \amp = 2</mrow>
+            <mrow> \outd(3) \amp = 1</mrow>
+            
+          </md>
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <!-- <title>Moving Around Digraphs</title> -->
+      <sidebyside widths="40% 60%">
+        <image label="digraph2">
+          <latex-image>
+            \begin{tikzpicture}[scale=3]
+                \SetGraphUnit{2}
+                \renewcommand*{\VertexLineColor}{white}
+                \renewcommand*{\VertexLightFillColor}{blue}
+                \renewcommand*{\VertexLineWidth}{1pt}
+                \GraphInit[vstyle=Welsh]
+                \Vertices{circle}{1,2,3,4}
+                %\AddVertexColor{blue}{5,1}
+                \SetUpEdge[style={->,very thick},color=black]
+                \Loop[dist=1cm,dir=EA](1)
+                \Edge(1)(2)
+                \Edge(1)(3)
+                \Edge(1)(4)
+                \Loop[dist=1cm,dir=NO](2)
+                \Edge(2)(4)
+                \Loop[dist=1cm,dir=WE](3)
+                \Loop[dist=1cm,dir=SO](4) 
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A <term>walk</term> is a sequence of vertices <m>\langle v_0,v_1,\dots,v_k\rangle</m> so that <m>(v_{i-1},v_i)\in E</m> for all <m>1\leq i\leq k</m>. The <term>length</term> of a walk is the number of edges.
+              </p>
+            </li>
+            <li>
+              <p>
+                A walk <m>\langle v_0,\dots,v_k\rangle </m> is <term>open</term> if <m>v_0\neq v_k</m>. Otherwise, it is <term>closed</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                A <term>trail</term> is a walk with no repeated edges.
+              </p>
+            </li>
+            <li>
+              <p>
+                A <term>path</term> is a walk with no repeated vertices.
+              </p>
+            </li>
+            <li>
+              <p>
+                A <term>circuit</term> is a closed trail.
+              </p>
+            </li>
+            <li>
+              <p>
+                A <term>cycle</term> is a closed circuit of length at least 1 with no repeated vertices (other than the first/last).
+              </p>
+            </li>
+          </ul>
+        </p>
+      </sidebyside>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-partial-orders">
+    <title>Partial Orders</title>
+    <slide>
+      <title>Posets</title>
+      <definition xml:id="def-poset">
+        <statement>
+          <p>
+            A binary relation <m>R</m> on a set <m>A</m> is called a partial order provided that <m>R</m> is
+            <ul>
+              <li>
+                <p component="a">
+                  reflexive
+                </p>
+                <p component="b">
+                  <nbsp/>
+                </p>
+              </li>
+              <li>
+                <p component="a">
+                  anti-symmetric
+                </p>
+                <p component="b">
+                  <nbsp/>
+                </p>
+              </li>
+              <li>
+                <p component="a">
+                  transitive
+                </p>
+                <p component="b">
+                  <nbsp/>
+                </p>
+              </li>
+            </ul>
+            If <m>aRb</m>, we write <m component="a">a\preceq b</m><m component="b">\phantom{a\preceq b}</m> and say <q><m>a</m> is at most <m>b</m></q>. A set <m>A</m> equipped with a partial order <m>\preceq</m> is called a <term>partially ordered set</term> or <term>poset</term>, denoted <m>(A,\preceq)</m>.
+          </p>
+        </statement>
+      </definition>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              The relation <m>\leq</m> on <m>\R</m> is a partial order.
+              <dl>
+                <li>
+                  <title>Reflexive</title>
+                  <p component="a">
+                    For all <m>x</m>, <m>x=x</m>, so <m>x\leq x</m>.
+                  </p>
+                  <p component="b"><nbsp/></p>
+                </li>
+                <li>
+                  <title>Anti-symmetric</title>
+                  <p component="a">
+                    For all <m>x,y</m>, if <m>x\leq y</m> and <m>y\leq x</m>, then <m>x=y</m>.
+                  </p>
+                  <p component="b"><nbsp/></p>
+                </li>
+                <li>
+                  <title>Transitive</title>
+                  <p component="a">
+                    For all <m>x,y,z</m>, if <m>x\leq y</m> and <m>y\leq z</m>, then <m>x\leq z</m>.
+                  </p>
+                  <p component="b"><nbsp/></p>
+                </li>
+              </dl>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              The relation <m>R=\set{(a,b)\colon a\mid b}</m> on <m>\Z^+</m> is a partial order.
+              <dl>
+                <li>
+                  <title>Reflexive</title>
+                  <p component="a">
+                    For all <m>x</m>, <m>x\mid x</m>.
+                  </p>
+                  <p component="b"><nbsp/></p>
+                </li>
+                <li>
+                  <title>Anti-symmetric</title>
+                  <p component="a">
+                    For all <m>x,y</m>, if <m>x\mid  y</m> and <m>y\mid x</m>, then <m>y=kx</m> and <m>x=jy</m> for some <m>k,j\in\Z^+</m>. Hence <m>x=jkx</m>, which requires <m>jk=1</m> and thus <m>k=j=1</m>. Thus, <m>x=y</m>.
+                  </p>
+                  <p component="b"><nbsp/></p>
+                </li>
+                <li>
+                  <title>Transitive</title>
+                  <p component="a">
+                    For all <m>x,y,z</m>, if <m>x\mid y</m> and <m>y\mid z</m>, then <m>y=kx</m> and <m>z=jy</m> for some <m>k,j\in\Z^+</m>. Hence, <m>z=jkx</m>, so <m>x\mid z</m>.
+                  </p>
+                  <p component="b"><nbsp/></p>
+                </li>
+              </dl>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>S</m> be a set and <m>P(S)</m> its power set. Show that <m>(P(S),\subseteq)</m> is a poset.
+        <dl component="a">
+          <li>
+            <title>Reflexive</title>
+            <p component="a">
+              For all <m>X</m>, <m>X\subseteq X</m>.
+            </p>
+            
+          </li>
+          <li>
+            <title>Anti-symmetric</title>
+            <p component="a">
+              For all <m>X,Y</m>, if <m>X\subseteq Y</m> and <m>Y\subseteq X</m>, then <m>X=Y</m>.
+            </p>
+            
+          </li>
+          <li>
+            <title>Transitive</title>
+            <p component="a">
+              For all <m>X,Y,Z</m>, if <m>X\subseteq Y</m> and <m>Y\subseteq Z</m>, then <m>x\in X</m> implies <m>x\in Y</m>, which implies <m>x\in Z</m>. Hence, <m>X\subseteq Z</m>.
+            </p>
+            
+          </li>
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Comparability</title>
+      <p>
+        If <m>(A,\preceq)</m> is a poset, we say <m>a,b\in A</m> are <term>comparable</term> provided that <m>a\preceq b</m> or <m>b\preceq a</m>. Otherwise, we say they are <term>incomparable</term>.
+      </p>
+      <p>
+        If <m>(A,\preceq)</m> is a poset and every pair of elements <m>a,b\in A</m> are comparable, then we call <m>(A,\preceq)</m> a <term>totally ordered set</term> and <m>\preceq</m> a <term>total order</term> or <term>linear order</term>.
+      </p>
+      <p component="a">
+        <m>(\R,\leq)</m> is a totally ordered set.
+      </p>
+    </slide>
+    <slide>
+      <title>Order Diagrams</title>
+      <p>
+        Consider the divides relation on the set <m>A=\set{1,2,3,5,6,10,15,30}</m>.
+      </p>
+      <p component="a">
+        Draw the order diagram, talk about comparable and incomparable and how to see this in the diagram. Note that <m>(A,\mid)</m> is not totally ordered.
+      </p>
+    </slide>
+    
+
+  </section>
+  <section xml:id="sec-strict-orders">
+    <title>Strict Orders and Directed Acyclic Graphs</title>
+    <slide>
+      <!-- <title>Strict Orders</title> -->
+      <p>
+        A binary relation <m>R</m> on a set <m>A</m> is a <term>strict order</term> provided that it is
+        <ul>
+          <li>
+            <p component="a">
+              irreflexive and 
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              transitive
+            </p>
+          </li>
+        </ul>
+        If <m>aRb</m>, we write <m>a\prec b</m> and say <q><m>a</m> is less than <m>b</m></q>.
+      </p>
+      <theorem>
+        <statement>
+          <p>
+            If <m>\prec</m> is a strict order on a set <m>A</m>, then <m>\prec</m> is antisymmetric.
+          </p>
+        </statement>
+      </theorem>
+      <p component="a">
+        Let <m>x,y\in A</m> and suppose <m>x\prec y</m> and <m>y\prec x</m>. Since <m>\prec</m> is irreflexive, this requires that <m>x\neq y</m>. Since <m>\prec</m> is transitive, we have <m>x\prec x</m>. This contradicts that <m>\prec</m> is irreflexive. Therefore, there cannot exist distinct <m>x,y\in A</m> so that <m>x\prec y</m> and <m>y\prec x</m> both hold. Therefore, <m>\prec</m> is vacuously antisymmetric.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        <m>\lt</m> is a strict order on <m>\Z</m>
+      </p>
+    
+    </slide>
+    <slide>
+      <title>Fact</title>
+      <p>
+        Strict orders are not meaningfully different from partial orders.
+      </p>
+      <p component="a">
+        Remove all the reflexive relations from a partial order and you get a strict order. Add all the reflexive relations to a strict order and you get a partial order. Yawn.
+      </p>
+    </slide>
+    <slide>
+      <title>Directed Acyclic Graphs</title>
+      <p>
+        A digraph with no cycles is called a <term>directed acyclic graph</term> or <term>DAG</term>.
+      </p>
+      <p component="a">
+        <em>Observation</em>: The order diagram of a poset is a DAG.
+      </p>
+    </slide>
+    <slide>
+      <title>Topological Sorts/Linear Extensions</title>
+      <p>
+        A <term>topological sort</term> or <term>topological ordering</term> of a directed acyclic graph <m>G=(V,E)</m> is a listing of the vertices so that if <m>(u,v)\in E</m>, then <m>u</m> comes before <m>v</m> in the list.
+      </p>
+      <p>
+        A <term>linear extension</term> of a partial order <m>\preceq</m> on a set <m>A</m> is a total ordering on <m>A</m> so that if <m>u\preceq v</m> (with <m>u\neq v</m>), then <m>u</m> appears below <m>v</m> in the total ordering.
+      </p>
+      <p component="a">
+        <em>Observation</em>: Since DAGs and strict orders and partial orders are all really equivalent, a topological sort is a linear extension and vice versa.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p component="a">
+        Draw the divisibility order for <m>\set{1,2,3,5,6,10,15,30}</m> again and give an example and a non-example of a linear extension of the partial order. Ask them to come up with two more linear extensions. How many might there be altogether?
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-eq-relns">
+    <title>Equivalence Relations</title>
+    <slide>
+      <title>Equivalence Relations</title>
+      <p>
+        A binary relation <m>R</m> on a set <m>A</m> is an <term>equivalence relation</term> provided that <m>R</m> is
+        <ul>
+          <li>
+            <p component="a">
+              reflexive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              symmetric
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              transitive
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ul>
+        If <m>aRb</m>, we write <m component="a">a\sim b</m><m component="b">\phantom{a\sim b}</m> and say <q><m>a</m> is equivalent to <m>b</m></q>. 
+      </p>
+      <p component="a">
+        Equality on any set is an equivalence relation. Yawn.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        The relation <m>R = \set{(a,b)\mid a\equiv b\pmod{3}}</m> is an equivalence relation on <m>\Z^+</m>.
+        <dl component="a">
+          <li>
+            <title>Reflexive</title>
+            <p component="a">
+              For all <m>x</m>, <m>3\mid (x-x)</m>, so <m>x\equiv x\pmod{3}</m>.
+            </p>
+            
+          </li>
+          <li>
+            <title>Symmetric</title>
+            <p component="a">
+              For all <m>x,y</m>, if <m>x\equiv y\pmod{3}</m>, then <m>3\mid (y-x)</m>. Hence, there is <m>k\in\Z</m> so that <m>y-x=3k</m>. Then <m>x-y=3(-k)</m>, so <m>3\mid x-y</m> and <m>y\equiv x\pmod{3}</m>.
+            </p>
+            
+          </li>
+          <li>
+            <title>Transitive</title>
+            <p component="a">
+              For all <m>x,y,z</m>, if <m>x\equiv y\pmod{3}</m> and <m>y\equiv z\pmod{3}</m>, then <m>3\mid (y-x)</m> and <m>3\mid (z-y)</m>. Notice that <m>z-x = (z-y)+(y-x)</m>. Since <m>3</m> divides both summands on the right-hand side, <m>3\mid (z-y)</m>. Thus, <m>y\equiv z\pmod{3}</m>.
+            </p>
+            
+          </li>
+        </dl>        
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        The relation <m>R = \set{(a,b)\mid a-b\in Z}</m> is an equivalence relation on <m>\R</m>.
+        <dl component="a">
+          <li>
+            <title>Reflexive</title>
+            <p component="a">
+              For all <m>x</m>, <m>x-x=0\in \Z</m>, so <m>(x,x)\in R</m>.
+            </p>
+            
+          </li>
+          <li>
+            <title>Symmetric</title>
+            <p component="a">
+              For all <m>x,y</m>, if <m>(x,y)\in R</m>, then <m>x-y\in \Z</m>. Hence <m>y-x=-(x-y)\in \Z</m> as well, so <m>(y,x)\in R</m>.
+            </p>
+            
+          </li>
+          <li>
+            <title>Transitive</title>
+            <p component="a">
+              For all <m>x,y,z</m>, if <m>(x,y)\in R</m> and <m>(y,z)\in R</m>, then <m>x-y\in\Z</m> and <m>y-z\in\Z</m>. Then <m>x-z = (x-y)+(y-z)</m> is the sum of integers and thus an integer. Therefore, <m>(x,z)\in R</m>.
+            </p>
+            
+          </li>
+        </dl>        
+      </p>      
+    </slide>
+    <slide>
+      <title>Equivalence Classes</title>
+      <p>
+        Given an equivalence relation <m>R</m> on a set <m>A</m>, the <term>equivalence class</term> of <m>a\in A</m>, denoted by <m>[a]_R</m> or just <m>[a]</m> is the set of all <m>b\in A</m> that are equivalent to <m>a</m>. That is,
+        <me component="a">
+          [a]_R = \set{b\in A\mid a\sim b}
+        </me>
+        <me component="b">
+          [a]_R = \phantom{\set{b\in A\mid a\sim b}}
+        </me>
+        If <m>b\in [a]_R</m>, we say that <m>b</m> is a <term>representative</term> of <m>[a]_R</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        The equivalence relation <m>R=\set{(a,b)\mid a= \pm b} </m> on <m>\Z</m> has equivalence classes
+        <me component="a">
+          [a] = \set{a,-a}, \quad a\neq 0\qquad\qquad [0]=\set{0}
+        </me>
+        <me component="a">
+          [5] = \set{5,-5}
+        </me>
+        
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Find the equivalence classes for the relation <m>R = \set{(a,b)\mid a\equiv b\pmod{3}}</m> on <m>A = \set{0,1,2,3,4,5,6,7,8}</m>.
+        <md component="a">
+          <mrow>[0] \amp = \set{0,3,6} = [3] = [6]</mrow>
+          <mrow>[1] \amp = \set{1,4,7} = [4] = [7]</mrow>
+          <mrow>[2] \amp = \set{2,5,8} = [5] = [8]</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Equivalence Relations and Partitions</title>
+      <theorem xml:id="thm-eqn-part">
+        <statement>
+          <p>
+            Let <m>R</m> be an equivalence relation on a set <m>A</m>. The following are equivalent:
+            <ol marker="1">
+              <li>
+                <p>
+                  <m>aRb</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <m>[a]=[b]</m>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <m>[a]\cap [b]\neq \empset</m>
+                </p>
+              </li>
+            </ol>
+          </p>
+          <p>
+            In other words, the equivlance classes of <m>R</m> form a partition of <m>A</m>.
+          </p>
+        </statement>
+      </theorem>
+      <p component="a">
+        <m>\set{0,1,\dots,8} = \set{0,3,6}\cup \set{1,4,7}\cup \set{2,5,8} = [0]\cup [1]\cup [2]</m>. Also true that any partition can be used to define an equivalence relation.
+      </p>
+    </slide>
+    
+  </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

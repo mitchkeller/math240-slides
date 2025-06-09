@@ -1,0 +1,1295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usetikzlibrary{backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+  <section xml:id="sec-definitions">
+    <title>Sets</title>
+    <slide>
+      <title>Sets and Subsets</title>
+      <p>
+        A <term>set</term> is a <term>well-defined</term> collection of elements from some domain. It is well-defined if given an element <m>x</m> from the domain, we can say for sure whether or not <m>x</m> is in the set.
+      </p>
+      <p>
+        Let <m>A</m> be a set. We write <m component="a">x\in A</m><m component="b"><fillin characters="4" /></m> when <m>x</m> is an element of <m>A</m> and <m component="a">x\not\in A</m><m component="b"><fillin characters="4" /></m> when <m>x</m> is not an element of <m>A</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              The set of states Dr Keller has lived in for at least a year is
+            </p>
+            <p component="a">
+              <m>S = \{\text{ND}, \text{GA}, \text{NE}, \text{VA}, \text{IA}, \text{WI}\}</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              The set of prime numbers smaller than <m>10</m> is
+            </p>
+            <p component="a">
+              <m>P=\{2,3,5,7\}</m>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For each set below, determine if it is equal to <m>P=\{2,3,5,7\}</m>.
+        <ol marker="a">
+          <li xml:id="reorder">
+            <p>
+              <m>\{7,3,2,5\}</m><m component="a">=\{2,3,5,7\}=P</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\{2,2,4,3,5,7\}</m><m component="a">=\{2,3,4,5,7\}\neq P</m>
+            </p>
+            <p component="a">
+              Since <m>4\not\in P</m>.
+            </p>
+          </li>
+          <li xml:id="extras">
+            <p>
+              <m>\{2,2,7,5,3,3,3\}</m><m component="a">=\{2,3,5,7\}=P</m>
+            </p>
+          </li>                    
+        </ol>
+      </p>
+      <p component="a">
+        a and c are equivalent since sets do not care about the order of elements or duplicates.
+      </p>
+    </slide>
+    <slide>
+      <title>Set Builder Notation</title>
+      <p>
+        To write <q>the set of all elements of <m>A</m> so that <m>P(x)</m> holds</q>, we use the notation 
+        <me component="a">
+          \{x\in A\mid P(x)\}
+        </me>        
+      </p>
+      <p component="a">
+        Example: <m>\{x\in P \mid x\leq 5\} = </m><m component="a">\{2,3,5\}</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Common Sets</title>
+      <sidebyside widths="42% 42% 16%">
+        <p>
+          <dl>
+            <li>
+              <title>Natural Numbers</title>
+              <p>
+                <m>\mathbb{N}=</m><m component="a">\{0,1,2,3,\dots\}</m>
+              </p>
+            </li>
+            <li>
+              <title>Integers</title>
+              <p>
+                <m>\mathbb{Z}=</m><m component="a">\{\dots,-2,-1,0,1,2,\dots\}</m>
+              </p>
+            </li>
+            <li>
+              <title>Rational Numbers</title>
+              <p>
+                <m>\mathbb{Q}=</m><m component="a">\left\{\frac{a}{b}\mid a,b\in\mathbb{Z}, b\neq 0\right\}</m>
+              </p>
+            </li> 
+          </dl>
+        </p>
+        <p>
+          <dl>
+            <li>
+              <title>Real Numbers</title>
+              <p>
+                <m>\mathbb{R}</m>
+              </p>
+            </li> 
+            <li>
+              <title>Irrational Numbers</title>
+              <p>
+                <m>\mathbb{P}=</m><m component="a">\{r\in\mathbb{R}\mid r\not\in \mathbb{Q}\}</m>
+              </p>
+            </li> 
+            <li>
+              <title>Complex Numbers</title>
+              <p>
+                <m>\mathbb{C}</m>
+              </p>
+            </li> 
+          </dl>
+        </p>
+        <p>
+          <dl>            
+            <li>
+              <title>Empty Set</title>
+              <p component="a">
+                <m>\emptyset</m> or <m>\empset</m>
+              </p>
+              <p component="b">
+                
+              </p>
+            </li>           
+          </dl>
+        </p>
+      </sidebyside>      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="a">
+          <li>
+            <p>
+              Write <m>P=\{2,3,5,7\}</m> in the form <m>\{x\in\Z\mid \dots\}</m>.
+            </p>
+            <p>
+              <m component="a">P=\{x\in\Z\mid x\lt 10\text{ and }x\text{ is prime}\}</m> <nbsp component="b"/>
+            </p>
+          </li>
+          <li>
+            <p>
+              Write <m>\N</m> in the form <m>\{x\in\Z\mid \dots\}</m>.
+            </p>
+            <p>
+              <m component="a">N=\{x\in\Z\mid x\geq 0\}</m> <nbsp component="b"/>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Cardinality</title>
+      <p>
+        The <term>cardinality</term> of a finite set <m>A</m>, denoted by <m component="a">|A|</m> <m component="b"><fillin characters="3" /></m> or <m component="a">\#A</m> <m component="b"><fillin characters="3" /></m> is the number of (distinct) elements in the set.
+      </p>
+      <p>
+        <ul>
+          <li>
+            <p>
+              If <m>P=\{2,3,5,7\}</m>, then <m component="a">|P|= 4</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S</m> is the set of U.S. states, then <m component="a">|S|=50</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="a">
+          <li>
+            <p>
+              What is <m>|\empset|</m>? <m component="a">0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              What is <m>|\{\{1,2\}\}|</m>? <m component="a">1</m>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Subsets</title>
+      <p>
+        A set <m>A</m> is a <term>subset</term> of a set <m>B</m>, written <m component="a">A\subseteq B</m><m component="b"><fillin characters="3" /></m>, if every element of <m>A</m> is also an element of <m>B</m>. We also say that <m>B</m> is a <term>superset</term> of <m>A</m>, <m component="a">B\supseteq A</m>
+      </p>
+      <p>
+        <ul>
+          <li>
+            <p>
+              <m>\{2,3,5,7\}\subseteq \{1,2,\dots,10\}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\Q\subseteq \R</m>
+            </p>
+          </li> 
+          <li>
+            <p>
+              <m>\Q\subseteq \Q</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\R\not\subseteq\Q</m>
+            </p>
+          </li>         
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <ol marker="1">
+          <li>
+            <p>
+              Write <m>A\subseteq B</m> using predicates.
+            </p>
+            <p >
+              <m component="a">(A\subseteq B) \equiv \forall x ((x\in A)\rightarrow (x\in B)) </m><nbsp component="b"/>
+            </p>
+          </li>
+          <li>
+            <p>
+              Let <m>E</m> be the set of even integers and <m>O</m> the set of odd integers. 
+            </p>
+            <p>
+              <ol marker="a">
+                <li>
+                  <p>
+                    Is <m>E\subseteq O</m>?
+                  </p>
+                  <p component="a">
+                    No: <m>2\in E</m> but <m>2\not\in O</m>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Is <m>O\subseteq E</m>?
+                  </p>
+                  <p component="a">
+                    No: <m>3\in O</m> but <m>3\not\in E</m>
+                  </p>                  
+                </li>                
+              </ol>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Equality of Sets, Proper Subsets</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              For two sets <m>A</m> and <m>B</m>, 
+              <me component="a">
+                A = B\leftrightarrow A\subseteq B\text{ and }B\subseteq A
+              </me>
+              <me component="b">
+                
+              </me>
+              
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>A\subseteq B</m> and <m>A\neq B</m>, then <m>\exists x\in B</m> so that <m>x\not\in A</m>. We then say that <m>A</m> is a <term>proper subset</term> of <m>B</m> and denote it by <m component="a">A\subset B</m><m component="b"><fillin characters="3" /></m> or <m component="a">A\subsetneq B</m><m component="b"><fillin characters="3" /></m>.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        <m>\Q\subsetneq \R</m> since <m component="a">\sqrt{2}\in\R\text{ but }\sqrt{2}\not\in\Q</m>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-sets-of-sets">
+    <title>Sets of Sets</title>
+    <slide>
+      <title>Power Set</title>
+      <p>
+        Sets can contain sets, as we have already seen with <m>\{\{1,2\}\}</m>. We can think of sets as boxes where we are allowed to put a box inside another box (inside another box).
+      </p>
+      <p>
+        The <term>power set</term> <m>P(A)</m> of a set <m>A</m> is the set of all subsets of <m>A</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>A =\{2,3,5,7\}</m>. 
+        <md component = "a">
+          <mrow>
+          P(A) = \{\amp \empset,</mrow>
+          <mrow>\amp \{2\},\{3\},\{5\},\{7\},</mrow>
+          <mrow>\amp \{2,3\},\{2,5\},\{2,7\},\{3,5\},\{3,7\},\{5,7\},</mrow>
+          <mrow>\amp\{2,3,5\},\{2,3,7\},\{2,5,7\},\{3,5,7\},</mrow>
+          <mrow>\amp\{2,3,5,7\}\}</mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Find <m>P(A)</m> where <m>A=\{0,1\}</m>.
+      </p>
+      <p component="a">
+        <me>
+          P(A) = \{ \empset,\{0\},\{1\},\{0,1\}\}
+        </me>
+        
+      </p>
+    </slide>
+    <slide>
+      <title>Cardinality of Power Set</title>
+      <theorem xml:id="thm-power-set-card">
+        <statement>
+          <p>
+            For a finite set <m>A</m> with <m>|A| = k</m>, we have <m>|P(A)| = 2^k</m>.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            To construct a subset <m>D</m> of <m>A</m>, for each element <m>x</m> of <m>A</m>, we decide if <m>x\in D</m> or <m>x\not\in D</m>. There are two choices for each element and so <m>2^k</m> ways to construct <m>D</m>.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    
+  </section>
+  <section xml:id="sec-union-intersection">
+    <title>Union and Intersection</title>
+    <slide>
+      <title>Union</title>
+      <p>
+        Suppose <m>A</m> and <m>B</m> are two sets of elements from some domain <m>D</m>. The <term>union</term> of <m>A</m> and <m>B</m> is the set
+        <me component="a">
+          A\cup B = \{x\in D\mid x\in A\lor x\in B\}
+        </me>
+      </p>
+      <image width="75%" label="venn-union" component="a">
+        <shortdescription>
+          A Venn diagram of two overlapping circles
+        </shortdescription>
+        <description>
+          <p>
+            A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Every point inside either circle is shaded.
+          </p>
+        </description>
+        <latex-image>
+          \begin{tikzpicture}
+            \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+            \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+            \def\thirdcircle{(270:2.75cm) circle (2.5cm)}
+            \fill[blue, fill opacity=0.5] \secondcircle;
+
+            \begin{scope}
+              \clip \thirdcircle;
+              \fill[white] \secondcircle;
+            \end{scope}
+            \fill[blue, fill opacity=0.5] \thirdcircle;
+            \fill[orange, fill opacity=0.5] \firstcircle;
+            \node (A) at (-2,2) {\Large{$A$}};
+            \node (B) at (2,2) {\Large{$B$}};
+            \node (B) at (-2,-5) {\Large{$C$}};
+            \draw \firstcircle;
+            \draw \secondcircle;
+            \draw \thirdcircle;
+        \end{tikzpicture}
+        </latex-image>
+      </image>
+
+    </slide>
+    <slide>
+      <title>Intersection</title>
+      <p>
+        Suppose <m>A</m> and <m>B</m> are two sets of elements from some domain <m>D</m>. The <term>intersection</term> of <m>A</m> and <m>B</m> is the set
+        <me component="a">
+          A\cap B = \{x\in D\mid x\in A\land x\in B\}
+        </me>
+      </p>
+      <image width="75%" label="venn-intersection" component="a">
+        <shortdescription>
+          A Venn diagram of two overlapping circles
+        </shortdescription>
+        <description>
+          <p>
+            A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points inside both circles are shaded.
+          </p>
+        </description>
+        <latex-image>
+          \begin{tikzpicture}
+
+          \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+          \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+
+          \begin{scope}
+            \clip \firstcircle;
+            \fill[blue, fill opacity=0.5] \secondcircle;
+          \end{scope}
+
+          \node (A) at (-2,2) {\Large{$A$}};
+          \node (B) at (2,2) {\Large{$B$}};
+          \draw \secondcircle;
+          \draw \firstcircle;
+          \draw[draw=black] (-4.5,-4) rectangle (4.5,3);
+
+        \end{tikzpicture}
+        </latex-image>
+      </image>
+
+    </slide>    
+    <slide>
+      <title>Example</title>
+      <p>
+        If <m>A=\{0,1,2,3\}</m> and <m>B=\{3,6,9\}</m>:
+        <md>
+          <mrow component="a">A\cup B \amp=\{0,1,2,3,6,9\} </mrow>
+          <mrow component="a">A\cap B \amp=\{3\} </mrow>
+          <mrow component="b">A\cup B \amp=\phantom{\{0,1,2,3,6,9\}}</mrow>
+          <mrow component="b">A\cap B \amp=\phantom{\{3\}} </mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For sets <m>A</m> and <m>B</m> with <m>A\subseteq B</m>, what are the following?
+        <ol marker="a">
+          <li>
+            <p>
+              <m>A\cup \empset</m><m component="a">=A</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>A\cap \empset</m><m component="a">=\empset</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>A\cup B</m><m component="a">=B</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>A\cap B</m><m component="a">=A</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Disjoint Sets</title>
+      <p>
+        We say that two sets <m>A</m> and <m>B</m> are <term>disjoint</term> provided that <m component="a">A\cap B = \empset</m>
+      </p>
+      <p component="a">
+        The set <m>E</m> of even integers and the set <m>O</m> of odd integers are disjoint because <m>E\cap O=\empset</m>.
+      </p>
+    </slide>
+    
+  </section>
+  <section>
+    <title>Power Set Practice</title>
+    <slide>
+      <p>
+        Let <m>A</m> and <m>S</m> be sets. Determine whether each of the following sentences is true or false. 
+        <!-- When in doubt, you may find it helpful to think about boxes or the power set of the set <m>\{1,2,\{1,2\}\}</m>. -->
+        <ol>
+          <li>
+            <p>
+              If <m>S\in{P}(A)</m>, then <m>S\in A</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S\in A</m>, then <m>S\subseteq {P}(A)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S\in{P}(A)</m>, then <m>S\subseteq A</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S\subseteq{P}(A)</m>, then <m>S</m> is a subset of <m>A</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S\subseteq{P}(A)</m>, then <m>S</m> is a set of subsets of <m>A</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S\subseteq{P}(A)</m>, then every element of <m>S</m> is an element of <m>A</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>S\subseteq{P}(A)</m>, then every element of <m>S</m> is a subset of <m>A</m>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Let <m>A</m> be a set.
+        Determine whether each of the following statements is true or false.
+        <ol>
+          <li>
+            <p>
+              If <m>x\in A</m>, then <m>x\subseteq {P}(A)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>x\subseteq A</m>, then <m>\set{\empset,x}\in{P}(A)</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              If <m>x\subseteq A</m>, then <m>\set{\empset,x}\subseteq{P}(A)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>x\in A</m>, then <m>\set{\empset,\set{x}}\in{P}(A)</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>x\in A</m>, then <m>\set{\empset,\set{x}}\subseteq{P}(A)</m>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <!-- Slide 28 Above -->
+  </section>
+  <section xml:id="sec-more-set-ops">
+    <title>More Set Operations</title>
+    <slide>
+      <title>Warmup Activity</title>
+      <p>
+        Let <m>A=\set{0,1}</m> and <m>B=\set{1,2}</m>. Find
+        <ol marker="a">
+          <li>
+            <p>
+              <m>A\cup B</m><m component="a">\set{0,1,2}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>P(A\cap B)</m><m component="a">P(\set{1})=\set{\empset,\set{1}}</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    
+    <slide>
+      <title>Set Difference</title>
+      <p>
+        Given two sets from a domain <m>D</m>, their <term>difference</term> is
+      </p>
+      <sbsgroup widths="48% 48%" component="a">
+        <sidebyside>
+          <p>
+            <me>
+              A-B=\set{x\in D\mid x\in A\land x\not\in B}
+            </me>
+          </p>
+          <p>
+            <me>
+              B-A=\set{x\in D\mid x\in B\land x\not\in A}
+            </me>
+          </p>          
+        </sidebyside>
+        <sidebyside>
+          <image width="75%" label="venn-A-B" component="a">
+            <shortdescription>
+              A Venn diagram of two overlapping circles
+            </shortdescription>
+            <description>
+              <p>
+                A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points inside the circle for <m>A</m> and <em>not</em> inside the circle for <m>B</m> are shaded.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+
+              \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+              \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+
+              \begin{scope}
+                \fill[blue, fill opacity=0.5] \firstcircle;
+                \fill[white] \secondcircle;
+              \end{scope}
+
+              \node (A) at (-2,2) {\Large{$A$}};
+              \node (B) at (2,2) {\Large{$B$}};
+              \draw \secondcircle;
+              \draw \firstcircle;
+              \draw[draw=black] (-4.5,-4) rectangle (4.5,3);
+              \node (diff) at (-2.5,-0.5) {\Large{$A-B$}};
+
+            \end{tikzpicture}
+            </latex-image>
+          </image>
+          <image width="75%" label="venn-B-A" component="a">
+            <shortdescription>
+              A Venn diagram of two overlapping circles
+            </shortdescription>
+            <description>
+              <p>
+                A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points inside the circle for <m>A</m> and <em>not</em> inside the circle for <m>B</m> are shaded.
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+
+              \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+              \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+
+              \begin{scope}
+                \fill[blue, fill opacity=0.5] \secondcircle;
+                \fill[white] \firstcircle;
+              \end{scope}
+
+              \node (A) at (-2,2) {\Large{$A$}};
+              \node (B) at (2,2) {\Large{$B$}};
+              \draw \secondcircle;
+              \draw \firstcircle;
+              \draw[draw=black] (-4.5,-4) rectangle (4.5,3);
+              \node (diff) at (2.5,-0.5) {\Large{$B-A$}};
+
+            \end{tikzpicture}
+            </latex-image>
+          </image>          
+        </sidebyside>
+      </sbsgroup>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>A=\set{0,1}</m> and <m>B=\set{1,2}</m>. Then
+        <md>
+          <mrow component="a">A-B \amp =\set{0} \amp B-A\amp=\set{2} </mrow>
+          <mrow component="b">A-B \amp =\phantom{\set{0}} \amp B-A\amp=\phantom{\set{2}} </mrow>
+        </md>
+        Also, <m>\Z-\N</m><m component="a">=\set{\dots,-3,-2,-1}=\set{x\in\Z\mid x\lt 0}</m>
+      </p>
+      <p component="a">
+        Note that some texts write <m>A\setminus B</m> for <m>A-B</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Let <m>A=\set{1,2}</m> and <m>B=C=\set{1}</m>. Find the following:
+        <ol marker="a">
+          <li>
+            <p>
+              <m component="b">A-(B-C)=\phantom{A-(\empset)=A=\set{1,2}}</m>
+              <m component="a">A-(B-C)=A-(\empset)=A=\set{1,2}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="b">(A-B)-C=\phantom{(\set{2})-\set{1}=\set{2}}</m>
+              <m component="a">(A-B)-C=(\set{2})-\set{1}=\set{2}</m>
+            </p>
+          </li>          
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Symmetric Difference</title>
+      <p>
+        Let <m>A</m> and <m>B</m> be sets of elements from a domain <m>D</m>. The <term>symmetric difference</term> of <m>A</m> and <m>B</m> is defined to be
+        <md>
+          <mrow component="a">A\oplus B \amp= (A-B)\cup (B-A)</mrow>
+          <mrow component="a">\amp= \set{x\in D\mid (x\in A\land x\not\in B)\lor (x\not\in A\land x\in B)}</mrow>
+          <mrow component="a">\amp= \set{x\in D \mid x\in A\oplus x\in B}</mrow>
+          <mrow component="b">A\oplus B \amp= \phantom{(A-B)\cup (B-A)}</mrow>
+          <mrow component="b">\amp= \phantom{\set{x\in D\mid (x\in A\land x\not\in B)\lor (x\not\in A\land x\in B)}}</mrow>
+          <mrow component="b">\amp= \phantom{\set{x\in D \mid x\in A\oplus x\in B}}</mrow>          
+        </md>
+      </p>
+      <sidebyside widths="70% 30%" component="a">
+        <image width="75%" label="venn-symm-diff" >
+          <shortdescription>
+            A Venn diagram of two overlapping circles
+          </shortdescription>
+          <description>
+            <p>
+              A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points that lie inside exactly one circle are shaded.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture}
+
+            \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+            \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+            \fill[blue, fill opacity=0.5] \firstcircle;
+            \fill[blue, fill opacity=0.5] \secondcircle;
+            \begin{scope}
+              \clip \secondcircle;
+              \fill[white] \firstcircle;
+            \end{scope}
+
+            \node (A) at (-2,2) {\Large{$A$}};
+            \node (B) at (2,2) {\Large{$B$}};
+            \draw \secondcircle;
+            \draw \firstcircle;
+            \draw[draw=black] (-4.5,-4) rectangle (4.5,3);
+          \end{tikzpicture}
+          </latex-image>
+        </image>     
+        <p>
+          Often <m>A\triangle B</m> is used for symmetric difference.
+        </p>
+      </sidebyside>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      Let <m>A=\set{0,1}</m> and <m>B=\set{1,2}</m>. Then <m component="b">A\oplus B=</m><m component="a">A\oplus B=\set{0,2}</m>.
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            <me>
+              A\oplus B = (A\cup B) - (A\cap B)
+            </me>
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            By definition, <m>A\oplus B = (A-B)\cup (B-A)</m>. We will show that <m>(A-B)\cup (B-A)\subseteq (A\cup B) - (A\cap B)</m> and <m>(A\cup B) - (A\cap B)\subseteq (A-B)\cup (B-A)</m>.
+          </p>
+        </proof>
+      </theorem>
+    </slide>
+    <slide>
+      <proof>
+        <title>Proof (Continued)</title>
+        <p>
+          (<m>\subseteq</m>) Let <m>x\in (A-B)\cup (B-A)</m>. Then we know that <m>x\in (A-B)</m> or <m>x\in (B-A)</m>. If <m>x\in A-B</m>, then <m>x\in A</m> and <m>x\not\in B</m>. Hence, since <m>x\in A</m>, <m>x\in A\cup B</m>. Furthermore, since <m>x\not\in B</m>, <m>x\not\in A\cap B</m>. Therefore, <m>x\in (A\cup B)-(A\cap B)</m>. Similarly, if <m>x\in B-A</m>, then <m>x\in B</m> and <m>x\not\in A</m>, which implies that <m>x\in A\cup B</m> and <m>x\not\in A\cap B</m>. Therefore, <m>A\oplus B\subseteq (A\cup B)-(A\cap B) </m>.
+        </p>
+        <p>
+          (<m>\supseteq</m>) Let <m>x\in (A\cup B)-(A\cap B) </m>. Then we know that <m>x\in A\cup B</m> and <m>x\not\in A\cap B</m>. Since <m>x\in A\cup B</m>, we know that <m>x\in A</m> or <m>x\in B</m>. If <m>x\in A</m>, then since <m>x\not\in A\cap B</m>, we know that <m>x\not\in B</m>. Thus, <m>x\in A-B</m>. On the other hand, if <m>x\in B</m>, the fact that <m>x\not\in A\cap B</m> means that <m>x\not\in A</m>. Hence, <m>x\in B-A</m>. In either case, <m>x\in (A-B)\cup (B-A)</m>. Therefore, <m>(A\cup B) - (A\cap B)\subseteq (A-B)\cup (B-A)</m>.
+        </p>
+        <p>
+          Since each set is a subset of the other, they are equal to one another.
+        </p>         
+      </proof>  
+    </slide>
+    <slide>
+      <title>Set Complement</title>
+      <p>
+        Suppose that <m>A</m> is a set of elements from a domain <m>D</m>. The <term>complement</term> of <m>A</m> is <m component="a">\overline{A}=\set{x\in D\mid x\not\in A}</m><m component="b">\overline{A}=\phantom{\set{x\in D\mid x\not\in A}}</m>
+      </p>
+      <image width="75%" label="venn-complement" component="a">
+        <shortdescription>
+          A Venn diagram of two overlapping circles
+        </shortdescription>
+        <description>
+          <p>
+            A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points that lie inside exactly one circle are shaded.
+          </p>
+        </description>
+        <latex-image>
+          \begin{tikzpicture}
+            \def\firstcircle{(210:1.75cm) circle (2.5cm)}          
+            \def\domainbox{(-4.5,-4) rectangle (4.5,3)}
+
+            \begin{scope}
+              \fill[blue,fill opacity=0.5] \domainbox;
+              \fill[white] \firstcircle;
+            \end{scope}
+
+            \node (A) at (-2,2) {\Large{$A$}};;
+            \draw \firstcircle;
+            \draw \domainbox;
+          \end{tikzpicture}
+        </latex-image>
+      </image>     
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        For the domain <m>\Z</m>, let <m>E</m> be the set of even integers. Then <m>\overline{E}</m> is the set of odd integers.
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        For the domain <m>\R</m>, define 
+        <m>
+          A=[0,1] = \set{x\in\R\mid 0\leq x\leq 1}
+        </m>.
+        Find <m>\overline{A}</m>.
+        <md component="a">
+          <mrow>\overline{A}\amp =\set{x\in \R\mid \neg (0\leq x\leq 1)}</mrow>
+          <mrow> \amp = \set{x\in R\mid (x\lt 0)\lor (x\gt 1) }</mrow>
+          <mrow> \amp = (-\infty, 0)\cup (1,\infty)</mrow>
+        </md>
+        
+      </p>
+
+    </slide>
+    
+  </section>
+  <section xml:id="sec-set-identities">
+    <title>Set Identities</title>
+    <slide>
+      <title>List of Identites</title>
+      <p>
+        See Table 3.5.1. Most of these are intuitive and direct analogues of identites for logical operators.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <theorem>
+        <statement>
+          <p>
+            <me>
+              A\cap (B\cup C) = (A\cap B)\cup (A\cap C)
+            </me>
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            <md>
+              <mrow>x\in A\cap (B\cup C) \amp \leftrightarrow (x\in A)\land (x\in B\cup C) </mrow>
+              <mrow> \amp \leftrightarrow (x\in A)\land ((x\in B) \lor (x\in C)) </mrow>
+              <mrow> \amp \leftrightarrow ((x\in A)\land (x\in B)) \lor ((x\in A)\land (x\in C)) </mrow>
+              <mrow> \amp \leftrightarrow (x\in A \cap B) \lor (x\in A \cap C) </mrow>
+              <mrow> \amp \leftrightarrow x\in ((A \cap B) \cup (A \cap C)) </mrow>
+            </md>
+          </p>
+          <p>
+            Thus, <m>A\cap (B\cup C) \subseteq (A\cap B)\cup (A\cap C)</m> and <m>A\cap (B\cup C) \supseteq (A\cap B)\cup (A\cap C)</m>. Therefore, the sets are equal.
+          </p>
+        </proof>
+      </theorem>
+    </slide>
+    <slide>
+      <sidebyside widths="48% 48%">
+        <image width="75%" label="venn-distribute" component="a">
+          <shortdescription>
+            A Venn diagram of two overlapping circles
+          </shortdescription>
+          <description>
+            <p>
+              A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points that lie inside exactly one circle are shaded.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture}
+              \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+              \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+              \def\thirdcircle{(270:2.75cm) circle (2.5cm)}
+              \fill[blue, fill opacity=0.5] \secondcircle;
+
+              \begin{scope}
+                \clip \thirdcircle;
+                \fill[white] \secondcircle;
+              \end{scope}
+              \fill[blue, fill opacity=0.5] \thirdcircle;
+              \fill[orange, fill opacity=0.5] \firstcircle;
+              \node (A) at (-2,2) {\Large{$A$}};
+              \node (B) at (2,2) {\Large{$B$}};
+              \node (B) at (-2,-5) {\Large{$C$}};
+              \draw \firstcircle;
+              \draw \secondcircle;
+              \draw \thirdcircle;
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+        <image width="75%" label="venn-distribute2" component="a">
+          <shortdescription>
+            A Venn diagram of two overlapping circles
+          </shortdescription>
+          <description>
+            <p>
+              A Venn diagram of two overlapping circles. The left circle is labeled <m>A</m> and the right circle is labeled <m>B</m>. Exactly the points that lie inside exactly one circle are shaded.
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture}
+            \def\firstcircle{(210:1.75cm) circle (2.5cm)}
+            \def\secondcircle{(330:1.75cm) circle (2.5cm)}
+            \def\thirdcircle{(270:2.75cm) circle (2.5cm)}
+
+            \begin{scope}
+              \clip \firstcircle;
+              \fill[blue, fill opacity=0.5] \secondcircle;
+            \end{scope}
+            \begin{scope}
+              \clip \firstcircle;
+              \fill[orange, fill opacity=0.5] \thirdcircle;
+            \end{scope}            
+            \node (A) at (-2,2) {\Large{$A$}};
+            \node (B) at (2,2) {\Large{$B$}};
+            \node (B) at (-2,-5) {\Large{$C$}};
+            \draw \firstcircle;
+            \draw \secondcircle;
+            \draw \thirdcircle;
+            \end{tikzpicture}
+          </latex-image>
+        </image>         
+      </sidebyside>
+      <p>
+        <alert>A Venn diagram is <em>not</em> a proof!</alert>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-cart-prod">
+    <title>Cartesian Products</title>
+    <slide>
+      <title>Cartesian Products</title>
+      <p>
+        For two sets <m>A</m> and <m>B</m>, the <term>Cartesian product</term> is the set <m>A\times B</m> of all ordered pairs <m>(x,y)</m> where <m>x\in A</m> and <m>y\in B</m>.
+      </p>
+      <p>
+        Example: Let <m>A=\set{0,1}</m> and <m>B=\set{x,y,z}</m>. Then
+        <me component="a">
+          A\times B = \set{(0,x),(1,x),(0,y),(1,y),(0,z),(1,z)}
+        </me>
+      </p>
+      <p>
+        Activity: Find <m>B\times A</m>.
+        <me>
+          B\times A = \set{(x,0),(x,1),(y,0),(y,1),(z,0),(z,1)}
+        </me>
+      </p>
+      <p component="a">
+        <m>A\times B\neq B\times A</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Cardinality and Higher Order Products</title>
+      <p>
+        Fact: <m component="a">|A\times B| = |A|\cdot |B|</m><m component="b">|A\times B| = </m>
+      </p>
+      <p>
+        For sets <m>A_1,A_2,\dots,A_n</m>, we have
+        <me>
+          A_1\times A_2\times \cdots \times A_n = \set{(x_1,x_2,\dots,x_n)\mid x_i\in A_i}
+        </me>.
+        If <m>A_i=A</m> for all <m>i</m>, we write <m>A^n = \underbrace{A\times A\times \cdots \times A}_{n\text{ times}}</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              <m component="b">\set{0,1}^2 = </m>
+              <m component="a">\set{0,1}^2 = \set{(0,0),(0,1),(1,0),(1,1)}</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">\R^2 = \R\times \R = \set{(x,y)\mid x,y\in \R}</m>
+              <m component="b">\R^2 = </m>
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-partitions">
+    <title>Partitions</title>
+    <slide>
+      <title>Partitions</title>
+      <p>
+        A collection of sets <m>A_1,A_2,\dots,A_n</m> are said to be <term>pairwise disjoint</term> if <m component="b">A_i\cap A_j = \phantom{\empset}</m><m component="a">A_i\cap A_j = \empset</m> for all <m component="a">i\neq j</m>
+      </p>
+      <p>
+        A <term>partition</term> of a set <m>B</m> is a collection of non-empty pairwise disjoint subsets <m>A_1,A_2,\dots,A_n</m> so that
+        <me component="a">
+          \bigcup_{i=1}^n A_i = A_1\cup A_2\cup \cdots \cup A_n = B
+        </me>
+        
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Example: <m>A_1=\set{1}</m>, <m>A_2 = \set{2,4,6,8}</m>, <m>A_3 = \set{3,5,7,9,10}</m> form a partition of <m>B=\set{1,2,\dots,10}</m>.
+      </p>
+      <p>
+        Activity: Find a partition of <m>\Z</m> into five sets.
+      </p>
+      <p component="a">
+        <m>A_i = \set{n\in\Z\mid n\equiv i\bmod{5}}</m>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-functions-defn">
+    <title>Functions</title>
+    <slide>
+      <title>Definition of Function</title>
+      <p>
+        A <term>function</term> <m>f</m> from a set <m>X</m> to a set <m>Y</m>, denoted <m component="a">f\colon X\to Y</m><m component="b">\phantom{f\colon X\to Y}</m>, is a rule that assigns to each element of <m>X</m> <em>exactly one</em> element of <m>Y</m>.
+      </p>
+      <p>
+        If <m>y\in Y</m> is assigned by <m>f</m> to <m>x\in X</m>, then we write <m component="a">f(x)=y</m><m component="b">\phantom{f(x)=y}</m>.
+        <ul>
+          <li>
+            <p component="a">
+              <m>X</m> is called the <term>domain</term> of <m>f</m>
+            </p>
+            <p component="b">
+              <m>X</m> is called the 
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              <m>Y</m> is called the <term>co-domain</term> of <m>f</m>
+            </p>
+            <p component="b">
+              <m>Y</m> is called the 
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <p>
+        Let <m>X=\set{0,1,2}</m> and <m>Y=\set{0,1,2,3,4,5}</m>. We define <m>f\colon X\to Y</m> by
+        <ul>
+          <li>
+            <p component="a">
+              <m>f(0)=0</m>, <m>f(1)=1</m>, <m>f(2)=4</m>
+            </p>
+            <p component="b">
+              <m>f(0)=\phantom{0}</m>, <m>f(1)=\phantom{1}</m>, <m>f(2)=\phantom{4}</m>
+            </p>            
+          </li>
+          <li>
+            <p component="a">
+              <m>f = \set{(0,0),(1,1),(2,4)}</m>
+            </p>
+            <p component="b">
+              <m>f = \set{\phantom{(0,0),(1,1),(2,4)}}</m>
+            </p>            
+          </li>  
+          <li>
+            <p component="a">
+              <m>f(x) = x^2</m>
+            </p>
+            <p component="b">
+              <m>f(x) = \phantom{x^2}</m>
+            </p>            
+          </li>     
+          <li>
+            <p component="a">
+              <m>x\mapsto x^2</m>
+            </p>
+            <p component="b">
+              <m>\phantom{x\mapsto x^2}</m>
+            </p>            
+          </li>                            
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <p>
+        The <term>range</term> of a function <m>f\colon X\to Y</m> is
+        <md>
+          <mrow component="a">f(X) \amp = \set{y\in Y\mid \exists x\in X(y=f(x))}</mrow>
+          <mrow component="a"> \amp = \set{f(x)\mid x\in X} </mrow>
+          <mrow component="b">f(X) \amp = \phantom{\set{y\in Y\mid \exists x\in X(y=f(x))}}</mrow>
+          <mrow component="b"> \amp = \phantom{\set{f(x)\mid x\in X}} </mrow>
+
+        </md>
+        
+      </p>
+    </slide>
+    <slide>
+      <p>
+        Two functions <m>f</m> and <m>g</m> are equal (<m component="a">f=g</m><m component="b">\phantom{f=g}</m>)provided that
+        <ol marker="i">
+          <li>
+            <p>
+              they have the same domain,
+            </p>
+          </li>
+          <li>
+            <p>
+              they have the same co-domain, and 
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>f(x)=g(x)</m> for every <m>x</m> in the domain.
+            </p>
+          </li>
+        </ol>
+      </p>
+      <p>
+        <m>f\colon \N\to\N</m> given by <m>f(n)=n+1</m> and <m>g\colon\R\to\R</m> given by <m>g(x) = x+1</m> are not equal as functions, since the domains are different.
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-abs-flr-ceil">
+    <title>Absolute Value, Floor, and Ceiling</title>
+    <slide>
+      <title>Absolute value function</title>
+      <p>
+        <m>\vert\cdot\vert\colon \R\to \R</m> is defined by 
+        <me component="a">\vert x\vert = \begin{cases} x\amp \text{ if }x\geq 0\\
+        -x\amp \text{ if }x\lt 0
+        \end{cases}</me>
+        <me component="b">\vert x\vert = \phantom{\begin{cases} x\amp \text{ if }x\geq 0\\
+        -x\amp \text{ if }x\lt 0
+        \end{cases}}</me>
+      </p>
+    </slide>
+    <slide>
+      <title>Floor and ceiling functions</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              The <term>floor function</term> <m>\lfloor\cdot\rfloor\colon \R\to\Z</m> is defined by
+              <me component="a">
+                \lfloor x\rfloor = \text{the greatest integer }y\leq x
+              </me>
+              <me component="b">
+                \lfloor x\rfloor = \phantom{\text{the greatest integer }y\leq x}
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              The <term>celing function</term> <m>\lceil\cdot\rceil\colon \R\to\Z</m> is defined by
+              <me component="a">
+                \lceil x\rceil = \text{the least integer }z\geq x
+              </me>
+              <me component="b">
+                \lceil x\lceil = \phantom{\text{the least integer }z\geq x}
+              </me>
+            </p>
+          </li>          
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Examples</title>
+      <p>
+        <md>
+          <mrow component="a">\lfloor 4.32\rfloor \amp= 4</mrow>
+          <mrow component="a">\lfloor 4\rfloor \amp= 4</mrow>
+          <mrow component="a">\lceil 4.32\rceil \amp= 5</mrow>
+          <mrow component="a">\lceil 4\rceil \amp= 4</mrow>
+          <mrow component="b">\lfloor 4.32\rfloor \amp= \phantom{4}</mrow>
+          <mrow component="b">\lfloor 4\rfloor \amp= </mrow>
+          <mrow component="b">\lceil 4.32\rceil \amp= </mrow>
+          <mrow component="b">\lceil 4\rceil \amp= </mrow>
+        </md>
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        <md>
+          <mrow component="a">\lfloor -4.32\rfloor \amp= -5</mrow>
+          <mrow component="a">\lceil -4.32\rceil \amp= 4</mrow>
+          <mrow component="b">\lfloor 4.32\rfloor \amp= \phantom{-5}</mrow>
+          <mrow component="b">\lceil 4.32\rceil \amp= </mrow>
+        </md>
+      </p>      
+    </slide>
+    
+  </section>
+  <section xml:id="sec-props-fns">
+    <title>Properties of Functions</title>
+    <slide>
+      <title>One-to-One</title>
+      <p>
+        A function <m>f\colon X\to Y</m> is <term>one-to-one</term> or <term>injective</term> or an <term>injection</term> provided that for all <m>x_1,x_2\in X</m>
+        <me component="a">
+          (x_1\neq x_2)\rightarrow (f(x_1)\neq f(x_2))
+        </me>
+        <me component="b">
+          \phantom{(x_1\neq x_2)\rightarrow (f(x_1)\neq f(x_2))}
+        </me>
+        or equivalently
+        <me component="a">
+          (f(x_1)= f(x_2))\rightarrow (x_1= x_2)
+        </me>
+        <me component="b">
+          \phantom{(f(x_1)= f(x_2))\rightarrow (x_1= x_2)}
+        </me>        
+      </p>
+    </slide>
+    <slide>
+      <title>Onto</title>
+      <p>
+        A function <m>f\colon X\to Y</m> is <term>onto</term> or <term>surjective</term> or a <term>surjection</term> provided that for all <m component="a">y\in Y</m><m component="b">\phantom{y\in Y}</m> there exists <m component="b">\phantom{x\in X}</m> such that <m component="a">f(x)=y</m><m component="b">\phantom{f(x)=y}</m>. Equivalently, <m component="a">f(X)=Y</m>
+      </p>
+    </slide>
+    <slide>
+      <title>Bijection</title>
+      <p>
+        A function <m>f\colon X\to Y</m> is <term>bijective</term> or a <term>bijection</term> or a <term>one-to-one correspondence</term> provided that <m>f</m> is both one-to-one and onto.
+      </p>
+    </slide>
+    <!-- Slide 65 above -->
+  </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

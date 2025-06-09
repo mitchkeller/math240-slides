@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude" >
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \newcommand{\Q}{\mathbb{Q}}
+      \newcommand{\N}{\mathbb{N}}
+      \newcommand{\empset}{\{\}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \DeclareMathOperator{\ind}{in-degree}
+      \DeclareMathOperator{\outd}{out-degree}
+      \newcommand{\set}[1]{\{#1\}}
+    </macros>
+    <latex-image-preamble>
+      \usepackage{tikz}
+      \usepackage{tkz-graph}
+      \usetikzlibrary{shapes.geometric,fit,backgrounds}
+    </latex-image-preamble>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+    <subtitle>Introduction to Discrete Mathematics</subtitle>
+    <frontmatter>
+      <bibinfo>
+      <author>
+        <personname>
+        Mitchel T.
+        Keller </personname>
+        <institution>University of Wisconsin<ndash/>
+        Madison</institution>
+      </author>
+      <date>Spring 2025</date>
+      </bibinfo>
+
+      <titlepage-items/>
+    </frontmatter>
+    <section xml:id="sec-graphs">
+      <title>Introduction to Graphs</title>
+      <slide>
+        <title>Multisets</title>
+        <p>
+          Recall that sets do not care about repeated elements:
+          <me>
+            \set{a,b,b,c,c,c}=\set{a,b,c}
+          </me>
+          A <term>multiset</term> is a set that cares about repeats. As multisets, we say 
+          <me>
+            \set{a,b,b,c,c,c}\neq \set{a,b,c}
+          </me>
+        </p>
+      </slide>
+      <slide>
+        <title>Graphs</title>
+        <p>
+          A <term>graph</term> <m>G=(V,E)</m> consists of a set <m>V</m> (called the set of <term>vertices</term> with an individual element called a <term>vertex</term>) and a multiset <m>E</m> (called the set of <term>edges</term>) where 
+          <m>
+            E\subseteq \set{\text{multisets }\set{u,v}\mid u,v\in V}
+          </m>.
+        </p>
+        <p>
+          <em>Example</em>: The graph <m>G=(V,E)</m> with
+          <md>
+            <mrow>V \amp = \set{a,b,c,d}</mrow>
+            <mrow>E \amp = \set{\set{a,b},\set{a,d},\set{b,c},\set{b,d},\set{c,c},\set{c,d},\set{c,d}}</mrow>
+          </md>
+          can be drawn as
+        </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Draw the graph <m>G=(V,E)</m> with
+          <md>
+            <mrow>V \amp = \set{a,b,c,d,e}</mrow>
+            <mrow>E \amp = \set{\set{a,b},\set{a,c},\set{b,c},\set{b,e},\set{c,d},\set{d,e}}</mrow>
+          </md>
+        </p>
+      </slide>
+      <slide>
+        <title>More terminology</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                Two edges between the same vertices are said to be <term>parallel</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Since elements of <m>E</m> are multisets, we can have <m>\set{u,u}</m> as an edge. Such an edge is called a <term>loop</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Graphs with no parallel edges and no loops are called <term>simple graphs</term>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Which of these graphs is simple?
+        </p>
+        <sidebyside widths="25% 25% 25% 25%">
+          <image >
+          <prefigure xmlns="https://prefigure.org" label="simple-graph-1">
+            <diagram dimensions="(250,250)" margins="5">
+              <definition>graph={1:[2,2,3],2:[3],3:[4]}</definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network graph="graph" scale="0.8"
+                  node-fill="#fcf" node-stroke="black"
+                  seed="1" labels="yes" 
+                  tactile-node-size="40">
+                  
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+          </image>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="simple-graph-2">
+              <diagram dimensions="(250,250)" margins="5">
+                <definition>graph={1:[2,3,4],2:[2,3,4]}</definition>
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network graph="graph" scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="yes" 
+                    tactile-node-size="40">
+                    
+                  </network>
+                </coordinates>
+              </diagram>
+              </prefigure>
+          </image>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="simple-graph-3">
+              <diagram dimensions="(250,250)" margins="5">
+                <definition>graph={1:[2,3],2:[4],3:[4,4,4]}</definition>
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network graph="graph" scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="yes" 
+                    tactile-node-size="40">
+                    
+                  </network>
+                </coordinates>
+              </diagram>
+              </prefigure>
+          </image>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="simple-graph-4">
+              <diagram dimensions="(250,250)" margins="5">
+                <definition>graph={1:[2,3,4],2:[3,4],3:[4]}</definition>
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network graph="graph" scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="yes" 
+                    tactile-node-size="40">
+                    
+                  </network>
+                </coordinates>
+              </diagram>
+              </prefigure>
+          </image>          
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>More Vocab!</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                If there is an edge between two vertices, then we say that they are <term>adjacent</term> or <term>neighbors</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Given an edge <m>\set{u,v}</m>, we say that <m>u</m> and <m>v</m> are the <term>endpoints</term> of the edge and that the edge is <term>incident</term> to <m>u</m> and <m>v</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                The <term>degree</term> of a vertex <m>v</m>, denoted <m>\deg(v)</m> is the number of edges incident to <m>v</m>, where we count loops twice.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <sidebyside widths="30% 70%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="neighbors">
+              <diagram dimensions="(250,250)" margins="5">
+                <definition>graph={1:[2,2,3],2:[4],3:[4],4:[4]}</definition>
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network graph="graph" scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="yes" 
+                    tactile-node-size="40">
+                    
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <p>
+            <ul>
+              <li>
+                <p component="a">
+                  The neighbors of <m>1</m> are <m>2</m> and <m>3</m>
+                </p>
+                <p component="b">
+                  The neighbors of <m>1</m> are
+                </p>
+              </li>
+              <li>
+                <p component="a">
+                  <m>1</m> and <m>4</m> are not adjacent
+                </p>
+                <p component="b">
+                  <m>1</m> and <m>4</m>
+                </p>
+              </li>
+              <li>
+                <p component="a">
+                  <m>\deg(1)=3</m>, <m>\deg(2)=3</m>, <m>\deg(3)=2</m>, <m>\deg(4)=4</m>
+                </p>
+                <p component="b">
+                  <m>\deg(1)=\phantom{3}</m>, <m>\deg(2)=\phantom{3}</m>, <m>\deg(3)=\phantom{2}</m>, <m>\deg(4)=\phantom{4}</m>
+                </p>
+              </li>
+            </ul>
+          </p>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Regular Graphs</title>
+        <p>
+          A graph is <term><m>d</m>-regular</term> provided that <m>\deg(v)=d</m> for all vertices <m>v</m>. A graph is <term>regular</term> provided that it is <m>d</m>-regular for some <m>d\in \N</m>.
+        </p>
+        <sidebyside widths="50% 50%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="cube-graph">
+              <diagram dimensions="(250,250)" margins="5">
+                
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network  scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="no" 
+                    tactile-node-size="40">
+                    <node at="1" p="(-0.7,0.7)" edges="[2,3,7]" />
+                    <node at="2" p="(0.7,0.7)" edges="[4,8]" />
+                    <node at="3" p="(-0.3,0.3)" edges="[4,5]" />
+                    <node at="4" p="(0.3,0.3)" edges="[6]" />
+                    <node at="5" p="(-0.3,-0.3)" edges="[6,7]" />
+                    <node at="6" p="(0.3,-0.3)" edges="[8]" />
+                    <node at="7" p="(-0.7,-0.7)" edges="[8]" />
+                    <node at="8" p="(0.7,-0.7)" edges="[]" />
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="K3-graph">
+              <diagram dimensions="(250,250)" margins="5">
+                
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network  scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="no" 
+                    tactile-node-size="40">
+                    <node at="1" p="(0,0.7)" edges="[2,3]" />
+                    <node at="2" p="(-0.7,0)" edges="[3]" />
+                    <node at="3" p="(0.7,0)" edges="[]" />
+                    
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+        </sidebyside>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Is the graph below regular? If so, what is the degree of each vertex?
+        </p>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="petersen-graph">
+              <diagram dimensions="(250,250)" margins="5">
+                <definition>N=5</definition>
+                <definition>g(t)=(0.5*cos(2*pi*t/N), 0.5*sin(2*pi*t/N))</definition>
+                <definition>f(t)=(cos(2*pi*t/N), sin(2*pi*t/N))</definition>
+                <coordinates bbox="(-1,-1,1,1)">
+                  <network  scale="0.8"
+                    node-fill="#fcf" node-stroke="black"
+                    seed="1" labels="no" 
+                    tactile-node-size="40">
+                    <node at="0" p="f(0)" edges="[1,4,5]"/>
+                    <node at="1" p="f(1)" edges="[2,6]"/>
+                    <node at="2" p="f(2)" edges="[3,7]"/>
+                    <node at="3" p="f(3)" edges="[4,8]"/>
+                    <node at="4" p="f(4)" edges="[9]"/>
+                    <node at="5" p="g(0)" edges="[7,8]"/>
+                    <node at="6" p="g(1)" edges="[8,9]"/>
+                    <node at="7" p="g(2)" edges="[9]"/>
+                    <node at="8" p="g(3)" edges="[]"/>
+                    <node at="9" p="g(4)" edges="[]"/>
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>      
+          <p component="a">
+            This graph is <m>3</m>-regular. We call this the <term>Petersen graph</term>.
+          </p>  
+      </slide>
+      <slide>
+        <title>The Handshaking Theorem</title>
+        <theorem xml:id="thm-handshake">
+          <statement>
+            <p>
+              Let <m>G=(V,E)</m> be a graph. Then
+              <me>
+                2|E| = \sum_{v\in V}\deg(v)
+              </me>
+            </p>
+          </statement>
+        </theorem>
+        <proof component="a">
+          <p>
+            We prove this combinatorially. The left-hand side counts each edge twice. The right-hand side counts each edge twice as well. A non-loop <m>\set{u,v}</m> is counted in both the <m>\deg(u)</m> and <m>\deg(v)</m> terms. A loop <m>\set{u,u}</m> counts twice in <m>\deg(u)</m>.
+          </p>
+        </proof>
+      </slide>
+      <slide>
+        <title>Complete Graphs</title>
+        <p>
+          A <term>complete graph</term> on <m>n</m> vertices, denoted <m>K_n</m>, is a simple graph that contains exactly one edge between every pair of vertices. We sometimes refer to complete graphs as <term>cliques</term>.
+        </p>
+        <p component="a">
+          Draw them.
+        </p>
+      </slide>
+      <slide>
+        <title>Cycle Graphs</title>
+        <p>
+          A <term>cycle graph</term> on <m>n\geq 3</m> vertices, <m>C_n</m>, is <m>C_n = (V,E)</m> with
+          <md>
+            <mrow>V \amp = \set{v_1,v_2,\dots,v_n}</mrow>
+            <mrow>E \amp = \set{\set{v_1,v_2},\set{v_2,v_3},\set{v_3,v_4},\dots,\set{v_{n-1},v_n},\set{v_n,v_1}}</mrow>
+          </md>
+        </p>
+        <p component="a">
+          Draw them.
+        </p>
+      </slide>
+      <slide>
+        <title>Bipartite Graphs</title>
+        <p>
+          A simple graph <m>G=(V,E)</m> is called <term>bipartite</term> provided that its vertex set can be partitioned as <m>V=V_1\sqcup V_2</m> so that every edge <m>e\in E</m> has the form <m>e=\set{u,v}</m> with <m>u\in V_1</m> and <m>v\in V_2</m>.
+        </p>
+        <p component="a">
+          Draw <m>P_5</m> and <m>K_3</m>.
+        </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Is the cycle graph <m>C_6</m> bipartite? What about <m>C_7</m>?
+        </p>
+      </slide>
+      <slide>
+        <title>Complete Bipartite Graphs</title>
+        <p>
+          The <term>complete bipartite graph</term> <m>K_{m,n}</m> is a simple graph <m>G=(V,E)</m> so that <m>V=V_1\sqcup V_2</m> with <m>|V_1| = m</m>, <m>|V_2| = n</m>, and <m>E = \set{\set{u,v}\mid u\in V_1,v\in V_2}</m>. That is, we have every possible edge from <m>V_1</m> to <m>V_2</m>.
+        </p>
+        <p component="a">
+          Draw <m>K_{2,3}</m> and <m>K_{3,3}</m>
+        </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Draw <m>K_{4,2}</m>.
+        </p>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-representations">
+      <title>Graph Representations</title>
+      <slide>
+        <title>Drawings</title>
+        <p>
+          We can draw the graph <m>G=(V,E)</m> with <m>V = \set{a,b,c,d,e}</m> and <m>E = \set{\set{a,b},\set{a,c},\set{b,c},\set{b,e},\set{c,d},\set{d,e}}</m> in multiple ways.
+        </p>
+        <p component="a">
+          Draw with crossing and non-crossing edges.
+        </p>       
+      </slide>
+      <slide>
+        <title>Adjacency Lists</title>
+        <p>
+          We can store the graph <m>G=(V,E)</m> with <m>V = \set{a,b,c,d,e}</m> and <m>E = \set{\set{a,b},\set{a,c},\set{b,c},\set{b,e},\set{c,d},\set{d,e}}</m> using adjacency lists:
+        </p>
+        <p component="a">
+          <md>
+            <mrow>a \amp \rightarrow b,c \amp d\amp \rightarrow c,e</mrow>
+            <mrow>b \amp \rightarrow a,c,e \amp e\amp \rightarrow b,d</mrow>
+            <mrow>c \amp \rightarrow a,b,d </mrow>
+          </md>
+        </p>       
+      </slide>
+      <slide>
+        <title>Adjacency Matrices</title>
+        <p>
+          We can store the graph <m>G=(V,E)</m> with <m>V = \set{a,b,c,d,e}</m> and <m>E = \set{\set{a,b},\set{a,c},\set{b,c},\set{b,e},\set{c,d},\set{d,e}}</m> using a matrix
+        </p>
+        <p component="a">
+          <me>
+            \begin{bmatrix}
+            0\amp 1\amp 1\amp 0\amp 0\\
+            1\amp 0\amp 1\amp 0\amp 1\\
+            1\amp 1\amp 0\amp 1\amp 0\\
+            0\amp 0\amp 1\amp 0\amp 1\\
+            0\amp 1\amp 0\amp 1\amp 0
+            \end{bmatrix}
+          </me>
+          
+        </p>       
+      </slide>
+    </section>
+    <section xml:id="sec-isomorphism">
+      <title>Graph Isomorphism</title>
+      <slide>
+        <title>Isomorphism Defined</title>
+      
+          <p>
+            Informally: We say two graphs are <term>isomorphic</term> if they are essentially relabellings of each other.
+          </p>
+          <p>
+            Formally: <m>G = (V,E)</m> and <m>G=(V',E')</m> are <term>isomorphic</term> provided that there exists a bijection <m>f\colon V\to V'</m> so that for all <m>u,v\in V</m>,
+            <me>
+              \set{u,v}\in E \text{ if and only if } \set{f(u),f(v)}\in E'
+            </me>
+            
+          </p>
+        
+      </slide>
+      <slide>
+        <title>Example</title>
+        <p component="a">
+          <m>K_4-e</m> with two drawings and label sets
+        </p>
+      </slide>
+      <slide>
+        <title>Non-example</title>
+        <p component="a">
+          <m>C_5+e</m> compared to <m>K_4-e</m> with a vertex added that's adjacent to one of the degree 2 vertices.
+        </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          A graph has <m>6</m> vertices and <m>9</m> edges. The degrees of <m>5</m> of the vertices are <m>4, 3, 3, 3, 2</m>. What is the degree of the sixth vertex?
+        </p>
+        <p component="a">
+          The sum of the degrees must be <m>2\cdot 9 = 18</m>. The given numbers add to <m>15</m>, so the unknown degree is <m>3</m>. Note also that we cannot have an odd number of vertices of odd degree!
+        </p>
+      </slide>
+        
+    </section>
+  <section xml:id="sec-walks-friends">
+    <title>Walks and Friends</title>
+    <slide>
+      <p>
+        <ul>
+          <li>
+            <p>
+              A <term>walk</term> is a sequence of vertices <m>\langle v_0,v_1,\dots,v_k\rangle</m> so that <m>\set{v_{i-1},v_i}\in E</m> for all <m>1\leq i\leq k</m>. The <term>length</term> of a walk is the number of edges.
+            </p>
+          </li>
+          <li>
+            <p>
+              A walk <m>\langle v_0,\dots,v_k\rangle </m> is <term>open</term> if <m>v_0\neq v_k</m>. Otherwise, it is <term>closed</term>.
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>trail</term> is a walk with no repeated edges.
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>path</term> is a walk with no repeated vertices.
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>circuit</term> is a closed trail.
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>cycle</term> is a circuit of length at least 1 with no repeated vertices (other than the first/last).
+            </p>
+          </li>
+        </ul>
+      </p>
+
+      
+    </slide>
+    <slide>
+      <!-- <title>Example</title> -->
+      <sbsgroup widths="50% 50%">
+        <sidebyside>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="walks-graph1">
+              <diagram dimensions="(400,200)" margins="20">
+                <coordinates bbox="(-1.5,-2.5,1.5,1.5)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black"  
+                    seed="0.8" 
+                    tactile-node-size="40">
+                    <node at="0" p="(-1,0)" edges="[1,3]" label="D"/>
+                    <node at="1" p="(0,0)" edges="[2,4,5]" label="E"/>
+                    <node at="2" p="(1,0)" edges="[5]" label="F"/>
+                    <node at="3" p="(-1,1)" edges="[4]" label="A"/>
+                    <node at="4" p="(0,1)" edges="[5]" label="B"/>
+                    <node at="5" p="(1,1)" edges="[]" label="C"/>
+                  </network> 
+                  <label anchor="(0,-2.5)" alignment="south" scale="1.2">
+                    Trail, not a path
+                  </label>
+                </coordinates>
+              </diagram>              
+            </prefigure>
+          </image> 
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="walks-graph2">
+              <diagram dimensions="(400,200)" margins="20">
+                <coordinates bbox="(-1.5,-2.5,1.5,1.5)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black" 
+                    seed="1" 
+                    tactile-node-size="40">
+                    <node at="0" p="(-1,0)" edges="[1,3]" label="D"/>
+                    <node at="1" p="(0,0)" edges="[2,4,5]" label="E"/>
+                    <node at="2" p="(1,0)" edges="[5]" label="F"/>
+                    <node at="3" p="(-1,1)" edges="[4]" label="A"/>
+                    <node at="4" p="(0,1)" edges="[5]" label="B"/>
+                    <node at="5" p="(1,1)" edges="[]" label="C"/>
+                  </network>
+                  <label anchor="(0,-2.5)" alignment="south" scale="1.2">
+                    Path
+                  </label>
+                </coordinates>
+              </diagram>  
+            </prefigure>
+          </image> 
+        </sidebyside>
+        <sidebyside>
+          <p component="b">
+            
+          </p>
+          <p component="a">
+             <m>\langle A,D,E,C,F,E\rangle</m>
+          </p>
+          <p component="b">
+            
+          </p>
+          <p component="a">
+             <m>\langle A,D,E,C\rangle</m>
+          </p>
+        </sidebyside>
+        <sidebyside>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="walks-graph3">
+              <diagram dimensions="(400,200)" margins="20">
+                <coordinates bbox="(-1.5,-2.5,1.5,1.5)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black" 
+                    seed="1" 
+                    tactile-node-size="40">
+                    <node at="0" p="(-1,0)" edges="[1,3]" label="D"/>
+                    <node at="1" p="(0,0)" edges="[2,4,5]" label="E"/>
+                    <node at="2" p="(1,0)" edges="[5]" label="F"/>
+                    <node at="3" p="(-1,1)" edges="[4]" label="A"/>
+                    <node at="4" p="(0,1)" edges="[5]" label="B"/>
+                    <node at="5" p="(1,1)" edges="[]" label="C"/>
+                  </network>
+                  <label anchor="(0,-2.5)" alignment="south" scale="1.2">
+                    Circuit, not a cycle
+                  </label>
+                </coordinates>
+              </diagram>  
+            </prefigure>
+          </image> 
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="walks-graph4">
+              <diagram dimensions="(400,200)" margins="20">
+                <coordinates bbox="(-1.5,-2.5,1.5,1.5)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black" 
+                    seed="1" 
+                    tactile-node-size="40">
+                    <node at="0" p="(-1,0)" edges="[1,3]" label="D"/>
+                    <node at="1" p="(0,0)" edges="[2,4,5]" label="E"/>
+                    <node at="2" p="(1,0)" edges="[5]" label="F"/>
+                    <node at="3" p="(-1,1)" edges="[4]" label="A"/>
+                    <node at="4" p="(0,1)" edges="[5]" label="B"/>
+                    <node at="5" p="(1,1)" edges="[]" label="C"/>
+                  </network>
+                  <label anchor="(0,-2.5)" alignment="south" scale="1.2">
+                    Cycle
+                  </label>
+                </coordinates>
+              </diagram>  
+            </prefigure>
+          </image> 
+        </sidebyside>
+        <sidebyside>
+          <p component="b">
+            
+          </p>
+          <p component="a">
+            <m>\langle A,D,E,C,F,E,B,A\rangle</m>
+          </p>
+
+          <p component="b">
+            
+          </p>
+          <p component="a">
+             <m>\langle A,B,C,E,D\rangle</m>
+          </p>
+        </sidebyside>
+      </sbsgroup>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Find a path of length <m>9</m> in the Petersen graph.
+      </p>
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="petersen-graph-path">
+            <diagram dimensions="(400,400)" margins="5">
+              <definition>N=5</definition>
+              <definition>g(t)=(0.5*cos(2*pi*t/N), 0.5*sin(2*pi*t/N))</definition>
+              <definition>f(t)=(cos(2*pi*t/N), sin(2*pi*t/N))</definition>
+              <coordinates bbox="(-1,-1,1,1)">
+                <network  scale="0.8"
+                  node-fill="#fcf" node-stroke="black"
+                  seed="1" labels="yes" 
+                  tactile-node-size="40">
+                  <node at="0" p="f(0)" edges="[1,4,5]"/>
+                  <node at="1" p="f(1)" edges="[2,6]"/>
+                  <node at="2" p="f(2)" edges="[3,7]"/>
+                  <node at="3" p="f(3)" edges="[4,8]"/>
+                  <node at="4" p="f(4)" edges="[9]"/>
+                  <node at="5" p="g(0)" edges="[7,8]"/>
+                  <node at="6" p="g(1)" edges="[8,9]"/>
+                  <node at="7" p="g(2)" edges="[9]"/>
+                  <node at="8" p="g(3)" edges="[]"/>
+                  <node at="9" p="g(4)" edges="[]"/>
+                </network>
+              </coordinates>
+            </diagram>
+          </prefigure>
+        </image>      
+        <p component="a">
+          <m>\langle 0,1,2,3,4,9,6,8,5,7\rangle</m>
+        </p>  
+      </slide>
+    </section>
+    <section xml:id="sec-connectivity">
+      <title>Graph Connectivity</title>
+      <slide>
+        <title>Definitions</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A graph <m>G=(V,E)</m> is <term>connected</term> provided for every pair of vertices <m>u,v</m>, there exists a path from <m>u</m> to <m>v</m> in <m>G</m>. Otherwise, we say that <m>G</m> is <term>disconnected.</term>
+              </p>
+            </li>
+            <li>
+              <p>
+                A <term>connected component</term> is a <em>maximal</em> subset <m>S</m> of <m>V</m> (and all edges with both endpoints in <m>S</m>) that is connected. (Here <em>maximal</em> means that adding any other vertex to <m>S</m> leads to having two vertices in <m>S</m> with no path between them.)
+              </p>
+            </li>
+            <li>
+              <p>
+                A graph is connected if and only if it has one connected component.
+              </p>
+            </li>
+            <li>
+              <p>
+                A vertex of degree <m>0</m> is said to be <term>isolated.</term>
+              </p>
+            </li>
+          </ul>
+        </p>
+      </slide>
+      <slide>
+        <title>Examples</title>
+        <p>
+          <m>K_n</m>, <m>C_n</m>, and <m>K_{m,n}</m> are all connected graphs.
+        </p>
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="disconnected-graph">
+            <diagram dimensions="(800,200)" margins="5">
+              <coordinates bbox="(0,0,8,1)">
+                <network  scale="0.8" labels="yes"
+                  node-fill="#fcf" node-stroke="black" 
+                  seed="1" 
+                  tactile-node-size="40">
+                  <node at="1" p="(1,1)" edges="[8,9]" />
+                  <node at="2" p="(5,1)" edges="[]" />
+                  <node at="3" p="(6,0)" edges="[]" />
+                  <node at="4" p="(3,1)" edges="[6,8]" />
+                  <node at="5" p="(7,1)" edges="[3,7]" />
+                  <node at="6" p="(4,0)" edges="[8]" />
+                  <node at="7" p="(8,0)" edges="[]" />
+                  <node at="8" p="(2,0)" edges="[9]" />
+                  <node at="9" p="(0,0)" edges="[]" />
+
+                </network>
+                
+              </coordinates>
+            </diagram>  
+          </prefigure>
+        </image> 
+        <p component="a">
+          Disconnected. Circle the connected components. Note that <m>2</m> is isolated.
+        </p>
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Find the connected components of <m>G=(V,E)</m> where <m>V = \set{a,b,c,d,e}</m> and <m>E = \set{\set{a,b},\set{a,c},\set{d,e}}</m>
+        </p>
+        <p component="a">
+          Draw and the connected components are <m>\set{a,b,c}</m> and <m>\set{d,e}</m>
+        </p>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-eulerian">
+      <title>Euler Circuits and Trails</title>
+      <slide>
+        <title>Definitions</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A trail that uses every edge exactly once is called an <term>Euler trail</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                A circuit that uses every edge exactly once is called an <term>Euler circuit</term>.
+              </p>
+            </li>
+          </ul>
+        </p>
+        <p component="a">
+          Having an Euler circuit automatically gives an Euler trail.
+        </p>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <sidebyside widths="50% 50%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="bowtie">
+              <diagram dimensions="(600,300)" margins="5">
+                <coordinates bbox="(0,0,2,1)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black" 
+                    seed="1" 
+                    tactile-node-size="40">
+                    <node at="1" p="(0,1)" edges="[2,3]" label="A" />
+                    <node at="2" p="(0,0)" edges="[3]" label="B" />
+                    <node at="3" p="(1,0.5)" edges="[4,5]" label="C" />
+                    <node at="4" p="(2,1)" edges="[5]" label="D" />
+                    <node at="5" p="(2,0)" edges="[]" label="E" />
+                  </network>
+                  
+                </coordinates>
+              </diagram>  
+            </prefigure>
+          </image> 
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="K4-e">
+              <diagram dimensions="(300,300)" margins="5">
+                <coordinates bbox="(0,0,1,1)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black" 
+                    seed="1" 
+                    tactile-node-size="40">
+                    <node at="1" p="(0,1)" edges="[2,3,4]" label="x" />
+                    <node at="2" p="(1,1)" edges="[3]" label="y" />
+                    <node at="3" p="(1,0)" edges="[4]" label="z" />
+                    <node at="4" p="(0,0)" edges="[]" label="w" />
+                  </network>
+                  
+                </coordinates>
+              </diagram>  
+            </prefigure>
+          </image>           
+        </sidebyside>
+        <p component="a">
+          Bowtie has an Euler circuit <m>\langle A,B,C,D,E,C,A\rangle </m>. <m>K_4-e</m> has an Euler trail <m>\langle x,y,z,x,w,z\rangle</m> but no Euler circuit because of odd degree vertices.
+        </p>
+      </slide>
+      <slide>
+        <theorem xml:id="thm-eulerian">
+          <statement>
+            <p>
+              <ol marker="a.">
+                <li>
+                  <p>
+                    A graph <m>G</m> has an Euler circuit if and only if <m>G</m> is connected and every vertex has even degree.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    A graph <m>G</m> has an Euler trail and no Euler circuit if and only if <m>G</m> is connected and has exactly two vertices with odd degree.
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </statement>
+        </theorem>
+        
+        
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          Does this graph have an Euler circuit? An Euler trail? If either exists, find it.
+        </p>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="find-euler">
+              <diagram dimensions="(400,200)" margins="20">
+                <coordinates bbox="(-1.5,-1.5,1.5,1.5)">
+                  <network  scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black" 
+                    seed="1" 
+                    tactile-node-size="40">
+                    <node at="0" p="(-1,0)" edges="[1,3]" label="D"/>
+                    <node at="1" p="(0,0)" edges="[2,4,5]" label="E"/>
+                    <node at="2" p="(1,0)" edges="[5]" label="F"/>
+                    <node at="3" p="(-1,1)" edges="[4]" label="A"/>
+                    <node at="4" p="(0,1)" edges="[5]" label="B"/>
+                    <node at="5" p="(1,1)" edges="[]" label="C"/>
+                  </network>
+                </coordinates>
+              </diagram>  
+            </prefigure>
+          </image> 
+      </slide>
+      
+    </section>
+    <section xml:id="sec-hamiltonian">
+      <title>Hamiltonian Cycles and Paths</title>
+      <slide>
+        <title>Definitions</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A path that visits every vertex exactly once is called a <term>Hamiltonian path</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                A cycle that visits every vertex exactly once is called a <term>Hamiltonian cycle</term>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="K4-e-hamiltonian">
+            <diagram dimensions="(300,300)" margins="5">
+              <coordinates bbox="(0,0,1,1)">
+                <network  scale="0.8" labels="yes"
+                  node-fill="#fcf" node-stroke="black" 
+                  seed="1" 
+                  tactile-node-size="40">
+                  <node at="1" p="(0,1)" edges="[2,3,4]" label="x" />
+                  <node at="2" p="(1,1)" edges="[3]" label="y" />
+                  <node at="3" p="(1,0)" edges="[4]" label="z" />
+                  <node at="4" p="(0,0)" edges="[]" label="w" />
+                </network>
+                
+              </coordinates>
+            </diagram>  
+          </prefigure>
+        </image> 
+        <p component="a">
+          <m>\langle x,y,z,w,x\rangle</m> is a Hamiltonian cycle. <m>\langle y,z,x,w\rangle</m> is a Hamiltonian path.
+        </p>
+      </slide>
+      <slide>
+        <title>Characterization</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                There are no known if-and-only-if theorems characterizing graphs with Hamiltonian cycles (or paths). There are some sufficient conditions, such as every vertex having degree at least <m>\lceil V/2\rceil </m>, but <m>C_n</m> shows this condition is not necessary.
+              </p>
+            </li>
+            <li>
+              <p>
+                Finding a Hamiltonian cycle is a special case of the Traveling Salesman Problem.
+              </p>
+            </li>
+          </ul>
+          
+        </p>
+        <p component="a">
+          Challenge problem: Show that the Petersen graph does not have a Hamiltonian cycle.
+        </p>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-planarity">
+      <title>Planar Graphs</title>
+      <slide>
+        <p>
+          A graph is <term>planar</term> if it can be drawn in the plane with no edges crossing. Otherwise, the graph is <term>non-planar</term>.
+        </p>
+        <sidebyside widths="50% 50%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="drawing-crossing">
+              <diagram dimensions="(300,300)" margins="5">
+                <coordinates bbox="(-1,-1,1,1)">
+                  <definition>N=5</definition>
+                  <definition>f(t)=(cos(2*pi*t/N), sin(2*pi*t/N))</definition>
+                  <network scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black"
+                    tactile-node-size="40">
+                    <node at="0" p="f(0)" edges="[1,2]"/>
+                    <node at="1" p="f(1)" edges="[2,4]"/>
+                    <node at="2" p="f(2)" edges="[3]"/>
+                    <node at="3" p="f(3)" edges="[4]"/>
+                    <node at="4" p="f(4)"/>
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+        </sidebyside>
+        <p component="a">
+          Draw with <m>\set{1,4}</m> shown as a curved edge.
+        </p>
+      </slide>
+      <slide>
+        <theorem xml:id="thm-planar-edge-count">
+          <statement>
+            <p>
+              Let <m>G=(V,E)</m> be a connected (simple) graph with <m>n=|V|\geq 3</m> and <m>m=|E|</m>. If <m>G</m> is planar, then <m>m\leq 3n-6</m>.
+            </p>
+          </statement>
+        </theorem>
+        <p>
+          <em>Activity</em>: Is <m>K_5</m> planar?
+        </p>
+        <p component="a">
+          No, since <m>m=10 \gt 3n-6 = 9</m>.
+        </p>
+
+      </slide>
+      <slide>
+        <title>Characterizing Planarity</title>
+        <p>
+          In addition to <m>K_5</m>, we also have that <m>K_{3,3}</m> is nonplanar.
+        </p>
+        <p component="a">
+          Try to draw <m>K_{3,3}</m> in a planar manner. Point out the inequality doesn't break. Wave hands at Kuratowski's theorem.
+        </p>
+      </slide>
+      
+    </section>
+    <section xml:id="sec-coloring">
+      <title>Graph Coloring</title>
+      <slide>
+        <title>Definitions</title>
+        <p>
+          <ul>
+            <li>
+              <p>
+                A <term>(valid) coloring</term> of a graph is an assignment of colors to each vertex so that no two adjacent vertices have the same color.
+              </p>
+            </li>
+            <li>
+              <p>
+                A coloring that uses <m>k</m> colors is called a <term><m>k</m>-coloring</term>.
+              </p>
+            </li>
+            <li>
+              <p>
+                The <term>chromatic number</term> of a graph <m>G</m>, which we denote by <m>\chi(G)</m>, is the smallest <m>k</m> for which <m>G</m> has a <m>k</m>-coloring.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </slide>
+      <slide>
+        <title>Examples</title>
+        <sidebyside widths="40% 20% 40%">
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="color-C6">
+              <diagram dimensions="(400,400)" margins="5">
+                <coordinates bbox="(-1,-1,1,1)">
+                  <definition>N=6</definition>
+                  <definition>f(t)=(cos(2*pi*t/N), sin(2*pi*t/N))</definition>
+                  <network scale="0.8" labels="yes" 
+                    node-fill="#fcf" node-stroke="black"
+                    tactile-node-size="40">
+                    <node at="0" p="f(0)" edges="[1]"/>
+                    <node at="1" p="f(1)" edges="[2]"/>
+                    <node at="2" p="f(2)" edges="[3]"/>
+                    <node at="3" p="f(3)" edges="[4]"/>
+                    <node at="4" p="f(4)" edges="[5]"/>
+                    <node at="5" p="f(5)" edges="[0]"/>
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+          <p>
+            <nbsp />
+          </p>
+          <image>
+            <prefigure xmlns="https://prefigure.org" label="color-C5">
+              <diagram dimensions="(400,400)" margins="5">
+                <coordinates bbox="(-1,-1,1,1)">
+                  <definition>N=5</definition>
+                  <definition>f(t)=(cos(2*pi*t/N), sin(2*pi*t/N))</definition>
+                  <network scale="0.8" labels="yes"
+                    node-fill="#fcf" node-stroke="black"
+                    tactile-node-size="40">
+                    <node at="0" p="f(0)" edges="[1]"/>
+                    <node at="1" p="f(1)" edges="[2]"/>
+                    <node at="2" p="f(2)" edges="[3]"/>
+                    <node at="3" p="f(3)" edges="[4]"/>
+                    <node at="4" p="f(4)" edges="[0]"/>
+                  </network>
+                </coordinates>
+              </diagram>
+            </prefigure>
+          </image>
+
+        </sidebyside>   
+        <p component="a">
+          <m>\chi(C_6)=2</m>, while <m>\chi(C_5)=3</m>. Mention that bipartite is the same as having chromatic number 2.
+        </p>     
+      </slide>
+      <slide>
+        <title>Activity</title>
+        <p>
+          What is <m>\chi(K_5)</m>? Can you say something about <m>\chi(K_n)</m>?
+        </p>
+        <p component="a">
+          <m>\chi(K_5) = 5</m> and in general, <m>\chi(K_n)=n</m>. If <m>G</m> contains <m>K_n</m>, then <m>\chi(G)\geq n</m>. However, there are graphs with arbitrarily large chromatic number that do not contain even <m>K_3</m>. Computationally, answering <m>\chi(G)\leq k</m> is NP-complete.
+        </p>
+      </slide>
+      <slide>
+        <title>Example</title>
+        <image>
+          <prefigure xmlns="https://prefigure.org" label="color-it">
+            <diagram dimensions="(800,400)" margins="5">
+              <coordinates bbox="(0,0,4,2)">
+                <network  scale="0.8" labels="no"
+                  node-fill="#fcf" node-stroke="black" 
+                  seed="1" 
+                  tactile-node-size="40">
+                  <node at="1" p="(0,1)" edges="[2,3]" />
+                  <node at="2" p="(1,0)" edges="[3,4,5]" />
+                  <node at="3" p="(1,2)" edges="[4,6]" />
+                  <node at="4" p="(2,1)" edges="[5,6]" />
+                  <node at="5" p="(3,0)" edges="[6,7]" />
+                  <node at="6" p="(3,2)" edges="[7]" />
+                  <node at="7" p="(4,1)" edges="[]" />
+                </network>
+                
+              </coordinates>
+            </diagram>  
+          </prefigure>
+        </image>   
+        <p component="a">
+          Contains <m>K_3</m>, so needs at least 3 colors. Demonstrate 3-coloring.
+        </p>      
+      </slide>
+      
+    </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8128/output/slides-a-3/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8128/output/slides-3/slides.html slides.pdf -->

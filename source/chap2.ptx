@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+  <docinfo>
+    <macros>
+      \newcommand{\Z}{\mathbb{Z}}
+      \newcommand{\R}{\mathbb{R}}
+      \DeclareMathOperator{\lcm}{lcm}
+      \newcommand{\land}{\wedge}
+      \newcommand{\lor}{\vee}
+    </macros>
+  </docinfo>
+  <slideshow>
+  <title>MATH/COMP SCI 240</title>
+
+  <subtitle>Introduction to Discrete Mathematics</subtitle>
+  <frontmatter>
+    <bibinfo>
+    <author>
+      <personname>
+      Mitchel T.
+      Keller </personname>
+      <institution>University of Wisconsin<ndash/>
+      Madison</institution>
+    </author>
+    <date>Spring 2025</date>
+    </bibinfo>
+
+    <titlepage-items/>
+  </frontmatter>
+  <section xml:id="sec-definitions">
+    <title>Definitions</title>
+    <slide>
+      <title>Even and Odd Integers</title>
+      <ul>
+        <li>
+          <p>
+            An integer <m>x</m> is <term>even</term> provided that there exists an integer <m>k</m> so that <m component="b">x=<fillin characters="3" /></m><m component="a">x=2k</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            An integer <m>x</m> is <term>odd</term> provided that there exists an integer <m>k</m> so that <m component="b">x=<fillin characters="3" /></m><m component="a">x=2k+1</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            The <term>parity</term> of an integer is whether it is even or odd.
+          </p>
+        </li>
+        <li>
+          <p>
+            If two integers are both even or both odd, we say they have the <term>same parity</term>.
+          </p>
+        </li>
+        <li>
+          <p>
+            If two integers are one even and one odd, we say they have <term>opposite parity</term>.
+          </p>
+        </li>
+      </ul>
+    </slide>
+    <slide>
+      <title>Rational Numbers</title>
+      <p>
+        A number <m>r</m> is <term>rational</term> if there exist integers <m>x</m> and <m>y</m> so that both of the following are true:
+        <ul>
+          <li>
+            <p>
+              <m component="a">y\neq 0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">r=\displaystyle\frac{x}{y}</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Divides</title>
+      <p>
+        Covered in our first class.
+      </p>
+    </slide>
+    <slide>
+      <title>Prime and Composite Numbers</title>
+      <p>
+        An integer <m>n\gt 1</m> is <term>prime</term> provided that the only positive integers dividing <m>n</m> are <m component="a">1</m><m component="b"><fillin characters="1" /></m> and <m component="a">n</m><m component="b"><fillin characters="1" /></m>
+      </p>
+      <p>
+        An integer <m>n\gt 1</m> is <term>composite</term> provided that there exists an integer <m>m</m> such that <m component="a">1\lt m\lt n</m><m component="b"><fillin characters="5" /></m> and <m component="a">m\mid n</m><m component="b"><fillin characters="5" /></m>
+      </p>      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Is the following statement true?
+      </p>
+      <p>
+        <q>If <m>n\gt 1</m> is an integer, then <m>n</m> is either prime or composite but not both.</q>
+      </p>
+      <p component="a">
+        <ul>
+          <li>
+            <p>
+              This is <em>true</em> because negating the definition of prime gives the definition of composite.
+            </p>
+          </li>
+          <li>
+            <p>
+              We cannot have free variables in something we plan to prove. Any variable that is not explicitly quantified is assumed to have a universal quantifer applied.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Inequalities</title>
+      <p>
+        For two real numbers <m>x</m> and <m>c</m>, exactly one of the following must be true:
+        <ul>
+          <li>
+            <p>
+              <m component="a">x\lt c</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m component="a">x=c</m>
+            </p>
+          </li>        
+          <li>
+            <p>
+              <m component="a">x\gt c</m>
+            </p>
+          </li>
+        </ul>
+      </p>
+      <p>
+        <m>x\geq c</m> means <m component="a">x\gt c\lor x=c</m><m component="b"><fillin characters="8" /></m>. We say <m>x</m> is at least <m>c</m> or greater than or equal to <m>c</m>. 
+      </p>
+      <p>
+        <m>x\leq c</m> means <m component="a">x\lt c\lor x=c</m><m component="b"><fillin characters="8" /></m>. We say <m>x</m> is at most <m>c</m> or less than or equal to <m>c</m>. 
+      </p>
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <p>
+        Rewrite each of the following
+        <ol marker="a">
+          <li>
+            <p>
+              <m>\neg (x\leq c) </m><m component="a">\equiv x\gt c</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>\neg (x\lt c) </m><m component="a">\equiv x\geq c</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>x\geq c\land x\leq c </m><m component="a">\equiv x= c</m>
+            </p>
+            <p component="a">
+              This is a common way to show that two numbers are equal.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Positive and Negative</title>
+      <p>
+        <ul>
+          <li>
+            <p>
+              <m>x</m> is <term>positive</term> provided that <m component="a">x\gt 0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>x</m> is <term>negative</term> provided that <m component="a">x\lt 0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>x</m> is <term>non-negative</term> provided that <m component="a">x\geq 0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              <m>x</m> is <term>non-positive</term> provided that <m component="a">x\leq 0</m>
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>x\geq c</m>, then
+              <ul>
+                <li>
+                  <p>
+                    <m>ax\geq ac</m> if <m component="a">a\geq 0</m>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m>ax\leq ac</m> if <m component="a">a\leq 0</m>
+                  </p>
+                </li>
+              </ul>
+              Corresponding versions with strict inequality also hold.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+  </section>
+  <section xml:id="sec-proofs">
+    <title>Introduction to Proofs</title>
+    <slide>
+      <title>Definitions</title>
+      <p>
+        A <term>theorem</term> is a statement that can be proven to be true.
+      </p>
+      <p>
+        A <term>proof</term> is a sequence of steps that follow logically from assumptions or from previous theorems and whose final step is the statement that the theorem is proved.
+      </p>
+      <p>
+        <term>Axioms</term> are statements that are assumed to be true without proof.
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <theorem xml:id="thm-int-lteq-sq">
+        <statement>
+          <p>
+            Every positive integer is less than or equal to its square.
+          </p>
+          <p component="a">
+            Domain: integers. Symbolically: <m>\forall x((x\gt 0)\rightarrow (x\leq x^2) )</m>
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>x\gt 0</m> be an integer. Then <m>x\geq 1</m>. Since <m>x \gt0</m>, we have that <m>x\cdot x \geq x\cdot 1</m>. That is, <m>x^2\geq x</m>.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Universal Statements</title>
+      <p>
+        We may wish to prove a theorem of the form <m>\forall xP(x)</m>. To do this, we can either:
+        <ul>
+          <li>
+            <p>
+              Check if <m>P(x)</m> is true for each <m>x</m>.
+            </p>
+            <p component="a">
+              Called <term>exhaustion</term>. <alert>Can only do for finite domains!</alert>
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              Show <m>P(x)</m> holds for an arbitrary <m>x</m>.
+            </p>
+            <p component="a">
+              Called <term>universal generalization</term>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    <slide>
+      <title>Existential Statements</title>
+      <p>
+        We may wish to prove a theorem of the form <m>\exists xP(x)</m>. To do this, we can either:
+        <ul>
+          <li>
+            <p>
+              Give an element <m>c</m> with <m>P(c)</m>.
+            </p>
+            <p component="a">
+              Called a <term>constructive</term> proof.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p>
+              Show that non-existence leads to a contradiction.
+            </p>
+            <p component="a">
+              Called a <term>non-constructive</term> proof.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </slide>
+    
+  </section>
+  <section xml:id="sec-best-practices-common-errors">
+    <title>Best Practices and Common Errors</title>
+    <slide>
+      <title>Allowed Assumptions in Proofs</title>
+      <p>
+        Refer to Figure 2.3.1 in the zyBook.
+      </p>
+    </slide>
+    <slide>
+      <title>The Language of Proofs</title>
+      <p>
+        Refer to Figure 2.3.2 in the zyBook.
+      </p>
+    </slide>
+    <slide>
+      <title>Best Practices in Writing Proofs</title>
+      <p>
+        Refer to Figure 2.3.3 in the zyBook.
+      </p>
+    </slide>
+    <slide>
+      <title>Common Mistakes</title>
+      <p>
+        Goal: <q>Let <m>n</m> be an integer. Then <m>n</m> and <m>n^2</m> have the same parity.</q>
+      </p>
+      <p>
+        <dl>
+          <li>
+            <title>Generalzing from examples (CM 2.3.1)</title>
+            <p>
+              <m>m=8</m> is an even integer since <m>8=2\cdot 4</m>. <m>m^2=8^2=64</m> is an even integer since <m>64=2\cdot 32</m>. Therefore, if <m>n</m> is an even integer, then <m>n^2</m> is also an even integer.
+              <ul component="a">
+                <li>
+                  <p>
+                    Exploring specific examples can give insights. However, it is <em>not</em> a proof of a universal statement unless can use exhaustion.
+                  </p>
+                </li>
+              </ul>
+            </p>
+          </li>
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Common Mistakes</title>
+      <p>
+        Goal: <q>Let <m>n</m> be an integer. Then <m>n</m> and <m>n^2</m> have the same parity.</q>
+      </p>
+      <p>
+        <dl>
+          <li>
+            <title>Skipping Steps (CM 2.3.2)</title>
+            <p>
+              If <m>n</m> is an odd integer, then <m>n=2k+1</m> for some integer <m>k</m>. Therefore, <m>n^2=(2k+1)^2</m> and <m>n^2</m> is odd.
+              <ul component="a">
+                <li>
+                  <p>
+                    This argument omits the steps showing that <m>(2k+1)^2=2(2k^2+1)+1</m> and arguing that <m>2k^2+2k</m> is an integer. Establish that <m>(2k+1)^2</m> is equal to two times an integer plus <m>1</m> is required in order to establish that <m>(2k+1)^2</m> is odd.
+                  </p>
+                </li>
+              </ul>
+            </p>
+          </li>  
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Common Mistakes</title>
+      <p>
+        Goal: <q>Let <m>n</m> be an integer. Then <m>n</m> and <m>n^2</m> have the same parity.</q>
+      </p>
+      <p>
+        <dl>
+          <li>
+            <title>Circular Reasoning (CM 2.3.3)</title>
+            <p>
+              If <m>n</m> is an odd integer, then <m>n=2k+1</m> for some integer <m>k</m>. Let <m>n^2=2j+1</m> for some integer <m>j</m>. Since <m>n^2</m> is equal to two times an integer plus <m>1</m>, then <m>n^2</m> is odd.
+              <ul component="a">
+                <li>
+                  <p>
+                    The proof jumps to the conclusion that <m>n^2=2j+1</m> for some integer <m>j</m>. The fact that <m>n^2</m> is odd is the fact that needs to be proven.
+                  </p>
+                </li>
+              </ul>
+            </p>
+          </li>
+        </dl>
+      </p>
+    </slide>
+    <slide>
+      <title>Common Mistakes</title>
+      <p>
+        Goal: <q>The square of a rational number is rational.</q>
+      </p>
+      <p>
+        <dl>
+          <li>
+            <title>Assuming facts that have not yet been proven (CM 2.3.4)</title>
+            <p>
+              Suppose <m>r</m> is a rational number. The product of any two rational numbers is rational. Therefore, <m>r^2=r\cdot r</m> is also rational.
+              <ul component="a">
+                <li>
+                  <p>
+                    The fact that the product of two rational numbers is rational has not been established in the proof and therefore cannot be used in the reasoning of the proof.
+                  </p>
+                </li>
+              </ul>
+            </p>
+          </li>
+        </dl>
+      </p>
+    </slide>           
+  </section>
+  <section xml:id="sec-direct-proofs">
+    <title>Direct Proofs</title>
+    <slide>
+      <title>Form</title>
+      <p>
+        A direct proof of <m>p\rightarrow q</m> has the form
+        <ol marker="1">
+          <li>
+            <p>
+              Assume that <m>p</m> is true
+            </p>
+          </li>
+          <li>
+            <p>
+              Perform a sequence of logical deductions to derive <m>q</m> from <m>p</m>
+            </p>
+          </li>          
+          <li>
+            <p>
+              Conclude that <m>q</m> is true
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <theorem xml:id="thm-n-squared-even">
+        <statement>
+          <p>
+            If <m>n</m> is an even integer, then <m>n^2</m> is even.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>n</m> be an even integer. Then <m>n=2k</m> for some integer <m>k</m>. Hence
+            <me>
+              n^2=(2k)^2=4k^2=2(2k^2)
+            </me>.
+            Since <m>k</m> is an integer, <m>2k^2</m> is also an integer. Hence, <m>n^2</m> is even.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <theorem xml:id="thm-odd-n-squared-plus-n">
+        <statement>
+          <p>
+            For all integers <m>n</m>, if <m>n</m> is odd, then <m>n^2+n</m> is even.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>n</m> be an odd integer. Then <m>n=2k+1</m> for some integer <m>k</m>. Hence
+            <md>
+              <mrow>n^2+n \amp= (2k+1)^2+(2k+1) =4k^2+4k+1+2k+1 </mrow>
+              <mrow> \amp= 4k^2+6k+2= 2(2k^2+3k+1)</mrow>
+            </md>.
+            Since <m>k</m> is an integer, so is <m>2k^2+3k+1</m>. Therefore, <m>n^2+n</m> is even.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Example</title>
+      <theorem>
+        <statement>
+          <p>
+            The product of two rational numbers is rational
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>r</m> and <m>s</m> be rational numbers. This means that there exist integers <m>x,y,z,w</m> such that <m>y\neq 0</m>, <m>w\neq 0</m>, <m>r=x/y</m>, and <m>s=z/w</m>. We find
+            <me>
+              r\cdot s = \frac{x}{y}\cdot \frac{z}{w} = \frac{xz}{yw}
+            </me>.
+            Since <m>x,y,z,w</m> are integers, so are <m>xz</m> and <m>yw</m>. Also, since <m>y\neq 0</m> and <m>w\neq 0</m>, we have <m>yw\neq 0</m>. Hence, <m>rs</m> is rational.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <!-- Annotated: Slide 29 -->
+    <!-- Blank: Slide 29 -->    
+    <slide>
+      <title>Activity</title>
+      <theorem>
+        <statement>
+          <p>
+            The sum of two rational numbers is rational.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>r</m> and <m>s</m> be rational. Then there exist integers <m>a,b,c,d</m> such that <m>b\neq 0</m>, <m>d\neq 0</m>, <m>r=a/b</m>, and <m>s=c/d</m>. We find
+            <me>
+              r+s = \frac{a}{b}+\frac{c}{d} = \frac{ad}{bd} + \frac{bc}{bd} = \frac{ad+bc}{bd}
+            </me>.
+            Since <m>a,b,c,d</m> are integers, so are <m>ad+bc</m> and <m>bd</m>. Since <m>b\neq 0</m> and <m>d\neq 0</m>, <m>bd\neq 0</m>. Therefore, <m>r+s</m> is rational.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+
+  </section>
+  <section xml:id="sec-contrapositive">
+    <title>Proof by Contrapositive</title>
+    <slide>
+      <title>Process</title>
+      <p>
+        Recall that the contrapositive of <m>p\rightarrow q</m> is <m component="a">\neg q\rightarrow \neg p</m><m component="b"><fillin characters="5" /></m>.
+      </p>
+      <p>
+        Since a conditional statement and its contrapositive are logically equivalent, one is true if and only if the other is true. Thus, to prove <m>p\rightarrow q</m>, we can also prove <m>\neg q\rightarrow \neg p</m>.
+      </p>
+    </slide>
+    <slide>
+      <title>Procedure for Proof by Contrapositive</title>
+      <p>
+        Goal: Prove that <m>p\rightarrow q</m> by contrapositive.
+        <ol marker="1">
+          <li>
+            <p component="b">
+              <nbsp/>
+            </p>
+            <p component="a">
+              State that we are using proof by contrapositive and what <m>\neg q\rightarrow \neg p</m> is.
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <nbsp/>
+            </p>
+            <p component="a">
+              Use direct proof to show <m>\neg q \rightarrow \neg p</m>.
+            </p>
+          </li>
+          <li>
+            <p component="b">
+              <nbsp/>
+            </p>
+            <p component="a">
+              Conclude that <m>p\rightarrow q</m> is also true.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <theorem>
+        <statement>
+          <p>
+            For all integer <m>n</m>, if <m>n^2</m> is even, then <m>n</m> is even.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            We will prove the contrapositive. That is, we will show that if <m>n</m> is odd, then <m>n^2</m> is odd. Let <m>n</m> be an odd integer. Then there exists an integer <m>k</m> so that <m>n=2k+1</m>. Hence, <m>n^2 = (2k+1)^2 = 4k^2+4k+1 = 2(2k^2+2k)+1</m>. Since <m>k</m> is an integer, <m>2k^2+2k</m> is an integer. Thus, <m>n^2</m> is one more than twice an integer, which means that <m>n^2</m> is odd. Hence, if <m>n^2</m> is even, then <m>n</m> is even.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <theorem>
+        <statement>
+          <p>
+            If <m>5n+3</m> is even, then <m>n</m> is odd.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            We will prove the contrapositive. That is, we will show if <m>n</m> is even, then <m>5n+3</m> is odd. Let <m>n</m> be an even integer. Then there is an integer <m>k</m> so that <m>n=2k</m>. Hence,
+            <me>
+              5n+3 = 5(2k)+3 = 10k+3 = 10k+2+1 = 2(5k+1)+1
+            </me>.
+            Since <m>k</m> is an integer, <m>5k+1</m> is also an integer. Therefore, <m>5n+3</m> is odd. Hence, if <m>5n+3</m> is even, then <m>n</m> must be odd.
+          </p>
+        </proof>
+      </theorem>
+    </slide>
+    <slide>
+      <title>Example</title>
+      <theorem>
+        <statement>
+          <p>
+            If <m>n=ab</m>, then <m>a\leq \sqrt{n}</m> or <m>b\leq \sqrt{n}</m>.
+          </p>
+        </statement>
+        <proof>
+          <p>
+            We will prove the contrapositive, which is <q>If <m>a\gt \sqrt{n}</m> and <m>b\gt \sqrt{n}</m>, then <m>n\neq ab</m>.</q>. Let <m>a\gt \sqrt{n}</m> and <m>b\gt \sqrt{n}</m>. Since <m>\sqrt{n}\geq 0</m>, we have
+            <me>
+              ab \gt \sqrt{n}\sqrt{n} = n,
+            </me>
+            which means <m>ab\neq n</m>. Therefore, if <m>n=ab</m>, then <m>a\leq \sqrt{n}</m> or <m>b\leq \sqrt{n}</m>.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    
+  </section>
+  <section xml:id="sec-contradiction">
+    <title>Proof by Contradiction</title>
+    <slide>
+      <title>Big Idea</title>
+      <p>
+        Goal: Want to prove <m>p\rightarrow q</m> is true.
+        <ol marker="1">
+          <li>
+            <p component="a">
+              State that you are using a proof by contradiction and assume <m>\neg(p\rightarrow q)\equiv \neg (\neg p\lor q) \equiv p\land\neg q</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              Perform a sequence of logical deductions to arrive at a contradiction (<m>r\land \neg r</m>).
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+          <li>
+            <p component="a">
+              Conclude that since <m>\neg (p\rightarrow q)</m> cannot be true, we must have <m>p\rightarrow q</m>.
+            </p>
+            <p component="b">
+              <nbsp/>
+            </p>
+          </li>
+        </ol>
+      </p>
+      <p component="a">
+        Classic example <m>\sqrt{2}</m> is irrational is done in the text as Theorem 2.6.1.
+      </p>
+    </slide>
+    <slide>
+      <title>Common contradictions</title>
+      <ul>
+        <li>
+          <p>
+            An integer is both even and odd.
+          </p>
+        </li>
+        <li>
+          <p>
+            A square is negative.
+          </p>
+        </li>
+      </ul>
+    </slide>
+    
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            For each real number <m>x</m>, if <m>0\lt x\lt 1</m>, then <m>\frac{1}{x(1-x)} \geq 4</m>.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            We will prove this by contradiction, so we assume the negation is true.
+            The negation is <q>There exists a real number <m>x</m> such that <m>0\lt x\lt 1</m> and <m>\frac{1}{x(1-x)}\lt 4</m>.</q> Using algebra, we now have
+          </p>
+          <sidebyside widths="30% 30% 30%">
+            <p>
+              <md>
+                <mrow>\frac{1}{x(1-x)}\amp \lt 4</mrow> 
+                <mrow>1\amp \lt 4x(1-x)</mrow>
+
+              </md>
+            </p>
+            <p>
+              <md>
+                <mrow>1\amp\lt 4x-4x^{2}</mrow>
+                <mrow>4x^{2}-4x+1\amp\lt 0</mrow>
+              </md>              
+            </p>
+            <p>
+              <md>
+                <mrow>x^{2}-x+\frac{1}{4}\amp\lt 0</mrow>
+                <mrow>\left(x-\frac{1}{2}\right)^{2}\amp\lt 0</mrow>
+              </md>              
+            </p>
+          </sidebyside>
+          <p>
+            The first step is valid since <m>x\gt 0</m> and <m>1-x\gt 0</m> (because <m>x \lt 1</m>).
+            The final inequality, however, is a contradiction, as the quantity on the left-hand side is a square and thus cannot be negative.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <title>Activity</title>
+      <theorem>
+        <statement>
+          <p>
+            For all real numbers <m>x</m> and <m>y</m>, if <m>x\neq y</m>, <m>x\gt 0</m>, and <m>y\gt0</m>, then <m>\frac{x}{y}+\frac{y}{x}\gt 2</m>.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            We will prove this by contradiction, so we begin by assuming the negation of the given statement is true.
+            The negation is <q>There exist real numbers <m>x</m> and <m>y</m> such that <m>x\neq 0</m>, <m>x\gt 0</m>, <m>y\gt 0</m>, and <m>\frac{x}{y}+\frac{y}{x}\leq 2</m>.</q> Multiplying the inequality by <m>xy</m> gives us <m>x^{2} + y^{2}\leq 2xy</m>.
+            Rearranging, we have <m>x^{2}-2xy + y^{2}\leq 0</m>, or <m>(x-y)^{2}\leq 0</m>.
+            The left-hand side is a perfect square, so the smallest it could be is zero.
+            However, we also know that <m>x\neq y</m>, which means <m>x-y\neq 0</m> so the left-hand side must be positive.
+            This is a contradiction.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    
+  </section>
+  <section xml:id="sec-Biconditionals">
+    <title>Biconditionals</title>
+    <slide>
+      <title>Proof of <m>p\leftrightarrow q</m></title>
+      <p>
+        To prove a biconditional, we use the fact that <m component="a">p\leftrightarrow q\equiv (p\rightarrow q)\land (q\rightarrow p) </m>.
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            For all integers <m>m</m> and <m>n</m>, <m>m\cdot n</m> is odd if and only if <m>m</m> is odd and <m>n</m> is odd.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Let <m>m</m> and <m>n</m> be integers.
+          </p>
+          <case>
+            <title><m>p\rightarrow q</m></title>
+            <p>
+              We will prove the contrapositive. That is, if <m>m</m> is even or <m>n</m> is even, then <m>mn</m> is even. Since our statement is symmetric in <m>m</m> and <m>n</m>, we assume without loss of generality that <m>m</m> is even. Hence, there exists an integer <m>k</m> so that <m>m=2k</m>. Thus, <m>mn=(2k)n=2(kn)</m>. Since <m>k</m> and <m>n</m> are integers, <m>kn</m> is an integer and therefore <m>mn</m> is even.
+            </p>
+            <p>
+              Therefore, <m>mn</m> must be even if <m>m</m> is even or <m>n</m> is even. Hence, if <m>mn</m> is even, then both <m>m</m> and <m>n</m> are odd.
+            </p>
+          </case>
+        </proof>
+      </theorem>
+    </slide>
+    <slide>
+      <proof component="a">
+        <title>(continued)</title>
+        <case>
+          <title><m>q\rightarrow p</m></title>
+          <p>
+            Let <m>m</m> and <m>n</m> be odd. Then there exist integers <m>k</m> and <m>j</m> so that <m>m=2k+1</m> and <m>n=2j+1</m>. Hence,
+            <md>
+              <mrow>mn \amp (2k+1)(2j+1) = 4kj+2k+2j+1 </mrow>
+              <mrow> \amp 2(2kj+k+j)+1</mrow>
+            </md>.
+            Since <m>k</m> and <m>j</m> are integers, <m>2kj+k+j</m> is an integer. Thus, <m>mn</m> is odd.
+          </p>
+        </case>
+        <p>
+          Therefore, <m>mn</m> is odd if and only if <m>m</m> and <m>n</m> are both odd.
+        </p>
+      </proof>
+      
+    </slide>
+    
+  </section>
+  <section xml:id="sec-cases">
+    <title>Proof by Cases</title>
+    <slide>
+      <title>Idea</title>
+      <p>
+        Some proofs require us to split the domain into two or more cases that exhaust all posibilities. We prove the theorem for each case individually.
+      </p>
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            If <m>n</m> is an integer, then <m>n^2\geq n</m>.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Consider the three cases when <m>n\lt 0</m>, <m>n=0</m>, and <m>n\gt 0</m>.
+          </p>
+          <case>
+            <title><m>n\lt 0</m></title>
+            <p>
+              If <m>n\lt 0</m>, then <m>n\lt 0\lt n^2</m>, so <m>n^2 \geq n</m>.
+            </p>
+          </case>
+          <case>
+            <title><m>n= 0</m></title>
+            <p>
+              If <m>n = 0</m>, then <m>n^2 = 0 = n</m>, so <m>n^2\geq n</m>.
+            </p>
+          </case>          
+          <case>
+            <title><m>n\gt 0</m></title>
+            <p>
+              We proved this case in the previous class.
+            </p>
+          </case>
+          <p>
+            Since <m>n^2\geq n</m> in all cases, the theorem is proved.
+          </p>
+        </proof>
+      </theorem>
+      
+    </slide>
+    <slide>
+      <theorem>
+        <statement>
+          <p>
+            Every group of <m>6</m> people contains <m>3</m> people who are all mutual acquaintances or <m>3</m> people who are all mutual strangers.
+          </p>
+        </statement>
+        <proof component="a">
+          <p>
+            Pick a person <m>A</m>. We have two cases:
+            <ol marker="1">
+              <li>
+                <p>
+                  <m>A</m> knows at least <m>3</m> other people
+                </p>
+              </li>
+              <li>
+                <p>
+                  <m>A</m> knows at most <m>2</m> people
+                </p>
+              </li>
+            </ol>
+          </p>
+        </proof>
+      </theorem>
+      
+      
+    </slide>
+    <!-- Annotated: Slide 49 -->
+    <!-- Blank: Slide 49 -->    
+    <slide>
+      <proof component="a">
+        <title>Continued</title>
+        <case>
+          <title><m>A</m> knows at least <m>3</m></title>
+          <p>
+            If there is a pair of people in the group that <m>A</m> knows who know each other, then <m>A</m> and these two are three mutual acquaintances.
+          </p>
+          <p>
+            Otherwise, nobody in the group that <m>A</m> knows know each other. However, this means that at least <m>3</m> are mutual strangers.
+          </p>
+        </case>
+        <case>
+          <title><m>A</m> knows at most <m>2</m></title>
+          <p>
+            If there is a pair of people in the group that <m>A</m> doesn't know who are strangers, then <m>A</m> and these two are three mutual strangers.
+          </p>
+          <p>
+            Otherwise, everybody in the group that <m>A</m> doesn't know knows each other. However, this means that at least <m>3</m> are mutual acquaintances.
+          </p>
+        </case>          
+      </proof>
+
+    </slide>
+    
+  </section>
+  </slideshow>
+</pretext>
+<!-- Need to fix the - - to be two dashes in these before using. -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-100 reveal http://localhost:8129/output/slides-a-2/slides-annotated.html slides-a.pdf -->
+<!-- arch -arm64 decktape - -load-pause 10 - -url-load-timeout 10000 - -slides 1-29 - -fragments reveal http://localhost:8129/output/slides-2/slides.html slides.pdf -->

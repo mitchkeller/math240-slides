@@ -3,15 +3,134 @@
 <project ptx-version="2">
   <targets>
     <target
-        name="slides"
+        name="slides-1"
+        source="chap1.ptx"
         format="revealjs"
         output-filename="slides.html"
         />
     <target
-        name="slides-a"
+        name="slides-a-1"
+        source="chap1.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-2"
+        source="chap2.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-2"
+        source="chap2.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-3"
+        source="chap3.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-3"
+        source="chap3.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-4"
+        source="chap4.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-4"
+        source="chap4.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-6"
+        source="chap6.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-6"
+        source="chap6.ptx"
         format="revealjs"
         output-filename="slides-annotated.html"
         publication="publication_annotated.ptx"
         />        
+    <target
+        name="slides-7"
+        source="chap7.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-7"
+        source="chap7.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-8"
+        source="chap8.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-8"
+        source="chap8.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-10"
+        source="chap10.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-10"
+        source="chap10.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-13"
+        source="chap13.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-13"
+        source="chap13.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
+    <target
+        name="slides-14"
+        source="chap14.ptx"
+        format="revealjs"
+        output-filename="slides.html"
+        />
+    <target
+        name="slides-a-14"
+        source="chap14.ptx"
+        format="revealjs"
+        output-filename="slides-annotated.html"
+        publication="publication_annotated.ptx"
+        />
   </targets>
 </project>
